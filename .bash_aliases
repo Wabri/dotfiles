@@ -27,5 +27,11 @@ alias grep='rg'
 # Vim
 alias svim='sudo vim'
 
+# Thefuck (https://github.com/nvbn/thefuck)
+eval $(thefuck --alias)
+# You can use whatever you want as an alias, like for Mondays:
+eval $(thefuck --alias fk)
+
+
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'

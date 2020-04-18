@@ -48,3 +48,21 @@ I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches 
 * [.bash_aliases](.bash_aliases)
 * [.bash_it/themes/wabri/wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
 
+### Bashrc
+
+Some mentions on this configuration:
+
+* Vim motion abilitate:
+
+    ```Bash
+    set -o vi
+    ```
+    
+* The must have ignore case abilitate:
+
+    ```Bash
+    bind 'set completion-ignore-case on'
+    ```
+
+* Some history settings and more (if you are curious there are many comments on the script)
+
