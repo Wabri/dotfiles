@@ -40,3 +40,11 @@ dotfiles push
 
 Atlassian made a tutorial about this method, you can find the post here [**The best way to store your dotfiles: A bare Git repository**](https://www.atlassian.com/git/tutorials/dotfiles).
 
+## Bash
+
+I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
+
+* [.bashrc](.bashrc)
+* [.bash_aliases](.bash_aliases)
+* [.bash_it/themes/wabri/wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
+
