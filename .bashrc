@@ -50,10 +50,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-eval $(thefuck --alias)
-# You can use whatever you want as an alias, like for Mondays:
-eval $(thefuck --alias fk)
-
 # Path to the bash it configuration
 export BASH_IT="/home/wabri/.bash_it"
 

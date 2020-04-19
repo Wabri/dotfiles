@@ -22,7 +22,6 @@ alias aptupd='sudo apt update'
 alias aptupg='sudo apt upgrade'
 alias aptupgd='sudo apt update && sudo apt dist-upgrade -V && sudo apt autoremove'
 alias aptrm='sudo apt remove'
-alias grep='rg'
 
 # Vim
 alias svim='sudo vim'
@@ -31,7 +30,6 @@ alias svim='sudo vim'
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias fk)
-
 
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'

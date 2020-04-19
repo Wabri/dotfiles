@@ -2,6 +2,62 @@
 
 A total nord dotfiles.
 
+## Bash
+
+I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
+
+* [.bashrc](.bashrc)
+* [.bash_aliases](.bash_aliases)
+* [.bash_it/themes/wabri/wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
+
+### Bashrc
+
+Some mentions on this configuration:
+
+* Vim motion abilitate:
+
+    ```Bash
+    set -o vi
+    ```
+    
+* The must have ignore case abilitate:
+
+    ```Bash
+    bind 'set completion-ignore-case on'
+    ```
+
+* Some history settings and more (if you are curious there are many comments on the script)
+
+### Bash aliases
+
+Mine aliases are:
+
+* Replace the old **ls,ll and la** with [exa](https://the.exa.website/):
+
+![ls](.dotfiles_resources/ls.png)
+
+![ll](.dotfiles_resources/ll.png)
+
+![la](.dotfiles_resources/la.png)
+
+* Created some **cd** aliases:
+
+![cds](.dotfiles_resources/cds.png)
+
+* Shortcuts for **apt**:
+
+![apts](.dotfiles_resources/apts.png)
+
+* Alias for [thefuck](https://github.com/nvbn/thefuck):
+
+![fuck](.dotfiles_resources/fuck.png)
+
+* Dotfiles command to update this repo ([How I maintain those dotfiles](#how-i-maintain-those-dotfiles)):
+
+![dotfiles_alias](.dotfiles_resources/dotfiles_alias.png)
+
+There are a lot of aliases that you can find also on the general aliases of [bash-it](https://github.com/Bash-it/bash-it).
+
 ## Why nord
 
 I'm using the [nord colorscheme](https://www.nordtheme.com/) because is a perfect balance between dark and light. Don't judge me I love dark themes, but there is something missing in using a total dark theme.
@@ -39,30 +95,4 @@ dotfiles push
 ```
 
 Atlassian made a tutorial about this method, you can find the post here [**The best way to store your dotfiles: A bare Git repository**](https://www.atlassian.com/git/tutorials/dotfiles).
-
-## Bash
-
-I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
-
-* [.bashrc](.bashrc)
-* [.bash_aliases](.bash_aliases)
-* [.bash_it/themes/wabri/wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
-
-### Bashrc
-
-Some mentions on this configuration:
-
-* Vim motion abilitate:
-
-    ```Bash
-    set -o vi
-    ```
-    
-* The must have ignore case abilitate:
-
-    ```Bash
-    bind 'set completion-ignore-case on'
-    ```
-
-* Some history settings and more (if you are curious there are many comments on the script)
 
