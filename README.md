@@ -34,11 +34,7 @@ Mine aliases are:
 
 * Replace the old **ls,ll and la** with [exa](https://the.exa.website/):
 
-![ls](.dotfiles_resources/ls.png)
-
-![ll](.dotfiles_resources/ll.png)
-
-![la](.dotfiles_resources/la.png)
+![ls-ll-la](.dotfiles_resources/ls-ll-la.png)
 
 * Created some **cd** aliases:
 
