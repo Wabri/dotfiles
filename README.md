@@ -2,6 +2,44 @@
 
 A total nord dotfiles.
 
+## Kitty
+
+The page of the [kitty site](https://sw.kovidgoyal.net/kitty/) said: the fast, featureful, GPU based terminal emulator. Fast is fast for now, I confirm the featureful and I presume it use the GPU.
+
+I love to use the [JetBrains](https://www.jetbrains.com/lp/mono/) font: the lignatures, the letters and the semplicity of the shape:
+
+![kitty-font](.dotfiles_resources/kitty-font.png)
+
+I found useful the build-in tabs and windows feature:
+
+![kitty-tabs](.dotfiles_resources/kitty-tabs.png)
+
+Then I create some personal shortcuts using the alt as kitty modifier:
+
+| ---| Description |
+| ctrl+shift+c | copy |
+| ctrl+shift+v | paste |
+| kitty_mod+u | hints urls |
+| kitty_mod+enter | new window |
+| kitty_mod+r | resizing window |
+| kitty_mod+] | move to next window |
+| kitty_mod+[ | move to previous window |
+| kitty_mod+k | move window to top |
+| kitty_mod+t | new tab |
+| kitty_mod+w | close tab |
+| kitty_mod+i | set tab title |
+| kitty_mod+l | next tab |
+| kitty_mod+h | previous tab |
+| kitty_mod+shift+L | move tab forward |
+| kitty_mod+shift+H | move tab backward |
+| kitty_mod+1 | go to tab 1 |
+| kitty_mod+2 | go to tab 2 |
+| kitty_mod+3 | go to tab 3 |
+| kitty_mod+4 | go to tab 4 |
+| kitty_mod+5 | go to tab 5 |
+| kitty_mod+shift+E | edit config file |
+| kitty_mod+shift+U | unicode input |
+
 ## Bash
 
 I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
