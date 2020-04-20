@@ -8,13 +8,8 @@ alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'        # Go back
 
+# Exit from bash with q
 alias q='exit'
-
-# Tree
-if [ ! -x "$(which tree 2>/dev/null)" ]
-then
-  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-fi
 
 # apt
 alias aptinst='sudo apt install -V'
