@@ -41,6 +41,8 @@ Then I create some personal shortcuts using the alt as kitty modifier:
 | kitty_mod+shift+E | edit config file |
 | kitty_mod+shift+U | unicode input |
 
+The nord palette of kitty can be found in the [same directory of the kitty config](.config/kitty/).
+
 ## Bash
 
 I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
