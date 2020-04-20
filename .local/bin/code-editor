@@ -1,1 +1,33 @@
-/home/wabri/.config/i3/code-editor.sh
+#! /usr/bin/env bash
+
+declare options=("quit
+vim
+codium")
+
+runwith="rofi -dmenu"
+
+case "$1" in
+    dmenu)
+        runwith=dmenu
+    ;;
+    rofi)
+        runwith="rofi -dmenu"
+    ;;
+esac
+
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'Open editor: ')
+
+case "$choice" in
+	quit)
+		echo "Program terminated." && exit 1
+	;;
+	codium)
+		codium &
+	;;
+	vim)
+                x-terminal-emulator -e vim
+	;;
+	*)
+		exit 1
+	;;
+esac

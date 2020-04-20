@@ -1,1 +1,62 @@
-/home/wabri/.config/i3/edit-config.sh
+#! /usr/bin/env bash
+
+declare options=("quit
+i3
+vim
+i3status
+kitty
+bash
+aliases
+vifm
+xresources")
+
+runwith="rofi -dmenu"
+
+case "$1" in
+    dmenu)
+        runwith=dmenu
+    ;;
+    rofi)
+        runwith="rofi -dmenu"
+    ;;
+esac
+
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'Edit config file: ')
+
+case "$choice" in
+	quit)
+		echo "Program terminated." && exit 1
+	;;
+	i3)
+		choice="$HOME/.config/i3/config"
+	;;
+	vim)
+		choice="$HOME/.vimrc"
+	;;
+	i3status)
+		choice="$HOME/.config/i3/i3status.conf"
+	;;
+	kitty)
+		choice="$HOME/.config/kitty/kitty.conf"
+	;;
+	bash)
+		choice="$HOME/.bashrc"
+	;;
+	aliases)
+		choice="$HOME/.bash_aliases"
+	;;
+	vifm)
+		choice="$HOME/.config/vifm/vifmrc"
+	;;
+	xresources)
+		choice="$HOME/.Xresources"
+	;;
+	polybar)
+		choice="$HOME/.config/polybar/config"
+	;;
+	*)
+		exit 1
+	;;
+esac
+choice_title="config "$choice
+x-terminal-emulator -e vim "$choice"
