@@ -95,7 +95,24 @@ Mine aliases are:
 
 There are a lot of aliases that you can find also on the general aliases of [bash-it](https://github.com/Bash-it/bash-it).
 
-## Why nord
+## Scripts
+
+| Script | Description |
+| ------ | ----------- |
+| chkey  | | Change keyboard layout |
+| code-editor | Choose text editor to open |
+| dtest | Run tests for dunst notifications |
+| edit-config | Choose what config need to edit |
+| extract | Extract everything |
+| i3exit | Systmctl for human |
+| i3light | Brightness controll for humans |
+| i3media | Controll media with command line |
+| power-controll | Systmctl menu |
+| vimv | Batch-rename files using Vim -- [thameera/vimv](https://github.com/thameera/vimv) |
+
+## Q&A
+
+### Why nord?
 
 I'm using the [nord colorscheme](https://www.nordtheme.com/) because is a perfect balance between dark and light. Don't judge me I love dark themes, but there is something missing in using a total dark theme.
 I remember when the first time I riced I spent over a month by changing the palette to find a list of colors that fits, thanks to [mycolor.space](https://mycolor.space/) that helped me a lot.
