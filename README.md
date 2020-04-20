@@ -16,7 +16,8 @@ I found useful the build-in tabs and windows feature:
 
 Then I create some personal shortcuts using the alt as kitty modifier:
 
-| ---| Description |
+| --- | Description |
+| - | - |
 | ctrl+shift+c | copy |
 | ctrl+shift+v | paste |
 | kitty_mod+u | hints urls |
