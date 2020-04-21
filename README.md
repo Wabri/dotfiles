@@ -48,8 +48,10 @@ dotfiles push
 
 Atlassian made a tutorial about this method, you can find the post here [**The best way to store your dotfiles: A bare Git repository**](https://www.atlassian.com/git/tutorials/dotfiles).
 
-
 ## Kitty
+
+- [kitty.conf](.config/kitty/kitty.conf)
+- [nord.conf](.config/kitty/nord.conf)
 
 The page of the [kitty site](https://sw.kovidgoyal.net/kitty/) said: the fast, featureful, GPU based terminal emulator. Fast is fast for now, I confirm the featureful and I presume it use the GPU.
 
@@ -92,11 +94,11 @@ The nord palette of kitty can be found in the [same directory of the kitty confi
 
 ## Bash
 
-I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me:
+- [.bashrc](.bashrc)
+- [.bash_aliases](.bash_aliases)
+- [wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
 
-* [.bashrc](.bashrc)
-* [.bash_aliases](.bash_aliases)
-* [.bash_it/themes/wabri/wabri.theme.bash](.bash_it/themes/wabri/wabri.theme.bash)
+I use [bash-it framework](https://github.com/Bash-it/bash-it) with some patches I made and one new theme created by me.
 
 ### Bashrc
 
@@ -161,6 +163,8 @@ Overtime I create a lot of scripts:
 
 ### Chkey
 
+***[.local/bin/chkey](.local/bin/chkey)***
+
 The script switch over 2 keyboard Italian and Us, can work over more keyboard by adding a new use case.
 
 The content of the case is this:
@@ -186,4 +190,5 @@ On the line where there is **symbols** split when find the + simbol and return t
 
 ### Code-editor
 
+***[.local/bin/code-editor](.local/bin/code-editor)***
 
