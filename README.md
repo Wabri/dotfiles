@@ -152,7 +152,7 @@ Overtime I create a lot of scripts:
 | ------ | ----------- |
 | [chkey](#chkey) | Change keyboard layout |
 | [code-editor](#code-editor) | Choose text editor to open |
-| [dtest]() | Run tests for dunst notifications |
+| [dtest](#dtest) | Run tests for dunst notifications |
 | [edit-config]() | Choose what config need to edit |
 | [extract]() | Extract everything |
 | [i3exit]() | Systmctl for human |
@@ -196,3 +196,10 @@ This is one of the menu used with i3 (I binded with mod+f3):
 
 ![code-editor](.dotfiles_resources/code-editor.png)
 
+### Dtest
+
+Simply restart the dunst session, used to debug dunst configuration:
+
+![dtest1](.dotfiles_resources/dtest1.png)
+![dtest2](.dotfiles_resources/dtest2.png)
+![dtest3](.dotfiles_resources/dtest3.png)
