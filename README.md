@@ -275,7 +275,6 @@ i3media {vol_up|vol_down|vol_toggle|mic_toggle}
 
 There is a dependency to install in order to use it:
 
-- [haikarainen/light](https://github.com/haikarainen/light)
 - amixer found on the official repository as alsa-tools
 - notify-send found on the official repository as libnotify
 - notification deamon like [dunst](https://github.com/dunst-project/dunst)
