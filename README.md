@@ -175,7 +175,7 @@ setxkbmap -v | awk -F '+' '/symbols/ {print $2}'
 
 from the output of the setxkbmap -v, that is something like this:
 
-```Bash
+```Text
 Trying to build keymap using the following components:
 keycodes:   evdev+aliases(qwerty)
 types:      complete
@@ -234,3 +234,53 @@ For now works with:
 
 ![extract](.dotfiles_resources/extract.png)
 
+### i3exit
+
+***[.local/bin/i3exit](.local/bin/i3exit)***
+***Used on i3 config***
+
+A command line utility with a better use of systmctl:
+
+```Bash
+i3exit {lock|logout|suspend|hibernate|reboot|shutdown}
+```
+
+### i3light
+
+***[.local/bin/i3light](.local/bin/i3light)***
+***Used on i3 config***
+
+A command line utility to manage brightness:
+
+```Bash
+i3light {up|down}
+```
+
+There is a dependency to install in order to use it:
+
+- [haikarainen/light](https://github.com/haikarainen/light)
+- notify-send found on the official repository as libnotify
+- notification deamon like [dunst](https://github.com/dunst-project/dunst)
+
+### i3media
+
+***[.local/bin/i3media](.local/bin/i3media)***
+***Used on i3 config***
+
+A command line utility to manage media:
+
+```Bash
+i3media {vol_up|vol_down|vol_toggle|mic_toggle}
+```
+
+There is a dependency to install in order to use it:
+
+- [haikarainen/light](https://github.com/haikarainen/light)
+- amixer found on the official repository as alsa-tools
+- notify-send found on the official repository as libnotify
+- notification deamon like [dunst](https://github.com/dunst-project/dunst)
+
+<!--
+power-controll](
+vimv]() | Batch-
+-->

@@ -45,7 +45,7 @@ case "$1" in
         systemctl poweroff
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        echo "Usage: i3exit {lock|logout|suspend|hibernate|reboot|shutdown}"
         exit 2
 esac
 

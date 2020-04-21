@@ -6,7 +6,10 @@ vol_down=2%-
 
 actual_volume=$(amixer sget Master | grep "Front Right:" | awk -F'[][]' '{ print $2 }';)
  
-if [ $actual_volume = "100%" ] && [ $1 = "vol_up" ] ; then
+if [ -z $1 ] ; then
+    echo "Usage: i3media {vol_up|vol_down|vol_toggle|mic_toggle}"
+    exit 2
+elif [ $actual_volume = "100%" ] && [ $1 = "vol_up" ] ; then
     exit 1
 elif [ $actual_volume = "0%" ] && [ $1 = "vol_down" ] ; then
     exit 1

@@ -5,7 +5,10 @@ light_delta=5
 
 actual_light=$(light -G)
 
-if [ $actual_light = "100.00" ] && [ $1 = "up" ] ; then
+if [ -z $1 ] ; then
+    echo "Usage: i3light {up|down}"
+    exit 2
+elif [ $actual_light = "100.00" ] && [ $1 = "up" ] ; then
     exit 1
 elif [ $actual_light = "0.00" ] && [ $1 = "down" ] ; then
     exit 1
