@@ -4,7 +4,7 @@ A total nord dotfiles.
 
 ## Table of contents
 
-- [Why nord?](#why-nord-?)
+- [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
 - [kitty](#kitty)
 - [bash](#bash)
@@ -148,8 +148,8 @@ Overtime I create a lot of scripts:
 
 | Script | Description |
 | ------ | ----------- |
-| [chkey](#chkey)  | | Change keyboard layout |
-| [code-editor]() | Choose text editor to open |
+| [chkey](#chkey) | Change keyboard layout |
+| [code-editor](#code-editor) | Choose text editor to open |
 | [dtest]() | Run tests for dunst notifications |
 | [edit-config]() | Choose what config need to edit |
 | [extract]() | Extract everything |
@@ -161,4 +161,29 @@ Overtime I create a lot of scripts:
 
 ### Chkey
 
+The script switch over 2 keyboard Italian and Us, can work over more keyboard by adding a new use case.
+
+The content of the case is this:
+
+```Bash
+setxkbmap -v | awk -F '+' '/symbols/ {print $2}'
+```
+
+from the output of the setxkbmap -v, that is something like this:
+
+```Bash
+Trying to build keymap using the following components:
+keycodes:   evdev+aliases(qwerty)
+types:      complete
+compat:     complete
+symbols:    pc+us+inet(evdev)
+geometry:   pc(pc105)
+```
+
+On the line where there is **symbols** split when find the + simbol and return the second component, in this case will be the keyboard layout. This result is passed for the cases and if the layout is us than switch to it and viceversa.
+
 ![chkey](.dotfiles_resources/chkey.png)
+
+### Code-editor
+
+

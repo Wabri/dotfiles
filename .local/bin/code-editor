@@ -8,7 +8,7 @@ runwith="rofi -dmenu"
 
 case "$1" in
     dmenu)
-        runwith=dmenu
+        runwith="dmenu"
     ;;
     rofi)
         runwith="rofi -dmenu"
@@ -21,13 +21,14 @@ case "$choice" in
 	quit)
 		echo "Program terminated." && exit 1
 	;;
-	codium)
-		codium &
-	;;
 	vim)
                 x-terminal-emulator -e vim
+	;;
+	codium)
+		codium &
 	;;
 	*)
 		exit 1
 	;;
 esac
+
