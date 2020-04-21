@@ -140,7 +140,7 @@ Mine aliases are:
 
 * Dotfiles command to update this repo ([How I maintain those dotfiles](#how-i-maintain-those-dotfiles)):
 
-![dotfiles_alias](.dotfiles_resources/dotfiles_alias.png)
+![alias](.dotfiles_resources/alias.png)
 
 There are a lot of aliases that you can find also on the general aliases of [bash-it](https://github.com/Bash-it/bash-it).
 
@@ -191,4 +191,8 @@ On the line where there is **symbols** split when find the + simbol and return t
 ### Code-editor
 
 ***[.local/bin/code-editor](.local/bin/code-editor)***
+
+This is one of the menu used with i3 (I binded with mod+f3):
+
+![code-editor](.dotfiles_resources/code-editor.png)
 
