@@ -198,8 +198,19 @@ This is one of the menu used with i3 (I binded with mod+f3):
 
 ### Dtest
 
+***[.local/bin/dtest](.local/bin/dtest)***
+
 Simply restart the dunst session, used to debug dunst configuration:
 
 ![dtest1](.dotfiles_resources/dtest1.png)
 ![dtest2](.dotfiles_resources/dtest2.png)
 ![dtest3](.dotfiles_resources/dtest3.png)
+
+### Edit-config
+
+***[.local/bin/edit-config](.local/bin/edit-config)***
+
+Same functionality of [code-editor](#code-editor), but choose from configurations.
+
+![edit-config](.dotfiles_resources/edit-config.png)
+
