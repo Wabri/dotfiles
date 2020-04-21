@@ -153,8 +153,8 @@ Overtime I create a lot of scripts:
 | [chkey](#chkey) | Change keyboard layout |
 | [code-editor](#code-editor) | Choose text editor to open |
 | [dtest](#dtest) | Run tests for dunst notifications |
-| [edit-config]() | Choose what config need to edit |
-| [extract]() | Extract everything |
+| [edit-config](#edit-config) | Choose what config need to edit |
+| [extract](#extract) | Extract everything |
 | [i3exit]() | Systmctl for human |
 | [i3light]() | Brightness controll for humans |
 | [i3media]() | Controll media with command line |
@@ -213,4 +213,24 @@ Simply restart the dunst session, used to debug dunst configuration:
 Same functionality of [code-editor](#code-editor), but choose from configurations.
 
 ![edit-config](.dotfiles_resources/edit-config.png)
+
+### Extract
+
+***[.local/bin/extract](.local/bin/extract)***
+
+For now works with:
+
+- tar.bz2
+- tar.gz 
+- bz2
+- rar
+- gz
+- tar
+- tbz2
+- tgz
+- zip
+- Z
+- 7z
+
+![extract](.dotfiles_resources/extract.png)
 
