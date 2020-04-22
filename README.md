@@ -285,7 +285,7 @@ There is a dependency to install in order to use it:
 
 Same functionality of [code-editor](#code-editor), but choose from system controll.
 
-![system-config](.dotfiles_resources/system-config.png)
+![system-controll](.dotfiles_resources/system-controll.png)
 
 <!--
 vimv]() | Batch-
