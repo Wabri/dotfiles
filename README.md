@@ -279,7 +279,14 @@ There is a dependency to install in order to use it:
 - notify-send found on the official repository as libnotify
 - notification deamon like [dunst](https://github.com/dunst-project/dunst)
 
+### System-controll
+
+***[.local/bin/system-controll](.local/bin/system-controll)***
+
+Same functionality of [code-editor](#code-editor), but choose from system controll.
+
+![system-config](.dotfiles_resources/system-config.png)
+
 <!--
-power-controll](
 vimv]() | Batch-
 -->
