@@ -155,11 +155,11 @@ Overtime I create a lot of scripts:
 | [dtest](#dtest) | Run tests for dunst notifications |
 | [edit-config](#edit-config) | Choose what config need to edit |
 | [extract](#extract) | Extract everything |
-| [i3exit]() | Systmctl for human |
-| [i3light]() | Brightness controll for humans |
-| [i3media]() | Controll media with command line |
-| [power-controll]() | Systmctl menu |
-| [vimv]() | Batch-rename files using Vim -- [thameera/vimv](https://github.com/thameera/vimv) |
+| [i3exit](#i3exit) | Systmctl for human |
+| [i3light](#i3light) | Brightness controll for humans |
+| [i3media](i3media) | Controll media with command line |
+| [system-controll](#system-controll) | Systmctl menu |
+| [vimv](#vimv) | Batch-rename files using Vim -- [thameera/vimv](https://github.com/thameera/vimv) |
 
 ### Chkey
 
@@ -287,6 +287,7 @@ Same functionality of [code-editor](#code-editor), but choose from system contro
 
 ![system-controll](.dotfiles_resources/system-controll.png)
 
-<!--
-vimv]() | Batch-
--->
+### Vimv
+
+Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
+

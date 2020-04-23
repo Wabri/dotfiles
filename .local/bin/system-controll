@@ -47,4 +47,4 @@ case "$choice" in
 		exit 1
 	;;
 esac
-~/.config/i3/i3exit $choice
+i3exit $choice
