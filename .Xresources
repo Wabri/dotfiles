@@ -1,9 +1,3 @@
-URxvt.font: xft:JetBrains Mono:size=12
-URxvt.scrollBar: false
-
-!URxvt*inheritPixmap: true
-!URxvt*transparent: true
-!URxvt*shading: 15
 
 #define nord0 #2E3440
 #define nord1 #3B4252
@@ -44,3 +38,11 @@ URxvt.scrollBar: false
 *color13: nord15
 *color14: nord7
 *color15: nord6
+
+URxvt.font: xft:JetBrains Mono:size=12
+URxvt.scrollBar: false
+!URxvt*inheritPixmap: true
+!URxvt*transparent: true
+!URxvt*shading: 15
+URxvt*depth:      32
+URxvt.background: [85]nord0

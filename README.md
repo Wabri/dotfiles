@@ -10,6 +10,10 @@ A total nord dotfiles.
 - [bash](#bash)
 - [Scripts](#scripts)
 
+Also on the dotfiles:
+
+- [Xresources](#Xresources)
+
 ## Why nord?
 
 I'm using the [nord colorscheme](https://www.nordtheme.com/) because is a perfect balance between dark and light. Don't judge me I love dark themes, but there is something missing in using a total dark theme.
@@ -291,3 +295,12 @@ Same functionality of [code-editor](#code-editor), but choose from system contro
 
 Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
 
+## Xresources
+
+In my old setup I use the urxvt terminal emulator (on debian can be found as *rxvt-unicode-256color*), but when setting up and let it work properly is a very hard and tedious work so I switch over [kitty terminal](#kitty).
+
+The visual impression is similar to kitty:
+
+![urxvt](.dotfiles_resources/urxvt.png)
+
+![urxvt-kitty](.dotfiles_resources/urxvt-kitty.png)
