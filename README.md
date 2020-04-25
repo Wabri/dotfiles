@@ -9,6 +9,7 @@ A total nord dotfiles.
 - [kitty](#kitty)
 - [bash](#bash)
 - [Scripts](#scripts)
+- [Gtk theme](#gtk)
 
 Also on the dotfiles:
 
@@ -295,6 +296,18 @@ Same functionality of [code-editor](#code-editor), but choose from system contro
 
 Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
 
+## Gtk
+
+[.themes/Nordic-master](.themes/Nordic-master)
+
+The gtk theme I use can be found on github as [EliverLara/Nordic](https://github.com/EliverLara/Nordic).
+
+An example is nautilus:
+
+![nautilus](.dotfiles_resources/nautilus.png)
+
+The icons can be found on the breeze icons package on debian is possible to install as breeze-icon-theme, same as the mouse coursor.
+
 ## Xresources
 
 In my old setup I use the urxvt terminal emulator (on debian can be found as *rxvt-unicode-256color*), but when setting up and let it work properly is a very hard and tedious work so I switch over [kitty terminal](#kitty).
@@ -304,3 +317,4 @@ The visual impression is similar to kitty:
 ![urxvt](.dotfiles_resources/urxvt.png)
 
 ![urxvt-kitty](.dotfiles_resources/urxvt-kitty.png)
+
