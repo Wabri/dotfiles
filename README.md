@@ -308,6 +308,13 @@ An example is nautilus:
 
 The icons can be found on the breeze icons package on debian is possible to install as breeze-icon-theme, same as the mouse coursor.
 
+## Fonts
+
+Those are not a nord related, but I use on the some configurations:
+
+- [Jet Brains mono](https://www.jetbrains.com/lp/mono/)
+- [Font Awesome](https://fontawesome.com/)
+
 ## Xresources
 
 In my old setup I use the urxvt terminal emulator (on debian can be found as *rxvt-unicode-256color*), but when setting up and let it work properly is a very hard and tedious work so I switch over [kitty terminal](#kitty).
