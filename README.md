@@ -6,8 +6,8 @@ A total nord dotfiles.
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
-- [kitty](#kitty)
-- [bash](#bash)
+- [Kitty](#kitty)
+- [Bash](#bash)
 - [Scripts](#scripts)
 - [Vim](#vim)
 - [Codium](#codium)
@@ -470,6 +470,14 @@ I manage to create a nord theme dunst notifications:
 ![dunst-high](.dotfiles_resources/dunst-high.png)
 
 I heavly use notifications with [i3 configuration](.config/i3/config) and with i3 related scripts like [i3ligh](.local/bin/i3ligh) and [i3media](.local/bin/i3media).
+
+I create some shortcut:
+
+- Close notification -> mod4+shift+z
+
+- Close all notifications -> mod4+shift+z
+
+- Show history -> mod4+n 
 
 ## Gtk
 
