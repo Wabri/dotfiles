@@ -9,6 +9,7 @@ A total nord dotfiles.
 - [kitty](#kitty)
 - [bash](#bash)
 - [Scripts](#scripts)
+- [Vim](#vim)
 - [Gtk theme](#gtk)
 - [Fonts](#fonts)
 
@@ -297,11 +298,43 @@ Same functionality of [code-editor](#code-editor), but choose from system contro
 
 Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
 
+## Vim
+
+[.vimrc](.vimrc)
+
+I use vim as my main text editor for coding and writing. I use severl plugins:
+
+- Themes:
+    - Colorscheme -> [arcticicestudio/nord-vim](www.github.com/arcticicestudio/nord-vim)
+    - Status & Tabline -> [vim-airline/vim-airline'](www.github.com/vim-airline/vim-airline)
+- Utils:
+    - Start screen -> [mhinz/vim-startify](github.com/mhinz/vim-startify)
+    - Distraction free writing -> [junegunn/goyo.vim](github.com/junegunn/goyo.vim)
+    - Tree explorer -> [preservim/nerdtree](github.com/preservim/nerdtree)
+    - File picker -> [vifm/vifm.vim](github.com/vifm/vifm.vim)
+    - Minimap -> [severin-lemaignan/vim-minimap](github.com/severin-lemaignan/vim-minimap)
+    - Buffers and more -> [vim-ctrlspace/vim-ctrlspace](github.com/vim-ctrlspace/vim-ctrlspace)
+    - Markdown preview -> [iamcco/markdown-preview.vim](github.com/iamcco/markdown-preview.vim)
+- Git:
+    - [tpope/vim-fugitive](github.com/tpope/vim-fugitive)
+    - [mhinz/vim-signify](github.com/mhinz/vim-signify)
+- Syntax:
+    - [PotatoesMaster/i3-vim-syntax](github.com/PotatoesMaster/i3-vim-syntax)
+
+### Startup
+
+If vim is start without any argument the empty buffer is replaced with NerdTree and Startify:
+
+![vim-startup](.dotfiles_resources/vim-startup.png)
+
+## Vscodium
+
+
 ## Gtk
 
 [.themes/Nordic-master](.themes/Nordic-master)
 
-The gtk theme I use can be found on github as [EliverLara/Nordic](https://github.com/EliverLara/Nordic).
+The gtk theme I use can be found on github in [EliverLara/Nordic](https://github.com/EliverLara/Nordic) repository.
 
 An example is nautilus:
 
@@ -316,7 +349,7 @@ Those are not a nord related, but I use on the some configurations:
 - [Jet Brains mono](https://www.jetbrains.com/lp/mono/)
 - [Font Awesome](https://fontawesome.com/)
 
-The font awesome is used in i3status, bash-it, vim and more.
+The font awesome is used in i3status, bash-it, vim, vscodium, and more.
 
 ## Xresources
 
