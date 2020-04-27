@@ -181,7 +181,6 @@ nmap <leader>Q :q!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>a ggVG
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Scrolling options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -348,9 +347,10 @@ map <Leader>v :Vifm<CR>
 " => Markdown Preview settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " for normal mode
-map <leader>cp <Plug>MarkdownPreview
+map <leader>cp :MarkdownPreview<CR>
 " for normal mode
-map <leader>cs <Plug>MarkdownPreviewStop
+map <leader>cs :MarkdownPreviewStop<CR>
+
 " browser
 let g:mkdp_path_to_chrome = "qutebrowser"
     " Path to the chrome or the command to open chrome (or other modern browsers).

@@ -302,6 +302,8 @@ Batch-rename files using Vim ([github repository](https://github.com/thameera/vi
 
 [.vimrc](.vimrc)
 
+![vim](.dotfiles_resources/vim.png)
+
 I use vim as my main text editor for coding and writing. I use severl plugins:
 
 - Themes:
