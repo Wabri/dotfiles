@@ -10,6 +10,7 @@ A total nord dotfiles.
 - [bash](#bash)
 - [Scripts](#scripts)
 - [Gtk theme](#gtk)
+- [Fonts](#fonts)
 
 Also on the dotfiles:
 
@@ -314,6 +315,8 @@ Those are not a nord related, but I use on the some configurations:
 
 - [Jet Brains mono](https://www.jetbrains.com/lp/mono/)
 - [Font Awesome](https://fontawesome.com/)
+
+The font awesome is used in i3status, bash-it, vim and more.
 
 ## Xresources
 
