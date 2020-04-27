@@ -31,9 +31,9 @@ else
             volume_percentage=$(amixer sget Master | grep "Front Right:" | awk -F'[][]' '{ print $2 }')
             volume_status=$(amixer sget Master | grep "Front Right:" | awk -F'[][]' '{ print $4 }')
     	if [ $volume_status = "on" ] ; then
-                notify-send --urgency=normal --expire-time=$[ 2 * $notification_time ] "$volume_percentage "
+                notify-send --urgency=normal --expire-time=$[ 2 * $notification_time ] "$volume_percentage "
     	else
-                notify-send --urgency=critical --expire-time=$[ 2 * $notification_time ] "Mute "
+                notify-send --urgency=critical --expire-time=$[ 2 * $notification_time ] "Mute "
     	fi
         ;;
         mic_toggle)

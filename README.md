@@ -10,6 +10,8 @@ A total nord dotfiles.
 - [bash](#bash)
 - [Scripts](#scripts)
 - [Vim](#vim)
+- [Codium](#codium)
+- [Dunst](#dunst)
 - [Gtk theme](#gtk)
 - [Fonts](#fonts)
 
@@ -438,7 +440,36 @@ When I want to concentrate I need to focus only where I write, this is why use a
 
 ![vim-goyo](.dotfiles_resources/vim-goyo.png)
 
-## Vscodium
+## Codium
+
+![codium](.dotfiles_resources/codium.png)
+
+List of plugins:
+
+- Use vim on Codium [VSCodeVim/Vim](https://github.com/VSCodeVim/Vim)
+- Nord theme [arcticicestudio/nord-visual-studio-code](https://github.com/arcticicestudio/nord-visual-studio-code)
+- Python code [Microsoft/vscode-python](https://github.com/Microsoft/vscode-python)
+- Markdown preview and more [yzhang-gh/vscode-markdown](https://github.com/yzhang-gh/vscode-markdown)
+
+## Dunst
+
+[.config/dunst/dunstrc](.config/dunst/dunstrc)
+
+I manage to create a nord theme dunst notifications:
+
+- low
+
+![dunst-low](.dotfiles_resources/dunst-low.png)
+
+- normal
+
+![dunst-normal](.dotfiles_resources/dunst-normal.png)
+
+- high
+
+![dunst-high](.dotfiles_resources/dunst-high.png)
+
+I heavly use notifications with [i3 configuration](.config/i3/config) and with i3 related scripts like [i3ligh](.local/bin/i3ligh) and [i3media](.local/bin/i3media).
 
 ## Gtk
 
