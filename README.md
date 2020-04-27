@@ -305,21 +305,110 @@ Batch-rename files using Vim ([github repository](https://github.com/thameera/vi
 I use vim as my main text editor for coding and writing. I use severl plugins:
 
 - Themes:
-    - Colorscheme -> [arcticicestudio/nord-vim](www.github.com/arcticicestudio/nord-vim)
-    - Status & Tabline -> [vim-airline/vim-airline'](www.github.com/vim-airline/vim-airline)
+    - Colorscheme -> [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)
+    - Status & Tabline -> [vim-airline/vim-airline'](https://github.com/vim-airline/vim-airline)
 - Utils:
-    - Start screen -> [mhinz/vim-startify](github.com/mhinz/vim-startify)
-    - Distraction free writing -> [junegunn/goyo.vim](github.com/junegunn/goyo.vim)
-    - Tree explorer -> [preservim/nerdtree](github.com/preservim/nerdtree)
-    - File picker -> [vifm/vifm.vim](github.com/vifm/vifm.vim)
-    - Minimap -> [severin-lemaignan/vim-minimap](github.com/severin-lemaignan/vim-minimap)
-    - Buffers and more -> [vim-ctrlspace/vim-ctrlspace](github.com/vim-ctrlspace/vim-ctrlspace)
-    - Markdown preview -> [iamcco/markdown-preview.vim](github.com/iamcco/markdown-preview.vim)
+    - Start screen -> [mhinz/vim-startify](https://github.com/mhinz/vim-startify)
+    - Distraction free writing -> [junegunn/goyo.vim](https://github.com/junegunn/goyo.vim)
+    - Tree explorer -> [preservim/nerdtree](https://github.com/preservim/nerdtree)
+    - File picker -> [vifm/vifm.vim](https://github.com/vifm/vifm.vim)
+    - Minimap -> [severin-lemaignan/vim-minimap](https://github.com/severin-lemaignan/vim-minimap)
+    - Buffers and more -> [vim-ctrlspace/vim-ctrlspace](https://github.com/vim-ctrlspace/vim-ctrlspace)
+    - Markdown preview -> [iamcco/markdown-preview.vim](https://github.com/iamcco/markdown-preview.vim)
 - Git:
-    - [tpope/vim-fugitive](github.com/tpope/vim-fugitive)
-    - [mhinz/vim-signify](github.com/mhinz/vim-signify)
+    - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
+    - [mhinz/vim-signify](https://github.com/mhinz/vim-signify)
 - Syntax:
-    - [PotatoesMaster/i3-vim-syntax](github.com/PotatoesMaster/i3-vim-syntax)
+    - [PotatoesMaster/i3-vim-syntax](https://github.com/PotatoesMaster/i3-vim-syntax)
+
+I create some shortcuts using the space mapleader:
+
+- Save and quit
+
+    ```Vimrc
+    nmap <leader>w :w!<cr>
+    nmap <leader>W :wq<cr>
+    nmap <leader>q :q<cr>
+    nmap <leader>Q :q!<cr>
+    ```
+
+- Select all
+
+    ```Vimrc
+    nnoremap <leader>a ggVG
+    ```
+
+- Terminal
+
+    ```Vimrc
+    nnoremap <leader>t :terminal<CR>
+    ```
+
+- Copy and paste
+
+    ```Vimrc
+    nnoremap <leader>p :set paste<CR>"+p:set nopaste<CR>
+    vnoremap <leader>p <Esc>:set paste<CR>gv"+p:set nopaste<CR>
+    
+    vnoremap <leader>y "+y
+    ```
+
+- NerdTree toggle
+
+    ```Vimrc
+    " Shortcut
+    map <leader>e :NERDTreeToggle<CR>
+    ```
+
+- Startify open
+
+    ```Vimrc
+    nmap <leader><leader> :Startify<CR>
+    ```
+
+- Git
+
+    ```Vimrc
+    nmap <leader>gs :Gstatus<CR>
+    nmap <leader>gc :Gcommit<CR>
+    nmap <leader>gl :GlLog<CR>
+    ```
+
+- Distraction free toggle
+
+    ```Vimrc
+    map <leader>f :Goyo \| set linebreak<CR>
+    ```
+- Buffers
+
+    ```Vimrc
+    nnoremap <leader>bn :bnext<CR>
+    nnoremap <leader>bp :bprev<CR>
+    nnoremap <leader>bb :CtrlSpace<CR>
+    ```
+
+- Minimap
+
+    ```Vimrc
+    let g:minimap_toggle='<leader>mm'
+    let g:minimap_show='<leader>ms'
+    let g:minimap_update='<leader>mu'
+    let g:minimap_close='<leader>mc'
+    let g:minimap_highlight='Search'
+    ```
+
+- Vifm
+
+    ```Vimrc
+    map <Leader>v :Vifm<CR>
+    ```
+
+- Markdown preview
+
+    ```Vimrc
+    map <leader>cp <Plug>MarkdownPreview
+    map <leader>cs <Plug>MarkdownPreviewStop
+    ```
 
 ### Startup
 
@@ -327,8 +416,27 @@ If vim is start without any argument the empty buffer is replaced with NerdTree 
 
 ![vim-startup](.dotfiles_resources/vim-startup.png)
 
-## Vscodium
+### Minimap
 
+I use the minimap when I need to edit a large file or a long documentation:
+
+![vim-minimap](.dotfiles_resources/vim-minimap.png)
+
+### Markdown Preview
+
+When I edit a Markdown file is necessary to have a visual feedback:
+
+![vim-markdown](.dotfiles_resources/vim-markdown.png)
+
+I prefer to use [qutebrowser](https://qutebrowser.org/) for the preview because is more light than other browsers and have the build-in vim key to move on the page.
+
+### Distraction free mode
+
+When I want to concentrate I need to focus only where I write, this is why use a distraction free mode:
+
+![vim-goyo](.dotfiles_resources/vim-goyo.png)
+
+## Vscodium
 
 ## Gtk
 
