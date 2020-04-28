@@ -6,17 +6,17 @@ A total nord dotfiles.
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
+- [Rofi](#rofi)
 - [Kitty](#kitty)
 - [Bash](#bash)
-- [Scripts](#scripts)
+    - [Scripts](#scripts)
 - [Vim](#vim)
 - [Codium](#codium)
 - [Dunst](#dunst)
 - [Gtk theme](#gtk)
 - [Fonts](#fonts)
-
-Also on the dotfiles:
-
+- [Telegram](#telegram)
+- [Mailspring](#mailspring)
 - [Xresources](#Xresources)
 
 ## Why nord?
@@ -56,6 +56,18 @@ dotfiles push
 ```
 
 Atlassian made a tutorial about this method, you can find the post here [**The best way to store your dotfiles: A bare Git repository**](https://www.atlassian.com/git/tutorials/dotfiles).
+
+## Rofi
+
+[.config/rofi/config](.config/rofi/config)
+
+I use [Rofi](https://github.com/davatorium/rofi) for applications launcher and in some i3 scripts.
+
+I create a personal nord theme:
+
+![rofi](.dotfiles_resources/rofi.png)
+
+The theme is possible to find on [.local/share/rofi/themes/nord.config](.local/share/rofi/themes/nord.config).
 
 ## Kitty
 
@@ -153,7 +165,7 @@ Mine aliases are:
 
 There are a lot of aliases that you can find also on the general aliases of [bash-it](https://github.com/Bash-it/bash-it).
 
-## Scripts
+### Scripts
 
 Overtime I create a lot of scripts:
 
@@ -170,7 +182,7 @@ Overtime I create a lot of scripts:
 | [system-controll](#system-controll) | Systmctl menu |
 | [vimv](#vimv) | Batch-rename files using Vim -- [thameera/vimv](https://github.com/thameera/vimv) |
 
-### Chkey
+#### Chkey
 
 ***[.local/bin/chkey](.local/bin/chkey)***
 
@@ -197,7 +209,7 @@ On the line where there is **symbols** split when find the + simbol and return t
 
 ![chkey](.dotfiles_resources/chkey.png)
 
-### Code-editor
+#### Code-editor
 
 ***[.local/bin/code-editor](.local/bin/code-editor)***
 
@@ -205,7 +217,7 @@ This is one of the menu used with i3 (I binded with mod+f3):
 
 ![code-editor](.dotfiles_resources/code-editor.png)
 
-### Dtest
+#### Dtest
 
 ***[.local/bin/dtest](.local/bin/dtest)***
 
@@ -215,7 +227,7 @@ Simply restart the dunst session, used to debug dunst configuration:
 ![dtest2](.dotfiles_resources/dtest2.png)
 ![dtest3](.dotfiles_resources/dtest3.png)
 
-### Edit-config
+#### Edit-config
 
 ***[.local/bin/edit-config](.local/bin/edit-config)***
 
@@ -223,7 +235,7 @@ Same functionality of [code-editor](#code-editor), but choose from configuration
 
 ![edit-config](.dotfiles_resources/edit-config.png)
 
-### Extract
+#### Extract
 
 ***[.local/bin/extract](.local/bin/extract)***
 
@@ -243,7 +255,7 @@ For now works with:
 
 ![extract](.dotfiles_resources/extract.png)
 
-### i3exit
+#### i3exit
 
 ***[.local/bin/i3exit](.local/bin/i3exit)***
 ***Used on i3 config***
@@ -254,7 +266,7 @@ A command line utility with a better use of systmctl:
 i3exit {lock|logout|suspend|hibernate|reboot|shutdown}
 ```
 
-### i3light
+#### i3light
 
 ***[.local/bin/i3light](.local/bin/i3light)***
 ***Used on i3 config***
@@ -271,7 +283,7 @@ There is a dependency to install in order to use it:
 - notify-send found on the official repository as libnotify
 - notification deamon like [dunst](https://github.com/dunst-project/dunst)
 
-### i3media
+#### i3media
 
 ***[.local/bin/i3media](.local/bin/i3media)***
 ***Used on i3 config***
@@ -288,7 +300,7 @@ There is a dependency to install in order to use it:
 - notify-send found on the official repository as libnotify
 - notification deamon like [dunst](https://github.com/dunst-project/dunst)
 
-### System-controll
+#### System-controll
 
 ***[.local/bin/system-controll](.local/bin/system-controll)***
 
@@ -296,7 +308,7 @@ Same functionality of [code-editor](#code-editor), but choose from system contro
 
 ![system-controll](.dotfiles_resources/system-controll.png)
 
-### Vimv
+#### Vimv
 
 Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
 
@@ -499,6 +511,18 @@ Those are not a nord related, but I use on the some configurations:
 - [Font Awesome](https://fontawesome.com/)
 
 The font awesome is used in i3status, bash-it, vim, vscodium, and more.
+
+## Telegram
+
+![telegram](.dotfiles_resources/telegram.png)
+
+To install this theme visit the [gilbertw1/telegram-nord-theme](https://github.com/gilbertw1/telegram-nord-theme) and follow the docs.
+
+## Mailspring
+
+![mailspring](https://raw.githubusercontent.com/faraadi/mailspring-nord-theme/master/screenshots/1.png)
+
+To install this theme visit the [faraadi/mailspring-nord-theme](https://github.com/faraadi/mailspring-nord-theme) and follow the docs.
 
 ## Xresources
 
