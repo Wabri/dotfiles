@@ -1,8 +1,11 @@
 #! /usr/bin/env bash
 
-declare options=("quit
-vim
-codium")
+declare options=(" quit
+ vim
+ doom
+ spacemacs
+ codium
+ atom")
 
 runwith="rofi -dmenu"
 
@@ -23,6 +26,12 @@ case "$choice" in
 	;;
 	vim)
                 x-terminal-emulator -e vim
+	;;
+        doom)
+                emacs --with-profile doom
+	;;
+        space)
+                emacs --with-profile space
 	;;
 	codium)
 		codium &

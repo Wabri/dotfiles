@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
-declare options=("quit
-lock
-logout
-suspend
-hibernate
-reboot
-poweroff")
+declare options=(" quit
+ lock
+ logout 
+ suspend
+ hibernate
+ reboot
+ poweroff")
 
 runwith="rofi -dmenu"
 

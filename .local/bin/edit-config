@@ -1,14 +1,14 @@
 #! /usr/bin/env bash
 
-declare options=("quit
-i3
-vim
-i3status
-kitty
-bash
-aliases
-vifm
-xresources")
+declare options=(" quit
+ i3
+ vim
+ i3status
+ kitty
+ bash
+ aliases
+ vifm
+ xresources")
 
 runwith="rofi -dmenu"
 
