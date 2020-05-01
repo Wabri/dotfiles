@@ -21,7 +21,7 @@ case "$1" in
     ;;
 esac
 
-choice=$(echo -e "${options[@]}" | $runwith -i -p 'Edit config file: ')
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'Edit config file: ' | awk -F ' ' '{print $2}')
 
 case "$choice" in
 	quit)
@@ -45,7 +45,7 @@ case "$choice" in
 	aliases)
 		choice="$HOME/.bash_aliases"
 	;;
-	vifm)
+        vifm)
 		choice="$HOME/.config/vifm/vifmrc"
 	;;
 	xresources)

@@ -18,7 +18,7 @@ case "$1" in
     ;;
 esac
 
-choice=$(echo -e "${options[@]}" | $runwith -i -p 'Open editor: ')
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'Open editor: ' | awk -F ' ' '{print $2}')
 
 case "$choice" in
 	quit)

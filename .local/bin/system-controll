@@ -19,7 +19,7 @@ case "$1" in
     ;;
 esac
 
-choice=$(echo -e "${options[@]}" | $runwith -i -p 'System controll: ')
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'System controll: ' | awk -F ' ' '{print $2}')
 
 case "$choice" in
 	quit)
