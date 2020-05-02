@@ -1,6 +1,13 @@
 # Wabri's Dotfiles
 
-A total nord dotfiles.
+## About this config
+
+* Focus on **shortcuts**
+* High **usability** and **performance**
+* **Optimized** for a 60% keyboard
+* **Low resources** used
+* **Fonts**: [JetBrains](https://www.jetbrains.com/lp/mono/) and [Fontawesome](https://fontawesome.com/).
+* **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
 
 ## Table of contents
 
@@ -62,14 +69,7 @@ Atlassian made a tutorial about this method, you can find the post here [**The b
 
 [.config/i3/config](.config/i3/config)
 
-About this config:
-
-* Focus on shortcuts
-* High usability and performance
-* Optimized for a 60% keyboard
-* Low resources used
-* **Fonts**: [JetBrains](https://www.jetbrains.com/lp/mono/) and [Fontawesome](https://fontawesome.com/).
-* **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
+From 2017 I'm a [i3wm](https://i3wm.org/) user, I created and tested many configuration focus on dark theme and ricing, here is my [old dotfiles](https://github.com/wabri/old_dotfiles).
 
 ## Rofi
 
