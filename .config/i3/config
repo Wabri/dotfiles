@@ -1,0 +1,402 @@
+# i3 config file (v4)
+
+################################################################################
+#### Modifiers ####
+### Start ###
+set $mod Mod4
+set $menu rofi
+### End ###
+################################################################################
+
+################################################################################
+#### Font ####
+### Start ###
+font pango:JetBrains Mono 11
+# Colors setup
+# class                 border  backgr. text    indicator child_border
+client.focused          #4C566A #4C566A #A3BE8C #EBCB8B   #5E81AC
+client.focused_inactive #2E3440 #B48EAD #A3BE8C #8FBCBB   #434C5E
+client.unfocused        #2E3440 #3B4252 #8FBCBB #8FBCBB   #3B4252
+client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
+client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
+client.background       #D8DEE9
+### End ###
+################################################################################
+
+################################################################################
+#### Motions ####
+### Start ###
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+### End ###
+################################################################################
+
+################################################################################
+#### Settings ####
+### Start ###
+# i3exit 
+set $mode_system System (l)  (s)  (h)  (r)  (p)  (q)  
+mode "$mode_system" {
+    bindsym l exec i3exit logout, mode "default"
+    bindsym s exec i3exit suspend, mode "default"
+    bindsym h exec i3exit hibernate, mode "default"
+    bindsym r exec i3exit reboot, mode "default"
+    bindsym p exec i3exit shutdown, mode "default"
+
+    # back to normal
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_system"
+bindsym $mod+Escape exec i3exit lock -f
+bindsym $mod+Shift+Escape exec --no-startup-id system-controll
+# Restart
+bindsym $mod+Shift+r restart
+# Terminal
+bindsym $mod+Return exec i3-sensible-terminal
+# Kill focused
+bindsym $mod+Shift+q kill
+# Start Application louncher 
+# bindsym $mod+Shift+Return exec i3-dmenu-desktop
+bindsym $mod+Shift+Return exec rofi -show 
+bindsym $mod+Tab exec rofi -show window
+### End ###
+################################################################################
+
+################################################################################
+#### Floating ####
+### Start ###
+floating_modifier $mod
+bindsym $mod+Shift+o floating toggle
+bindsym $mod+o focus mode_toggle
+bindsym --whole-window $mod+Shift+button1 floating toggle
+floating_minimum_size 400 x 200
+floating_maximum_size 1000 x 800
+### End ###
+################################################################################
+
+################################################################################
+#### Mouse touchpad bindings & settings  ####
+### Start ###
+exec --no-startup-id xinput set-prop \
+"SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+bindsym --border $mod+button2 kill
+# yes|no
+focus_follows_mouse no
+# output|none
+mouse_warping output
+### End ###
+################################################################################
+
+################################################################################
+#### Display Setup ####
+### Start ###
+# horizontal|vertical|auto
+default_orientation horizontal 
+# default|stacking|tabbed
+workspace_layout default 
+# left|center|right
+title_align center 
+# normal|none|pixel normal|pixel <px>
+default_border pixel 3
+# normal|none|pixel normal|pixel <px>
+default_floating_border pixel 7
+# none|vertical|horizontal|both|smart
+hide_edge_borders smart
+# resize window (you can also use the mouse for that)
+# Pixels per resize
+set $pxpr 10
+set $mode_resize Resize (h) (j) (k) (l) (q)
+mode "$mode_resize" {
+        bindsym h resize shrink width $pxpr px or $pxpr ppt
+        bindsym j resize grow height $pxpr px or $pxpr ppt
+        bindsym k resize shrink height $pxpr px or $pxpr ppt
+        bindsym l resize grow width $pxpr px or $pxpr ppt
+
+        bindsym Escape mode "default"
+        bindsym q mode "default"
+}
+bindsym $mod+r mode $mode_resize
+# Wallpaper setup
+exec nitrogen --restore
+# smart|ignore|leave_fullscreen
+popup_during_fullscreen smart
+# yes|no|force|workspace
+focus_wrapping yes
+# yes|no
+force_xinerama no
+# Toggle fullscreen
+bindsym $mod+f fullscreen toggle
+# split toggle|horizontal|vertical
+bindsym $mod+slash split toggle
+# Toggle between stacking/tabbed/splith/splitv:
+bindsym $mod+shift+slash layout toggle all
+# Brightness Controll
+bindsym XF86MonBrightnessUp exec i3light up
+bindsym XF86MonBrightnessDown exec i3light down
+# red filter
+exec --no-startup-id redshift-gtk -l 46.755:14.7756 -t 6500:3000
+### End ###
+################################################################################
+
+################################################################################
+#### Volume & Mic & Media ####
+### Start ###
+## Vol ##
+bindsym XF86AudioRaiseVolume exec i3media vol_up
+bindsym XF86AudioLowerVolume exec i3media vol_down
+bindsym XF86AudioMute exec i3media vol_toggle
+## Mic ##
+bindsym XF86AudioMicMute exec i3media mic_toggle
+# Spotato modality
+set $mode_spotato Media (h)  (l)  (j)  (k)  (s)  (a)  (d)  (q)
+mode "$mode_spotato" {
+    bindsym k exec "spotato play ; notify-send --expire-time=400 --urgency=low "
+    bindsym j exec "spotato pause; notify-send --expire-time=400 --urgency=low "
+    bindsym s exec "spotato toggle; notify-send --expire-time=800 --urgency=normal /", mode "default"
+    bindsym l exec "spotato next; notify-send --expire-time=400 --urgency=low "
+    bindsym h exec "spotato previous; notify-send --expire-time=400 --urgency=low "
+
+    bindsym d exec i3media vol_up
+    bindsym a exec i3media vol_down
+
+    # back to normal
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+s mode "$mode_spotato"
+## Music ##
+bindsym XF86AudioPlay exec "spotato toggle ; notify-send --expire-time=800 --urgency=normal /"
+bindsym XF86AudioNext exec "spotato next ; notify-send --expire-time=400 --urgency=low "
+bindsym XF86AudioPrev exec "spotato previous ; notify-send --expire-time=400 --urgency=low "
+### End ###
+################################################################################
+
+################################################################################
+#### Criteria Windows ####
+### Start ###
+assign [class="^Brave"] → $ws2
+assign [class="Firefox"] → $ws2
+assign [class="Code"] → $ws3
+assign [class="GitKraken"] → $ws4
+assign [class="Steam"] → $ws7
+assign [class="Lutris"] → $ws7
+assign [class="Mailspring"] → $ws8
+assign [class="Station"] → $ws9
+assign [class="Bitwarden"] → $ws9
+assign [class="Ferdi"] → $ws9
+assign [class="TelegramDesktop"] → $ws9
+for_window [class="Spotify"] move to workspace $ws10
+
+for_window [class="Nautilus"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
+### End ###
+################################################################################
+
+################################################################################
+#### Monitor setup ####
+### Start ###
+exec_always --no-startup-id ~/.screenlayout/default.sh
+# Content move from output to another
+set $workspace_move Workspace (h) (j) (k) (l) (q)
+mode "$workspace_move" {
+    
+    # Move workspace between outputs
+    bindsym h move workspace to output left
+    bindsym l move workspace to output right
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+    
+    # Change focus window
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    
+    # Move focused window
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+    
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+Tab mode "$workspace_move"
+### End ###
+################################################################################
+
+################################################################################
+#### Startup executions  ####
+### Start ###
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id compton -b -c 
+exec --no-startup-id "dunst --config ~/.config/dunst/dunstrc"
+### End ###
+################################################################################
+
+################################################################################
+#### Windows settings ####
+### Start ###
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+bracketright workspace next
+bindsym $mod+bracketleft workspace prev
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+# Automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth no
+# smart|urgent|focus|none
+focus_on_window_activation smart
+# yes|no
+show_marks yes
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+# Swap with marked 
+bindsym $mod+Shift+m swap container with mark m
+### End ###
+################################################################################
+
+################################################################################
+#### Bar ####
+### Start ###
+## Polybar
+# exec_always ~/.config/polybar/launch.sh
+## i3status
+bar {
+    status_command i3status -c ~/.config/i3/i3status.conf
+    font pango:JetBrains Mono 12
+    # dock|hide|invisible
+    mode dock
+    # hide|show
+    hidden_state hide
+    # <Modifier>|none
+    modifier $mod
+    # disable clicking on workspace buttons
+    # bindsym button1 nop
+    bindsym button3 exec --no-startup-id pavucontrol
+    bindsym button2 exec --no-startup-id arandr
+    # bottom|top
+    position top
+    # primary|<output>
+    # tray_output none|primary|<output>
+    tray_output none
+    # <px> [px]
+    tray_padding 0
+    separator_symbol "  "
+    # yes|no
+    workspace_buttons yes
+    # yes|no
+    # strip_workspace_numbers yes
+    # yes|no
+    # strip_workspace_name no
+    # yes|no
+    binding_mode_indicator yes
+    colors {
+        background #2E3440
+        statusline #88C0D0
+        separator #ECEFF4
+
+	# class            border  backgr. text    
+        focused_workspace  #2E3440 #2E3440 #A3BE8C
+        active_workspace   #2E3440 #2E3440 #D08770
+        inactive_workspace #2E3440 #2E3440 #4C566A
+        urgent_workspace   #BF616A #2E3440 #BF616A
+        binding_mode       #2E3440 #2E3440 #A3BE8C
+    }
+}
+## bar hidden_state hide|show|toggle [<bar_id>]
+## bar mode dock|hide|invisible|toggle [<bar_id>]
+bindsym $mod+b bar mode toggle
+### End ###
+################################################################################
+
+################################################################################
+#### Scratchpad ####
+### Start ###
+## Make the currently focused window a scratchpad
+bindsym $mod+Shift+y move scratchpad
+# Show the first scratchpad window
+bindsym $mod+Shift+p scratchpad show
+### End ###
+################################################################################
+
+################################################################################
+#### Screenshot ####
+### Start ###
+# Take Screenshoot
+# All
+bindsym $mod+Shift+Print exec \
+scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Selection
+bindsym --release $mod+Print exec \
+scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Focus window
+bindsym Print exec \
+scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+### End ###
+################################################################################
+
+################################################################################
+#### Functions & Shortcuts ####
+### Start ###
+## Functions ##
+#bindsym $mod+F1 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F2 exec edit-config $menu
+#bindsym $mod+F3 exec code-editor $menu
+#bindsym $mod+F4 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F5 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F6 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F7 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F8 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F9 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F10 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F11 exec i3-sensible-terminal -e vim ~/.config/i3/config
+#bindsym $mod+F12 exec i3-sensible-terminal -e vim ~/.config/i3/config
+## Shortcut ##
+bindsym XF86Display exec arandr
+bindsym $mod+space exec chkey
+bindsym $mod+backslash exec x-terminal-emulator -e vifm
+bindsym $mod+period exec i3-sensible-terminal -e vim ~/.config/i3/config
+bindsym $mod+c exec configs $menu
+bindsym $mod+e exec editors $menu

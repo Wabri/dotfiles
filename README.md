@@ -1,5 +1,11 @@
 # Wabri's Dotfiles
 
+![i3wm-full](.dotfiles_resources/i3wm-full.png)
+
+![i3wm-light](.dotfiles_resources/i3wm-light.png)
+
+![i3wm-empty](.dotfiles_resources/i3wm-empty.png)
+
 ## About this config
 
 * Focus on **shortcuts**
@@ -8,6 +14,7 @@
 * **Low resources** used
 * **Fonts**: [JetBrains](https://www.jetbrains.com/lp/mono/) and [Fontawesome](https://fontawesome.com/).
 * **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
+* All you see is only tested on Debian 10
 
 ## Table of contents
 
@@ -70,6 +77,19 @@ Atlassian made a tutorial about this method, you can find the post here [**The b
 [.config/i3/config](.config/i3/config)
 
 From 2017 I'm a [i3wm](https://i3wm.org/) user, I created and tested many configuration focus on dark theme and ricing, here is my [old dotfiles](https://github.com/wabri/old_dotfiles).
+
+I try to use less resources and keep it as light as possible and this is what it look like on idle:
+
+![htop-idle](.dotfiles_resources/htop-idle.png)
+
+There are deamons and applets running: 
+
+- compton a compositor
+- network manager applet
+- blueman applet for bluethoot managing
+- dunst for notifications
+
+
 
 ## Rofi
 
