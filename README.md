@@ -6,6 +6,7 @@ A total nord dotfiles.
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
+- [i3wm](#i3wm)
 - [Rofi](#rofi)
 - [Kitty](#kitty)
 - [Bash](#bash)
@@ -56,6 +57,19 @@ dotfiles push
 ```
 
 Atlassian made a tutorial about this method, you can find the post here [**The best way to store your dotfiles: A bare Git repository**](https://www.atlassian.com/git/tutorials/dotfiles).
+
+## I3wm
+
+[.config/i3/config](.config/i3/config)
+
+About this config:
+
+* Focus on shortcuts
+* High usability and performance
+* Optimized for a 60% keyboard
+* Low resources used
+* **Fonts**: [JetBrains](https://www.jetbrains.com/lp/mono/) and [Fontawesome](https://fontawesome.com/).
+* **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
 
 ## Rofi
 
@@ -172,9 +186,9 @@ Overtime I create a lot of scripts:
 | Script | Description |
 | ------ | ----------- |
 | [chkey](#chkey) | Change keyboard layout |
-| [code-editor](#code-editor) | Choose text editor to open |
+| [editors](#editors) | Choose text editor to open |
 | [dtest](#dtest) | Run tests for dunst notifications |
-| [edit-config](#edit-config) | Choose what config need to edit |
+| [configs](#configs) | Choose what config need to edit |
 | [extract](#extract) | Extract everything |
 | [i3exit](#i3exit) | Systmctl for human |
 | [i3light](#i3light) | Brightness controll for humans |
@@ -209,13 +223,13 @@ On the line where there is **symbols** split when find the + simbol and return t
 
 ![chkey](.dotfiles_resources/chkey.png)
 
-#### Code-editor
+#### Editors
 
-***[.local/bin/code-editor](.local/bin/code-editor)***
+***[.local/bin/editors](.local/bin/editors)***
 
 This is one of the menu used with i3 (I binded with mod+f3):
 
-![code-editor](.dotfiles_resources/code-editor.png)
+![editors](.dotfiles_resources/editors.png)
 
 #### Dtest
 
@@ -229,11 +243,11 @@ Simply restart the dunst session, used to debug dunst configuration:
 
 #### Edit-config
 
-***[.local/bin/edit-config](.local/bin/edit-config)***
+***[.local/bin/configs](.local/bin/configs)***
 
-Same functionality of [code-editor](#code-editor), but choose from configurations.
+Same functionality of [editors](#editors), but choose from configurations.
 
-![edit-config](.dotfiles_resources/edit-config.png)
+![configs](.dotfiles_resources/configs.png)
 
 #### Extract
 
@@ -304,7 +318,7 @@ There is a dependency to install in order to use it:
 
 ***[.local/bin/system-controll](.local/bin/system-controll)***
 
-Same functionality of [code-editor](#code-editor), but choose from system controll.
+Same functionality of [editors](#editors), but choose from system controll.
 
 ![system-controll](.dotfiles_resources/system-controll.png)
 
