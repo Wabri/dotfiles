@@ -241,7 +241,7 @@ Simply restart the dunst session, used to debug dunst configuration:
 ![dtest2](.dotfiles_resources/dtest2.png)
 ![dtest3](.dotfiles_resources/dtest3.png)
 
-#### Edit-config
+#### Configs
 
 ***[.local/bin/configs](.local/bin/configs)***
 
