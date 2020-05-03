@@ -89,7 +89,71 @@ There are deamons and applets running:
 - blueman applet for bluethoot managing
 - dunst for notifications
 
+### Theme
 
+This is the palette for the container:
+
+| Class | Border | Background | Text | Indicator | Child_border |
+| ----------------------- | ------- | ------- | ------- | ------- | ------- |
+| client.focused          | #4C566A | #4C566A | #A3BE8C | #EBCB8B | #5E81AC |
+| client.focused_inactive | #2E3440 | #B48EAD | #A3BE8C | #8FBCBB | #434C5E |
+| client.unfocused        | #2E3440 | #3B4252 | #8FBCBB | #8FBCBB | #3B4252 |
+| client.urgent           | #BF616A | #BF616A | #2E3440 | #BF616A | #BF616A |
+| client.placeholder      | #88C0D0 | #2E3440 | #B48EAD | #2E3440 | #2E3440 |
+| client.background       | #D8DEE9 |         |         |         |         |
+
+### Lock & system controll
+
+**$mod+Shift+x**
+
+I replace the old `i3exit lock` lock screen:
+
+![i3wm-i3exit-lock](.dotfiles_resources/i3wm-i3exit-lock.png)
+
+With the `i3lock-fancy`:
+
+![i3wm-i3lock-fancy](.dotfiles_resources/i3wm-i3lock-fancy.png)
+
+---
+
+**$mod+Escape**
+
+I also use the [system-controll](#system-controll) for more accessibility:
+
+![system-controll](.dotfiles_resources/system-controll.png)
+
+### Applications launcher & windows switcher
+
+**$mod+Shift+Return**
+
+I use the rofi lancher with [personal theme](#rofi):
+
+![rofi](.dotfiles_resources/rofi.png)
+
+**$mod+Tab**
+
+When there are too many windows open is necessary to have a list:
+
+![rofi-window](.dotfiles_resources/rofi-window.png)
+
+### Modes
+
+I create several modes to improove usability:
+
+- [system](#system) -> shortcut for [i3exit script](#i3exit)
+
+#### System
+
+**$mod+p** is the bindsym to enter in this mode:
+
+![i3wm-i3exit](.dotfiles_resources/i3wm-i3exit.png)
+
+- l -> logout
+- s -> suspend
+- h -> hibernate
+- r -> reboot
+- p -> shutdown
+- q -> return in default mode
 
 ## Rofi
 
