@@ -104,6 +104,8 @@ This is the palette for the container:
 
 ### Lock & system controll
 
+#### Lock
+
 **$mod+Shift+x**
 
 I replace the old `i3exit lock` lock screen:
@@ -114,7 +116,7 @@ With the `i3lock-fancy`:
 
 ![i3wm-i3lock-fancy](.dotfiles_resources/i3wm-i3lock-fancy.png)
 
----
+#### System controll
 
 **$mod+Escape**
 
@@ -136,11 +138,22 @@ When there are too many windows open is necessary to have a list:
 
 ![rofi-window](.dotfiles_resources/rofi-window.png)
 
+### Wallpaper
+
+![nord](Pictures/Wallpapers/nord1.png)
+
+I use nitrogen to manage wallpaper:
+
+```I3config
+exec nitrogen --restore
+```
+
 ### Modes
 
 I create several modes to improove usability:
 
 - [system](#system) -> shortcut for [i3exit script](#i3exit)
+- [resize](#resize) -> resize windows and containers
 
 #### System
 
@@ -153,6 +166,18 @@ I create several modes to improove usability:
 - h -> hibernate
 - r -> reboot
 - p -> shutdown
+- q -> return in default mode
+
+#### Resize
+
+**$mod+r** is the bindsym to enter in this mode:
+
+![i3wm-resize](.dotfiles_resources/i3wm-resize.png)
+
+- h -> resize left 
+- j -> resize down
+- k -> resize up
+- l -> resize right
 - q -> return in default mode
 
 ## Rofi
