@@ -102,9 +102,7 @@ This is the palette for the container:
 | client.placeholder      | #88C0D0 | #2E3440 | #B48EAD | #2E3440 | #2E3440 |
 | client.background       | #D8DEE9 |         |         |         |         |
 
-### Lock & system controll
-
-#### Lock
+### Lock
 
 **$mod+Shift+x**
 
@@ -116,7 +114,7 @@ With the `i3lock-fancy`:
 
 ![i3wm-i3lock-fancy](.dotfiles_resources/i3wm-i3lock-fancy.png)
 
-#### System controll
+### System controll
 
 **$mod+Escape**
 

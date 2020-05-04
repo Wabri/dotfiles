@@ -24,7 +24,7 @@ client.background       #D8DEE9
 ################################################################################
 
 ################################################################################
-#### Motions ####
+#### Keybindings ####
 ### Start ###
 # change focus
 bindsym $mod+h focus left
@@ -56,8 +56,8 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+p mode "$mode_system"
-bindsym $mod+Escape exec i3exit lock -f
-bindsym $mod+Shift+Escape exec --no-startup-id system-controll
+bindsym $mod+Shift+x exec i3exit lock -f
+bindsym $mod+Escape exec --no-startup-id system-controll
 # Restart
 bindsym $mod+Shift+r restart
 # Terminal
@@ -78,7 +78,7 @@ floating_modifier $mod
 bindsym $mod+Shift+o floating toggle
 bindsym $mod+o focus mode_toggle
 bindsym --whole-window $mod+Shift+button1 floating toggle
-floating_minimum_size 400 x 200
+floating_minimum_size 100 x 50
 floating_maximum_size 1000 x 800
 ### End ###
 ################################################################################
