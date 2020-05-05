@@ -152,6 +152,8 @@ I create several modes to improove usability:
 
 - [system](#system) -> shortcut for [i3exit script](#i3exit)
 - [resize](#resize) -> resize windows and containers
+- [spotato](#spotato) -> media controll 
+- [workspace](#workspace) -> move window between outputs
 
 #### System
 
@@ -177,6 +179,39 @@ I create several modes to improove usability:
 - k -> resize up
 - l -> resize right
 - q -> return in default mode
+
+#### Spotato
+
+**$mod+s** is the bindsym to enter in this mode:
+
+![i3wm-spotato](.dotfiles_resources/i3wm-spotato.png)
+
+- h -> previous song
+- l -> next song
+- j -> pause song
+- k -> play song
+- s -> toggle play/pause song
+- a -> volume down
+- d -> volume up
+- q -> return in default mode
+
+#### Workspace
+
+**$mod+Shift+Tab** is the bindsym to enter in this mode:
+
+![i3wm-workspace](.dotfiles_resources/i3wm-workspace.png)
+
+- h -> Move workspace to output left
+- j -> Move workspace to output down
+- k -> Move workspace to output up
+- l -> Move workspace to output right
+- q -> return in default mode
+
+## i3Status
+
+[.config/i3/i3status.conf](.config/i3/i3status.conf)
+
+![i3status](.dotfiles_resources/i3status.png)
 
 ## Rofi
 
