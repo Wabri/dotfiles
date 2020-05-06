@@ -282,6 +282,7 @@ let g:startify_bookmarks = [
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Gpush<CR>
 nmap <leader>gl :GlLog<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -347,7 +348,7 @@ map <Leader>v :Vifm<CR>
 " => Markdown Preview settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " for normal mode
-map <leader>cp :MarkdownPreview<CR>
+map <leader>cm :MarkdownPreview<CR>
 " for normal mode
 map <leader>cs :MarkdownPreviewStop<CR>
 
@@ -355,4 +356,10 @@ map <leader>cs :MarkdownPreviewStop<CR>
 let g:mkdp_path_to_chrome = "qutebrowser"
     " Path to the chrome or the command to open chrome (or other modern browsers).
     " If set, g:mkdp_browserfunc would be ignored.
+    
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Compile document and preview
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>cc :w! \| !compilepreview <c-r>%<CR>
+map <leader>co :!openpreview <c-r>%<CR><CR>
 

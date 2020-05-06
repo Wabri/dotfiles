@@ -337,6 +337,8 @@ Overtime I create a lot of scripts:
 | [i3media](i3media) | Controll media with command line |
 | [system-controll](#system-controll) | Systmctl menu |
 | [vimv](#vimv) | Batch-rename files using Vim -- [thameera/vimv](https://github.com/thameera/vimv) |
+| [compilepreview](#compilepreview) | Compile a text from different format to a readable one |
+| [openpreview](#openpreview) | Open file created with [compilepreview](#compilepreview) |
 
 #### Chkey
 
@@ -468,6 +470,18 @@ Same functionality of [editors](#editors), but choose from system controll.
 
 Batch-rename files using Vim ([github repository](https://github.com/thameera/vimv)).
 
+#### Compilepreview
+
+***[.local/bin/compilepreview](.local/bin/compilepreview)***
+
+Used on vim to create a preview file.
+
+#### Openpreview
+
+***[.local/bin/openpreview](.local/bin/openpreview)***
+
+Used on vim to open a preview file created with [compilepreview](.local/bin/compilepreview).
+
 ## Vim
 
 [.vimrc](.vimrc)
@@ -575,11 +589,13 @@ I create some shortcuts using the space mapleader:
     map <Leader>v :Vifm<CR>
     ```
 
-- Markdown preview
+- Preview (see [compilepreview](#compilepreview) and [openpreview](#openpreview)
 
     ```Vimrc
-    map <leader>cp <Plug>MarkdownPreview
+    map <leader>cm <Plug>MarkdownPreview
     map <leader>cs <Plug>MarkdownPreviewStop
+    map <leader>cc :w! \| !compilepreview <c-r>%<CR>
+    map <leader>co :!openpreview <c-r>%<CR><CR>
     ```
 
 ### Startup
@@ -594,13 +610,17 @@ I use the minimap when I need to edit a large file or a long documentation:
 
 ![vim-minimap](.dotfiles_resources/vim-minimap.png)
 
-### Markdown Preview
+### Preview
 
 When I edit a Markdown file is necessary to have a visual feedback:
 
 ![vim-markdown](.dotfiles_resources/vim-markdown.png)
 
 I prefer to use [qutebrowser](https://qutebrowser.org/) for the preview because is more light than other browsers and have the build-in vim key to move on the page.
+
+Latex file are preview with the [compilepreview](#compilepreview) that create a pdf fileand the [openpreview](#openpreview) open it with the zathura pdf reader.
+
+![vim-pdf-preview](.dotfiles_resources/vim-pdf-preview.png)
 
 ### Distraction free mode
 
