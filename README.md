@@ -303,6 +303,10 @@ Mine aliases are:
 
 ![ls-ll-la](.dotfiles_resources/ls-ll-la.png)
 
+* Replace the old **cat** with [bat](https://github.com/sharkdp/bat):
+
+![bat](.dotfiles_resources/bat.png)
+
 * Created some **cd** aliases:
 
 ![cds](.dotfiles_resources/cds.png)

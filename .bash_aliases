@@ -2,6 +2,8 @@ alias ls='exa'
 alias ll='ls -l'
 alias la='ls -al'
 
+alias cat='bat'
+
 alias ..='cd ..'         # Go up one directory
 alias cd..='cd ..'       # Common misspelling for going up one directory
 alias ...='cd ../..'     # Go up two directories
@@ -28,3 +30,4 @@ eval $(thefuck --alias fk)
 
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
