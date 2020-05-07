@@ -320,7 +320,7 @@ bar {
     position top
     # primary|<output>
     # tray_output none|primary|<output>
-    tray_output none
+    tray_output primary
     # <px> [px]
     tray_padding 0
     separator_symbol "  "

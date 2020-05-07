@@ -211,7 +211,30 @@ I create several modes to improove usability:
 
 [.config/i3/i3status.conf](.config/i3/i3status.conf)
 
+In order on the bar there is:
+
+- Workspaces
+- Wireless
+- Ethernet
+- Disk
+- Temperature
+- Cpu usage
+- Ram load
+- Volume master
+- Battery
+- Date and time
+
+The bar can be toggle with the shortcut `$mod+b`.
+
 ![i3status](.dotfiles_resources/i3status.png)
+
+The right click on the bar open the pavucontrol audio management:
+
+![i3status-pavucontrol](.dotfiles_resources/i3status-pavucontrol.png)
+
+The middle click on the bar open the arandr output management:
+
+![i3status-arandr](.dotfiles_resources/i3status-arandr.png)
 
 ## Rofi
 
