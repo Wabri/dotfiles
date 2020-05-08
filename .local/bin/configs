@@ -4,7 +4,7 @@ declare options=(" quit
  i3
  vim
  i3status
- kitty
+ kitty
  bash
  aliases
  vifm
