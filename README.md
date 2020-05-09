@@ -737,3 +737,9 @@ The visual impression is similar to kitty:
 
 ![urxvt-kitty](.dotfiles_resources/urxvt-kitty.png)
 
+## TODO
+
+- [ ] Try polybar
+- [ ] Move to a new compton
+- [ ] Install i3-gaps and change setup 
+- [ ] Update vim with language setup
