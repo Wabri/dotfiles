@@ -743,3 +743,5 @@ The visual impression is similar to kitty:
 - [ ] Move to a new compton
 - [ ] Install i3-gaps and change setup 
 - [ ] Update vim with language setup
+- [ ] zsh
+- [ ] fish
