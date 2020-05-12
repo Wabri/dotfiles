@@ -23,6 +23,7 @@
 - [i3wm](#i3wm)
 - [Rofi](#rofi)
 - [Kitty](#kitty)
+- [Neofetch](#neofetch)
 - [Bash](#bash)
     - [Scripts](#scripts)
 - [Vim](#vim)
@@ -291,6 +292,26 @@ Then I create some personal shortcuts using the alt as kitty modifier:
 | kitty_mod+shift+U | unicode input |
 
 The nord palette of kitty can be found in the [same directory of the kitty config](.config/kitty/).
+
+## Neofetch
+
+[.config/neofetch/config.conf](.config/neofetch/config.conf)
+
+![neofetch](.dotfiles_resources/neofetch.png)
+
+In order:
+
+- Date and time
+- Weather
+- Resolution of the screen
+- Kernel
+- Distro
+- Window manager
+- Packages
+- Shell
+- Memory
+- CPU
+- GPUs
 
 ## Bash
 
