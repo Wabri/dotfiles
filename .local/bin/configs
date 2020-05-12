@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 declare options=(" quit
+ dotfiles
  i3
  vim
  i3status
@@ -9,7 +10,8 @@ declare options=(" quit
  aliases
  vifm
  xresources
- dotfiles")
+ neofetch
+")
 
 runwith="rofi -dmenu"
 
@@ -27,6 +29,9 @@ choice=$(echo -e "${options[@]}" | $runwith -i -p 'Edit config file: ' | awk -F 
 case "$choice" in
 	quit)
 		echo "Program terminated." && exit 1
+	;;
+        dotfiles)
+		choice="$HOME/README.md"
 	;;
 	i3)
 		choice="$HOME/.config/i3/config"
@@ -52,8 +57,8 @@ case "$choice" in
 	xresources)
 		choice="$HOME/.Xresources"
 	;;
-        dotfiles)
-		choice="$HOME/README.md"
+        neofetch)
+		choice="$HOME/.config/neofetch/config.conf"
 	;;
 	polybar)
 		choice="$HOME/.config/polybar/config"
