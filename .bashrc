@@ -1,6 +1,11 @@
+# ____            _              
+#| __ )  __ _ ___| |__  
+#|  _ \ / _` / __| '_ \ 
+#| |_) | (_| \__ \ | | |
+#|____/ \__,_|___/_| |_|
+#
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 case $- in
@@ -63,4 +68,6 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+figlet "Wabri"
 
