@@ -30,7 +30,7 @@ case "$choice" in
         doom)
                 emacs --with-profile doom
 	;;
-        space)
+        spacemacs)
                 emacs --with-profile space
 	;;
 	codium)
