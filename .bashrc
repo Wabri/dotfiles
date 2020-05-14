@@ -56,7 +56,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Path to the bash it configuration
-export BASH_IT="/home/wabri/.bash_it"
+export BASH_IT="$HOME/.bash_it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
@@ -70,4 +70,3 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 
 figlet "Wabri"
-
