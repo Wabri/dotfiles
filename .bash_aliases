@@ -37,3 +37,15 @@ eval $(thefuck --alias fk)
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
+# taskbook
+alias tb='clear ; task'
+alias tbtask='task --task'
+alias tbtime='clear ; task --timeline'
+alias tbbegin='task --begin'
+alias tbedit='task --edit'
+alias tbcheck='task --check'
+alias tbclear='task --clear'
+alias tbrestore='task --restore'
+alias tbstar='task --star'
+alias tbdelete='task --delete'
+

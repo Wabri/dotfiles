@@ -363,6 +363,10 @@ Mine aliases are:
 
 ![fuck](.dotfiles_resources/fuck.png)
 
+* Alias for [taskbook](https://github.com/klaussinani/taskbook):
+
+![taskbook](.dotfiles_resources/taskbook.png)
+
 * Dotfiles command to update this repo ([How I maintain those dotfiles](#how-i-maintain-those-dotfiles)):
 
 ![alias](.dotfiles_resources/alias.png)
