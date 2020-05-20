@@ -27,7 +27,7 @@ alias aptupgd='sudo apt update && sudo apt dist-upgrade -V && sudo apt autoremov
 alias aptrm='sudo apt remove'
 
 # Vim
-alias svim='sudo vim'
+alias svim='sudoedit'
 
 # Thefuck (https://github.com/nvbn/thefuck)
 eval $(thefuck --alias)

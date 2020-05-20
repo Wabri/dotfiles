@@ -20,9 +20,9 @@ set $menu rofi
 font pango:JetBrains Mono 11
 # Colors setup
 # class                 border  backgr. text    indicator child_border
-client.focused          #4C566A #4C566A #A3BE8C #EBCB8B   #5E81AC
-client.focused_inactive #2E3440 #B48EAD #A3BE8C #8FBCBB   #434C5E
-client.unfocused        #2E3440 #3B4252 #8FBCBB #8FBCBB   #3B4252
+client.focused          #4C566A #4C566A #ECEFF4 #EBCB8B   #5E81AC
+client.focused_inactive #2E3440 #81A1C1 #2E3440 #8FBCBB   #434C5E
+client.unfocused        #2E3440 #3B4252 #A3BE8C #8FBCBB   #3B4252
 client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
 client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
 client.background       #D8DEE9
@@ -93,7 +93,7 @@ floating_maximum_size 1000 x 800
 #### Mouse touchpad bindings & settings  ####
 ### Start ###
 exec --no-startup-id xinput set-prop \
-"SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+"ALP0017:00 044E:121C Touchpad" "libinput Tapping Enabled" 1
 bindsym --border $mod+button2 kill
 # yes|no
 focus_follows_mouse no
@@ -193,6 +193,7 @@ assign [class="^Brave"] → $ws2
 assign [class="Firefox"] → $ws2
 assign [class="Code"] → $ws3
 assign [class="GitKraken"] → $ws4
+assign [class="DBeaver"] → $ws6
 assign [class="Steam"] → $ws7
 assign [class="Lutris"] → $ws7
 assign [class="Mailspring"] → $ws8
