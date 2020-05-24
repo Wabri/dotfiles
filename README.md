@@ -558,6 +558,10 @@ I use vim as my main text editor for coding and writing. I use severl plugins:
     - [mhinz/vim-signify](https://github.com/mhinz/vim-signify)
 - Syntax:
     - [PotatoesMaster/i3-vim-syntax](https://github.com/PotatoesMaster/i3-vim-syntax)
+    - [leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim)
+    - [PotatoesMaster/i3-vim-syntax](https://github.com/PotatoesMaster/i3-vim-syntax)
+- Code completion:
+    - [ycm-core/YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 
 I create some shortcuts using the space mapleader:
 
@@ -764,6 +768,7 @@ The visual impression is similar to kitty:
 
 ## TODO
 
+- [x] Find and setup completion for vim
 - [ ] Try polybar
 - [ ] Move to a new compton
 - [ ] Install i3-gaps and change setup 

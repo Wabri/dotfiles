@@ -389,6 +389,6 @@ map <leader>co :!openpreview <c-r>%<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Typescript settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:typescript_indent_disable = 1
+let g:typescript_indent_disable = 0
 let g:typescript_ignore_browserwords = 1
 
