@@ -22,7 +22,7 @@ font pango:JetBrains Mono 11
 # class                 border  backgr. text    indicator child_border
 client.focused          #4C566A #4C566A #ECEFF4 #EBCB8B   #5E81AC
 client.focused_inactive #2E3440 #81A1C1 #2E3440 #8FBCBB   #434C5E
-client.unfocused        #2E3440 #3B4252 #A3BE8C #8FBCBB   #3B4252
+client.unfocused        #2E3440 #2E3440 #4C566A #8FBCBB   #3B4252
 client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
 client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
 client.background       #D8DEE9
