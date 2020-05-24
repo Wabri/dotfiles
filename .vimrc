@@ -21,6 +21,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Required
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
 call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Declare the list of plugins.
@@ -62,6 +68,14 @@ Plug 'mhinz/vim-signify'
 " => Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'leafgarland/typescript-vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Code completion 
+" Must read the guide if use:
+" https://github.com/ycm-core/YouCompleteMe/blob/master/README.md
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'ycm-core/YouCompleteMe'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => List ends here.
@@ -184,6 +198,11 @@ nmap <leader>Q :q!<cr>
 " => Select all
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>a ggVG
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Source vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>s :source ~/.vimrc<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Scrolling options
@@ -366,4 +385,10 @@ let g:mkdp_path_to_chrome = "qutebrowser"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>cc :w! \| !compilepreview <c-r>%<CR>
 map <leader>co :!openpreview <c-r>%<CR><CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Typescript settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:typescript_indent_disable = 1
+let g:typescript_ignore_browserwords = 1
 

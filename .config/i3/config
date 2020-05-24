@@ -192,6 +192,7 @@ bindsym XF86AudioPrev exec "spotato previous ; notify-send --expire-time=400 --u
 assign [class="^Brave"] → $ws2
 assign [class="Firefox"] → $ws2
 assign [class="Code"] → $ws3
+assign [class="VSCodium"] → $ws3
 assign [class="GitKraken"] → $ws4
 assign [class="DBeaver"] → $ws6
 assign [class="Steam"] → $ws7
