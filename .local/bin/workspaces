@@ -1,0 +1,30 @@
+#! /usr/bin/env bash
+
+declare options=(" quit
+ estar/concorsi
+ accademy/corso_git
+ accademy/Angular101
+ accademy/MaterialeFormazione")
+
+runwith="rofi -dmenu"
+
+case "$1" in
+    dmenu)
+        runwith="dmenu"
+    ;;
+    rofi)
+        runwith="rofi -dmenu"
+    ;;
+esac
+
+choice=$(echo -e "${options[@]}" | $runwith -i -p 'Open editor: ' | awk -F ' ' '{print $2}')
+
+case "$choice" in
+	quit)
+		exit 1
+	;;
+	*/*)
+		x-terminal-emulator -T=$choice -d='~/Workspace/'$choice &
+	;;
+esac
+

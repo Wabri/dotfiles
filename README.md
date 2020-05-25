@@ -423,9 +423,19 @@ On the line where there is **symbols** split when find the + simbol and return t
 
 ***[.local/bin/editors](.local/bin/editors)***
 
-This is one of the menu used with i3 (I binded with mod+f3):
+This is one of the menu used with i3 (I binded with mod+e):
 
 ![editors](.dotfiles_resources/editors.png)
+
+#### Workspaces
+
+***[.local/bin/workspaces](.local/bin/workspaces)***
+
+This is one of the menu used with i3 (I binded with mod+w):
+
+![workspaces](.dotfiles_resources/workspaces.png)
+
+When one of the workspace are choosen, a new terminal will be open in that workspace.
 
 #### Dtest
 

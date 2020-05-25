@@ -408,3 +408,4 @@ bindsym $mod+backslash exec x-terminal-emulator -e vifm
 bindsym $mod+period exec i3-sensible-terminal -e vim ~/.config/i3/config
 bindsym $mod+c exec configs $menu
 bindsym $mod+e exec editors $menu
+bindsym $mod+w exec workspaces $menu

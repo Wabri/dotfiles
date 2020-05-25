@@ -386,9 +386,3 @@ let g:mkdp_path_to_chrome = "qutebrowser"
 map <leader>cc :w! \| !compilepreview <c-r>%<CR>
 map <leader>co :!openpreview <c-r>%<CR><CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Typescript settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:typescript_indent_disable = 0
-let g:typescript_ignore_browserwords = 1
-
