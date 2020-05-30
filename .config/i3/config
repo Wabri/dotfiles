@@ -22,7 +22,7 @@ font pango:JetBrains Mono 11
 # class                 border  backgr. text    indicator child_border
 client.focused          #4C566A #4C566A #ECEFF4 #EBCB8B   #5E81AC
 client.focused_inactive #2E3440 #81A1C1 #2E3440 #8FBCBB   #434C5E
-client.unfocused        #2E3440 #3B4252 #A3BE8C #8FBCBB   #3B4252
+client.unfocused        #2E3440 #2E3440 #4C566A #8FBCBB   #3B4252
 client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
 client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
 client.background       #D8DEE9
@@ -192,6 +192,7 @@ bindsym XF86AudioPrev exec "spotato previous ; notify-send --expire-time=400 --u
 assign [class="^Brave"] → $ws2
 assign [class="Firefox"] → $ws2
 assign [class="Code"] → $ws3
+assign [class="VSCodium"] → $ws3
 assign [class="GitKraken"] → $ws4
 assign [class="DBeaver"] → $ws6
 assign [class="Steam"] → $ws7
@@ -407,3 +408,4 @@ bindsym $mod+backslash exec x-terminal-emulator -e vifm
 bindsym $mod+period exec i3-sensible-terminal -e vim ~/.config/i3/config
 bindsym $mod+c exec configs $menu
 bindsym $mod+e exec editors $menu
+bindsym $mod+w exec workspaces $menu

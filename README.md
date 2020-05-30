@@ -423,9 +423,19 @@ On the line where there is **symbols** split when find the + simbol and return t
 
 ***[.local/bin/editors](.local/bin/editors)***
 
-This is one of the menu used with i3 (I binded with mod+f3):
+This is one of the menu used with i3 (I binded with mod+e):
 
 ![editors](.dotfiles_resources/editors.png)
+
+#### Workspaces
+
+***[.local/bin/workspaces](.local/bin/workspaces)***
+
+This is one of the menu used with i3 (I binded with mod+w):
+
+![workspaces](.dotfiles_resources/workspaces.png)
+
+When one of the workspace are choosen, a new terminal will be open in that workspace.
 
 #### Dtest
 
@@ -558,6 +568,10 @@ I use vim as my main text editor for coding and writing. I use severl plugins:
     - [mhinz/vim-signify](https://github.com/mhinz/vim-signify)
 - Syntax:
     - [PotatoesMaster/i3-vim-syntax](https://github.com/PotatoesMaster/i3-vim-syntax)
+    - [leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim)
+    - [PotatoesMaster/i3-vim-syntax](https://github.com/PotatoesMaster/i3-vim-syntax)
+- Code completion:
+    - [ycm-core/YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 
 I create some shortcuts using the space mapleader:
 
@@ -764,6 +778,7 @@ The visual impression is similar to kitty:
 
 ## TODO
 
+- [x] Find and setup completion for vim
 - [ ] Try polybar
 - [ ] Move to a new compton
 - [ ] Install i3-gaps and change setup 
