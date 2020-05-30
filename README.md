@@ -435,7 +435,9 @@ This is one of the menu used with i3 (I binded with mod+w):
 
 ![workspaces](.dotfiles_resources/workspaces.png)
 
-When one of the workspace are choosen, a new terminal will be open in that workspace.
+When one of the workspace are choosen, a new terminal will be open in that workspace:
+
+![workspaces-open](.dotfiles_resources/workspaces-open.png)
 
 #### Dtest
 

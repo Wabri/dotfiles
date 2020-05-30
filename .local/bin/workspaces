@@ -1,10 +1,11 @@
 #! /usr/bin/env bash
 
 declare options=(" quit
- estar/concorsi
- accademy/corso_git
- accademy/Angular101
- accademy/MaterialeFormazione")
+ Spotato
+ i3battery
+ bash-it
+ blog
+ thesis")
 
 runwith="rofi -dmenu"
 
@@ -23,7 +24,7 @@ case "$choice" in
 	quit)
 		exit 1
 	;;
-	*/*)
+	*)
 		x-terminal-emulator -T=$choice -d='~/Workspace/'$choice &
 	;;
 esac
