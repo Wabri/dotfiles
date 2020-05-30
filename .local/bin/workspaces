@@ -25,7 +25,9 @@ case "$choice" in
 		exit 1
 	;;
 	*)
+            if [ -n "$choice" ]; then
 		x-terminal-emulator -T=$choice -d='~/Workspace/'$choice &
+            fi
 	;;
 esac
 
