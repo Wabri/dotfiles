@@ -381,6 +381,7 @@ Overtime I create a lot of scripts:
 | ------ | ----------- |
 | [chkey](#chkey) | Change keyboard layout |
 | [editors](#editors) | Choose text editor to open |
+| [workspaces](#workspaces) | Open a terminal with a workspaces |
 | [dtest](#dtest) | Run tests for dunst notifications |
 | [configs](#configs) | Choose what config need to edit |
 | [extract](#extract) | Extract everything |
