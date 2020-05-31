@@ -213,7 +213,7 @@ for_window [class="Pavucontrol"] floating enable
 ################################################################################
 #### Monitor setup ####
 ### Start ###
-# exec_always --no-startup-id ~/.screenlayout/default.sh
+exec_always --no-startup-id ~/.screenlayout/default.sh
 # Content move from output to another
 set $workspace_move Workspace (h) (j) (k) (l) (q)
 mode "$workspace_move" {
