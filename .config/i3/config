@@ -11,6 +11,8 @@
 ### Start ###
 set $mod Mod4
 set $menu rofi
+set $o_primary HDMI1
+set $o_secondary eDP1
 ### End ###
 ################################################################################
 
@@ -203,7 +205,6 @@ assign [class="Bitwarden"] → $ws9
 assign [class="Ferdi"] → $ws9
 assign [class="TelegramDesktop"] → $ws9
 for_window [class="Spotify"] move to workspace $ws10
-
 for_window [class="Nautilus"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -213,7 +214,7 @@ for_window [class="Pavucontrol"] floating enable
 ################################################################################
 #### Monitor setup ####
 ### Start ###
-exec_always --no-startup-id ~/.screenlayout/default.sh
+exec_always --no-startup-id $HOME/.screenlayout/default.sh
 # Content move from output to another
 set $workspace_move Workspace (h) (j) (k) (l) (q)
 mode "$workspace_move" {
@@ -290,6 +291,17 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+# Multiple monitor setup (works even with one screen)
+workspace $ws1 output $o_secondary
+workspace $ws2 output $o_primary
+workspace $ws3 output $o_primary
+workspace $ws4 output $o_secondary
+workspace $ws5 output $o_secondary
+workspace $ws6 output $o_secondary
+workspace $ws7 output $o_primary
+workspace $ws8 output $o_secondary
+workspace $ws9 output $o_secondary
+workspace $ws10 output $o_secondary
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth no
 # smart|urgent|focus|none
