@@ -167,22 +167,36 @@ bindsym XF86AudioMute exec i3media vol_toggle
 ## Mic ##
 bindsym XF86AudioMicMute exec i3media mic_toggle
 # Spotato modality
-set $mode_spotato Media (h)  (l)  (j)  (k)  (s)  (a)  (d)  (q)
+set $mode_spotato Media (h)  (l)  (j)  (k)  (s)  (a)  (d)  (c)  (q)
+set $mode_spotato_conf Media config (1)  (2)  (b)  (q)
 mode "$mode_spotato" {
     bindsym k exec "spotato play ; notify-send --expire-time=400 --urgency=low "
     bindsym j exec "spotato pause; notify-send --expire-time=400 --urgency=low "
     bindsym s exec "spotato toggle; notify-send --expire-time=800 --urgency=normal /", mode "default"
     bindsym l exec "spotato next; notify-send --expire-time=400 --urgency=low "
     bindsym h exec "spotato previous; notify-send --expire-time=400 --urgency=low "
+    bindsym c mode "$mode_spotato_conf"
 
     bindsym d exec i3media vol_up
     bindsym a exec i3media vol_down
 
-    # back to normal
+    #back to normal
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
+mode "$mode_spotato_conf" {
+    bindsym 1 exec "spotato mediaplayer spotify ; notify-send --expire-time=800 --urgency=normal  ", mode "$mode_spotato"
+    bindsym 2 exec "spotato mediaplayer chromium.instance2065 ; notify-send --expire-time=800 --urgency=normal  ", mode "$mode_spotato"
+
+    #back to spotato
+    bindsym b mode "$mode_spotato"
+    bindsym Escape mode "$mode_spotato"
+
+    #back to default
+    bindsym q mode "default"
+}
 bindsym $mod+s mode "$mode_spotato"
+# Spotato config
 ## Music ##
 bindsym XF86AudioPlay exec "spotato toggle ; notify-send --expire-time=800 --urgency=normal /"
 bindsym XF86AudioNext exec "spotato next ; notify-send --expire-time=400 --urgency=low "

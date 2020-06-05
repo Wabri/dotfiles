@@ -194,6 +194,16 @@ I create several modes to improove usability:
 - s -> toggle play/pause song
 - a -> volume down
 - d -> volume up
+- c -> config
+- q -> return in default mode
+
+Config is another mode where I choose from different mediaplayer:
+
+![i3wm-spotato-mediaplayer](.dotfiles_resources/i3wm-spotato-mediaplayer.png)
+
+- 1 -> control spotify
+- 2 -> control chrome
+- b -> back to spotato mode
 - q -> return in default mode
 
 #### Workspace
