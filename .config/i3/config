@@ -11,8 +11,8 @@
 ### Start ###
 set $mod Mod4
 set $menu rofi
-set $o_primary HDMI-1
-set $o_secondary eDP-1
+set $o_primary HDMI1
+set $o_secondary eDP1
 ### End ###
 ################################################################################
 
@@ -96,8 +96,8 @@ floating_maximum_size 1000 x 800
 ### Start ###
 exec --no-startup-id xinput set-prop \
 "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop \
-"ALP0017:00 044E:121C Touchpad" "libinput Tapping Enabled" 1
+#exec --no-startup-id xinput set-prop \
+#"ALP0017:00 044E:121C Touchpad" "libinput Tapping Enabled" 1
 bindsym --border $mod+button2 kill
 # yes|no
 focus_follows_mouse no
@@ -186,7 +186,7 @@ mode "$mode_spotato" {
 }
 mode "$mode_spotato_conf" {
     bindsym 1 exec "spotato mediaplayer spotify ; notify-send --expire-time=800 --urgency=normal  ", mode "$mode_spotato"
-    bindsym 2 exec "spotato mediaplayer chromium.instance2065 ; notify-send --expire-time=800 --urgency=normal  ", mode "$mode_spotato"
+    bindsym 2 exec "spotato mediaplayer chromium.instance1756 ; notify-send --expire-time=800 --urgency=normal  ", mode "$mode_spotato"
 
     #back to spotato
     bindsym b mode "$mode_spotato"
@@ -196,7 +196,6 @@ mode "$mode_spotato_conf" {
     bindsym q mode "default"
 }
 bindsym $mod+s mode "$mode_spotato"
-# Spotato config
 ## Music ##
 bindsym XF86AudioPlay exec "spotato toggle ; notify-send --expire-time=800 --urgency=normal /"
 bindsym XF86AudioNext exec "spotato next ; notify-send --expire-time=400 --urgency=low "
