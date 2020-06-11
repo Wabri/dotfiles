@@ -798,3 +798,4 @@ The visual impression is similar to kitty:
 - [ ] Update vim with language setup
 - [ ] zsh
 - [ ] fish
+- [ ] Update image readme
