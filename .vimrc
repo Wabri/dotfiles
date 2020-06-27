@@ -68,7 +68,6 @@ Plug 'mhinz/vim-signify'
 " => Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'leafgarland/typescript-vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Code completion 
@@ -76,6 +75,7 @@ Plug 'leafgarland/typescript-vim'
 " https://github.com/ycm-core/YouCompleteMe/blob/master/README.md
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'ycm-core/YouCompleteMe'
+Plug 'zxqfl/tabnine-vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => List ends here.

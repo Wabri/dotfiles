@@ -10,8 +10,7 @@ declare options=(" quit
  aliases
  vifm
  xresources
- neofetch
-")
+ neofetch")
 
 runwith="rofi -dmenu"
 
