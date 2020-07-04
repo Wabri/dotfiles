@@ -10,4 +10,5 @@ case "$file" in
  	*\.tex) pandoc "$file" -f latex -s -o "$base".pdf ;;
 	*\.md) pandoc "$file" -f markdown -s -o "$base".pdf ;;
 	*\.py) python "$file" ;;
+ 	*\.c) clang $file ;;
 esac

@@ -4,7 +4,9 @@ declare options=(" quit
  Spotato
  i3battery
  bash-it
+ Fly-By-Wire
  blog
+ schrodinger-hat
  thesis")
 
 runwith="rofi -dmenu"
