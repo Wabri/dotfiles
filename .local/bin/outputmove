@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+
+notification_time=250
+
+if [ -z $1 ] ; then
+    echo "Usage: outputmove {left|up|right}"
+    exit 2
+else
+    case "$1" in
+        left)
+            $HOME/.screenlayout/left.sh
+            notify-send --expire-time=$notification_time "  "
+        ;;
+        up)
+            $HOME/.screenlayout/default.sh
+            notify-send --expire-time=$notification_time "  "
+        ;;
+        right)
+            $HOME/.screenlayout/right.sh
+            notify-send --expire-time=$notification_time "  "
+        ;;
+        *)
+            exit 2
+        ;;
+    esac
+fi
+

@@ -793,6 +793,7 @@ The visual impression is similar to kitty:
 
 - [x] Find and setup completion for vim
 - [ ] Try polybar
+- [ ] Explain outputmove
 - [ ] Move to a new compton
 - [ ] Install i3-gaps and change setup 
 - [ ] Update vim with language setup

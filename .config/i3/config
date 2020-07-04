@@ -51,7 +51,7 @@ bindsym $mod+Shift+l move right
 #### Settings ####
 ### Start ###
 # i3exit 
-set $mode_system System (l)  (s)  (h)  (r)  (p)  (q)  
+set $mode_system System (l) (s) (h) (r) (p) (q) 
 mode "$mode_system" {
     bindsym l exec i3exit logout, mode "default"
     bindsym s exec i3exit suspend, mode "default"
@@ -167,8 +167,8 @@ bindsym XF86AudioMute exec i3media vol_toggle
 ## Mic ##
 bindsym XF86AudioMicMute exec i3media mic_toggle
 # Spotato modality
-set $mode_spotato Media (h)  (l)  (j)  (k)  (s)  (a)  (d)  (c)  (q)
-set $mode_spotato_conf Media config (1)  (2)  (b)  (q)
+set $mode_spotato Media (h) (l) (j) (k) (s) (a) (d) (c) (q)
+set $mode_spotato_conf Media config (1) (2) (b)  (q)
 mode "$mode_spotato" {
     bindsym k exec "spotato play ; notify-send --expire-time=400 --urgency=low "
     bindsym j exec "spotato pause; notify-send --expire-time=400 --urgency=low "
@@ -324,11 +324,24 @@ focus_on_window_activation smart
 # yes|no
 show_marks yes
 # read 1 character and mark the current window with this character
-bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+#bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 # read 1 character and go to the window with the character
-bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+#bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 # Swap with marked 
-bindsym $mod+Shift+m swap container with mark m
+#bindsym $mod+Shift+m swap container with mark m
+
+# Output move orientations
+set $output_move Output (h) (k) (q)
+mode "$output_move" {
+    
+    # Secondary screen orientation
+    bindsym h exec "outputmove left", mode "default"
+    bindsym k exec "outputmove up", mode "default"
+    
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode "$output_move"
 ### End ###
 ################################################################################
 
