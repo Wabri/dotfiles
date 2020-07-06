@@ -21,7 +21,7 @@ alias q='exit'
 
 # apt
 alias aptinst='sudo apt install -V'
-alias aptupd='sudo apt update'
+alias aptupd='sudo apt update ; apt list --upgradable'
 alias aptupg='sudo apt upgrade'
 alias aptupgd='sudo apt update && sudo apt dist-upgrade -V && sudo apt autoremove'
 alias aptrm='sudo apt remove'

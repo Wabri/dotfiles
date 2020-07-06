@@ -94,10 +94,10 @@ floating_maximum_size 1000 x 800
 ################################################################################
 #### Mouse touchpad bindings & settings  ####
 ### Start ###
-exec --no-startup-id xinput set-prop \
-"SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 #exec --no-startup-id xinput set-prop \
-#"ALP0017:00 044E:121C Touchpad" "libinput Tapping Enabled" 1
+#"SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop \
+"ALP0017:00 044E:121C Touchpad" "libinput Tapping Enabled" 1
 bindsym --border $mod+button2 kill
 # yes|no
 focus_follows_mouse no
