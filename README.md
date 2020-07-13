@@ -800,3 +800,4 @@ The visual impression is similar to kitty:
 - [ ] zsh
 - [ ] fish
 - [ ] Update image readme
+- [ ] Update vim documentations
