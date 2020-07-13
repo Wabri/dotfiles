@@ -54,6 +54,8 @@ Plug 'severin-lemaignan/vim-minimap'
 Plug 'vim-ctrlspace/vim-ctrlspace'
 " Markdown preview
 Plug 'iamcco/markdown-preview.vim'
+" Highlight, navigate, and operate on sets of matching text
+Plug 'andymass/vim-matchup'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git
