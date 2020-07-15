@@ -146,10 +146,10 @@ set mouse=nicr
 let mapleader =" "
 
 " => Disable arrow keys in Normal mode
-no <Up> <Nop>
-no <Down> <Nop>
-no <Left> <Nop>
-no <Right> <Nop>
+"no <Up> <Nop>
+"no <Down> <Nop>
+"no <Left> <Nop>
+"no <Right> <Nop>
 
 " => Disable arrow keys in Insert mode
 ino <Up> <Nop>
@@ -465,4 +465,10 @@ nmap <silent> - zc
 nmap <silent> ++ zR
 nmap <silent> + zo
 nmap <silent> __ :OR<CR>
+
+" => Markdown Preview
+map <left> <C-w>5<
+map <right> <C-w>5>
+map <down> <C-w>5+
+map <up> <C-w>5-
 
