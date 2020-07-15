@@ -1,9 +1,12 @@
 #! /usr/bin/env bash
 
 declare options=(" quit
- estar/concorsi
- accademy/MaterialeFormazione
- accademy/GestioneOrari")
+ blog
+ Fly-By-Wire
+ i3battery
+ schrodinger-hat
+ Spotato
+ thesis")
 
 runwith="rofi -dmenu"
 
