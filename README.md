@@ -801,3 +801,4 @@ The visual impression is similar to kitty:
 - [ ] fish
 - [ ] Update image readme
 - [ ] Update vim documentations
+- [ ] Update vimrc documentations
