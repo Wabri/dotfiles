@@ -66,6 +66,7 @@ Plug 'mhinz/vim-signify'
 " => Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Code completion 
