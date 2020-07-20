@@ -45,6 +45,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/goyo.vim'
 " File manager
 Plug 'preservim/nerdtree'
+Plug 'unkiwii/vim-nerdtree-sync'
 " Minimap
 Plug 'severin-lemaignan/vim-minimap'
 " All buffers, tabs, and tab layouts can be persisted as a workspace
@@ -67,6 +68,11 @@ Plug 'mhinz/vim-signify'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntax checking and semantic error 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'dense-analysis/ale'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Code completion 
@@ -103,8 +109,8 @@ set encoding=utf-8
 
 " => Tabs and Spaces
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
+set softtabstop =2         " Tab key indents by 2 spaces.
+set shiftwidth  =2         " >> indents by 2 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 " => Removes pipes | that act as seperators on splits
@@ -184,6 +190,7 @@ set number relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Close if only NERDTree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:nerdtree_sync_cursorline = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline settings
