@@ -1,0 +1,61 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet encoding "Default encoding declaration" w
+# -*- coding: utf-8 -*-
+endsnippet
+
+snippet environment "Default environment declaration" b
+#! usr/bin/env python3
+endsnippet
+
+snippet docstring_function "Function docstring" b
+"""<Short Description>
+
+  <Description>
+
+Parameters
+----------
+<argument name>: <type>
+  <argument description>
+<argument>: <type>
+  <argument description>
+
+Returns
+-------
+<type>
+  <description>
+"""
+endsnippet
+
+
+snippet docstring_module "Module docstring" b
+"""This is the example module.
+
+This module does stuff.
+"""
+endsnippet
+
