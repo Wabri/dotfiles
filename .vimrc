@@ -54,6 +54,10 @@ Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'iamcco/markdown-preview.vim'
 " General-purpose command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" An ack/ag/pt/rg powered code search and view tool
+Plug 'dyng/ctrlsf.vim'
+" True Sublime Text style multiple selections for Vim
+Plug 'terryma/vim-multiple-cursors'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git
@@ -109,8 +113,8 @@ set encoding=utf-8
 
 " => Tabs and Spaces
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =2         " Tab key indents by 2 spaces.
-set shiftwidth  =2         " >> indents by 2 spaces.
+set softtabstop =4         " Tab key indents by 2 spaces.
+set shiftwidth  =4         " >> indents by 2 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 " => Removes pipes | that act as seperators on splits
@@ -371,12 +375,22 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " xmap <silent> <C-s> <Plug>(coc-range-select)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ctrlsf options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 1000
+    \ }
+let g:ctrlsf_search_mode = 'async'
+let g:ctrlsf_position = 'right'
+let g:ctrlsf_winsize = '100'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keybindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " => Easy save
 nmap <leader>w :w!<cr>
-nmap <leader>W :wq<cr>
+nmap <leader>W :x<cr>
 " => Easy quit
 nmap <leader>q :q<cr>
 nmap <leader>Q :q!<cr>
@@ -391,6 +405,8 @@ nnoremap <leader>s :source ~/.vimrc<cr>
 noremap <C-d> :sh<CR>
 " => Terminal inside vim
 nnoremap <leader>t :terminal<CR>
+" Shortcommand for :enew variant for terminal
+nnoremap <leader>T :term ++curwin<CR>
 
 " => Switch between splitted editor
 map <c-h> <C-w>h
@@ -419,6 +435,7 @@ nmap <leader>gl :GlLog<CR>
 map <F11> :Goyo \| set linebreak<CR>
 
 " => Buffer switching
+nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprev<CR>
 
@@ -480,3 +497,23 @@ map <right> <C-w>5>
 map <down> <C-w>5+
 map <up> <C-w>5-
 
+" => Multiple Cursor mapping
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+" => CtrlSF mapping
+nmap     <C-F> <Plug>CtrlSFPrompt
+"vmap     <C-F> <Plug>CtrlSFVwordPath
+vmap     <C-F> <Plug>CtrlSFVwordExec
+"nmap     <C-F>n <Plug>CtrlSFCwordPath
+"nmap     <C-F>p <Plug>CtrlSFPwordPath
+"nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
