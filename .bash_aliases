@@ -25,6 +25,7 @@ alias aptupd='sudo apt update ; apt list --upgradable'
 alias aptupg='sudo apt upgrade'
 alias aptupgd='sudo apt update && sudo apt dist-upgrade -V && sudo apt autoremove'
 alias aptrm='sudo apt remove'
+alias aa='aptupd ; aptupgd'
 
 # Vim
 alias svim='sudoedit'
