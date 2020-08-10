@@ -58,6 +58,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'dyng/ctrlsf.vim'
 " True Sublime Text style multiple selections for Vim
 Plug 'terryma/vim-multiple-cursors'
+" Jump iMproved
+Plug 'pechorin/any-jump.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git
@@ -526,3 +528,13 @@ vmap     <C-F> <Plug>CtrlSFVwordExec
 "nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+" => Any Jump
+" Normal mode: Jump to definition under cursore
+nnoremap <leader>j :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>j :AnyJumpVisual<CR>
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
