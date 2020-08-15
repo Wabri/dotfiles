@@ -802,3 +802,6 @@ The visual impression is similar to kitty:
 - [ ] Update image readme
 - [ ] Update vim documentations
 - [ ] Update vimrc documentations
+
+
+[![time tracker](https://wakatime.com/badge/github/Wabri/dotfiles.svg)](https://wakatime.com/badge/github/Wabri/dotfiles)
