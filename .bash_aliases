@@ -51,3 +51,4 @@ alias tbrestore='task --restore'
 alias tbstar='task --star'
 alias tbdelete='task --delete'
 
+alias ng='~/.npm-global/bin/ng'

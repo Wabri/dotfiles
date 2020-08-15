@@ -47,6 +47,18 @@ export TERMINAL=x-terminal-emulator
 export EDITOR=vim
 export VISUAL=vim
 
+_pipenv_completion() {
+    local IFS=$'\t'
+    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   _PIPENV_COMPLETE=complete-bash $1 ) )
+    return 0
+}
+
+complete -F _pipenv_completion -o default pipenv
+
+source ~/.local/bin/bash-wakatime.sh
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -65,6 +77,11 @@ export BASH_IT_THEME='wabri'
 
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
+
+#determines search program for fzf
+if type ag &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+fi
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
