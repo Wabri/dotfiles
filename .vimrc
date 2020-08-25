@@ -450,7 +450,7 @@ vnoremap <leader>y "+y
 map <leader>e :NERDTreeToggle<CR>
 
 " => Fugitive git
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :vertical Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Gpush<CR>
 nmap <leader>gl :GlLog<CR>
