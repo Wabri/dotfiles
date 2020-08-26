@@ -1,12 +1,13 @@
 #! /usr/bin/env bash
 
 declare options=(" quit
- blog
- Fly-By-Wire
- i3battery
- schrodinger-hat
- Spotato
- thesis")
+ blog
+ Fly-By-Wire
+ i3battery
+ schrodinger-hat
+ ImageGoNord
+ Spotato
+ thesis")
 
 runwith="rofi -dmenu"
 
