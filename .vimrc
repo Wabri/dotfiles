@@ -92,7 +92,7 @@ Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Wakatime 
+" => Time coding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'wakatime/vim-wakatime'
 
@@ -450,7 +450,7 @@ vnoremap <leader>y "+y
 map <leader>e :NERDTreeToggle<CR>
 
 " => Fugitive git
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :vertical Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Gpush<CR>
 nmap <leader>gl :GlLog<CR>
@@ -557,3 +557,6 @@ xnoremap <leader>j :AnyJumpVisual<CR>
 nnoremap <leader>ab :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
 nnoremap <leader>al :AnyJumpLastResults<CR>
+
+" Autocommand
+autocmd filetype c nnoremap <f5> :w <bar> !clang % -o %:r && %:r <cr>
