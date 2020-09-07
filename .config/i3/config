@@ -218,6 +218,7 @@ assign [class="Mailspring"] → $ws8
 assign [class="Station"] → $ws9
 assign [class="Bitwarden"] → $ws9
 assign [class="Ferdi"] → $ws9
+assign [class="Rambox"] → $ws9
 assign [class="TelegramDesktop"] → $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Nautilus"] floating enable
