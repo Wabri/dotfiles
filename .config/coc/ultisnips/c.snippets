@@ -34,14 +34,28 @@ int main(int argc, char *argv[]) {
 endsnippet
 
 snippet fork "Create a default fork controller" b
-int son = fork();
-if (son < 0) {
-	// forkr failed
-	exit(EXIT_FAILURE);
-} else if (son != 0) {
-	// father
-	signal(SIGCHLD, func); 
+if  (fork() == 0) {
+    // son
 } else {
-	// son
+    // father
+    signal(SIGCHLD, func); 
 }
+endsnippet
+
+
+snippet readFile "Create a default read of file" b
+FILE *pfFile = fopen(fileToRead, "r");
+char sRead[howManyCharacters];
+
+while (1) {
+	int charRead = fread(charArry, elementLength, howManyCharacters, fromFile);
+	if (i < howManyCharacters) {
+	// No elements remain on file
+	    break;
+	} else {
+	// work with charrArray
+	}
+}
+
+fclose(pfFile);
 endsnippet

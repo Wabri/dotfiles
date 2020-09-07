@@ -46,8 +46,6 @@ Plug 'junegunn/goyo.vim'
 " File manager
 Plug 'preservim/nerdtree'
 Plug 'unkiwii/vim-nerdtree-sync'
-" Minimap
-Plug 'severin-lemaignan/vim-minimap'
 " All buffers, tabs, and tab layouts can be persisted as a workspace
 Plug 'vim-ctrlspace/vim-ctrlspace'
 " Markdown preview
@@ -60,10 +58,15 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 " Jump iMproved
 Plug 'pechorin/any-jump.vim'
-" always-on highlight for a unique character in every word on a line to help you use f
-Plug 'unblevable/quick-scope'
 " Comment stuff out
 Plug 'tpope/vim-commentary'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Session Manager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'tpope/vim-obsession'
+" auto-detect session and load session when opening vim editor without arguments.
+Plug 'c9s/gsession.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git
@@ -72,8 +75,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 " Get git diff from file
 Plug 'mhinz/vim-signify'
-" lightweight and powerful git branch viewer
-Plug 'rbong/vim-flog'
+" A git commit browser
+Plug 'junegunn/gv.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntax
@@ -101,15 +104,6 @@ Plug 'wakatime/vim-wakatime'
 " => Plugins become visible to Vim after this call.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#end()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Startup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd VimEnter *
-       \   if !argc()
-       \ |   NERDTree
-       \ |   wincmd w
-       \ | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme
@@ -203,6 +197,12 @@ set nobackup
 " => Put the number of the line at the left of the text,
 " => with the relative distance between the line focused.
 set number relativenumber
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => gsession settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:session_dir = '~/.vim/session'
+let g:local_session_filename = '.session.vim'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree setup
@@ -366,7 +366,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{ObsessionStatus()}%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -400,6 +400,7 @@ let g:ctrlsf_search_mode = 'async'
 let g:ctrlsf_position = 'right'
 let g:ctrlsf_winsize = '100'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ale configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
@@ -417,26 +418,34 @@ nmap <leader>w :w!<cr>
 nmap <leader>W :x<cr>
 " => Easy quit
 nmap <leader>q :q<cr>
-nmap <leader>Q :q!<cr>
+nmap <leader>Q :q!
+nmap <leader><ESC> :qall!
 
 " => Select all
 nnoremap <leader>a ggVG
 
 " => Source vimrc
-nnoremap <leader>s :source ~/.vimrc<cr>
+nnoremap <leader>r :source ~/.vimrc<cr>
 
 " => Switch to terminal
 noremap <C-d> :sh<CR>
 " => Terminal inside vim
 nnoremap <leader>t :terminal<CR>
 " Shortcommand for :enew variant for terminal
-nnoremap <leader>T :term ++curwin<CR>
+nnoremap <leader>T :tab term ++curwin<CR>
 
 " => Switch between splitted editor
 map <c-h> <C-w>h
 map <c-j> <C-w>j
 map <c-k> <C-w>k
 map <c-l> <C-w>l
+
+" Next tab
+nnoremap <tab> gt
+nnoremap <leader><tab> gT
+
+" Map Ctrl-Backspace to delete the previous word in insert mode.
+noremap! <C-BS> <C-w>
 
 " => This abilitate the copy and paste to clipboard (on debian
 " => you need to install: apt install vim-gnome
@@ -448,6 +457,9 @@ vnoremap <leader>y "+y
 
 " => NERDTree open 
 map <leader>e :NERDTreeToggle<CR>
+
+" Open a new tab
+nmap <leader>nt :tabnew<CR>
 
 " => Fugitive git
 nmap <leader>gs :vertical Gstatus<CR>
@@ -539,11 +551,11 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " => CtrlSF mapping
-nmap     <C-F> <Plug>CtrlSFPrompt
-"vmap     <C-F> <Plug>CtrlSFVwordPath
-vmap     <C-F> <Plug>CtrlSFVwordExec
-"nmap     <C-F>n <Plug>CtrlSFCwordPath
-"nmap     <C-F>p <Plug>CtrlSFPwordPath
+nmap <C-F> <Plug>CtrlSFPrompt
+"vmap <C-F> <Plug>CtrlSFVwordPath
+vmap <C-F> <Plug>CtrlSFVwordExec
+"nmap <C-F>n <Plug>CtrlSFCwordPath
+"nmap <C-F>p <Plug>CtrlSFPwordPath
 "nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
@@ -554,9 +566,13 @@ nnoremap <leader>j :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
 xnoremap <leader>j :AnyJumpVisual<CR>
 " Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
+nnoremap <leader>jb :AnyJumpBack<CR>
 " Normal mode: open last closed search window again
-nnoremap <leader>al :AnyJumpLastResults<CR>
+nnoremap <leader>jl :AnyJumpLastResults<CR>
 
-" Autocommand
-autocmd filetype c nnoremap <f5> :w <bar> !clang % -o %:r && %:r <cr>
+" => Any Jump
+" Normal mode: Open commit browser
+nnoremap <leader>gv :GV<CR>
+" Normal mode: Open commit browser on current file
+nnoremap <leader>gvc :GV!<CR>
+
