@@ -16,4 +16,4 @@ rofi.separator-style:       none
 rofi.hide-scrollbar:        true
 rofi.line-margin:           0
 rofi.font:                  JetBrains Mono 10
-rofi.theme: .local/share/rofi/themes/nord.rasi
+rofi.theme: ~/.local/share/rofi/themes/nord.rasi

@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Declare the list of plugins.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'RRethy/vim-illuminate'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme
@@ -64,7 +65,6 @@ Plug 'tpope/vim-commentary'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Session Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'tpope/vim-obsession'
 " auto-detect session and load session when opening vim editor without arguments.
 Plug 'c9s/gsession.vim'
 
@@ -75,8 +75,6 @@ Plug 'c9s/gsession.vim'
 Plug 'tpope/vim-fugitive'
 " Get git diff from file
 Plug 'mhinz/vim-signify'
-" A git commit browser
-Plug 'junegunn/gv.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntax
