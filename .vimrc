@@ -214,6 +214,7 @@ let g:nerdtree_sync_cursorline = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Goyo settings
@@ -364,7 +365,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{ObsessionStatus()}%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -458,6 +459,9 @@ map <leader>e :NERDTreeToggle<CR>
 
 " Open a new tab
 nmap <leader>nt :tabnew<CR>
+
+" Open file in vertical
+nmap <leader>vv :vsplit<CR>
 
 " => Fugitive git
 nmap <leader>gs :vertical Gstatus<CR>
