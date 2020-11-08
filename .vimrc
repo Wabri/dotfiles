@@ -3,7 +3,9 @@ source ~/.vim/plugins/*
 
 " => Color column
 set colorcolumn=80
-set t_Co=256
+
+" => Line numbers
+set number relativenumber
 
 " => Split
 set splitright
@@ -15,13 +17,13 @@ set splitbelow
 " => Set tab 
 set expandtab              " Use spaces instead of tabs.
 set tabstop=4
-set softtabstop =4         " Tab key indents by 2 spaces.
-set shiftwidth  =4         " >> indents by 2 spaces.
+set softtabstop=4         " Tab key indents by 2 spaces.
+set shiftwidth=4         " >> indents by 2 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 let mapleader=" "
 
-nmap <leader>, :split +e ~/.vimrc <CR>
+nmap <leader>, :vsplit +e ~/.vimrc <CR>
 nmap <leader>. :source ~/.vimrc <CR>
 
 nmap <leader>q :q<CR>
@@ -33,8 +35,8 @@ nnoremap <leader>a ggVG|"
 
 nmap <leader>e :e .<CR>
 nmap <leader>t :tabnew <CR>
-nmap <leader>nh :split <CR>
-nmap <leader>nv :vsplit <CR>
+nmap <leader>s :split <CR>
+nmap <leader>v :vsplit <CR>
 
 nmap <leader><CR> :vertical terminal<CR>
 nmap <leader><leader> :terminal<CR>
