@@ -7,11 +7,14 @@ call plug#begin('~/.vim/plugged')
     " Colorscheme
     Plug 'joshdick/onedark.vim'
 
+    " Fuzzy Finder <= MOST IMPORTANT PLUGIN
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 " => Load Personal plugins
 source ~/.vim/plugins/*
-
 
 " =========================================================================== "
 " => THEMES
@@ -25,7 +28,7 @@ set cursorcolumn
 
 
 " =========================================================================== "
-" => Settings
+" => SETTINGS
 
 " => Line numbers
 set number relativenumber
@@ -51,6 +54,9 @@ set shiftround      " >> indents to next multiple of 'shiftwidth'.
 " => Mapleader
 let mapleader=" "
 
+" => Help
+nmap <leader>? :Maps<CR>
+
 " => Vimrc
 nmap <leader>, :vsplit +e ~/.vimrc <CR>
 nmap <leader>. :source ~/.vimrc <CR>
@@ -66,10 +72,13 @@ nnoremap <leader>a ggVG|"
 " => Directory tree 
 nmap <leader>e :e .<CR>
 
+" => Files search
+nmap <leader>f :Files<CR>
+
 " => New 
-nmap <leader>t :tabnew <CR> e<CR>
-nmap <leader>s :split <CR>
-nmap <leader>v :vsplit <CR>
+nmap <leader>t :tabnew <CR>
+nmap <leader>s :split<CR>
+nmap <leader>v :vsplit<CR>
 
 " => Terminal
 nmap <leader><CR> :vertical terminal<CR>
@@ -80,9 +89,10 @@ nmap <tab> gt
 nmap <s-tab> gT
 
 " => Buffers
-nmap <Leader>b :buffers<CR>:buffer<Space>
-nmap <leader>bn :bnext<CR>
-nmap <leader>bp :bprev<CR>
+" nmap <Leader>b :buffers<CR>:buffer<Space>
+nmap <Leader>b :Buffers<CR>
+nmap <silent>' :bnext<CR>
+nmap <silent>" :bprev<CR>
 
 " => Windows moving 
 nmap <C-h> <C-W>h
@@ -107,9 +117,9 @@ tmap <down> <C-w>5+
 tmap <up> <C-w>5-
 
 " => Session
-nmap <leader>ss :mksession! %:p:h:t<CR>
+nmap <leader>S :mksession! %:p:h:t<CR>
 
 " => Code related
 nnoremap <leader>r :call RunScript()<CR>
-nnoremap <silent>== ggVG=
+nnoremap <silent>== ggVG= <C-o>
 
