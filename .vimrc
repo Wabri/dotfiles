@@ -26,6 +26,9 @@ colorscheme onedark
 set colorcolumn=80
 set cursorcolumn
 
+" => File detection and syntax detection
+filetype plugin indent on
+syntax on
 
 " =========================================================================== "
 " => SETTINGS
@@ -38,7 +41,7 @@ set splitright
 set splitbelow
 
 " => Remove swap file
-" set noswapfile
+set noswapfile
 
 " => Set tab 
 set expandtab       " Use spaces instead of tabs.
@@ -46,7 +49,12 @@ set tabstop=4
 set softtabstop=4   " Tab key indents by 2 spaces.
 set shiftwidth=4    " >> indents by 2 spaces.
 set shiftround      " >> indents to next multiple of 'shiftwidth'.
+set autoindent
+set smartindent
 
+" => Backspace
+set backspace=indent,eol,start
+set hidden
 
 " =========================================================================== "
 " => MAPPING
@@ -73,10 +81,10 @@ nnoremap <leader>a ggVG|"
 nmap <leader>e :e .<CR>
 
 " => Files search
-nmap <leader>f :Files<CR>
+nmap <leader>f :GFiles<CR>
 
 " => New 
-nmap <leader>t :tabnew <CR>
+nmap <leader>t :tabnew <CR>:GFiles<CR>
 nmap <leader>s :split<CR>
 nmap <leader>v :vsplit<CR>
 
@@ -123,3 +131,5 @@ nmap <leader>S :mksession! %:p:h:t<CR>
 nnoremap <leader>r :call RunScript()<CR>
 nnoremap <silent>== ggVG= <C-o>
 
+" => Go definition
+nnoremap gd g<C-]>
