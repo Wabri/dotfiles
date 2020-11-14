@@ -66,7 +66,7 @@ let mapleader=" "
 nmap <leader>? :Maps<CR>
 
 " => Vimrc
-nmap <leader>, :vsplit +e ~/.vimrc <CR>
+nmap <leader>, :tabnew +e ~/.vimrc <CR>
 nmap <leader>. :source ~/.vimrc <CR>
 
 " => Easy quit and save
@@ -129,7 +129,7 @@ nmap <leader>S :mksession! %:p:h:t<CR>
 
 " => Code related
 nnoremap <leader>r :call RunScript()<CR>
-nnoremap <silent>== ggVG= <C-o>
+nnoremap <silent>== ggVG=<C-o><C-o>
 
 " => Go definition
 nnoremap gd g<C-]>
