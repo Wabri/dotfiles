@@ -56,6 +56,10 @@ set smartindent
 set backspace=indent,eol,start
 set hidden
 
+" => Scrolling options
+" keep 5 lines between the cursor and the edge of the screen
+set scrolloff=6
+
 " =========================================================================== "
 " => MAPPING
 
@@ -133,3 +137,7 @@ nnoremap <silent>== ggVG=<C-o><C-o>
 
 " => Go definition
 nnoremap gd g<C-]>
+
+" => Scrolling
+inoremap <C-E> <C-X><C-E>
+inoremap <C-Y> <C-X><C-Y>
