@@ -1,3 +1,5 @@
+# *WORK IN PROGRESS: SWITCH FROM DEBIAN TO ARCOLINUX*
+
 # Wabri's Dotfiles
 
 ![i3wm-full](.dotfiles_resources/i3wm-full.png)
