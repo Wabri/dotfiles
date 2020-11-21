@@ -1,5 +1,7 @@
 # *WORK IN PROGRESS: SWITCH FROM DEBIAN TO ARCOLINUX*
 
+[Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/DebNord)
+
 # Wabri's Dotfiles
 
 ![i3wm-full](.dotfiles_resources/i3wm-full.png)
