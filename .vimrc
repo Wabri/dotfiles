@@ -4,8 +4,8 @@
 " => Load Personal plugins
 call plug#begin('~/.vim/plugged')
 
-    " Colorscheme
-    Plug 'joshdick/onedark.vim'
+    " Colors
+    Plug 'arcticicestudio/nord-vim'
 
     " Fuzzy Finder <= MOST IMPORTANT PLUGIN
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -19,8 +19,13 @@ source ~/.vim/plugins/*
 " =========================================================================== "
 " => THEMES
 
-" => Colorschemes
-colorscheme onedark
+colorscheme nord
+
+" => Enable 256 colors
+" set t_Co=256
+" set encoding=utf-8
+
+set nocompatible
 
 " => Color column
 set colorcolumn=80
@@ -59,6 +64,7 @@ set hidden
 " => Scrolling options
 " keep 5 lines between the cursor and the edge of the screen
 set scrolloff=6
+"
 
 " =========================================================================== "
 " => MAPPING

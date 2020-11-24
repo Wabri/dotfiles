@@ -13,6 +13,8 @@
 [[ $- != *i* ]] && return
 
 export HISTCONTROL=ignoreboth:erasedups
+export EDITOR=vim
+export VISUAL=vim
 
 PS1='[\u@\h \W]\$ '
 
