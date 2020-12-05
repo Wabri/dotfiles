@@ -50,8 +50,6 @@ workspace_auto_back_and_forth no
 # smart|urgent|focus|none
 focus_on_window_activation smart
 
-exec --no-startup-id ~/.screenlayout/up.sh
-
 workspace 1 output $firstMonitor
 workspace 2 output $firstMonitor
 workspace 3 output $secondMonitor
@@ -120,6 +118,8 @@ mode "$monitor" {
     # Secondary screen orientation
     bindsym h exec --no-startup-id ~/.screenlayout/left.sh, exec nitrogen --restore, mode "default"
     bindsym k exec --no-startup-id ~/.screenlayout/up.sh, exec nitrogen --restore, mode "default"
+    bindsym e exec --no-startup-id ~/.screenlayout/ex.sh, exec nitrogen --restore, mode "default"
+    bindsym s exec --no-startup-id ~/.screenlayout/solo.sh, exec nitrogen --restore, mode "default"
 
     bindsym q mode "default"
     bindsym Escape mode "default"
@@ -141,7 +141,7 @@ bindsym $mod+Shift+Return exec rofi -show
 #Backup exit
 bindsym $mod+p mode "$mode_system"
 
-set $mode_system System (k)lock, (l)logout, (s)suspend, (h)hibernate, (r)reboot, (p)shutdown
+set $mode_system System 
 mode "$mode_system" {
     bindsym k exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
     bindsym l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh logout, mode "default"
@@ -317,10 +317,10 @@ assign [class="Steam"] → 7
 assign [class="Vmplayer|VirtualBox"] → 8
 
 # Workspace 9 email clients
-assign [class="whatsapp-nativefier*|Telegram*"] → 9
+assign [class="Slack*|Whatsapp*|Telegram*"] → 9
 
 # Workspace 10 music related
-assign [class="Spotify|spotify"]                                                    → 10
+assign [class="Spotify|spotify"] → 10
 #fix for spotify not moving to workspace 10
 for_window [class="Spotify"] move to workspace 10
 
@@ -334,6 +334,9 @@ for_window [class="Spotify"] move to workspace 10
 
 # ArcoLinux Welcome App
 #exec --no-startup-id dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
+
+# Screen monitor
+exec --no-startup-id ~/.screenlayout/solo.sh
 
 # Autotiling
 exec_always --no-startup-id autotiling
@@ -417,7 +420,7 @@ bindsym $mod+shift+s exec --no-startup-id pavucontrol
 bindsym --release $mod+Escape exec xkill
 
 #change keyboard layout
-bindsym $mod+space exec chkey
+bindsym $mod+space exec --no-startup-id ~/.config/i3/scripts/i3key
 
 #workspace related
 
@@ -451,15 +454,17 @@ bindsym $mod+space exec chkey
 
 # Take Screenshoot
 # All
-bindsym $mod+Shift+Print exec \
-scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+#bindsym $mod+Shift+Print exec \
+#scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym $mod+Shift+Print exec flameshot full
 # Selection
-bindsym --release $mod+Print exec \
-scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+#bindsym --release $mod+Print exec \
+#scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym $mod+Print exec flameshot gui
 # Focus window
-bindsym Print exec \
-scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-#bindsym shift+Print exec --no-startup-id shutter
+#bindsym Print exec \
+#scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym Print exec flameshot screen
 
 #####################################################################################################################
 #################                          floating or tiled                                        #################
@@ -479,6 +484,7 @@ for_window [class="System-config-printer.py"] floating enable
 for_window [class="^Vlc$"] floating disable
 for_window [class="Wine"] floating disable
 for_window [class="Arandr"] floating enable
+for_window [class="Blueberry*"] floating enable
 
 
 #for_window [instance="gimp"] floating disable
@@ -501,10 +507,8 @@ for_window [window_role="setup"] floating enable
 #################                          give focus to applications                               #################
 #####################################################################################################################
 
-
 for_window [class="Kitty"] focus
 for_window [class="Alacritty"] focus
-
 
 #####################################################################################################################
 #################                          audio settings                                           #################
@@ -548,8 +552,6 @@ mode "$mode_media" {
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
 
-
-
 #####################################################################################################################
 #################                          bar toggle                                               #################
 #####################################################################################################################
@@ -583,8 +585,8 @@ new_window normal
 new_float normal
 #new_float none
 
-
-
+# Title align
+title_align center
 
 #####################################################################################################################
 #################                          Popups  control                                          #################
@@ -592,9 +594,6 @@ new_float normal
 
 #Popups during fullscreen mode
 popup_during_fullscreen smart
-
-
-
 
 #####################################################################################################################
 #################                          i3 gaps next                                             #################
@@ -612,15 +611,9 @@ gaps outer 5
 #smart_gaps on
 #smart_borders on
 
-
-
-
-
 #####################################################################################################################
 #################                          i3 gaps change                                           #################
 #####################################################################################################################
-
-
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -658,9 +651,6 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-
-
 
 #####################################################################################################################
 #################                          picom of i3wm                                          #################
@@ -763,17 +753,6 @@ client.background       #D8DEE9
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 # bindsym Mod1+minus scratchpad show
-
-#####################################################################################################################
-#################                          keyboard control                                         #################
-#####################################################################################################################
-
-# NOT USED
-
-# Settings of arcolinux will be applied
-#exec --no-startup-id setxkbmap be
-#exec --no-startup-id setxkbmap us
-
 
 
 #####################################################################################################################

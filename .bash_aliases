@@ -1,8 +1,10 @@
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
+
 #list
-alias ls='ls --color=auto'
+# alias ls='ls --color=auto'
+alias ls='exa'
 alias la='ls -a'
 alias ll='ls -la'
 alias l='ls'
@@ -79,9 +81,6 @@ alias cb='sudo cp /etc/skel/.bashrc ~/.bashrc && source ~/.bashrc'
 #switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-
-#quickly kill conkies
-alias kc='killall conky'
 
 #hardware info --short
 alias hw="hwinfo --short"
