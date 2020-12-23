@@ -13,10 +13,19 @@ Plug 'junegunn/fzf.vim'
 
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
+
+" Highlight of code
+Plug 'sheerun/vim-polyglot'
 
 " Tabbing configurations
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-sensible'
+
+" Undo history visualizer
+Plug 'mbbill/undotree'
+
+" Better statusline
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -26,17 +35,20 @@ call plug#end()
 " =========================================================================== "
 " => THEMES
 
+" => colorscheme
 colorscheme nord
 
 " => Enable 256 colors
-" set t_Co=256
-" set encoding=utf-8
+if !has('gui_running')
+  set t_Co=256
+endif
+set encoding=utf-8
 
 set nocompatible
 
 " => Color column
 set colorcolumn=80
-set cursorcolumn
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " => File detection and syntax detection
 filetype plugin indent on
@@ -56,13 +68,14 @@ set splitbelow
 set noswapfile
 
 " => Set tab 
-"set expandtab       " Use spaces instead of tabs.
-"set tabstop=4
-"set softtabstop=4   " Tab key indents by 2 spaces.
-"set shiftwidth=4    " >> indents by 2 spaces.
-"set shiftround      " >> indents to next multiple of 'shiftwidth'.
-"set autoindent
-"set smartindent
+set tabstop=4 softtabstop=4     " Tab key indents by 4 spaces.
+set shiftwidth=4                " >> indents by 2 spaces.
+set expandtab                   " Use spaces instead of tabs.
+set smartindent                 " Autoindentation
+set shiftround                  " >> indents to next multiple of 'shiftwidth'.
+
+set smartcase
+
 
 " => Backspace
 set backspace=indent,eol,start
@@ -74,8 +87,14 @@ set hidden
 set nobackup
 set nowritebackup
 
+" Highlight the symbol and its references when holding the cursor.
+set incsearch
+
+set undodir=~/.vim/undodir
+set undofile
+
 " Give more space for displaying messages.
-set cmdheight=2
+" set cmdheight=2
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -91,11 +110,10 @@ set updatetime=300
 " keep 5 lines between the cursor and the edge of the screen
 set scrolloff=6
 
-" =========================================================================== "
-" => AutoCommand
+" => Mouse Scrolling
+set mouse=nicr
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+set wrap
 
 " =========================================================================== "
 " => Statusline
@@ -103,6 +121,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set laststatus=2
+let g:lightline = {
+    \ 'colorscheme': 'nord',
+    \ }
+set noshowmode      " Not show current mode in command-line.
+set showcmd         " Show already typed keys when more are expected.
 
 " =========================================================================== "
 " => Functions
@@ -111,7 +135,6 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
@@ -157,7 +180,8 @@ nnoremap <leader>a ggVG|"
 nmap <leader>e :e .<CR>
 
 " => Files search
-nmap <leader>f :GFiles<CR>
+nmap <leader>fg :GFiles<CR>
+nmap <leader>ff :Files<CR>
 
 " => New 
 nmap <leader>t :tabnew <CR>:GFiles<CR>
@@ -175,8 +199,8 @@ nmap <s-tab> gT
 " => Buffers
 " nmap <Leader>b :buffers<CR>:buffer<Space>
 nmap <Leader>b :Buffers<CR>
-nmap <silent>' :bnext<CR>
-nmap <silent>" :bprev<CR>
+nmap <Leader>' :bnext<CR>
+nmap <Leader>" :bprev<CR>
 
 " => Windows moving 
 nmap <C-h> <C-W>h
@@ -208,27 +232,6 @@ tmap <up> <C-w>5-
 " => Session
 nmap <leader>S :mksession! %:p:h:t<CR>
 
-" => Go definition
-" without coc
-" nnoremap gd g<C-]>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd <Plug>(coc-definition)
-
-" => Go implementation        
-nmap <silent> gi <Plug>(coc-implementation)
-
-" => Go definition        
-nmap <silent> gy <Plug>(coc-type-definition)
-
-" => list of references
-nmap <silent> gr <Plug>(coc-references)
-
-" => Show documentation
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" => Rename
-nmap <leader>rn <Plug>(coc-rename)
-
 " => Scrolling
 inoremap <C-E> <C-X><C-E>
 inoremap <C-Y> <C-X><C-Y>
@@ -238,10 +241,19 @@ inoremap <C-Y> <C-X><C-Y>
 nnoremap <silent>== ggVG=<C-o><C-o>
 " nmap <silent> == :Format<CR>
 
+" => Substitute
+vnoremap <leader>p "_dP
+
 " => Organize imports
 nmap <silent> __ :OR<CR>
 
-" => Coc Addons
+" => Organize imports
+nnoremap <leader>u :UndotreeToggle<CR>
+
+" => Go definition
+" without coc
+" nnoremap gd g<C-]>
+
 " TAB trigger completion
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -264,3 +276,26 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> =g :CocDiagnostics<CR>
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <NUL> coc#refresh()
+" => Go definition
+nmap <buffer> <silent> <leader>gd <Plug>(coc-definition)
+" => Go implementation        
+nmap <buffer> <silent> <leader>gi <Plug>(coc-implementation)
+" => Go definition        
+nmap <buffer> <silent> <leader>gy <Plug>(coc-type-definition)
+" => list of references
+nmap <buffer> <silent> <leader>gr <Plug>(coc-references)
+" => Rename
+nmap <buffer> <leader>rn <Plug>(coc-rename)
+" => Show documentation
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" =========================================================================== "
+" => AutoCommand
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" =========================================================================== "
+" => Path
+
+let &path.="/usr/include/,"
