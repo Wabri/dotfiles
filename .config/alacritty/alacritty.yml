@@ -8,6 +8,83 @@
 # # References:
 # #   https://github.com/alacritty/alacritty
 
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Specified in number of columns/lines, not pixels.
+  # If both are `0`, this setting is ignored.
+  dimensions:
+    columns: 0
+    lines: 0
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  position:
+    x: 0
+    y: 0
+
+  # Window padding (changes require restart)
+    
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+     x: 7
+     y: 7
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: false
+
+  # Window decorations
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background, but no title bar buttons
+  decorations: full
+
+
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
+
+
+# Background opacity
+background_opacity: 0.8
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 3
+
+# Font configuration (changes require restart)
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux) monospace
+    #   - (Windows) Consolas
+    family: monospace
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: true
+
 colors:
   primary:
     background: '#2e3440'
@@ -15,44 +92,44 @@ colors:
     dim_foreground: '#a5abb6'
     cursor:
       text: '#2e3440'
-      cursor: '#d8dee9'
-      vi_mode_cursor:
-        text: '#2e3440'
-        cursor: '#d8dee9'
-        selection:
-          text: CellForeground
-          background: '#4c566a'
-          search:
-            matches:
-              foreground: CellBackground
-              background: '#88c0d0'
-              bar:
-                background: '#434c5e'
-                foreground: '#d8dee9'
-                normal:
-                  black: '#3b4252'
-                  red: '#bf616a'
-                  green: '#a3be8c'
-                  yellow: '#ebcb8b'
-                  blue: '#81a1c1'
-                  magenta: '#b48ead'
-                  cyan: '#88c0d0'
-                  white: '#e5e9f0'
-                  bright:
-                    black: '#4c566a'
-                    red: '#bf616a'
-                    green: '#a3be8c'
-                    yellow: '#ebcb8b'
-                    blue: '#81a1c1'
-                    magenta: '#b48ead'
-                    cyan: '#8fbcbb'
-                    white: '#eceff4'
-                    dim:
-                      black: '#373e4d'
-                      red: '#94545d'
-                      green: '#809575'
-                      yellow: '#b29e75'
-                      blue: '#68809a'
-                      magenta: '#8c738c'
-                      cyan: '#6d96a5'
-                      white: '#aeb3bb'
+    cursor: '#d8dee9'
+    vi_mode_cursor:
+      text: '#2e3440'
+    cursor: '#d8dee9'
+    selection:
+      text: CellForeground
+      background: '#4c566a'
+      search:
+        matches:
+          foreground: CellBackground
+          background: '#88c0d0'
+          bar:
+            background: '#434c5e'
+            foreground: '#d8dee9'
+            normal:
+              black: '#3b4252'
+              red: '#bf616a'
+              green: '#a3be8c'
+              yellow: '#ebcb8b'
+              blue: '#81a1c1'
+              magenta: '#b48ead'
+              cyan: '#88c0d0'
+              white: '#e5e9f0'
+              bright:
+                black: '#4c566a'
+                red: '#bf616a'
+                green: '#a3be8c'
+                yellow: '#ebcb8b'
+                blue: '#81a1c1'
+                magenta: '#b48ead'
+                cyan: '#8fbcbb'
+                white: '#eceff4'
+                dim:
+                  black: '#373e4d'
+                  red: '#94545d'
+                  green: '#809575'
+                  yellow: '#b29e75'
+                  blue: '#68809a'
+                  magenta: '#8c738c'
+                  cyan: '#6d96a5'
+                  white: '#aeb3bb'
