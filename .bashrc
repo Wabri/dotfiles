@@ -8,6 +8,7 @@
 export HISTCONTROL=ignoreboth:erasedups
 export EDITOR=vim
 export VISUAL=vim
+export TERM="xterm-256color"
 
 PS1='[\u@\h \W]\$ '
 
@@ -17,6 +18,10 @@ fi
 
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.emacs.d/bin" ] ;
+  then PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
 #ignore upper and lowercase when TAB completion
@@ -68,41 +73,7 @@ neofetch
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
-# Path to your oh-my-bash installation.
-export OSH=/home/wabri/.oh-my-bash
-
-# For themes look at ~/.oh-my-bash/themes
-OSH_THEME="agnoster"
-
-# Case-sensitive completion.
-CASE_SENSITIVE="true"
-
-# Disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Auto-correction.
-ENABLE_CORRECTION="true"
-
-# Add wisely, as too many completions slow down shell startup.
-completions=(
-  git
-  composer
-  ssh
-)
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
-
-source $OSH/oh-my-bash.sh
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+eval "$(starship init bash)"

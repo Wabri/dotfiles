@@ -1,6 +1,8 @@
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
+#view
+alias cat='bat'
 
 #list
 # alias ls='ls --color=auto'
@@ -110,7 +112,6 @@ alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias yta-opus="youtube-dl --extract-audio --audio-format opus "
 alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
 alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 #Recent Installed Packages
@@ -128,14 +129,13 @@ alias jctl="journalctl -p 3 -xb"
 
 #nano for important configuration files
 #know what you do in these files
-alias nlightdm="sudo nano /etc/lightdm/lightdm.conf"
-alias npacman="sudo nano /etc/pacman.conf"
-alias ngrub="sudo nano /etc/default/grub"
-alias nmkinitcpio="sudo nano /etc/mkinitcpio.conf"
-alias nslim="sudo nano /etc/slim.conf"
-alias noblogout="sudo nano /etc/oblogout.conf"
-alias nmirrorlist="sudo nano /etc/pacman.d/mirrorlist"
-alias nconfgrub="sudo nano /boot/grub/grub.cfg"
+alias npacman="sudo vim /etc/pacman.conf"
+alias ngrub="sudo vim /etc/default/grub"
+alias nmkinitcpio="sudo vim /etc/mkinitcpio.conf"
+alias nslim="sudo vim /etc/slim.conf"
+alias noblogout="sudo vim /etc/oblogout.conf"
+alias nmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
+alias nconfgrub="sudo vim /boot/grub/grub.cfg"
 alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 
 #gpg
@@ -154,3 +154,6 @@ alias probe="sudo -E hw-probe -all -upload"
 #shutdown or reboot
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
+
+alias pomostart="sleep 1800 && zenity --warning --text='pomodoro completed'"
+alias breakstart="sleep 300 && zenity --warning --text='pomodoro completed'"
