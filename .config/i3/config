@@ -27,7 +27,6 @@
 # Mod1 = Alt key on keyboard
 set $mod Mod4
 
-
 #####################################################################################################################
 #################                          Define the movements keys - variables                    #################
 #####################################################################################################################
@@ -36,7 +35,6 @@ set $up k
 set $down j
 set $left h
 set $right l
-
 
 #####################################################################################################################
 #################                          Single and Dual screen                                   #################
@@ -215,7 +213,7 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+Tab workspace back_and_forth
 
 # switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+#for_window [urgent=latest] focus
 
 
 #####################################################################################################################
@@ -237,18 +235,13 @@ bindsym $mod+slash split toggle
 # change focus between tiling / floating windows
 bindsym $mod+o focus mode_toggle
 
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 #####################################################################################################################
 #################                          mouse settings in i3                                     #################
 #####################################################################################################################
 
 # yes|no
 focus_follows_mouse no
+
 # # output|none
 mouse_warping output
 
@@ -396,7 +389,7 @@ exec --no-startup-id nitrogen --restore &
 #bindsym control+mod1+w exec --no-startup-id arcolinux-welcome-app
 
 #ArcoLinux Tweak Tool
-bindsym $mod+shift+e exec --no-startup-id arcolinux-tweak-tool
+#bindsym $mod+shift+e exec --no-startup-id arcolinux-tweak-tool
 
 #conky
 #bindsym $mod+c exec --no-startup-id conky-toggle
@@ -427,24 +420,26 @@ bindsym $mod+space exec --no-startup-id ~/.config/i3/scripts/i3key
 #workspace 1 related
 
 #workspace 2 related
+bindsym $mod+F2 exec --no-startup-id firefox; focus
 
 #workspace 3 related
-#bindsym $mod+F3 exec --no-startup-id inkscape;focus
 
 #workspace 4 related
-#bindsym $mod+F4 exec --no-startup-id gimp;focus
 
 #workspace 5 related
 
 #workspace 6 related
 
 #workspace 7 related
+bindsym $mod+F7 exec --no-startup-id steam
 
 #workspace 8 related
 
 #workspace 9 related
+bindsym $mod+F9 exec --no-startup-id "telegram-desktop & whatsapp-for-linux & slack" ; focus
 
 #workspace 10 related
+bindsym $mod+F10 exec --no-startup-id spotify
 
 
 #####################################################################################################################
@@ -453,18 +448,21 @@ bindsym $mod+space exec --no-startup-id ~/.config/i3/scripts/i3key
 
 
 # Take Screenshoot
-# All
-#bindsym $mod+Shift+Print exec \
-#scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-bindsym $mod+Shift+Print exec flameshot full
+
 # Selection
 #bindsym --release $mod+Print exec \
 #scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym $mod+Print exec flameshot gui
+
 # Focus window
 #bindsym Print exec \
 #scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-bindsym Print exec flameshot screen
+bindsym Print exec flameshot screen -c
+
+# All
+#bindsym $mod+Shift+Print exec \
+#scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym $mod+Shift+Print exec flameshot full -c
 
 #####################################################################################################################
 #################                          floating or tiled                                        #################
@@ -476,7 +474,7 @@ for_window [class="Arcolinux-welcome-app.py"] floating enable
 #for_window [class="Arcolinux-tweak-tool.py"] floating enable
 for_window [class="Font-manager"] floating enable
 #for_window [class="qt5ct|Lxappearance] floating enable
-for_window [class="Nitrogen"] floating disable
+for_window [class="Nitrogen"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="^Skype$"] floating enable
 for_window [class="^Spotify$"] floating disable
@@ -486,22 +484,18 @@ for_window [class="Wine"] floating disable
 for_window [class="Arandr"] floating enable
 for_window [class="Blueberry*"] floating enable
 
-
 #for_window [instance="gimp"] floating disable
 for_window [instance="script-fu"] border normal
 for_window [instance="variety"] floating disable
-
 
 for_window [title="Copying"] floating enable
 for_window [title="Deleting"] floating enable
 for_window [title="Moving"] floating enable
 
-
 #for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="^Preferences$"] floating enable
 for_window [window_role="setup"] floating enable
-
 
 #####################################################################################################################
 #################                          give focus to applications                               #################
@@ -544,7 +538,6 @@ mode "$mode_media" {
     bindsym Escape mode "default"
 }
 
-
 #####################################################################################################################
 #################                          xbacklight                                               #################
 #####################################################################################################################
@@ -556,15 +549,12 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 #################                          bar toggle                                               #################
 #####################################################################################################################
 
-
 # bar toggle, hide or show
-#bindsym $mod+b bar mode toggle
-
+bindsym $mod+b bar mode toggle
 
 #####################################################################################################################
 #################                          border control                                           #################
 #####################################################################################################################
-
 
 # Border control
 hide_edge_borders both
@@ -572,10 +562,9 @@ bindsym $mod+shift+b exec --no-startup-id i3-msg border toggle
 
 #changing border style
 #super+t in arcolinux is starting terminal
-bindsym $mod+t border normal
-bindsym $mod+y border 1pixel
-bindsym $mod+u border none
-
+#bindsym $mod+t border normal
+#bindsym $mod+y border 1pixel
+#bindsym $mod+u border none
 
 #new_window pixel 1
 new_window normal
@@ -604,7 +593,6 @@ popup_during_fullscreen smart
 # delete or uncomment the following lines if you do not have it or do not
 # want it
 
-
 for_window [class="^.*"] border pixel 2
 gaps inner 5
 gaps outer 5
@@ -615,42 +603,43 @@ gaps outer 5
 #################                          i3 gaps change                                           #################
 #####################################################################################################################
 
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-    bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-    bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-    bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+#set $mode_gaps Gaps: (o) outer, (i) inner
+#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#bindsym $mod+Shift+g mode "$mode_gaps"
+#
+#mode "$mode_gaps" {
+#    bindsym o      mode "$mode_gaps_outer"
+#    bindsym i      mode "$mode_gaps_inner"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+#
+#mode "$mode_gaps_inner" {
+#    bindsym plus  gaps inner current plus 5
+#    bindsym minus gaps inner current minus 5
+#    bindsym 0     gaps inner current set 0
+#
+#    bindsym Shift+plus  gaps inner all plus 5
+#    bindsym Shift+minus gaps inner all minus 5
+#    bindsym Shift+0     gaps inner all set 0
+#
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+#
+#mode "$mode_gaps_outer" {
+#    bindsym plus  gaps outer current plus 5
+#    bindsym minus gaps outer current minus 5
+#    bindsym 0     gaps outer current set 0
+#
+#    bindsym Shift+plus  gaps outer all plus 5
+#    bindsym Shift+minus gaps outer all minus 5
+#    bindsym Shift+0     gaps outer all set 0
+#
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
 
 #####################################################################################################################
 #################                          picom of i3wm                                          #################
@@ -659,7 +648,7 @@ mode "$mode_gaps_outer" {
 #if you want transparency on non-focused windows, ...
 exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
 
-bindsym control+mod1+o exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
+bindsym $mod+shift+t exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 
 #####################################################################################################################
 #####################################################################################################################
@@ -671,7 +660,7 @@ bindsym control+mod1+o exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 
 bar {
     status_command i3status -c ~/.config/i3/i3status.conf
-    font pango:JetBrains Mono 12
+    font pango:JetBrains mono 12,Medium Nerd Font 12
     # dock|hide|invisible
     mode dock
     # hide|show
@@ -689,7 +678,7 @@ bar {
     tray_output primary
     # <px> [px]
     tray_padding 0
-    separator_symbol "  "
+    separator_symbol "  "
     # yes|no
     workspace_buttons yes
     # yes|no
@@ -726,6 +715,23 @@ client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
 client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
 client.background       #D8DEE9
 ##STOP THEMING WM
+
+#####################################################################################################################
+#####################################################################################################################
+#####################################################################################################################
+#################                          pomodoro timer                                           #################
+#####################################################################################################################
+#####################################################################################################################
+#####################################################################################################################
+
+bindsym $mod+F1 mode "$mode_pomo"
+set $mode_pomo Pomodoro
+mode "$mode_pomo" {
+    bindsym s exec --no-startup-id "sleep 1 && i3-msg 'mode Pomodoro' ; zenity --warning --text='Long Pomodoro done'", mode "default" 
+    bindsym b exec --no-startup-id "sleep 2 && i3-msg 'mode Pomodoro'; zenity --warning --text='Break done'", mode "default" 
+
+    bindsym Escape mode "default"
+}
 
 #####################################################################################################################
 #####################################################################################################################
