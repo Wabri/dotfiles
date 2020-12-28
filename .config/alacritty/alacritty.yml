@@ -1,12 +1,4 @@
-# Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
-# Copyright (c) 2017-present Sven Greb <code@svengreb.de>
-#
-# # Project:    Nord Alacritty
-# # Version:    0.1.0
-# # Repository: https://github.com/arcticicestudio/nord-alacritty
-# # License:    MIT
-# # References:
-# #   https://github.com/alacritty/alacritty
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 window:
   # Window dimensions (changes require restart)
@@ -71,17 +63,31 @@ scrolling:
   # scrollback is enabled (history > 0).
   multiplier: 3
 
-# Font configuration (changes require restart)
+# Font configuration
 font:
   # Normal (roman) font face
   normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux) monospace
-    #   - (Windows) Consolas
-    family: monospace
+    family: JetBrains Mono
+    style: Regular
+
+  # Bold font face
+  bold:
+    family: JetBrains Mono
+    style: Bold
+
+  # Italic font face
+  italic:
+    family: JetBrains Mono
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: JetBrains Mono
+    style: Bold Italic
+
+  # Point size
+  size: 8.0
+  
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
