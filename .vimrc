@@ -1,36 +1,7 @@
 " =========================================================================== "
 " => PLUGINS
 
-" => Load Personal plugins
-call plug#begin('~/.vim/plugged')
-
-" Colors
-Plug 'arcticicestudio/nord-vim'
-
-" Fuzzy Finder <= MOST IMPORTANT PLUGIN
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Completion and syntax of code
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Highlight of code
-Plug 'sheerun/vim-polyglot'
-
-" Tabbing configurations
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-sensible'
-
-" Undo history visualizer
-Plug 'mbbill/undotree'
-
-" Better statusline
-Plug 'itchyny/lightline.vim'
-
-call plug#end()
-
-" => Load Personal plugins
-" source ~/.vim/plugins/*
+source ~/.vim/plugins.vim
 
 " =========================================================================== "
 " => THEMES
@@ -38,21 +9,11 @@ call plug#end()
 " => colorscheme
 colorscheme nord
 
-" => Enable 256 colors
-if !has('gui_running')
-  set t_Co=256
-endif
-set encoding=utf-8
-
 set nocompatible
 
 " => Color column
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-" => File detection and syntax detection
-filetype plugin indent on
-syntax on
 
 " =========================================================================== "
 " => SETTINGS
@@ -76,10 +37,6 @@ set shiftround                  " >> indents to next multiple of 'shiftwidth'.
 
 set smartcase
 
-
-" => Backspace
-set backspace=indent,eol,start
-
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -87,14 +44,8 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Highlight the symbol and its references when holding the cursor.
-set incsearch
-
 set undodir=~/.vim/undodir
 set undofile
-
-" Give more space for displaying messages.
-" set cmdheight=2
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -113,7 +64,11 @@ set scrolloff=6
 " => Mouse Scrolling
 set mouse=nicr
 
+" => Go down on a new line instead of infinitely right 
 set wrap
+
+" 
+set clipboard=unnamedplus
 
 " =========================================================================== "
 " => Statusline
@@ -121,7 +76,6 @@ set wrap
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set laststatus=2
 let g:lightline = {
     \ 'colorscheme': 'nord',
     \ }
@@ -218,6 +172,10 @@ nmap <leader>j <C-W>J
 nmap <leader>k <C-W>K
 nmap <leader>l <C-W>L
 
+" Move up down 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " => Windows resizing
 nmap <left> <C-w>5<
 nmap <right> <C-w>5>
@@ -277,13 +235,13 @@ nmap <silent> =g :CocDiagnostics<CR>
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <NUL> coc#refresh()
 " => Go definition
-nmap <buffer> <silent> <leader>gd <Plug>(coc-definition)
+nmap <buffer> <silent> gd <Plug>(coc-definition)
 " => Go implementation        
-nmap <buffer> <silent> <leader>gi <Plug>(coc-implementation)
+nmap <buffer> <silent> gi <Plug>(coc-implementation)
 " => Go definition        
-nmap <buffer> <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <buffer> <silent> gy <Plug>(coc-type-definition)
 " => list of references
-nmap <buffer> <silent> <leader>gr <Plug>(coc-references)
+nmap <buffer> <silent> gr <Plug>(coc-references)
 " => Rename
 nmap <buffer> <leader>rn <Plug>(coc-rename)
 " => Show documentation
