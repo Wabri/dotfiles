@@ -457,12 +457,12 @@ bindsym $mod+Print exec flameshot gui
 # Focus window
 #bindsym Print exec \
 #scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-bindsym Print exec flameshot screen -c
+bindsym Print exec "scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f /tmp/'"
 
 # All
 #bindsym $mod+Shift+Print exec \
 #scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-bindsym $mod+Shift+Print exec flameshot full -c
+bindsym $mod+Shift+Print exec "scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f /tmp/'"
 
 #####################################################################################################################
 #################                          floating or tiled                                        #################
