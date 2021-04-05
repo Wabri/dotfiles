@@ -13,6 +13,15 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" 
+Plug 'dyng/ctrlsf.vim'
+
+" Distraction-free mode
+Plug 'junegunn/goyo.vim'
+
+" Continuously updated session files 
+Plug 'tpope/vim-obsession'
+
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

@@ -1,14 +1,9 @@
 #
 # ~/.bashrc
-#
 
+#
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-export HISTCONTROL=ignoreboth:erasedups
-export EDITOR=vim
-export VISUAL=vim
-export TERM="xterm-256color"
 
 PS1='[\u@\h \W]\$ '
 
@@ -77,3 +72,12 @@ neofetch
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 eval "$(starship init bash)"
+
+export HISTCONTROL=ignoreboth:erasedups
+export EDITOR=vim
+export VISUAL=vim
+export TERM="xterm-256color"
+export YTFZF_HIST=0
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

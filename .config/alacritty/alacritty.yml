@@ -52,7 +52,7 @@ window:
 
 
 # Background opacity
-background_opacity: 0.8
+background_opacity: 1.0
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

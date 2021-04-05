@@ -138,7 +138,6 @@ nmap <leader>fg :GFiles<CR>
 nmap <leader>ff :Files<CR>
 
 " => New 
-nmap <leader>t :tabnew <CR>:GFiles<CR>
 nmap <leader>s :split<CR>:GFiles<CR>
 nmap <leader>v :vsplit<CR>:GFiles<CR>
 
@@ -147,8 +146,19 @@ nmap <leader><CR> :vertical terminal<CR>
 nmap <leader><leader> :terminal<CR>
 
 " => Tabs
+nmap <leader>t :tabnew <CR>:GFiles<CR>
 nmap <tab> gt
 nmap <s-tab> gT
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
 
 " => Buffers
 " nmap <Leader>b :buffers<CR>:buffer<Space>
@@ -188,7 +198,8 @@ tmap <down> <C-w>5+
 tmap <up> <C-w>5-
 
 " => Session
-nmap <leader>S :mksession! %:p:h:t<CR>
+nmap <leader>SS :mksession! %:p:h:t<CR>:Obsess<CR>
+nmap <leader>SD :Obsess!<CR>
 
 " => Scrolling
 inoremap <C-E> <C-X><C-E>
@@ -206,7 +217,12 @@ vnoremap <leader>p "_dP
 nmap <silent> __ :OR<CR>
 
 " => Organize imports
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>uu :UndotreeToggle<CR>
+nnoremap <leader>uf :UndotreeFocus<CR>
+
+" => Distraction-free mode
+nnoremap <leader>z :Goyo<CR>
+nnoremap <leader>Z :Goyo!<CR>
 
 " => Go definition
 " without coc
@@ -229,19 +245,19 @@ else
 endif
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> =g :CocDiagnostics<CR>
+nmap <leader>[g <Plug>(coc-diagnostic-prev)
+nmap <leader>]g <Plug>(coc-diagnostic-next)
+nmap <leader>=g :CocDiagnostics<CR>
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <NUL> coc#refresh()
 " => Go definition
-nmap <buffer> <silent> gd <Plug>(coc-definition)
+nmap <buffer> <leader>gd <Plug>(coc-definition)
 " => Go implementation        
-nmap <buffer> <silent> gi <Plug>(coc-implementation)
+nmap <buffer> <leader>gi <Plug>(coc-implementation)
 " => Go definition        
-nmap <buffer> <silent> gy <Plug>(coc-type-definition)
+nmap <buffer> <leader>gy <Plug>(coc-type-definition)
 " => list of references
-nmap <buffer> <silent> gr <Plug>(coc-references)
+nmap <buffer> <leader>gr <Plug>(coc-references)
 " => Rename
 nmap <buffer> <leader>rn <Plug>(coc-rename)
 " => Show documentation

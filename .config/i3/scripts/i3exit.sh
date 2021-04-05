@@ -3,7 +3,7 @@
 
 case "$1" in
     lock)
-        betterlockscreen -l --timestr="%H:%M"
+        betterlockscreen -l blur --timestr="%H:%M" 
         ;;
     logout)
         i3-msg exit
