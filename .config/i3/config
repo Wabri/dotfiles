@@ -378,9 +378,6 @@ exec --no-startup-id volumeicon
 #feh sets wallpaper
 exec --no-startup-id nitrogen --restore &
 
-#Polybar
-#exec_always --no-startup-id ~/.config/polybar/launch.sh &
-
 #####################################################################################################################
 #################                          applications keyboard shortcuts                          #################
 #####################################################################################################################
@@ -662,48 +659,52 @@ bindsym $mod+shift+t exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 #####################################################################################################################
 #####################################################################################################################
 
-bar {
-    status_command i3status -c ~/.config/i3/i3status.conf
-    font pango:JetBrains mono 12,Medium Nerd Font 12
-    # dock|hide|invisible
-    mode dock
-    # hide|show
-    hidden_state hide
-    # <Modifier>|none
-    modifier $mod
-    # disable clicking on workspace buttons
-    # bindsym button1 nop
-    bindsym button3 exec --no-startup-id pavucontrol
-    bindsym button2 exec --no-startup-id arandr
-    # bottom|top
-    position top
-    # primary|<output>
-    # tray_output none|primary|<output>
-    tray_output primary
-    # <px> [px]
-    tray_padding 0
-    separator_symbol "  "
-    # yes|no
-    workspace_buttons yes
-    # yes|no
-    # strip_workspace_numbers yes
-    # yes|no
-    # strip_workspace_name no
-    # yes|no
-    binding_mode_indicator yes
-    colors {
-        background #2E3440
-        statusline #88C0D0
-        separator #ECEFF4
+#bar {
+#    status_command i3status -c ~/.config/i3/i3status.conf
+#    font pango:JetBrains mono 12,Medium Nerd Font 12
+#    # dock|hide|invisible
+#    mode dock
+#    # hide|show
+#    hidden_state hide
+#    # <Modifier>|none
+#    modifier $mod
+#    # disable clicking on workspace buttons
+#    # bindsym button1 nop
+#    bindsym button3 exec --no-startup-id pavucontrol
+#    bindsym button2 exec --no-startup-id arandr
+#    # bottom|top
+#    position top
+#    # primary|<output>
+#    # tray_output none|primary|<output>
+#    tray_output primary
+#    # <px> [px]
+#    tray_padding 0
+#    separator_symbol "  "
+#    # yes|no
+#    workspace_buttons yes
+#    # yes|no
+#    # strip_workspace_numbers yes
+#    # yes|no
+#    # strip_workspace_name no
+#    # yes|no
+#    binding_mode_indicator yes
+#    colors {
+#        background #2E3440
+#        statusline #88C0D0
+#        separator #ECEFF4
+#
+#	# class            border  backgr. text
+#        focused_workspace  #2E3440 #2E3440 #A3BE8C
+#        active_workspace   #2E3440 #2E3440 #D08770
+#        inactive_workspace #2E3440 #2E3440 #4C566A
+#        urgent_workspace   #BF616A #2E3440 #BF616A
+#        binding_mode       #2E3440 #2E3440 #A3BE8C
+#    }
+#}
 
-	# class            border  backgr. text
-        focused_workspace  #2E3440 #2E3440 #A3BE8C
-        active_workspace   #2E3440 #2E3440 #D08770
-        inactive_workspace #2E3440 #2E3440 #4C566A
-        urgent_workspace   #BF616A #2E3440 #BF616A
-        binding_mode       #2E3440 #2E3440 #A3BE8C
-    }
-}
+
+#Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 ##STOP THEMING BAR
 

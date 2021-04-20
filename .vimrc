@@ -147,8 +147,8 @@ nmap <leader><leader> :terminal<CR>
 
 " => Tabs
 nmap <leader>t :tabnew <CR>:GFiles<CR>
-nmap <tab> gt
-nmap <s-tab> gT
+nmap <leader>> gt
+nmap <leader>< gT
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
