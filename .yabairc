@@ -1,1 +1,44 @@
-/Users/gpuliti/.yabairc
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# Layout
+yabai -m config layout bsp
+
+# Split ratio
+yabai -m config auto_balance on
+
+# Padding and gaps
+yabai -m config top_padding 10
+yabai -m config bottom_padding 10
+yabai -m config left_padding 10
+yabai -m config right_padding 10
+yabai -m config window_gap 10
+
+# Mouse support
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config focus_follows_mouse autoraise
+yabai -m config mouse_follows_focus on
+
+# Window modifications
+yabai -m config window_topmost on 
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.9
+
+# Rules
+yabai -m rule --add app='^Firefox' space=2
+yabai -m rule --add app='^Code' space=3
+yabai -m rule --add app='^VirtualBox' space=4
+yabai -m rule --add app='^Doker*Desktop' space=5
+yabai -m rule --add app='^Pritunl' space=6
+yabai -m rule --add app='^Bitwarden' space=7
+yabai -m rule --add app='^Notion' space=8
+yabai -m rule --add title='^Whats*' space=9
+yabai -m rule --add app='^Telegram' space=9
+yabai -m rule --add app='^Spotify' space=10
+
+# Create 9 workspaces
+/Users/gpuliti/.local/bin/setup_workspaces
+
