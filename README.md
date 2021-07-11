@@ -1,4 +1,11 @@
-# Wabri's Dotfiles
+# Wabri's *Debian* Dotfiles
+
+***Debian dotfiles are no longer mantain***
+
+Other dotfiles:
+
+* [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/DebNord)
+* [ArcoLinux Dotfiles](https://github.com/Wabri/dotfiles)
 
 ![i3wm-full](.dotfiles_resources/i3wm-full.png)
 
