@@ -17,7 +17,6 @@ Other dotfiles:
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
-- [Vim](#vim)
 
 ## Why nord?
 
