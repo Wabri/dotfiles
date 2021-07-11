@@ -2,7 +2,7 @@
 
 Other dotfiles:
 
-* [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/DebNord)
+* [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/debian)
 * [ArcoLinux Dotfiles](https://github.com/Wabri/dotfiles)
 
 ## About this config
