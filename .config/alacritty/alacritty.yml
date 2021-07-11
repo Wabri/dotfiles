@@ -67,26 +67,26 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrains Mono
+    family: Hack Nerd Font
     style: Regular
 
   # Bold font face
   bold:
-    family: JetBrains Mono
+    family: Hack Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: JetBrains Mono
+    family: Hack Nerd Font
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: JetBrains Mono
+    family: Hack Nerd Font
     style: Bold Italic
 
   # Point size
-  size: 8.0
+  size: 14.0
   
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
