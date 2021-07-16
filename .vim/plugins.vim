@@ -10,6 +10,7 @@ Plug 'tpope/vim-sleuth'
 
 " Colors
 Plug 'kamwitsta/nordisk'
+Plug 'TaDaa/vimade'
 
 " Fuzzy Finder <- MOST IMPORTANT PLUGIN
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -19,14 +20,13 @@ Plug 'junegunn/fzf.vim'
 " Plug 'junegunn/goyo.vim'
 
 " Continuously updated session files 
-" Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pearofducks/ansible-vim'
 
 " Highlight of code
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 " Undo history visualizer
 " Plug 'mbbill/undotree'

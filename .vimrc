@@ -145,6 +145,10 @@ nnoremap <leader>p "*p
 vnoremap <leader>y "*y
 vnoremap <leader>p "*p
 
+" => Session
+nmap <leader>SS :mksession! %:p:h:t<CR>:Obsess<CR>
+nmap <leader>SD :Obsess!<CR>
+
 " =========================================================================== "
 " => Augroup
 
