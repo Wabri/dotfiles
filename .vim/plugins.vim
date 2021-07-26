@@ -10,26 +10,23 @@ Plug 'tpope/vim-sleuth'
 
 " Colors
 Plug 'kamwitsta/nordisk'
-Plug 'TaDaa/vimade'
 
 " Fuzzy Finder <- MOST IMPORTANT PLUGIN
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Distraction-free mode
-" Plug 'junegunn/goyo.vim'
+if !has('nvim')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+else
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+endif
 
 " Continuously updated session files 
 Plug 'tpope/vim-obsession'
 
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Highlight of code
-Plug 'sheerun/vim-polyglot'
-
-" Undo history visualizer
-" Plug 'mbbill/undotree'
 
 " Better statusline
 Plug 'itchyny/lightline.vim'
@@ -62,3 +59,13 @@ let g:lightline = {
       \    'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction

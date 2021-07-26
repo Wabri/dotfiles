@@ -10,6 +10,7 @@ colorscheme nordisk
 
 " => Color column
 set colorcolumn=80
+set cursorline
 
 " =========================================================================== "
 " => SETTINGS
@@ -26,6 +27,28 @@ set noswapfile
 
 " => Remove banner on netrw
 let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+
+" => Persitent undo history
+set undodir=~/.vim/undodir
+set undofile
+
+" => Search config
+set incsearch ignorecase
+
+" => More space on command
+set cmdheight=2
+
+" => Updatetime
+set updatetime=300
+
+" => 
+set shortmess+=c
+
+
+set signcolumn=yes
 
 " =========================================================================== "
 " => MAPPING
@@ -44,8 +67,11 @@ nmap <leader>w :w<CR>
 " => Reload open file
 nmap <leader>R :e!<CR>
 
+" => Open a remotely file 
+nmap <leader>E q::e scp://user@192.168.1.1//...
+
 " => Directory tree
-nmap <leader>e :e .<CR>
+nmap <leader>e :Le .<CR>
 
 " => Terminal
 nmap <leader><CR> :vertical terminal<CR>
@@ -87,8 +113,12 @@ noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
 " => Move up down 
+" Visual
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" Insert
+inoremap <c-j> <Esc>:m .+1<CR>==gi
+inoremap <c-k> <Esc>:m .-2<CR>==gi
 
 " => Shift + Enter = new line
 inoremap <S-CR> <END><CR>
@@ -108,7 +138,9 @@ function! NetrwMapping()
 endfunction
 
 " => Format
-nnoremap <silent>== ggVG=<C-o><C-o>
+" nnoremap <silent>== ggVG=<C-o><C-o>
+command! -nargs=0 Format :call CocAction('format')
+nmap <silent>== <Esc>:Format<CR>
 
 " => Completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -120,6 +152,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+" use <c-n>for trigger completion
+inoremap <silent><expr> <C-n> coc#refresh()
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
@@ -127,17 +161,18 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" use <c-n>for trigger completion
-inoremap <silent><expr> <C-n> coc#refresh()
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 
 " => fzf
-nnoremap <c-f> :Rg<CR>
-nnoremap <leader>F :Files<CR>
-nnoremap <leader>ff :GitFiles<CR>
-nnoremap <leader>fl :Lines<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>ct :Filetypes<CR>
-nnoremap <leader>? :Maps<CR>
+nmap <c-f> :Rg<CR>
+nmap <leader>F :Files<CR>
+nmap <leader>ff :GitFiles<CR>
+nmap <leader>fl :Lines<CR>
+nmap <leader>fb :Buffers<CR>
+nmap <leader>ct :Filetypes<CR>
+nmap <leader>? :Maps<CR>
 
 " => Yank to clipboard
 nnoremap <leader>y "*y
@@ -172,10 +207,8 @@ augroup netrw_mapping
     autocmd filetype netrw call NetrwMapping()
 augroup END
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | Vex | endif
 
 if has("autocmd")
   autocmd BufRead *-vault.yml ! ansible-vault edit %
