@@ -1,5 +1,5 @@
-" =========================================================================== "
 " => PLUGINS
+" =========================================================================== "
 
 source ~/.vim/plugins.vim
 " =========================================================================== "
@@ -29,7 +29,7 @@ set noswapfile
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
-let g:netrw_winsize = 20
+let g:netrw_winsize = 13
 
 " => Persitent undo history
 set undodir=~/.vim/undodir
@@ -119,6 +119,9 @@ vnoremap K :m '<-2<CR>gv=gv
 " Insert
 inoremap <c-j> <Esc>:m .+1<CR>==gi
 inoremap <c-k> <Esc>:m .-2<CR>==gi
+" Normal
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
 
 " => Shift + Enter = new line
 inoremap <S-CR> <END><CR>
@@ -164,7 +167,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-
 " => fzf
 nmap <c-f> :Rg<CR>
 nmap <leader>F :Files<CR>
@@ -179,10 +181,46 @@ nnoremap <leader>y "*y
 nnoremap <leader>p "*p
 vnoremap <leader>y "*y
 vnoremap <leader>p "*p
+nnoremap Y y$
+
+" => Dont let focus go away when searching mode
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" => Undo, but undo in the right way
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" => Select and group
+vnoremap ." <esc>`>a"<esc>`<i"<esc>
+vnoremap .' <esc>`>a"<esc>`<i"<esc>
+vnoremap .( <esc>`>a)<esc>`<i(<esc>
+vnoremap .[ <esc>`>a]<esc>`<i[<esc>
+vnoremap .{ <esc>`>a}<esc>`<i{<esc>
+vnoremap .2{ <esc>`>a }}<esc>`<i{{ <esc>
+
+" => Make command simple
+nnoremap ; :
+vnoremap ; :
+
+" => Exit from insert without break the Home raw position
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " => Session
 nmap <leader>SS :mksession! %:p:h:t<CR>:Obsess<CR>
 nmap <leader>SD :Obsess!<CR>
+
+" => Git
+nmap <leader>gg :tabnew<CR>:Git<CR><C-w><C-w>:q!<CR>
+nmap <leader>gc :Git commit<CR>
+nmap <leader>gp :Git push<CR>
+nmap <leader>gd :Git diff<CR>
+nmap <leader>gb :Git blame<CR>
+nmap <leader>gl :Git log --oneline<CR>
+nmap <leader>gf :Flogsplit<CR>
 
 " =========================================================================== "
 " => Augroup
