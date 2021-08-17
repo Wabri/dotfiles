@@ -114,10 +114,10 @@ set $monitor Monitor
 mode "$monitor" {
 
     # Secondary screen orientation
-    bindsym h exec --no-startup-id ~/.screenlayout/left.sh, exec nitrogen --restore, mode "default"
-    bindsym k exec --no-startup-id ~/.screenlayout/up.sh, exec nitrogen --restore, mode "default"
-    bindsym e exec --no-startup-id ~/.screenlayout/ex.sh, exec nitrogen --restore, mode "default"
-    bindsym s exec --no-startup-id ~/.screenlayout/solo.sh, exec nitrogen --restore, mode "default"
+    bindsym h exec --no-startup-id ~/.screenlayout/left.sh, exec nitrogen --restore, exec ~/.config/polybar/launch.fish &, mode "default"
+    bindsym k exec --no-startup-id ~/.screenlayout/up.sh, exec nitrogen --restore, exec ~/.config/polybar/launch.fish &, mode "default"
+    bindsym e exec --no-startup-id ~/.screenlayout/ex.sh, exec nitrogen --restore, exec ~/.config/polybar/launch.fish &, mode "default"
+    bindsym s exec --no-startup-id ~/.screenlayout/solo.sh, exec nitrogen --restore, exec ~/.config/polybar/launch.fish &, mode "default"
 
     bindsym q mode "default"
     bindsym Escape mode "default"
@@ -551,7 +551,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 #####################################################################################################################
 
 # bar toggle, hide or show
-bindsym $mod+b bar mode toggle
+#bindsym $mod+b bar mode toggle
+bindsym $mod+b exec --no-startup-id ~/.config/polybar/launch.fish &
 
 #####################################################################################################################
 #################                          border control                                           #################
@@ -704,7 +705,7 @@ bindsym $mod+shift+t exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 
 
 #Polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
+exec_always --no-startup-id ~/.config/polybar/launch.fish &
 
 ##STOP THEMING BAR
 

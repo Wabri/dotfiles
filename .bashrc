@@ -19,6 +19,10 @@ if [ -d "$HOME/.emacs.d/bin" ] ;
   then PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
+if [ -d "$HOME/Documents/Applications/flutter/bin" ] ;
+  then PATH="$HOME/Documents/Applications/flutter/bin:$PATH"
+fi
+
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 # Use vim on bashrc

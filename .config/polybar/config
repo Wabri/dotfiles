@@ -113,14 +113,14 @@ module-margin-right = 5
 ;https://github.com/jaagr/polybar/wiki/Fonts
 font-0 = "Noto Sans:size=10;0"
 font-1 = "FontAwesome:size=10;0"
-font-2 = "Noto Sans:size=10;0"
-font-3 = "Noto Sans Mono:size=10;0"
+font-2 = "JetBrains Mono:size=10;0"
+font-3 = "Roboto Mono:size=10;0"
 
 modules-left = i3 xwindow spotify1
 modules-center = wireless-network wired-network 
 modules-right = xbacklight pavolume battery xkeyboard date
 
-separator = |
+;separator = 
 
 ;dim-value = 1.0
 
@@ -143,12 +143,12 @@ enable-ipc = true
 
 ; Fallback click handlers that will be called if
 ; there's no matching module handler found.
-click-left =
-click-middle =
-click-right =
+click-left = 
+click-middle = arandr
+click-right = pavucontrol
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-double-click-left =
+double-click-left = rofi -show
 double-click-middle =
 double-click-right =
 
