@@ -1,5 +1,5 @@
-" => PLUGINS
 " =========================================================================== "
+" => PLUGINS
 
 source ~/.vim/plugins.vim
 " =========================================================================== "
@@ -44,6 +44,9 @@ set cmdheight=2
 " => Updatetime
 set updatetime=300
 
+" => Updatetime
+set completeopt=menuone,noinsert,noselect
+
 " => 
 set shortmess+=c
 
@@ -81,6 +84,7 @@ nmap <leader><leader> :terminal<CR>
 nmap <leader>s :split<CR>:GitFiles<CR>
 nmap <leader>v :vsplit<CR>:GitFiles<CR>
 nmap <leader>t :tabnew <CR>:GitFiles<CR>
+nmap <leader>n :split 
 
 " => Windows moving
 nmap <C-h> <C-W>h
@@ -140,33 +144,6 @@ function! NetrwMapping()
     nmap <buffer> <C-l> <C-w>l
 endfunction
 
-" => Format
-" nnoremap <silent>== ggVG=<C-o><C-o>
-command! -nargs=0 Format :call CocAction('format')
-nmap <silent>== <Esc>:Format<CR>
-
-" => Completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" use <c-n>for trigger completion
-inoremap <silent><expr> <C-n> coc#refresh()
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 " => fzf
 nmap <c-f> :Rg<CR>
 nmap <leader>F :Files<CR>
@@ -195,6 +172,7 @@ inoremap ? ?<c-g>u
 
 " => Select and group
 vnoremap ." <esc>`>a"<esc>`<i"<esc>
+vnoremap .' <esc>`>a'<esc>`<i'<esc>
 vnoremap .' <esc>`>a"<esc>`<i"<esc>
 vnoremap .( <esc>`>a)<esc>`<i(<esc>
 vnoremap .[ <esc>`>a]<esc>`<i[<esc>
@@ -222,6 +200,28 @@ nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
 nmap <leader>gf :Flogsplit<CR>
 
+" => coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ Check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+nnoremap <silent> K :call Show_documentation()<CR>
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>rn <Plug>(coc-rename)
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
 " =========================================================================== "
 " => Augroup
 
@@ -233,6 +233,7 @@ augroup END
 augroup vagrant_ft
     au!
     au BufRead,BufNewFile Vagrantfile setfiletype ruby
+    au BufRead,BufNewFile Vagrantfile vertical terminal
 augroup END
 
 augroup vimrc_ft
