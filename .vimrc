@@ -236,6 +236,11 @@ augroup vagrant_ft
     au BufRead,BufNewFile Vagrantfile vertical terminal
 augroup END
 
+augroup dockercompose_ft
+    au!
+    au BufRead,BufNewFile docker-compose.yml vertical terminal
+augroup END
+
 augroup vimrc_ft
     au!
     au BufRead,BufNewFile .vimrc setfiletype vim
