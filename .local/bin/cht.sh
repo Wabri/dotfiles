@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-languages=`echo "awk ansible chef ruby bash python" | tr ' ' '\n'`
-core_utils=`echo "find sed" | tr ' ' '\n'`
+languages=`cat ~/.local/share/cht/languages | tr ' ' '\n'`
+commands=`cat ~/.local/share/cht/commands | tr ' ' '\n'`
 
-selected=`printf "$languages\n$core_utils" | fzf`
+selected=`printf "$languages\n$commands" | fzf`
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
 read -p "query: " query
 
 execute="curl cht.sh/$selected"
@@ -13,6 +17,7 @@ if [[ $languages[*] =~ $selected ]]; then
 else
 	execute+='~'
 fi
-execute+="`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
+execute+="`echo $query | tr ' ' '+'`& while [ : ]; do sleep 1; done"
 
 tmux neww "$execute"
+
