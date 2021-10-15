@@ -47,9 +47,7 @@ set updatetime=300
 " => Updatetime
 set completeopt=menuone,noinsert,noselect
 
-" => 
 set shortmess+=c
-
 
 set signcolumn=yes
 
@@ -60,12 +58,13 @@ set signcolumn=yes
 let mapleader=" "
 
 " => Vimrc
-nmap <leader>, :tabnew +e ~/.vimrc <CR> 
+nmap <leader>, :tabnew +e ~/.vimrc <CR>
 nmap <leader>. :source ~/.vimrc <CR>
 
 " => Easy quit and save
 nmap <leader>q :q<CR>
 nmap <leader>w :w<CR>
+nmap <leader>Q :qa!<CR>
 
 " => Reload open file
 nmap <leader>R :e!<CR>
@@ -188,8 +187,7 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 " => Session
-nmap <leader>SS :mksession! %:p:h:t<CR>:Obsess<CR>
-nmap <leader>SD :Obsess!<CR>
+nmap <leader>SS :ToggleWorkspace<CR>
 
 " => Git
 nmap <leader>gg :tabnew<CR>:Git<CR><C-w><C-w>:q!<CR>
@@ -233,17 +231,6 @@ augroup END
 augroup vagrant_ft
     au!
     au BufRead,BufNewFile Vagrantfile setfiletype ruby
-    au BufRead,BufNewFile Vagrantfile vertical terminal
-augroup END
-
-augroup dockercompose_ft
-    au!
-    au BufRead,BufNewFile docker-compose.yml vertical terminal
-augroup END
-
-augroup dockerfile_ft
-    au!
-    au BufRead,BufNewFile Dockerfile vertical terminal
 augroup END
 
 augroup vimrc_ft
@@ -257,7 +244,6 @@ augroup netrw_mapping
 augroup END
 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | Vex | endif
 
 if has("autocmd")
   autocmd BufRead *-vault.yml ! ansible-vault edit %

@@ -16,7 +16,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Continuously updated session files 
-Plug 'tpope/vim-obsession'
+Plug 'thaerkh/vim-workspace'
 
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -75,3 +75,8 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" => workspace
+let g:workspace_autocreate = 1
+let g:workspace_session_name = 'Session.vim'
+let g:workspace_persist_undo_history = 0

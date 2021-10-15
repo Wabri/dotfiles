@@ -13,8 +13,8 @@ if [ $? != 0 ]; then
   for project in $projects
   do
      tmux new-window -t $workspace:$window -n $(basename $project) -c "$project" 
-     if [ -f $project/$(basename $project) ]; then
-        tmux send-keys -t $workspace:$window "vim -s $(basename $project)" C-m
+     if [ -f $project/Session.vim ]; then
+        tmux send-keys -t $workspace:$window "vim" C-m
      fi
      window=$((window + 1))
   done
