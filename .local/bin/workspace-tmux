@@ -6,17 +6,20 @@ workspace=`basename $(ls -d $workspace_dir/*) | fzf`
 tmux has-session -t $workspace 2>/dev/null
 
 if [ $? != 0 ]; then
-   tmux new-session -d -s $workspace -c "$workspace_dir/$workspace" 
-   
-   projects=`ls -1 -m -d $workspace_dir/$workspace/* | tr ', ' '\n'`
-   window=2
-   for project in $projects
-   do
-      tmux new-window -t $workspace:$window -n $(basename $project) -c "$project" 
-      window=$((window + 1))
-   done
-   tmux kill-window -t$workspace:1
+  tmux new-session -d -s $workspace -c "$workspace_dir/$workspace" 
+  
+  projects=`ls -1 -m -d $workspace_dir/$workspace/* | tr ', ' '\n'`
+  window=2
+  for project in $projects
+  do
+     tmux new-window -t $workspace:$window -n $(basename $project) -c "$project" 
+     if [ -f $project/$(basename $project) ]; then
+        tmux send-keys -t $workspace:$window "vim -s $(basename $project)" C-m
+     fi
+     window=$((window + 1))
+  done
+  tmux kill-window -t$workspace:1
 else
-   [ -z "${TMUX}" ] && tmux attach-session -t $workspace
+  [ -z "${TMUX}" ] && tmux attach-session -t $workspace
 fi
 
