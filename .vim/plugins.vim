@@ -21,6 +21,9 @@ Plug 'thaerkh/vim-workspace'
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Syntax and indentation support
+Plug 'sheerun/vim-polyglot'
+
 " Better statusline
 Plug 'itchyny/lightline.vim'
 
@@ -46,7 +49,7 @@ let g:fzf_preview_window = ['down:70%', 'ctrl-/']
 
 " => lightline
 set laststatus=2
-let g:lightline = { 
+let g:lightline = {
       \ 'colorscheme': 'nord',
       \ 'active': {
       \    'left': [ ['mode', 'paste'],
@@ -77,6 +80,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " => workspace
-let g:workspace_autocreate = 1
+let g:workspace_autocreate = 0
 let g:workspace_session_name = 'Session.vim'
 let g:workspace_persist_undo_history = 0
+

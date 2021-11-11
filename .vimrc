@@ -83,7 +83,8 @@ nmap <leader><leader> :terminal<CR>
 nmap <leader>s :split<CR>:GitFiles<CR>
 nmap <leader>v :vsplit<CR>:GitFiles<CR>
 nmap <leader>t :tabnew <CR>:GitFiles<CR>
-nmap <leader>n :split 
+nmap <leader>nt :tabnew <CR>:e
+nmap <leader>ns :split<CR>:e
 
 " => Windows moving
 nmap <C-h> <C-W>h
@@ -172,15 +173,11 @@ inoremap ? ?<c-g>u
 " => Select and group
 vnoremap ." <esc>`>a"<esc>`<i"<esc>
 vnoremap .' <esc>`>a'<esc>`<i'<esc>
-vnoremap .' <esc>`>a"<esc>`<i"<esc>
+vnoremap .` <esc>`>a`<esc>`<i`<esc>
 vnoremap .( <esc>`>a)<esc>`<i(<esc>
 vnoremap .[ <esc>`>a]<esc>`<i[<esc>
 vnoremap .{ <esc>`>a}<esc>`<i{<esc>
 vnoremap .2{ <esc>`>a }}<esc>`<i{{ <esc>
-
-" => Make command simple
-nnoremap ; :
-vnoremap ; :
 
 " => Exit from insert without break the Home raw position
 inoremap jk <Esc>
@@ -240,7 +237,7 @@ augroup END
 
 augroup netrw_mapping
     autocmd!
-    autocmd filetype netrw call NetrwMapping()
+    autocmd filetype netrw call etrwMapping()
 augroup END
 
 autocmd StdinReadPre * let s:std_in=1

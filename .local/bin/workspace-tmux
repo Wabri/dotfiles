@@ -3,7 +3,7 @@
 workspace_dir=~/Documents/Workspaces
 workspace=`basename $(ls -d $workspace_dir/*) | fzf`
 
-tmux has-session -t $workspace 2>/dev/null
+tmux has-session -t $workspace >/dev/null
 
 if [ $? != 0 ]; then
   tmux new-session -d -s $workspace -c "$workspace_dir/$workspace" 
