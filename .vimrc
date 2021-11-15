@@ -85,6 +85,7 @@ nmap <leader>v :vsplit<CR>:GitFiles<CR>
 nmap <leader>t :tabnew <CR>:GitFiles<CR>
 nmap <leader>nt :tabnew <CR>:e
 nmap <leader>ns :split<CR>:e
+nmap <leader>nn :e
 
 " => Windows moving
 nmap <C-h> <C-W>h
@@ -237,7 +238,7 @@ augroup END
 
 augroup netrw_mapping
     autocmd!
-    autocmd filetype netrw call etrwMapping()
+    autocmd filetype netrw call NetrwMapping()
 augroup END
 
 autocmd StdinReadPre * let s:std_in=1

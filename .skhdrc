@@ -1,5 +1,5 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
-alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty 
+alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 
 # focus window
 alt - h : yabai -m window --focus west

@@ -46,6 +46,7 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.8, 'xoffset': 0.5, 'yoffset': 0.0 } }
 let g:fzf_preview_window = ['down:70%', 'ctrl-/']
+set rtp+=/usr/local/opt/fzf
 
 " => lightline
 set laststatus=2
