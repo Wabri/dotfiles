@@ -35,7 +35,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: buttonless
 
 
 
@@ -48,7 +48,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Windowed
+  startup_mode: Fullscreen
 
 
 # Background opacity
@@ -67,22 +67,22 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: Hack Nerd Font
+    family: JetBrains Mono
     style: Regular
 
   # Bold font face
   bold:
-    family: Hack Nerd Font
+    family: JetBrains Mono
     style: Bold
 
   # Italic font face
   italic:
-    family: Hack Nerd Font
+    family: JetBrains Mono
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: Hack Nerd Font
+    family: JetBrains Mono
     style: Bold Italic
 
   # Point size
