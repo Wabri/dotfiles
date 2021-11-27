@@ -3,7 +3,8 @@
 Other dotfiles:
 
 * [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/debian)
-* [ArcoLinux Dotfiles](https://github.com/Wabri/dotfiles)
+* [ArcoLinux Dotfiles](https://github.com/Wabri/dotfiles/tree/arcolinux)
+* [Popos Dotfiles](https://github.com/Wabri/dotfiles)
 
 ## About this config
 
