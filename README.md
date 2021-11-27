@@ -6,6 +6,7 @@ Other dotfiles:
 
 * [Mac Dotfiles](https://github.com/Wabri/dotfiles/tree/mac)
 * [ArcoLinux Dotfiles](https://github.com/Wabri/dotfiles)
+* [Popos Dotfiles](https://github.com/Wabri/dotfiles)
 
 ![i3wm-full](.dotfiles_resources/i3wm-full.png)
 
