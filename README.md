@@ -1,4 +1,6 @@
-# Wabri's *ArcoLinux* Dotfiles
+# Wabri's *Popos* Dotfiles
+
+***CHECK MAC OR ARCOLINUX DOTFILES for up to date***
 
 ***Work in progress***
 
@@ -6,6 +8,7 @@ Other dotfiles:
 
 * [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/debian)
 * [Mac Dotfiles](https://github.com/Wabri/dotfiles/tree/mac)
+* [Arcolinux Dotfiles](https://github.com/Wabri/dotfiles/tree/arcolinux)
 
 ## About this config
 
@@ -14,13 +17,11 @@ Other dotfiles:
 * **Optimized** for a 60% keyboard
 * **Low resources** used
 * **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
-* All you see is only tested on Debian 10
 
 ## Table of contents
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
-- [i3wm](#i3wm)
 
 ## Why nord?
 
