@@ -51,6 +51,9 @@ set shortmess+=c
 
 set signcolumn=yes
 
+" => mouse
+set mouse=a
+
 " =========================================================================== "
 " => MAPPING
 
@@ -103,9 +106,15 @@ nmap <leader>j <C-W>J
 nmap <leader>k <C-W>K
 nmap <leader>l <C-W>L
 
+" => Buffers
+nmap <leader>bb :b#<CR>
+nmap <leader>bn :bn<CR>
+nmap <leader>bp :bp<CR>
+nmap <leader>bd :bd %<CR>
+
 " => Tabs
-nmap <s-tab> gT
-nmap <tab> gt
+nmap <leader>tn gT
+nmap <leader>tp gt
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -117,7 +126,7 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-" => Move up down 
+" => Move up down
 " Visual
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -188,7 +197,7 @@ inoremap kj <Esc>
 nmap <leader>SS :ToggleWorkspace<CR>
 
 " => Git
-nmap <leader>gg :tabnew<CR>:Git<CR><C-w><C-w>:q!<CR>
+nmap <leader>gg :Git<CR><C-w><C-w>:q!<CR>
 nmap <leader>gc :Git commit<CR>
 nmap <leader>gp :Git push<CR>
 nmap <leader>gd :Git diff<CR>
@@ -229,6 +238,11 @@ augroup END
 augroup vagrant_ft
     au!
     au BufRead,BufNewFile Vagrantfile setfiletype ruby
+augroup END
+
+augroup aclpolicy_ft
+    au!
+    au BufRead,BufNewFile *.aclpolicy setfiletype yaml
 augroup END
 
 augroup vimrc_ft

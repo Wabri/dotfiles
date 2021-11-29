@@ -31,9 +31,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
 
-" Distraction free
-Plug 'junegunn/goyo.vim'
-
 call plug#end()
 
 " =========================================================================== "

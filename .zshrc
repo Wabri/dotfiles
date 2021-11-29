@@ -8,7 +8,7 @@ DISABLE_UPDATE_PROMPT="false"
 
 ENABLE_CORRECTION="false"
 
-plugins=(vi-mode vagrant tmux sudo kitchen fzf git docker colorize)
+plugins=(vi-mode vagrant tmux kitchen fzf git docker)
 
 source $ZSH/oh-my-zsh.sh
 
