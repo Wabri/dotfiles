@@ -1,3 +1,6 @@
+# === Clear ===
+alias c='clear'
+
 # === List ===
 alias ll='ls -alF'
 alias la='ls -A'
