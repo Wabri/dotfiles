@@ -20,6 +20,7 @@ Plug 'thaerkh/vim-workspace'
 
 " Completion and syntax of code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
 
 " Syntax and indentation support
 Plug 'sheerun/vim-polyglot'

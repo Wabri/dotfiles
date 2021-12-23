@@ -43,8 +43,6 @@ function cd() {
   fi
 }
 
-alias workspace=~/.local/bin/workspace-tmux
-
 # => Git
 alias g="git status"
 
@@ -52,7 +50,6 @@ alias g="git status"
 alias kd="kitchen destroy -f ;" 
 alias kc="kitchen converge ;"
 alias kl="kitchen login ;"
-
 
 # >>>> Vagrant command completion (start)
 fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
