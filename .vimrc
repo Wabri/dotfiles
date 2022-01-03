@@ -237,11 +237,11 @@ augroup ansible_ft
     au BufRead,BufNewFile playbook.yml setfiletype yaml.ansible
 augroup END
 
-augroup readme
+augroup readme_autoindex
     let @z = "'sj/^## mswy$'ao- [pa]o(#pa):s/ /-/gekJxma@z"
-    let @x = "gg/^## IndexjV/^##kdOkmams"
+    let @x = "gg/^## IndexjV/^##kdOOjkmams"
     au BufRead README.md set nowrapscan
-    au BufReadPost README.md norm mc@x
+    au BufReadPost README.md norm mc@x'c
     au BufWritePre README.md norm @z
     au BufWritePost README.md norm 'c
     au BufLeave README.md set wrapscan

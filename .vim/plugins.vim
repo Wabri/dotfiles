@@ -15,7 +15,7 @@ Plug 'kamwitsta/nordisk'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Continuously updated session files 
+" Continuously updated session files
 Plug 'thaerkh/vim-workspace'
 
 " Completion and syntax of code
@@ -27,6 +27,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Better statusline
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'
@@ -58,6 +59,25 @@ let g:lightline = {
       \    'gitbranch': 'FugitiveHead'
       \ },
       \ }
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+let g:lightline.active = {
+            \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+            \            [ 'lineinfo' ],
+	          \            [ 'percent' ],
+	          \            [ 'fileformat', 'fileencoding', 'filetype'] ] }
 
 " => coc
 function! Check_back_space() abort
