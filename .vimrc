@@ -15,6 +15,11 @@ set cursorline
 " =========================================================================== "
 " => SETTINGS
 
+" => Tabs
+set expandtab " use space instead of tab
+set tabstop=4 " set tab width to 4 spaces
+set shiftwidth=4 " auto indented with the reindent operations
+
 " => Line numbers
 set number relativenumber
 
@@ -137,9 +142,6 @@ inoremap <c-k> <Esc>:m .-2<CR>==gi
 nnoremap <leader>k :m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
 
-" => Shift + Enter = new line
-inoremap <S-CR> <END><CR>
-
 " => Windows resizing
 nmap <left> <C-w>5<
 nmap <right> <C-w>5>
@@ -203,7 +205,6 @@ nmap <leader>gp :Git push<CR>
 nmap <leader>gd :Git diff<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
-nmap <leader>gf :Flogsplit<CR>
 
 " => coc
 inoremap <silent><expr> <TAB>

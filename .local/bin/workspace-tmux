@@ -1,25 +1,32 @@
 #!/usr/bin/env bash
 
 workspace_dir=~/Documents/Workspaces
-workspace=`basename $(ls -d $workspace_dir/*) | fzf`
 
-tmux has-session -t $workspace >/dev/null
+group=`basename $(ls -d $workspace_dir/*) | fzf`
+
+if [ -z $group ]; then
+    exit 1
+fi
+
+workspace=`basename $(ls -d $workspace_dir/$group/*) | fzf`
+
+if [ -z $workspace ]; then
+    exit 1
+fi
+
+project_basename=`basename $(ls -d $workspace_dir/$group/$workspace/*) | fzf`
+
+if [ -z $project_basename ]; then
+    exit 1
+fi
+
+project_fullname=$group/$workspace/$project_basename
+
+tmux has-session -t $project_fullname >/dev/null
 
 if [ $? != 0 ]; then
-  tmux new-session -d -s $workspace -c "$workspace_dir/$workspace" 
-  
-  projects=`ls -1 -m -d $workspace_dir/$workspace/* | tr ', ' '\n'`
-  window=2
-  for project in $projects
-  do
-     tmux new-window -t $workspace:$window -n $(basename $project) -c "$project" 
-     if [ -f $project/Session.vim ]; then
-        tmux send-keys -t $workspace:$window "vim" C-m
-     fi
-     window=$((window + 1))
-  done
-  tmux kill-window -t$workspace:1
+  tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname"
 else
-  [ -z "${TMUX}" ] && tmux attach-session -t $workspace
+  [ -z "${TMUX}" ] && tmux attach-session -t $project_fullname
 fi
 
