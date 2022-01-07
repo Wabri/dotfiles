@@ -2,31 +2,47 @@
 
 workspace_dir=~/Documents/Workspaces
 
-group=`basename $(ls -d $workspace_dir/*) | fzf`
+case "$1" in
+"full")
+    project_fullpath=`ls -d $workspace_dir/*/*/* | fzf`
+    group=`echo $project_fullpath | awk -F "/" '{print $(NF-2)}'`
+    scope=`echo $project_fullpath | awk -F "/" '{print $(NF-1)}'`
+    project_basename=`echo $project_fullpath | awk -F "/" '{print $(NF)}'`
+    ;;
+"steps")
+    group=`basename -a $(ls -d $workspace_dir/*) | fzf`
 
-if [ -z $group ]; then
+    if [ -z $group ]; then
+        exit 1
+    fi
+    
+    scope=`basename -a $(ls -d $workspace_dir/$group/*) | fzf`
+
+    if [ -z $scope ]; then
+        exit 1
+    fi
+
+    project_basename=`basename -a $(ls -d $workspace_dir/$group/$scope/*) | fzf`
+    
+    if [ -z $project_basename ]; then
+        exit 1
+    fi
+    ;;
+*)
     exit 1
-fi
+    ;;
+esac
 
-workspace=`basename $(ls -d $workspace_dir/$group/*) | fzf`
-
-if [ -z $workspace ]; then
-    exit 1
-fi
-
-project_basename=`basename $(ls -d $workspace_dir/$group/$workspace/*) | fzf`
-
-if [ -z $project_basename ]; then
-    exit 1
-fi
-
-project_fullname=$group/$workspace/$project_basename
+project_fullname=$group/$scope/$project_basename
 
 tmux has-session -t $project_fullname >/dev/null
 
 if [ $? != 0 ]; then
   tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname"
+  tmux rename-window -t $project_fullname:1 "main"
 else
-  [ -z "${TMUX}" ] && tmux attach-session -t $project_fullname
+  [ -z "${TMUX}" ] && tmux attach-session -t $project_fullname && exit 0
 fi
+
+tmux switch-client -t $project_fullname
 
