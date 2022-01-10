@@ -23,7 +23,7 @@ case "$1" in
     fi
 
     project_basename=`basename -a $(ls -d $workspace_dir/$group/$scope/*) | fzf`
-    
+
     if [ -z $project_basename ]; then
         exit 1
     fi
@@ -34,6 +34,8 @@ case "$1" in
 esac
 
 project_fullname=$group/$scope/$project_basename
+
+echo $project_fullname
 
 tmux has-session -t $project_fullname >/dev/null
 
