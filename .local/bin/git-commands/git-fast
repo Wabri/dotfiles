@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Fast"
+git status -s
+git add --all .
+git commit -a -m "THIS IS A FAST COMMITY TO DO SOMETHING URGENT"
+

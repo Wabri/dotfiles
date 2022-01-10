@@ -44,7 +44,7 @@ function cd() {
 }
 
 # => Git
-alias g="git status"
+alias g="git status -s"
 
 # => Kitchen
 alias kd="kitchen destroy -f ;" 
