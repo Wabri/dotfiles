@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Fast"
+echo "Fasted"
 git status -s
 git add --all .
-git commit -a -m "THIS IS A FAST COMMITY TO DO SOMETHING URGENT"
+git commit --quiet -m "THIS IS A FAST COMMITY TO DO SOMETHING URGENT (this commit should not be pushed)"
 
