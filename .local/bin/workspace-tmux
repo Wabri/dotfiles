@@ -2,27 +2,34 @@
 
 workspace_dir=~/Documents/Workspaces
 
+fzf_args='--border=rounded --margin=2,4,2,4 --layout=reverse'
+
 case "$1" in
 "full")
-    project_fullpath=`ls -d $workspace_dir/*/*/* | fzf`
+    project_fullpath=`ls -d $workspace_dir/*/*/* | fzf --prompt='Choose the project>' ${fzf_args}`
+
+    if [ -z $project_fullpath ]; then
+        exit 1
+    fi
+
     group=`echo $project_fullpath | awk -F "/" '{print $(NF-2)}'`
     scope=`echo $project_fullpath | awk -F "/" '{print $(NF-1)}'`
     project_basename=`echo $project_fullpath | awk -F "/" '{print $(NF)}'`
     ;;
 "steps")
-    group=`basename -a $(ls -d $workspace_dir/*) | fzf`
+    group=`basename -a $(ls -d $workspace_dir/*) | fzf --prompt='Group>' ${fzf_args}`
 
     if [ -z $group ]; then
         exit 1
     fi
-    
-    scope=`basename -a $(ls -d $workspace_dir/$group/*) | fzf`
+
+    scope=`basename -a $(ls -d $workspace_dir/$group/*) | fzf --prompt='Scope>' ${fzf_args}`
 
     if [ -z $scope ]; then
         exit 1
     fi
 
-    project_basename=`basename -a $(ls -d $workspace_dir/$group/$scope/*) | fzf`
+    project_basename=`basename -a $(ls -d $workspace_dir/$group/$scope/*) | fzf --prompt='Project>' ${fzf_args}`
 
     if [ -z $project_basename ]; then
         exit 1
