@@ -44,13 +44,20 @@ function cd() {
   fi
 }
 
+# ===== Aliases ======
+
+# => ls
+alias ls='exa -lgh --group-directories-first'
+alias la='exa -lgha --group-directories-first'
+alias cat='bat'
+
 # => Git
-alias g="git status -s"
+alias g='git status -s'
 
 # => Kitchen
-alias kd="kitchen destroy -f ;" 
-alias kc="kitchen converge ;"
-alias kl="kitchen login ;"
+alias kd='kitchen destroy -f ;' 
+alias kc='kitchen converge ;'
+alias kl='kitchen login ;'
 
 # >>>> Vagrant command completion (start)
 fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
