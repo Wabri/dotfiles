@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-
 workspace_dir=~/Documents/Workspaces
 
-fzf_args='--border=rounded --margin=2,4,2,4 --layout=reverse'
+fzf_args='--border=rounded --margin=2,4,2,4 --layout=reverse --keep-right'
 
 case "$1" in
 "full")

@@ -1,6 +1,7 @@
 export ZSH="/Users/$USER/.oh-my-zsh"
 
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore -l ""'
+export FZF_DEFAULT_OPTS='--layout=reverse --keep-right'
 
 DISABLE_AUTO_UPDATE="true"
 
