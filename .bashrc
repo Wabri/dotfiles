@@ -45,3 +45,5 @@ export EDITOR='vim'
 
 # === PROMPT ===
 eval "$(starship init bash)"
+
+export PATH="$PATH:$HOME/.poetry/bin"
