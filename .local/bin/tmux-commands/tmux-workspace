@@ -45,12 +45,13 @@ echo $project_fullname
 
 tmux has-session -t $project_fullname >/dev/null
 
+[ -z "${TMUX}" ] && tmux attach-session -t $project_fullname && exit 0
+
 if [ $? != 0 ]; then
-  tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname"
-  tmux rename-window -t $project_fullname:1 "main"
-else
-  [ -z "${TMUX}" ] && tmux attach-session -t $project_fullname && exit 0
+  tmux new-session -d -s $project_fullname -c $workspace_dir/$project_fullname/main-dev
+  tmux rename-window -t $project_fullname:1 "main-dev"
 fi
 
 tmux switch-client -t $project_fullname
-
+tmux split-window -v -c "$workspace_dir/$project_fullname/main-dev"
+tmux split-window -h -c "$workspace_dir/$project_fullname/main-dev"

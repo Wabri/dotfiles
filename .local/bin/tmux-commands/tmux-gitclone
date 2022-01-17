@@ -40,21 +40,18 @@ fi
 project_workdir="$workspace_dir/$group/$scope"
 name=$(echo $(echo "$project_url" | awk -F "/" '{print $NF}' | rev | cut -f 2- -d '.' | rev ))
 [ -d $project_workdir/$name ] && exit 1
-default_branch=$(git remote show $project_url | grep 'HEAD branch' | cut -d' ' -f5)
-git clone $project_url $project_workdir/$name/$default_branch
+git clone $project_url $project_workdir/$name/main-dev
 
 actions=(Move_on_it Leave)
 action=$(for i in ${actions[@]}
        do
          echo $i
        done | fzf --prompt='What do you want to do>' ${fzf_args})
-if [ -z $action ]; then
-    exit 0
-fi
 if [ $action = "Move_on_it" ]; then
   project_fullname="$group/$scope/$name"
-  tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname/$default_branch"
-  tmux rename-window -t $project_fullname:1 "main"
+  tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname/main-dev"
+  tmux rename-window -t $project_fullname:1 "main-dev"
+  tmux split-window -v -c "$workspace_dir/$project_fullname/main-dev"
+  tmux split-window -h -c "$workspace_dir/$project_fullname/main-dev"
   tmux switch-client -t $project_fullname
 fi
-exit 0
