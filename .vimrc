@@ -199,7 +199,7 @@ inoremap kj <Esc>
 nmap <leader>SS :ToggleWorkspace<CR>
 
 " => Git
-nmap <leader>gg :Git<CR><C-w><C-w>:q!<CR>
+nmap <leader>gg :Git<CR>:only<CR>
 nmap <leader>gc :Git commit<CR>
 nmap <leader>gp :Git push<CR>
 nmap <leader>gd :Git diff<CR>
@@ -238,15 +238,15 @@ augroup ansible_ft
     au BufRead,BufNewFile playbook.yml setfiletype yaml.ansible
 augroup END
 
-augroup readme_autoindex
-    let @z = "'sj/^## mswy$'ao- [pa]o(#pa):s/ /-/gekJxma@z"
-    let @x = "gg/^## IndexjV/^##kdOOjkmams"
-    au BufRead README.md set nowrapscan
-    au BufReadPost README.md norm mc@x'c
-    au BufWritePre README.md norm @z
-    au BufWritePost README.md norm 'c
-    au BufLeave README.md set wrapscan
-augroup END
+"augroup readme_autoindex
+"    let @z = "'sj/^## mswy$'ao- [pa]o(#pa):s/ /-/gekJxma@z"
+"    let @x = "gg/^## IndexjV/^##kdOOjkmams"
+"    au BufRead README.md set nowrapscan
+"    au BufReadPost README.md norm mc@x'c
+"    au BufWritePre README.md norm @z
+"    au BufWritePost README.md norm 'c
+"    au BufLeave README.md set wrapscan
+"augroup END
 
 augroup vagrant_ft
     au!

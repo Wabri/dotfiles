@@ -63,3 +63,5 @@ alias kl='kitchen login ;'
 fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
+
+export PATH="$HOME/.local/bin:$HOME/.local/bin/git-commands/:$HOME/.poetry/bin:$PATH"
