@@ -48,11 +48,11 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Fullscreen
+  startup_mode: Windowed
 
 
 # Background opacity
-background_opacity: 1.0
+window.opacity: 0.9
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

@@ -1,8 +1,24 @@
 ---
-- name: Copy file with owner and permissions
-  ansible.builtin.copy:
+- name: Init Tmux Conf
+  copy:
     remote_src: yes
     src: .tmux.conf
     dest: /home/{{ username }}/.tmux.conf
     mode: '0644'
     backup: yes
+
+- name: Init Tmux plugins
+  block:
+    - name: Install tmux plugin manager
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: /home/{{ username }}/.tmux/plugins/tpm
+    
+    - name: Install Tmux plugins
+      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/install_plugins
+
+    - name: Update Tmux plugins
+      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/update_plugins all
+        
+    - name: Clean Tmux plugins
+      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/clean_plugins

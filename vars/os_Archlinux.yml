@@ -2,3 +2,6 @@
 # Archlinux
 os: Archlinux
 username: wabri
+home_dir: /home/wabri
+workspace_dir: Documents/Workspaces
+dotfiles_repository: git@github.com:Wabri/dotfiles.git

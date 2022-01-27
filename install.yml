@@ -1,29 +1,45 @@
 ---
 - hosts: localhost
-  become: true
   tasks:
     - name: Set OS distribution dependent variables
       include_vars: "os_{{ ansible_facts['distribution'] }}.yml"
       ignore_errors: yes
 
-    - name: Fail if vars not set
+    - debug:
+        var: ide_packages
+
+    - name: Fail if distribution is not set
       fail:
         msg: "{{ ansible_facts['distribution'] }} distribution is not in the list" 
       when: os is undefined
 
-    - name: Get packages to install
-      include_vars: "packages.yml"
+    - name: Create Workspaces directory
+      file:
+        path: "{{ home_dir }}/{{ workspace_dir }}"
+        state: directory
 
-    - debug:
-        var: ide_packages
+    - name: Install IDE
+      block:
+        - name: Get packages to install
+          include_vars: "packages.yml"
 
-    - name: Install IDE tools
-      shell: sudo -u {{ username }} yay --noconfirm -S {{ item }}
-      with_items:
-        - "{{ ide_packages }}"
+        - debug:
+            var: ide_packages
 
-    - name: setup vim
-      include_tasks: "tasks/{{ item }}.yml"
-      with_items:
-        - "{{ ide_packages }}"
+        - name: Install IDE packages
+          shell: sudo -u {{ username }} yay --noconfirm -S {{ item }}
+          with_items:
+            - "{{ ide_packages }}"
+
+        - name: Init IDE configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ ide_config }}"
+
+    - name: Copy user local directory
+      copy:
+        src: .local/
+        dest: "{{ home_dir }}/.local"
+        directory_mode: yes
+        remote_src: yes
 

@@ -1,5 +1,13 @@
 ---
-# All
+# packages
 ide_packages:
+  - alacritty
+  - vim
+  - tmux
+  - fzf
+  - ttf-jetbrains-mono
+
+ide_config:
+  - alacritty
   - vim
   - tmux
