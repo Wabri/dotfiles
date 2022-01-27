@@ -35,7 +35,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: buttonless
 
 
 
@@ -86,7 +86,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 16.0
+  size: 14.0
   
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true

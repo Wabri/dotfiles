@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+workspace_dir=~/Documents/Workspaces
+fzf_args='--border=rounded --margin=2,4,2,4 --layout=reverse'
+
+read -p "Provide git urls: " project_url && [ ! -z $project_url ] || exit 1
+declare -a array
+groups=($(basename -a $(ls -d $workspace_dir/*)))
+groups+=('New')
+group=$(for i in ${groups[@]}
+       do
+         echo $i
+       done | fzf --prompt='Group>' ${fzf_args} && [ -z $group ] || exit 1)
+if [ -z $group ]; then
+    exit 1
+fi
+if [ $group = "New" ]; then
+        read -p "Provide new group name: " group
+        if [ -z $group ]; then
+            exit 1
+        fi
+        mkdir $workspace_dir/$group
+fi
+scopes=($(basename -a $(ls -d $workspace_dir/$group/* 2> /dev/null) 2> /dev/null))
+scopes+=('New')
+scope=$(for i in ${scopes[@]}
+       do
+         echo $i
+       done | fzf --prompt='Scope>' ${fzf_args})
+if [ -z $scope ]; then
+    exit 1
+fi
+if [ $scope = "New" ]; then
+        read -p "Provide new scope name: " scope
+        if [ -z $scope ]; then
+            exit 1
+        fi
+        mkdir $workspace_dir/$group/$scope
+fi
+project_workdir="$workspace_dir/$group/$scope"
+name=$(echo $(echo "$project_url" | awk -F "/" '{print $NF}' | rev | cut -f 2- -d '.' | rev ))
+[ -d $project_workdir/$name ] && exit 1
+git clone $project_url $project_workdir/$name/main-dev
+
+actions=(Move_on_it Leave)
+action=$(for i in ${actions[@]}
+       do
+         echo $i
+       done | fzf --prompt='What do you want to do>' ${fzf_args})
+if [ $action = "Move_on_it" ]; then
+  project_fullname="$group/$scope/$name"
+  tmux new-session -d -s $project_fullname -c "$workspace_dir/$project_fullname/main-dev"
+  tmux rename-window -t $project_fullname:1 "main-dev"
+  tmux send-keys 'vim' 'C-m'
+  tmux split-window -v -l 20% -c "$workspace_dir/$project_fullname/main-dev"
+  tmux split-window -h -l 40% -c "$workspace_dir/$project_fullname/main-dev"
+  tmux switch-client -t $project_fullname
+fi

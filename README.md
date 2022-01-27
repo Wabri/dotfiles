@@ -2,12 +2,6 @@
 
 ***Forever work in progress***
 
-Other dotfiles:
-
-* [Debian Dotfiles](https://github.com/Wabri/dotfiles/tree/debian)
-* [Mac Dotfiles](https://github.com/Wabri/dotfiles/tree/mac)
-* [Arcolinux Dotfiles](https://github.com/Wabri/dotfiles/tree/arcolinux)
-
 ## About this config
 
 * Focus on **shortcuts**

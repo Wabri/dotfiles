@@ -1,2 +1,3 @@
-# === VIM SWAP ===
+# VIM
 *.swp
+Session.vim
