@@ -1,0 +1,8 @@
+---
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    remote_src: yes
+    src: .tmux.conf
+    dest: /home/{{ username }}/.tmux.conf
+    mode: '0644'
+    backup: yes

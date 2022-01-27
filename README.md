@@ -24,4 +24,29 @@ Now I'm using nord everywhere I can, from vim to firefox and I'm well settled.
 
 ## How I maintain those dotfiles
 
-I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutorials/dotfiles) to Ansible.
+I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutorials/dotfiles) to Ansible automation. This add more complexity in order to get more efficency.
+
+## How to install this dotfiles
+
+- Install [Poetry](https://python-poetry.org/) by follow the docs [here](https://python-poetry.org/docs/#installation). I use Arch so I can install it with yay:
+
+    ```bash
+    yay -S python-poetry
+    ``` 
+
+- Clone the repository then cd into it:
+
+    ```bash
+    git clone https://github.com/Wabri/dotfiles
+    cd dotfiles
+    ```
+
+- Run poetry install and run ansible-playbook:
+
+    ```bash
+    poetry install
+    poetry run ansible-playbook -k install.yml 
+    ```
+
+Ansible install everything and once is done the system should work.
+

@@ -1,0 +1,5 @@
+---
+# All
+ide_packages:
+  - vim
+  - tmux
