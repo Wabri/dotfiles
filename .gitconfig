@@ -1,6 +1,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	pager = delta
+	editor = vim
 
 [pull]
 	rebase = true
@@ -22,4 +23,7 @@
 [delta "decorations"]
 	commit-decoration-style = blue ol
 	syntax-theme = Nord
+
+[includeIf "gitdir:~/Documents/Workspaces/Personal/*"]
+  path = ~/Documents/Workspaces/Personal/.gitconfig
 
