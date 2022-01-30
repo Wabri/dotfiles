@@ -1,0 +1,25 @@
+[core]
+	excludesfile = ~/.gitignore
+	pager = delta
+
+[pull]
+	rebase = true
+
+[alias]
+	l = log -p
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[delta]
+	line-numbers = true
+	features = decorations
+	side-by-side = true
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-decoration-style = blue ol
+	syntax-theme = Nord
+

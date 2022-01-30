@@ -44,6 +44,7 @@ general_packages:
   - arandr
   - vagrant
   - spotify
+  - steam
 
 # === Configurations ===
 ide_config:
@@ -52,6 +53,7 @@ ide_config:
   - tmux
   - bash
   - zsh
+  - git
 
 system_config:
   - i3

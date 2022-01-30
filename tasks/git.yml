@@ -1,0 +1,16 @@
+--- 
+- name: Add Global gitignore
+  copy:
+    remote_src: yes
+    src: .gitignore
+    dest: "{{ home_dir }}/.gitignore"
+    mode: '0644'
+    backup: yes
+
+- name: Add Global gitconfig
+  copy:
+    remote_src: yes
+    src: .gitconfig
+    dest: "{{ home_dir }}/.gitconfig"
+    mode: '0644'
+    backup: yes
