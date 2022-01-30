@@ -1,0 +1,9 @@
+--- 
+- name: Copy Dunst configurations
+  copy:
+    src: .config/dunst/
+    dest: "{{ home_dir }}/.config/dunst/"
+    directory_mode: yes
+    remote_src: yes
+
+
