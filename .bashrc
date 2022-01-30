@@ -15,19 +15,6 @@ HISTFILESIZE=2000
 # === LAZY REDRAW ===
 shopt -s checkwinsize
 
-# === LOGIN ===
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# === CHROOT ===
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# === ALIASES ===
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # === COMPLETION ===
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -41,9 +28,14 @@ fi
 set -o vi
 
 # === Environment ===
-export EDITOR='vim'
+if [ -f ~/.env ]; then
+    source ~/.env
+fi
+
+# === ALIASES ===
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
 
 # === PROMPT ===
 eval "$(starship init bash)"
-
-export PATH="$PATH:$HOME/.poetry/bin"

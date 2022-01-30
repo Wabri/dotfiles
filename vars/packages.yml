@@ -1,13 +1,24 @@
 ---
 # packages
 ide_packages:
+  - git
   - alacritty
+  - bash
+  - zsh
   - vim
   - tmux
   - fzf
   - ttf-jetbrains-mono
+  - nerd-fonts-complete
+  - ripgrep
+  - exa
+  - bat
+  - git-delta
+  - vagrant
 
 ide_config:
   - alacritty
   - vim
   - tmux
+  - bash
+  - zsh

@@ -3,7 +3,7 @@
   copy:
     remote_src: yes
     src: .tmux.conf
-    dest: /home/{{ username }}/.tmux.conf
+    dest: "{{ home_dir }}/.tmux.conf"
     mode: '0644'
     backup: yes
 
@@ -12,13 +12,13 @@
     - name: Install tmux plugin manager
       git:
         repo: https://github.com/tmux-plugins/tpm
-        dest: /home/{{ username }}/.tmux/plugins/tpm
+        dest: "source {{ home_dir }}/.tmux.conf && {{ home_dir }}/.tmux/plugins/tpm"
     
     - name: Install Tmux plugins
-      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/install_plugins
+      shell: "TMUX_PLUGIN_MANAGER_PATH={{ home_dir }}/.tmux/plugins/ {{ home_dir }}/.tmux/plugins/tpm/bin/install_plugins"
 
     - name: Update Tmux plugins
-      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/update_plugins all
+      shell: "TMUX_PLUGIN_MANAGER_PATH={{ home_dir }}/.tmux/plugins/ {{ home_dir }}/.tmux/plugins/tpm/bin/update_plugins all"
         
     - name: Clean Tmux plugins
-      shell: /home/{{ username }}/.tmux/plugins/tpm/bin/clean_plugins
+      shell: "TMUX_PLUGIN_MANAGER_PATH={{ home_dir }}.tmux/plugins/ {{ home_dir }}/.tmux/plugins/tpm/bin/clean_plugins"

@@ -1,0 +1,16 @@
+---
+- name: Init bashrc
+  copy:
+    remote_src: yes
+    src: .bashrc
+    dest: "{{ home_dir }}/.bashrc"
+    mode: '0644'
+    backup: yes
+
+- name: Install bash configuration dependencies
+  shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+  loop:
+    - starship
+    - bash-completion
+  loop_control:
+    loop_var: bash_package

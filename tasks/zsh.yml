@@ -1,0 +1,24 @@
+---
+- name: Init zshrc
+  copy:
+    remote_src: yes
+    src: .zshrc
+    dest: "{{ home_dir }}/.zshrc"
+    mode: '0644'
+    backup: yes
+
+- name: Install oh-my-zsh dependencies
+  shell: "sudo -u {{ username }} {{ install_command }} {{ zsh_package }}"
+  loop:
+    - oh-my-zsh-git
+  loop_control:
+    loop_var: zsh_package
+
+- name: Download oh-my-zsh installation
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "/tmp/ohmyzsh.sh"
+
+- name: Install oh-my-zsh
+  shell: "sudo -u {{ username }} KEEP_ZSHRC=yes CHSH={{ (default_shell == 'zsh' ) | ternary ('yes', 'no') }} sh /tmp/ohmyzsh.sh --unattended"
+

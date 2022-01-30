@@ -2,6 +2,8 @@
 # Archlinux
 os: Archlinux
 username: wabri
+install_command: yay --noconfirm -S
 home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
-dotfiles_repository: git@github.com:Wabri/dotfiles.git
+default_shell: zsh
+default_keyboard: us

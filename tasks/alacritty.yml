@@ -1,13 +1,13 @@
 ---
 - name: Create alacritty configuration directory
   file:
-    path: /home/{{ username }}/.config/alacritty
+    path: "{{ home_dir }}/.config/alacritty"
     state: directory
 
 - name: Init alacritty configuration 
   copy:
     remote_src: yes
     src: .config/alacritty/alacritty.yml
-    dest: /home/{{ username }}/.config/alacritty/alacritty.yml
+    dest: "{{ home_dir }}/.config/alacritty/alacritty.yml"
     mode: '0644'
     backup: yes

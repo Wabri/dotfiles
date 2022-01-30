@@ -45,8 +45,10 @@ I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutori
 
     ```bash
     poetry install
-    poetry run ansible-playbook -k install.yml 
+    poetry run ansible-playbook -K install.yml 
     ```
 
 Ansible install everything and once is done the system should work.
+
+**NB: run outside tmux otherwise it does not work**
 

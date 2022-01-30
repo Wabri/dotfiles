@@ -1,12 +1,10 @@
 ---
 - hosts: localhost
+  become: true
   tasks:
     - name: Set OS distribution dependent variables
       include_vars: "os_{{ ansible_facts['distribution'] }}.yml"
       ignore_errors: yes
-
-    - debug:
-        var: ide_packages
 
     - name: Fail if distribution is not set
       fail:
@@ -27,7 +25,7 @@
             var: ide_packages
 
         - name: Install IDE packages
-          shell: sudo -u {{ username }} yay --noconfirm -S {{ item }}
+          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
           with_items:
             - "{{ ide_packages }}"
 
@@ -36,10 +34,28 @@
           with_items:
             - "{{ ide_config }}"
 
-    - name: Copy user local directory
-      copy:
-        src: .local/
-        dest: "{{ home_dir }}/.local"
-        directory_mode: yes
-        remote_src: yes
+        - name: Copy user local directory
+          copy:
+            src: .local/
+            dest: "{{ home_dir }}/.local"
+            directory_mode: yes
+            remote_src: yes
+
+        - name: Copy environment configuration
+          copy:
+            src: .env
+            dest: "{{ home_dir }}/.env"
+            remote_src: yes
+
+        - name: Copy aliases
+          copy:
+            src: .aliases
+            dest: "{{ home_dir }}/.aliases"
+            remote_src: yes
+
+    - name: Set default shell
+      shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
+          
+    - name: Set default keyboard layout using setxkbmap
+      shell: "sudo -u {{ username }} setxkbmap -layout {{ default_keyboard }}"
 
