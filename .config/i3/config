@@ -62,7 +62,7 @@ bindsym $mod+Shift+l move right
 
 # Terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e "tmux new -A -s Home"
+bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
 
 # Kill
 bindsym $mod+q kill
