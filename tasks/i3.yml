@@ -1,5 +1,5 @@
 --- 
-- name: Copy user local directory
+- name: Copy i3wm configurations
   copy:
     src: .config/i3/
     dest: "{{ home_dir }}/.config/i3/"

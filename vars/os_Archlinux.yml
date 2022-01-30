@@ -45,6 +45,7 @@ general_packages:
   - vagrant
   - spotify
   - steam
+  - firefox
 
 # === Configurations ===
 ide_config:
@@ -57,5 +58,6 @@ ide_config:
 
 system_config:
   - i3
+  - dunst
 
 general_config:
