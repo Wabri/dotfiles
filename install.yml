@@ -18,9 +18,6 @@
 
     - name: Install IDE
       block:
-        - name: Get packages to install
-          include_vars: "packages.yml"
-
         - debug:
             var: ide_packages
 
@@ -53,9 +50,36 @@
             dest: "{{ home_dir }}/.aliases"
             remote_src: yes
 
-    - name: Set default shell
-      shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
-          
-    - name: Set default keyboard layout using setxkbmap
-      shell: "sudo -u {{ username }} setxkbmap -layout {{ default_keyboard }}"
+        - name: Set default shell
+          shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
+              
+        - name: Set default keyboard layout using setxkbmap
+          shell: "sudo -u {{ username }} setxkbmap -layout {{ default_keyboard }}"
+      when: ide_install
 
+    - name: Install system environment 
+      block:
+        - debug:
+            var: system_packages
+
+        - name: Install system packages
+          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+          with_items:
+            - "{{ system_packages }}"
+
+        - name: Init system configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ system_config }}"
+      when: system_install
+
+    - name: Install general packages 
+      block:
+        - debug:
+            var: general_packages
+
+        - name: Install system packages
+          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+          with_items:
+            - "{{ general_packages }}"
+      when: general_install

@@ -1,0 +1,9 @@
+--- 
+- name: Copy user local directory
+  copy:
+    src: .config/i3/
+    dest: "{{ home_dir }}/.config/i3/"
+    directory_mode: yes
+    remote_src: yes
+
+
