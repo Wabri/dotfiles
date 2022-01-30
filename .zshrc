@@ -1,3 +1,4 @@
+# === Oh-my-zsh ===
 export ZSH="$HOME/.oh-my-zsh"
 
 DISABLE_AUTO_UPDATE="true"
@@ -12,12 +13,8 @@ source $ZSH/oh-my-zsh.sh
 
 fpath=(~/.zsh.d/ $fpath)
 
+# === Fzf ===
 [ -f ~/.zsh/fzf.zsh ] && source ~/.zsh/fzf.zsh
-
-# >>>> Vagrant command completion (start)
-#fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
-#compinit
-# <<<<  Vagrant command completion (end)
 
 # === Environment ===
 if [ -f ~/.env ]; then
