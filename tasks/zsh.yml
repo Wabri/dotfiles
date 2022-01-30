@@ -7,18 +7,21 @@
     mode: '0644'
     backup: yes
 
-- name: Install oh-my-zsh dependencies
-  shell: "sudo -u {{ username }} {{ install_command }} {{ zsh_package }}"
-  loop:
-    - oh-my-zsh-git
-  loop_control:
-    loop_var: zsh_package
 
-- name: Download oh-my-zsh installation
-  get_url:
-    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: "/tmp/ohmyzsh.sh"
+- name: Install oh-my-zsh 
+  block:
+    - name: Download oh-my-zsh installation
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: "/tmp/ohmyzsh.sh"
 
-- name: Install oh-my-zsh
-  shell: "sudo -u {{ username }} KEEP_ZSHRC=yes CHSH={{ (default_shell == 'zsh' ) | ternary ('yes', 'no') }} sh /tmp/ohmyzsh.sh --unattended"
+    - name: Run oh-my-zsh install script
+      shell: "sudo -u {{ username }} KEEP_ZSHRC=yes CHSH={{ (default_shell == 'zsh' ) | ternary ('yes', 'no') }} sh /tmp/ohmyzsh.sh --unattended"
+      register: ohmyzsh_result
+      ignore_errors: true
 
+    - name: Check if oh-my-zsh is already installed
+      debug:
+        msg: "Oh-my-zsh is already installed"
+      when: ohmyzsh_result.stdout == "The $ZSH folder already exists ({{ home_dir }}/.oh-my-zsh).\nYou'll need to remove it if you want to reinstall."
+  

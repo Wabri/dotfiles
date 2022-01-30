@@ -86,7 +86,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 16.0
+  size: 13.0
   
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
