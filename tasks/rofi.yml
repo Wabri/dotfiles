@@ -1,0 +1,7 @@
+--- 
+- name: Copy rofi configurations
+  copy:
+    src: .config/rofi/
+    dest: "{{ home_dir }}/.config/rofi/"
+    directory_mode: yes
+    remote_src: yes

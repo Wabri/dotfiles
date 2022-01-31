@@ -38,6 +38,8 @@ system_packages:
   - autotiling
   - blueberry
   - rofi
+  - power-profiles-daemon
+  - i3blocks
 
 general_install: true
 general_packages:
@@ -59,5 +61,6 @@ ide_config:
 system_config:
   - i3
   - dunst
+  - rofi
 
 general_config:
