@@ -27,6 +27,13 @@ fi
 # === VIM ===
 set -o vi
 
+# === Completion ===
+bind 'set completion-ignore-case on'
+
+# === Update size ===
+shopt -s checkwinsize
+shopt -s autocd
+
 # === Environment ===
 if [ -f ~/.env ]; then
     source ~/.env
