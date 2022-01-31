@@ -30,12 +30,10 @@ ide_packages:
 system_install: true
 system_packages:
   - i3-gaps
-  - compton
   - playerctl
   - picom
   - nitrogen
   - dunst
-  - autotiling
   - blueberry
   - rofi
   - power-profiles-daemon

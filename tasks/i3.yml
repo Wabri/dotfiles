@@ -1,9 +1,12 @@
---- 
+---
 - name: Copy i3wm configurations
   copy:
     src: .config/i3/
     dest: "{{ home_dir }}/.config/i3/"
     directory_mode: yes
     remote_src: yes
+
+- name: Restart i3
+  shell: "sudo -u {{ username }} i3-msg restart"
 
 

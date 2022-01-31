@@ -1,15 +1,33 @@
+################################################################
+# ___ _______        ____  __
+#|_ _|___ /\ \      / /  \/  |
+# | |  |_ \ \ \ /\ / /| |\/| |
+# | | ___) | \ V  V / | |  | |
+#|___|____/   \_/\_/  |_|  |_|
+################################################################
+# Maintainer: Wabri <gabriele.puliti@pm.me>                    #
+# Alias: Wabri (https://github.com/Wabri)                      #
+################################################################
+
 #######################
 # === Font ============
 #######################
-font pango:JetBrains Regular 10
+font pango:JetBrains Mono 10
 
 #######################
-# === Mod key =========
+# === Themes ==========
 #######################
-set $mod Mod4
+# Colors setup
+# class                 border  backgr. text    indicator child_border
+client.focused          #4C566A #81A1C1 #2E3440 #EBCB8B   #5E81AC
+client.focused_inactive #2E3440 #4C566A #ECEFF4 #8FBCBB   #434C5E
+client.unfocused        #2E3440 #2E3440 #4C566A #8FBCBB   #3B4252
+client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
+client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
+client.background       #D8DEE9
 
 #######################
-# === Workspace =======
+# === Settings ========
 #######################
 workspace_layout default
 
@@ -18,6 +36,174 @@ new_window pixel 1
 # Gaps
 gaps inner 6
 gaps outer 3
+
+# Mouse
+# yes|no
+focus_follows_mouse no
+# output|none
+mouse_warping output
+
+#######################
+# === Mod key =========
+#######################
+set $mod Mod4
+set $menu rofi
+set $o_primary HDMI1
+set $o_secondary eDP1
+
+#######################
+# === Keybindings =====
+#######################
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Terminal
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
+
+# Drun
+bindsym $mod+d exec rofi -modi drun -show drun \
+		-config ~/.config/rofi/rofidmenu.rasi
+
+# Windows
+bindsym $mod+t exec rofi -show window \
+		-config ~/.config/rofi/rofidmenu.rasi
+
+# Lock
+bindsym $mod+Shift+x exec ~/.config/i3/scripts/i3exit lock -f
+
+# Powermenu
+bindsym $mod+Escape exec ~/.config/i3/scripts/system-controll
+
+# Restart i3
+bindsym $mod+Shift+r restart
+
+# Floating
+bindsym $mod+Shift+o floating toggle
+bindsym $mod+o focus mode_toggle
+
+# Layout
+# toggle|horizontal|vertical
+bindsym $mod+slash split toggle
+# stacking/tabbed/splith/splitv:
+bindsym $mod+shift+slash layout toggle all
+
+# Volume
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
+
+# Media
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Backlight
+bindsym XF86MonBrightnessUp exec xbacklight +10
+bindsym XF86MonBrightnessDown exec xbacklight -10
+
+# Power Profiles menu switcher (rofi)
+bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
+
+#######################
+# === Modes ===========
+#######################
+# i3exit
+set $mode_system System (l) (s) (h) (r) (p) (q)
+mode "$mode_system" {
+    bindsym l exec ~/.config/i3/scripts/i3exit logout, mode "default"
+    bindsym s exec ~/.config/i3/scripts/i3exit suspend, mode "default"
+    bindsym h exec ~/.config/i3/scripts/i3exit hibernate, mode "default"
+    bindsym r exec ~/.config/i3/scripts/i3exit reboot, mode "default"
+    bindsym p exec ~/.config/i3/scripts/i3exit shutdown, mode "default"
+
+    # back to normal
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_system"
+
+# Resize
+# Pixels per resize
+set $pxpr 10
+set $mode_resize Resize (h) (j) (k) (l) (q)
+mode "$mode_resize" {
+        bindsym h resize shrink width $pxpr px or $pxpr ppt
+        bindsym j resize grow height $pxpr px or $pxpr ppt
+        bindsym k resize shrink height $pxpr px or $pxpr ppt
+        bindsym l resize grow width $pxpr px or $pxpr ppt
+
+        bindsym Escape mode "default"
+        bindsym q mode "default"
+}
+bindsym $mod+r mode $mode_resize
+
+# Move workspace
+set $workspace_move Workspace (h) (j) (k) (l) (q)
+mode "$workspace_move" {
+
+    # Move workspace between outputs
+    bindsym h move workspace to output left
+    bindsym l move workspace to output right
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+    
+    # Change focus window
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    
+    # Move focused window
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+    
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+Tab mode "$workspace_move"
+
+# Output move orientations
+set $output_move Output (h) (k) (q)
+mode "$output_move" {
+    
+    # Secondary screen orientation
+    bindsym h exec ~/.screenlayout/left.sh, exec sleep 2 && nitrogen --restore, mode "default"
+    bindsym k exec ~/.screenlayout/up.sh, exec sleep 2 && nitrogen --restore, mode "default"
+    
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode "$output_move"
+
+#######################
+# === Workspace =======
+#######################
+# Workspace definition
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # Switch workspace
 bindsym $mod+1 workspace $ws1
@@ -43,26 +229,9 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# Switch focus container
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# Move focus container
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-
 #######################
 # === Keybindings =====
 #######################
-
-# Terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
 
 # Kill
 bindsym $mod+q kill
@@ -70,17 +239,8 @@ bindsym $mod+q kill
 # Powermenu
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
-# Lock
-# with picture
-bindsym $mod+Shift+x exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
-# lock by blurring the screen:
-#bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
-
 # Reload
 bindsym $mod+Shift+c reload
-
-# Restart
-bindsym $mod+Shift+r restart
 
 # Fullscreen
 bindsym $mod+f fullscreen toggle
@@ -88,50 +248,43 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+e layout toggle split
 
+# Bar
+bindsym $mod+b bar mode toggle
+
+# Screenshot
+bindsym $mod+Shift+Print exec \
+scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Selection
+bindsym --release $mod+Print exec \
+scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Focus window
+bindsym Print exec \
+scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+
+# Display
+bindsym XF86Display exec arandr
+
+# Keyboard layout
+bindsym $mod+space exec chkey
+
 #######################
 # === Multimedia ======
 #######################
-
-# Volume
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
-
-# Media
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-# Backlight
-bindsym XF86MonBrightnessUp exec xbacklight +10
-bindsym XF86MonBrightnessDown exec xbacklight -10
-
-# Power Profiles menu switcher (rofi)
-bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
 # bind program to workspace and focus to them on startup:
 assign [class="(?i)firefox"] $ws2
-assign [class="TelegramDesktop"] $ws9
+assign [class="Steam"] → $ws7
+assign [class="Lutris"] → $ws7
+assign [class="Bitwarden"] → $ws8
+assign [class="TelegramDesktop"] → $ws9
+for_window [class="Spotify"] move to workspace $ws10
+for_window [class="Nautilus"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
 #######################
 # === Compositor ======
@@ -148,16 +301,13 @@ exec --no-startup-id picom -b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Display
-exec --no-startup-id sleep 1 && ~/.screenlayout/monitor.sh
+exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
 
 # Wallpaper
 exec --no-startup-id sleep 2 && nitrogen --restore
 
 # Desktop notifications
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-
-# Autotiling
-exec_always --no-startup-id autotiling
 
 # Bluetooth
 exec --no-startup-id blueberry-tray
@@ -181,60 +331,49 @@ for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enabl
 for_window [window_role="About"] floating enable
 
 #######################
-# === Themes ==========
-#######################
-
-# Define colors variables:
-set $darkbluetrans	#08052be6
-set $darkblue		#08052b
-set $lightblue		#5294e2
-set $urgentred		#e53935
-set $white		#ffffff
-set $black		#000000
-set $purple		#e345ff
-set $darkgrey		#383c4a
-set $grey		#b0b5bd
-set $mediumgrey		#8b8b8b
-set $yellowbrown	#e1b700
-
-# define colors for windows:
-#class		        	border		bground		text		indicator	child_border
-client.focused		    $lightblue	$darkblue	$white		$purple		$mediumgrey
-client.unfocused	    $darkblue	$darkblue	$grey		$purple		$darkgrey
-client.focused_inactive	$darkblue	$darkblue	$grey		$purple		$black
-client.urgent		    $urgentred	$urgentred	$white		$purple		$yellowbrown
-
-#######################
 # === Bar ============
 #######################
 
 bar {
-		font pango:JetBrains Regular 10, FontAwesome 10
-		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	    	position bottom
-		    tray_output primary
-		    tray_padding 0
+    status_command i3status -c ~/.config/i3/i3status.conf
+    font pango:JetBrains Mono 12
+    # dock|hide|invisible
+    mode dock
+    # hide|show
+    hidden_state hide
+    # <Modifier>|none
+    modifier $mod
+    # disable clicking on workspace buttons
+    # bindsym button1 nop
+    bindsym button3 exec --no-startup-id pavucontrol
+    bindsym button2 exec --no-startup-id arandr
+    # bottom|top
+    position top
+    # primary|<output>
+    # tray_output none|primary|<output>
+    tray_output primary
+    # <px> [px]
+    tray_padding 0
+    separator_symbol " | "
+    # yes|no
+    workspace_buttons yes
+    # yes|no
+    # strip_workspace_numbers yes
+    # yes|no
+    # strip_workspace_name no
+    # yes|no
+    binding_mode_indicator yes
+    colors {
+        background #2E3440
+        statusline #88C0D0
+        separator #ECEFF4
 
-		    colors {
-		    separator          $purple
-		    background         $darkgrey
-		    statusline         $white
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
-	}
+	      # class            border  backgr. text
+        focused_workspace  #2E3440 #2E3440 #A3BE8C
+        active_workspace   #2E3440 #2E3440 #D08770
+        inactive_workspace #2E3440 #2E3440 #4C566A
+        urgent_workspace   #BF616A #2E3440 #BF616A
+        binding_mode       #2E3440 #2E3440 #A3BE8C
+    }
 }
-
-#######################
-# === Run =============
-#######################
-
-# Drun
-bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
-
-# Windows
-bindsym $mod+t exec rofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi
 
