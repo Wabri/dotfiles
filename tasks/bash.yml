@@ -5,7 +5,7 @@
     src: .bashrc
     dest: "{{ home_dir }}/.bashrc"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     mode: '0644'
     backup: yes
 

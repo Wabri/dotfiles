@@ -5,7 +5,7 @@
     src: .tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     mode: '0644'
     backup: yes
 

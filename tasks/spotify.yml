@@ -26,7 +26,7 @@
   file:
     path: "{{ spicetify_dir.stdout }}/../../Extensions"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     state: directory
 
 - name: Enable spotify devtool
@@ -34,7 +34,7 @@
     src: /usr/share/spicetify-cli/Themes/Dribbblish/dribbblish.js
     dest: "{{ spicetify_dir.stdout }}/../../Extensions/dribbblish.js"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     remote_src: yes
 
 - name: Enable dribbblish extension

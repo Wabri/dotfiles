@@ -4,24 +4,17 @@
   tasks:
     - name: Get Profile variables
       include_vars: "profiles/{{ profile }}.yml"
-      ignore_errors: yes
       when: profile is defined
 
     - name: Get Os variables if no profile
       include_vars: "os_{{ ansible_facts['distribution'] }}.yml"
-      ignore_errors: yes
       when: profile is undefined
-
-    - name: Fail if os is not found
-      fail:
-        msg: "{{ os }} distribution is defined on profile"
-      when: os is undefined
 
     - name: Create Workspaces directory
       file:
         path: "{{ home_dir }}/{{ workspace_dir }}"
         owner: "{{ username }}"
-        group: "{{ username }}"
+        group: "{{ group | default(username) }}"
         state: directory
 
     - name: Install IDE
@@ -33,6 +26,7 @@
           shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
           with_items:
             - "{{ ide_packages }}"
+          ignore_errors: true
 
         - name: Init IDE configurations
           include_tasks: "tasks/{{ item }}.yml"
@@ -44,7 +38,7 @@
             src: .local/
             dest: "{{ home_dir }}/.local"
             owner: "{{ username }}"
-            group: "{{ username }}"
+            group: "{{ group | default(username) }}"
             directory_mode: yes
             remote_src: yes
 
@@ -53,7 +47,7 @@
             src: .env
             dest: "{{ home_dir }}/.env"
             owner: "{{ username }}"
-            group: "{{ username }}"
+            group: "{{ group | default(username) }}"
             remote_src: yes
 
         - name: Copy aliases
@@ -61,17 +55,19 @@
             src: .aliases
             dest: "{{ home_dir }}/.aliases"
             owner: "{{ username }}"
-            group: "{{ username }}"
+            group: "{{ group | default(username) }}"
             remote_src: yes
 
         - name: Set default shell
           shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
+          ignore_errors: true
               
         - name: Set default keyboard layout using setxkbmap
           shell: "sudo -u {{ username }} setxkbmap -layout {{ default_keyboard }}"
+          when: default_keyboard is defined
       when: ide_install
 
-    - name: Install system environment 
+    - name: Install system environment
       block:
         - debug:
             var: system_packages
@@ -80,6 +76,7 @@
           shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
           with_items:
             - "{{ system_packages }}"
+          ignore_errors: true
 
         - name: Init system configurations
           include_tasks: "tasks/{{ item }}.yml"
@@ -87,7 +84,7 @@
             - "{{ system_config }}"
       when: system_install
 
-    - name: Install general packages 
+    - name: Install general packages
       block:
         - debug:
             var: general_packages
@@ -96,6 +93,7 @@
           shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
           with_items:
             - "{{ general_packages }}"
+          ignore_errors: true
 
         - name: Init general configurations
           include_tasks: "tasks/{{ item }}.yml"

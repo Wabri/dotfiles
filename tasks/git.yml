@@ -5,7 +5,7 @@
     src: .gitignore
     dest: "{{ home_dir }}/.gitignore"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     mode: '0644'
     backup: yes
 
@@ -15,6 +15,6 @@
     src: .gitconfig
     dest: "{{ home_dir }}/.gitconfig"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     mode: '0644'
     backup: yes

@@ -4,7 +4,7 @@
     src: .config/rofi/
     dest: "{{ home_dir }}/.config/rofi/"
     owner: "{{ username }}"
-    group: "{{ username }}"
+    group: "{{ group | default(username) }}"
     directory_mode: yes
     remote_src: yes
 
