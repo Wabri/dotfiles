@@ -24,6 +24,12 @@ Plug 'tpope/vim-fugitive'
 " Better statusline
 Plug 'itchyny/lightline.vim'
 
+" Completion and syntax of code
+Plug 'neoclide/coc.nvim'
+
+" Syntax and indentation support
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 " => fzf
@@ -31,8 +37,8 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.8, 'xoffset': 0.5, 'yoffset': 0.0 } }
-let g:fzf_preview_window = ['down:70%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 1.0, 'xoffset': 1.8, 'yoffset': 0.0 } }
+let g:fzf_preview_window = ['down:60%', 'ctrl-/']
 
 " => workspace
 let g:workspace_autocreate = 0
@@ -47,3 +53,23 @@ let g:lightline = {
       \    'gitbranch': 'FugitiveHead'
       \ },
     \ }
+
+" => coc
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }

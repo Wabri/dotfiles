@@ -163,15 +163,18 @@ nmap <leader>gd :Git diff<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
 
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
+" => FZF
 imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" => COC
+inoremap <silent><expr> <C-n>
+      \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " =========================================================================== "
 " => Augroup
