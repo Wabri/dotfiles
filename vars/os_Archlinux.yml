@@ -10,8 +10,8 @@ workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
 ide_install: false
-system_install: false
-general_install: true
+system_install: true
+general_install: false
 
 # === Packages ===
 ide_packages:
@@ -39,7 +39,6 @@ system_packages:
   - blueberry
   - rofi
   - power-profiles-daemon
-  - i3blocks
   - nordic-theme
   - breeze-icons
   - graphite-cursor-theme-git
