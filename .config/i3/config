@@ -88,7 +88,7 @@ bindsym $mod+b bar mode toggle
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym $mod+space exec chkey
+bindsym $mod+Space exec chkey
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun

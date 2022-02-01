@@ -1,4 +1,4 @@
---- 
+---
 - name: Add Global gitignore
   copy:
     remote_src: yes

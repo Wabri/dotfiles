@@ -10,7 +10,7 @@
     backup: yes
 
 - name: Install bash configuration dependencies
-  shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+  shell: "sudo -u {{ username }} {{ install_command }} {{ bash_package }}"
   loop:
     - starship
     - bash-completion

@@ -1,4 +1,4 @@
---- 
+---
 - name: Copy rofi configurations
   copy:
     src: .config/rofi/
