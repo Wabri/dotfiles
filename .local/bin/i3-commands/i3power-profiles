@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+case "$1" in
+    performance)
+        powerprofilesctl set performance
+        ;;
+    balanced)
+        powerprofilesctl set balanced        
+        ;;
+    powerSaver)
+        powerprofilesctl set power-saver
+        ;;
+    *)
+        echo "Usage: i3power-profiles {performance|balanced|powerSaver}"
+        exit 2
+esac
+
+exit 0
