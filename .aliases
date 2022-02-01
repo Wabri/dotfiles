@@ -8,3 +8,8 @@ alias cat='bat'
 # => Git
 alias g='git status -s'
 
+# => Kitchen
+alias kd='kitchen destroy -f ;' 
+alias kc='kitchen converge ;'
+alias kl='kitchen login ;'
+
