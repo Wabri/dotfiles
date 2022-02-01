@@ -7,3 +7,11 @@
     group: "{{ username }}"
     directory_mode: yes
     remote_src: yes
+
+- name: Install tmux plugin manager
+  git:
+    repo: https://github.com/lr-tech/rofi-themes-collection.git
+    dest: "/tmp/rofi-themes"
+
+
+
