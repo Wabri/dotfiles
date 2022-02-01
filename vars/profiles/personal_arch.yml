@@ -46,7 +46,6 @@ general_packages:
   - spotify
   - steam
   - firefox
-  - obinskit
 
 # === Configurations ===
 ide_config:

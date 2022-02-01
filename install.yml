@@ -2,18 +2,26 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Set OS distribution dependent variables
+    - name: Get Profile variables
+      include_vars: "profiles/{{ profile }}.yml"
+      ignore_errors: yes
+      when: profile is defined
+
+    - name: Get Os variables if no profile
       include_vars: "os_{{ ansible_facts['distribution'] }}.yml"
       ignore_errors: yes
+      when: profile is undefined
 
-    - name: Fail if distribution is not set
+    - name: Fail if os is not found
       fail:
-        msg: "{{ ansible_facts['distribution'] }} distribution is not in the list" 
+        msg: "{{ os }} distribution is defined on profile"
       when: os is undefined
 
     - name: Create Workspaces directory
       file:
         path: "{{ home_dir }}/{{ workspace_dir }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         state: directory
 
     - name: Install IDE
@@ -35,6 +43,8 @@
           copy:
             src: .local/
             dest: "{{ home_dir }}/.local"
+            owner: "{{ username }}"
+            group: "{{ username }}"
             directory_mode: yes
             remote_src: yes
 
@@ -42,12 +52,16 @@
           copy:
             src: .env
             dest: "{{ home_dir }}/.env"
+            owner: "{{ username }}"
+            group: "{{ username }}"
             remote_src: yes
 
         - name: Copy aliases
           copy:
             src: .aliases
             dest: "{{ home_dir }}/.aliases"
+            owner: "{{ username }}"
+            group: "{{ username }}"
             remote_src: yes
 
         - name: Set default shell
