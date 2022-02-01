@@ -5,6 +5,8 @@
     src: .zshrc
     dest: "{{ home_dir }}/.zshrc"
     mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ username }}"
     backup: yes
 
 

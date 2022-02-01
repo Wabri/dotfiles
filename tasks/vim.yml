@@ -4,6 +4,8 @@
     remote_src: yes
     src: .vimrc
     dest: "{{ home_dir }}/.vimrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0644'
     backup: yes
 
@@ -12,6 +14,8 @@
     - name: Create vim directory
       file:
         path: "{{ home_dir }}/.vim"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         state: directory
 
     - name: Add vim plugins
@@ -19,12 +23,16 @@
         remote_src: yes
         src: .vim/plugins.vim
         dest: "{{ home_dir }}/.vim/plugins.vim"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: '0644'
         backup: yes
 
     - name: Create vim autoload directory
       file:
         path: "{{ home_dir }}/.vim/autoload"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         state: directory
     
     - name: Download plug.vim

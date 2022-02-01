@@ -31,7 +31,7 @@ client.background       #D8DEE9
 #######################
 workspace_layout default
 
-new_window pixel 1
+new_window pixel 3
 
 # Gaps
 gaps inner 6
@@ -70,6 +70,33 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
 
+# Kill
+bindsym $mod+Shift+q kill
+
+# Restart i3
+bindsym $mod+Shift+r restart
+
+# Powermenu
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
+
+# Power Profiles menu switcher (rofi)
+bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+e layout toggle split
+
+# Bar
+bindsym $mod+b bar mode toggle
+
+# Display
+bindsym XF86Display exec arandr
+
+# Keyboard layout
+bindsym $mod+space exec chkey
+
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
@@ -77,15 +104,6 @@ bindsym $mod+d exec rofi -modi drun -show drun \
 # Windows
 bindsym $mod+t exec rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
-
-# Lock
-bindsym $mod+Shift+x exec ~/.config/i3/scripts/i3exit lock -f
-
-# Powermenu
-bindsym $mod+Escape exec ~/.config/i3/scripts/system-controll
-
-# Restart i3
-bindsym $mod+Shift+r restart
 
 # Floating
 bindsym $mod+Shift+o floating toggle
@@ -114,8 +132,15 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight +10
 bindsym XF86MonBrightnessDown exec xbacklight -10
 
-# Power Profiles menu switcher (rofi)
-bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
+# Screenshot
+bindsym $mod+Shift+Print exec \
+scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Selection
+bindsym --release $mod+Print exec \
+scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+# Focus window
+bindsym Print exec \
+scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 
 #######################
 # === Modes ===========
@@ -175,7 +200,7 @@ mode "$workspace_move" {
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+Tab mode "$workspace_move"
+bindsym $mod+Shift+w mode "$workspace_move"
 
 # Output move orientations
 set $output_move Output (h) (k) (q)
@@ -188,7 +213,7 @@ mode "$output_move" {
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+w mode "$output_move"
+bindsym $mod+Shift+m mode "$output_move"
 
 #######################
 # === Workspace =======
@@ -228,48 +253,6 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
-
-#######################
-# === Keybindings =====
-#######################
-
-# Kill
-bindsym $mod+q kill
-
-# Powermenu
-bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
-
-# Reload
-bindsym $mod+Shift+c reload
-
-# Fullscreen
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+e layout toggle split
-
-# Bar
-bindsym $mod+b bar mode toggle
-
-# Screenshot
-bindsym $mod+Shift+Print exec \
-scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-# Selection
-bindsym --release $mod+Print exec \
-scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-# Focus window
-bindsym Print exec \
-scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
-
-# Display
-bindsym XF86Display exec arandr
-
-# Keyboard layout
-bindsym $mod+space exec chkey
-
-#######################
-# === Multimedia ======
-#######################
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -348,7 +331,7 @@ bar {
     bindsym button3 exec --no-startup-id pavucontrol
     bindsym button2 exec --no-startup-id arandr
     # bottom|top
-    position top
+    position bottom
     # primary|<output>
     # tray_output none|primary|<output>
     tray_output primary

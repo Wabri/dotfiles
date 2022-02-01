@@ -3,6 +3,8 @@
   copy:
     src: .config/i3/
     dest: "{{ home_dir }}/.config/i3/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     directory_mode: yes
     remote_src: yes
 

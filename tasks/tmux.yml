@@ -4,6 +4,8 @@
     remote_src: yes
     src: .tmux.conf
     dest: "{{ home_dir }}/.tmux.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0644'
     backup: yes
 

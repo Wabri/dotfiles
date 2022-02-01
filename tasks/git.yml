@@ -4,6 +4,8 @@
     remote_src: yes
     src: .gitignore
     dest: "{{ home_dir }}/.gitignore"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0644'
     backup: yes
 
@@ -12,5 +14,7 @@
     remote_src: yes
     src: .gitconfig
     dest: "{{ home_dir }}/.gitconfig"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0644'
     backup: yes

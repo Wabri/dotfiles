@@ -3,6 +3,8 @@
   copy:
     src: .config/dunst/
     dest: "{{ home_dir }}/.config/dunst/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     directory_mode: yes
     remote_src: yes
 

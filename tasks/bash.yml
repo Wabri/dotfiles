@@ -4,6 +4,8 @@
     remote_src: yes
     src: .bashrc
     dest: "{{ home_dir }}/.bashrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0644'
     backup: yes
 

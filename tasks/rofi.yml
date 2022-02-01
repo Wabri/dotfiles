@@ -3,5 +3,7 @@
   copy:
     src: .config/rofi/
     dest: "{{ home_dir }}/.config/rofi/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     directory_mode: yes
     remote_src: yes
