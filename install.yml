@@ -92,8 +92,13 @@
         - debug:
             var: general_packages
 
-        - name: Install system packages
+        - name: Install general packages
           shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
           with_items:
             - "{{ general_packages }}"
+
+        - name: Init general configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ general_config }}"
       when: general_install

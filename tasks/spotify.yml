@@ -1,0 +1,50 @@
+---
+- name: Install spotify configuration dependencies
+  shell: "sudo -u {{ username }} {{ install_command }} {{ spotify_package }}"
+  loop:
+    - spicetify-cli
+    - spicetify-themes-git
+  loop_control:
+    loop_var: spotify_package
+
+- name: Change permission to Spotify files
+  shell: >
+      chmod a+wr /opt/spotify ;
+      chmod a+wr /opt/spotify/Apps -R ;
+
+- name: Init spicetify configuration
+  shell: spicetify
+
+- name: Enable spotify devtool
+  shell: "sudo -u {{ username }} spicetify backup apply enable-devtool ;"
+
+- name: Get spicetify directory for Dribbblish
+  shell: "echo $(dirname $(spicetify -c))/Themes/Dribbblish"
+  register: spicetify_dir
+
+- name: Create extensions directory
+  file:
+    path: "{{ spicetify_dir.stdout }}/../../Extensions"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+
+- name: Enable spotify devtool
+  copy:
+    src: /usr/share/spicetify-cli/Themes/Dribbblish/dribbblish.js
+    dest: "{{ spicetify_dir.stdout }}/../../Extensions/dribbblish.js"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    remote_src: yes
+
+- name: Enable dribbblish extension
+  shell: "sudo -u {{ username }} spicetify config extensions {{ spicetify_dir.stdout }}/../../Extensions/dribbblish.js"
+
+- name: Change theme and colorscheme
+  shell: "sudo -u {{ username }} spicetify config current_theme Dribbblish color_scheme nord-dark"
+      
+- name: Change css configuration
+  shell: "sudo -u {{ username }} spicetify config inject_css 1 replace_colors 1 overwrite_assets 1"
+
+- name: Apply spicetify configuration
+  shell: "sudo -u {{ username }} spicetify apply"

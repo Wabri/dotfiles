@@ -9,9 +9,11 @@ home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
+ide_install: false
+system_install: false
+general_install: true
 
 # === Packages ===
-ide_install: true
 ide_packages:
   - git
   - alacritty
@@ -27,10 +29,10 @@ ide_packages:
   - bat
   - git-delta
 
-system_install: true
 system_packages:
   - i3-gaps
   - playerctl
+  - arandr
   - picom
   - nitrogen
   - dunst
@@ -38,14 +40,11 @@ system_packages:
   - rofi
   - power-profiles-daemon
   - i3blocks
-  - lxappearance
-  - nordic-theme 
+  - nordic-theme
   - breeze-icons
   - graphite-cursor-theme-git
 
-general_install: true
 general_packages:
-  - arandr
   - vagrant
   - spotify
   - steam
@@ -56,7 +55,7 @@ general_packages:
   - ncdu
   - duf
   - tldr
-  - balena-etcher
+  - etcher-bin
 
 # === Configurations ===
 ide_config:
@@ -74,3 +73,4 @@ system_config:
   - gtk3
 
 general_config:
+  - spotify
