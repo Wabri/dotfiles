@@ -47,7 +47,6 @@ mouse_warping output
 # === Mod key =========
 #######################
 set $mod Mod4
-set $menu rofi
 set $o_primary HDMI1
 set $o_secondary eDP1
 
@@ -71,16 +70,10 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
 
 # Kill
-bindsym $mod+Shift+q kill
+bindsym $mod+BackSpace kill
 
 # Restart i3
 bindsym $mod+Shift+r restart
-
-# Powermenu
-bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
-
-# Power Profiles menu switcher (rofi)
-bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
 # Fullscreen
 bindsym $mod+f fullscreen toggle
@@ -98,12 +91,10 @@ bindsym XF86Display exec arandr
 bindsym $mod+space exec chkey
 
 # Drun
-bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+d exec rofi -modi drun -show drun
 
 # Windows
-bindsym $mod+t exec rofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+t exec rofi -show window
 
 # Floating
 bindsym $mod+Shift+o floating toggle
@@ -148,17 +139,29 @@ scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 # i3exit
 set $mode_system System (l) (s) (h) (r) (p) (q)
 mode "$mode_system" {
-    bindsym l exec ~/.config/i3/scripts/i3exit logout, mode "default"
-    bindsym s exec ~/.config/i3/scripts/i3exit suspend, mode "default"
-    bindsym h exec ~/.config/i3/scripts/i3exit hibernate, mode "default"
-    bindsym r exec ~/.config/i3/scripts/i3exit reboot, mode "default"
-    bindsym p exec ~/.config/i3/scripts/i3exit shutdown, mode "default"
+    bindsym l exec i3exit logout, mode "default"
+    bindsym s exec i3exit suspend, mode "default"
+    bindsym h exec i3exit hibernate, mode "default"
+    bindsym r exec i3exit reboot, mode "default"
+    bindsym p exec i3exit shutdown, mode "default"
 
     # back to normal
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+p mode "$mode_system"
+
+set $mode_power_profiles System (p) (b)  (s) (q)
+mode "$mode_system" {
+    bindsym p exec i3power-profiles performance, mode "default"
+    bindsym b exec i3power-profiles balanced, mode "default"
+    bindsym s exec i3power-profiles powerSaver, mode "default"
+
+    # back to normal
+    bindsym q mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+p mode "$mode_power_profiles"
 
 # Resize
 # Pixels per resize
@@ -319,7 +322,7 @@ for_window [window_role="About"] floating enable
 
 bar {
     status_command i3status -c ~/.config/i3/i3status.conf
-    font pango:JetBrains Mono 12
+    font pango:JetBrains Mono 10
     # dock|hide|invisible
     mode dock
     # hide|show
