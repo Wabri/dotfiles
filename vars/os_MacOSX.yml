@@ -1,0 +1,59 @@
+---
+# === MacOSX ===
+os: MacOSX
+
+# === System configuration ===
+username: wabri
+group: staff
+install_command: brew install --quiet
+home_dir: /Users/wabri
+workspace_dir: Documents/Workspaces
+default_shell: zsh
+ide_install: true
+system_install: false
+general_install: false
+
+# === Packages ===
+ide_packages:
+  - git
+  - alacritty
+  - zsh
+  - vim
+  - tmux
+  - fzf
+  - ripgrep
+  - exa
+  - bat
+  - git-delta
+
+system_packages:
+  - vagrant
+  - ruby
+
+general_packages:
+  - spotify
+  - firefox
+  - obinskit
+  - htop
+  - gtop
+  - ncdu
+  - duf
+  - tldr
+  - etcher-bin
+
+# === Configurations ===
+ide_config:
+  - alacritty
+  - vim
+  - tmux
+  - zsh
+  - git
+
+system_config:
+  - i3
+  - dunst
+  - rofi
+  - gtk3
+
+general_config:
+  - spotify

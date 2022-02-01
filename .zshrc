@@ -13,6 +13,14 @@ source $ZSH/oh-my-zsh.sh
 
 fpath=(~/.zsh.d/ $fpath)
 
+# === Brew ===
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # === Fzf ===
 [ -f ~/.zsh/fzf.zsh ] && source ~/.zsh/fzf.zsh
 

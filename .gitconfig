@@ -27,3 +27,8 @@
 [includeIf "gitdir:~/Documents/Workspaces/Personal/"]
   path = ~/Documents/Workspaces/Personal/.gitconfig
 
+[includeIf "gitdir:~/Documents/Workspaces/Mediolanum/"]
+  path = ~/Documents/Workspaces/Mediolanum/.gitconfig
+
+[includeIf "gitdir:~/Documents/Workspaces/Sourcesense/"]
+  path = ~/Documents/Workspaces/Sourcesense/.gitconfig
