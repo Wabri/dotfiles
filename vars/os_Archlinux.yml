@@ -38,6 +38,10 @@ system_packages:
   - rofi
   - power-profiles-daemon
   - i3blocks
+  - lxappearance
+  - nordic-theme 
+  - breeze-icons
+  - graphite-cursor-theme-git
 
 general_install: true
 general_packages:
@@ -47,6 +51,12 @@ general_packages:
   - steam
   - firefox
   - obinskit
+  - htop
+  - gtop
+  - ncdu
+  - duf
+  - tldr
+  - balena-etcher
 
 # === Configurations ===
 ide_config:
@@ -61,5 +71,6 @@ system_config:
   - i3
   - dunst
   - rofi
+  - gtk3
 
 general_config:
