@@ -27,6 +27,13 @@ set incsearch ignorecase
 set splitright
 set splitbelow
 
+" => Persitent undo history
+set undodir=~/.vim/undodir
+set undofile
+
+" => More space on command
+set cmdheight=2
+
 " === NETRW ===
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3

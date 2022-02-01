@@ -21,6 +21,9 @@ Plug 'sheerun/vim-polyglot'
 " Git wrapper
 Plug 'tpope/vim-fugitive'
 
+" Better statusline
+Plug 'itchyny/lightline.vim'
+
 call plug#end()
 
 " => fzf
@@ -35,3 +38,12 @@ let g:fzf_preview_window = ['down:70%', 'ctrl-/']
 let g:workspace_autocreate = 0
 let g:workspace_session_name = 'Session.vim'
 let g:workspace_persist_undo_history = 1
+
+" => lightline
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'component_function' : {
+      \    'gitbranch': 'FugitiveHead'
+      \ },
+    \ }
