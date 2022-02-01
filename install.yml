@@ -82,6 +82,7 @@
           include_tasks: "tasks/{{ item }}.yml"
           with_items:
             - "{{ system_config }}"
+          when: system_config is defined
       when: system_install
 
     - name: Install general packages
@@ -99,4 +100,5 @@
           include_tasks: "tasks/{{ item }}.yml"
           with_items:
             - "{{ general_config }}"
+          when: general_config is defined
       when: general_install

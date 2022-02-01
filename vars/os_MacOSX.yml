@@ -10,8 +10,8 @@ home_dir: /Users/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
 ide_install: true
-system_install: false
-general_install: false
+system_install: true
+general_install: true
 
 # === Packages ===
 ide_packages:
@@ -29,17 +29,15 @@ ide_packages:
 system_packages:
   - vagrant
   - ruby
-
-general_packages:
-  - spotify
-  - firefox
-  - obinskit
-  - htop
-  - gtop
+  - tldr
   - ncdu
   - duf
-  - tldr
-  - etcher-bin
+  - gtop
+
+general_packages:
+  - homebrew/cask-drivers/obinskit
+  - spotify
+  - balenaetcher
 
 # === Configurations ===
 ide_config:
@@ -49,11 +47,3 @@ ide_config:
   - zsh
   - git
 
-system_config:
-  - i3
-  - dunst
-  - rofi
-  - gtk3
-
-general_config:
-  - spotify
