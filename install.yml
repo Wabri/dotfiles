@@ -18,6 +18,10 @@
         state: directory
         mode: "0755"
 
+    - name: Update packages
+      shell: "sudo -u {{ username }} {{ update_command }}"
+      when: update_command is defined
+
     - name: Install IDE
       block:
         - name: Print ide packages

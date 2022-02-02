@@ -5,11 +5,12 @@ os: Archlinux
 # === System configuration ===
 username: wabri
 install_command: yay --noconfirm -S
+update_command: yay -Syyu --noconfirm
 home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
-ide_install: false
+ide_install: true
 system_install: true
 general_install: false
 
@@ -28,6 +29,7 @@ ide_packages:
   - exa
   - bat
   - git-delta
+  - nodejs
 
 system_packages:
   - i3-gaps
@@ -38,10 +40,13 @@ system_packages:
   - dunst
   - blueberry
   - rofi
-  - power-profiles-daemon
+  - power-profiles-daemon-git
   - nordic-theme
   - breeze-icons
   - graphite-cursor-theme-git
+  - betterlockscreen-git
+  - autotiling
+  - pamac-all
 
 general_packages:
   - vagrant
@@ -52,9 +57,10 @@ general_packages:
   - htop
   - gtop
   - ncdu
-  - duf
+  - duf-bin
   - tldr
   - etcher-bin
+  - vlc
 
 # === Configurations ===
 ide_config:
