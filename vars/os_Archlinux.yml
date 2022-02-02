@@ -23,7 +23,6 @@ ide_packages:
   - vim
   - tmux
   - fzf
-  - ttf-jetbrains-mono
   - nerd-fonts-complete
   - ripgrep
   - exa
@@ -47,6 +46,8 @@ system_packages:
   - betterlockscreen-git
   - autotiling
   - pamac-all
+  - ttf-font-awesome
+  - polybar
 
 general_packages:
   - vagrant
