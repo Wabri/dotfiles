@@ -28,10 +28,10 @@ I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutori
 
 ## How to install this dotfiles
 
-- Install [Poetry](https://python-poetry.org/) by follow the docs [here](https://python-poetry.org/docs/#installation). I use Arch so I can install it with yay:
+- Install [Poetry](https://python-poetry.org/) by follow the docs [here](https://python-poetry.org/docs/#installation).
 
     ```bash
-    yay -S python-poetry
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
     ``` 
 
 - Clone the repository then cd into it:
