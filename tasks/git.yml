@@ -6,7 +6,7 @@
     dest: "{{ home_dir }}/.gitignore"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
-    mode: '0644'
+    mode: '0755'
     backup: yes
 
 - name: Add Global gitconfig
@@ -16,5 +16,5 @@
     dest: "{{ home_dir }}/.gitconfig"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
-    mode: '0644'
+    mode: '0755'
     backup: yes

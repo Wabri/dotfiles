@@ -16,10 +16,12 @@
         owner: "{{ username }}"
         group: "{{ group | default(username) }}"
         state: directory
+        mode: "0755"
 
     - name: Install IDE
       block:
-        - debug:
+        - name: Print ide packages
+          debug:
             var: ide_packages
 
         - name: Install IDE packages
@@ -41,6 +43,7 @@
             group: "{{ group | default(username) }}"
             directory_mode: yes
             remote_src: yes
+            mode: "0755"
 
         - name: Copy environment configuration
           copy:
@@ -49,6 +52,7 @@
             owner: "{{ username }}"
             group: "{{ group | default(username) }}"
             remote_src: yes
+            mode: "0755"
 
         - name: Copy aliases
           copy:
@@ -57,6 +61,7 @@
             owner: "{{ username }}"
             group: "{{ group | default(username) }}"
             remote_src: yes
+            mode: "0755"
 
         - name: Set default shell
           shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
@@ -69,7 +74,8 @@
 
     - name: Install system environment
       block:
-        - debug:
+        - name: Print system packages
+          debug:
             var: system_packages
 
         - name: Install system packages
@@ -87,7 +93,8 @@
 
     - name: Install general packages
       block:
-        - debug:
+        - name: Print system packages
+          debug:
             var: general_packages
 
         - name: Install general packages

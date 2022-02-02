@@ -6,7 +6,7 @@
     dest: "{{ home_dir }}/.vimrc"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
-    mode: '0644'
+    mode: '0755'
     backup: yes
 
 - name: Init plugins 
@@ -25,7 +25,7 @@
         dest: "{{ home_dir }}/.vim/plugins.vim"
         owner: "{{ username }}"
         group: "{{ group | default(username) }}"
-        mode: '0644'
+        mode: '0755'
         backup: yes
 
     - name: Create vim autoload directory

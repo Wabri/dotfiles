@@ -13,5 +13,5 @@
     dest: "{{ home_dir }}/.config/alacritty/alacritty.yml"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
-    mode: '0644'
+    mode: '0755'
     backup: yes
