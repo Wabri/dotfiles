@@ -88,7 +88,7 @@ bindsym $mod+b bar mode toggle
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym $mod+Space exec chkey
+bindsym $mod+space exec chkey
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun
@@ -133,11 +133,14 @@ scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym Print exec \
 scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 
+# lock
+bindsym $mod+shift+x i3exit lock
+
 #######################
 # === Modes ===========
 #######################
 # i3exit
-set $mode_system System (l) (s) (h) (r) (p) (q)
+set $mode_system System (l) (s) (h) (r)(p)(q)
 mode "$mode_system" {
     bindsym l exec i3exit logout, mode "default"
     bindsym s exec i3exit suspend, mode "default"
