@@ -9,6 +9,14 @@
     mode: '0755'
     backup: yes
 
+- name: Create Workspaces directory
+  file:
+    path: "{{ home_dir }}/.tmux/plugins"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    state: directory
+    mode: "0755"
+
 - name: Init Tmux plugins
   block:
     - name: Install tmux plugin manager

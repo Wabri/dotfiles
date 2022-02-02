@@ -8,10 +8,18 @@
     directory_mode: yes
     remote_src: yes
 
-- name: Install tmux plugin manager
+- name: Install rofi themes
   git:
     repo: https://github.com/lr-tech/rofi-themes-collection.git
-    dest: "/tmp/rofi-themes"
+    dest: "/tmp/rofi-themes/"
 
-
+- name: Install rofi themes collection 
+  copy:
+    src: /tmp/rofi-themes/themes
+    dest: "{{ home_dir }}/.local/share/rofi/"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
+    directory_mode: yes
+    remote_src: yes
 

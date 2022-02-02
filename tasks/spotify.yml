@@ -12,8 +12,13 @@
       chmod a+wr /opt/spotify ;
       chmod a+wr /opt/spotify/Apps -R ;
 
+- name: Exec spotify to setup configuration
+  shell: >
+    sudo -u {{ username }} spotify &
+    sleep 3 ; killall spotify
+
 - name: Init spicetify configuration
-  shell: spicetify
+  shell: "sudo -u {{ username }} spicetify"
 
 - name: Enable spotify devtool
   shell: "sudo -u {{ username }} spicetify backup apply enable-devtool ;"

@@ -28,6 +28,13 @@
         mode: '0755'
         backup: yes
 
+    - name: Create coc configuration directory
+      file:
+        path: "{{ home_dir }}/.config/coc"
+        owner: "{{ username }}"
+        group: "{{ group | default(username) }}"
+        state: directory
+
     - name: Create vim autoload directory
       file:
         path: "{{ home_dir }}/.vim/autoload/"
