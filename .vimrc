@@ -168,7 +168,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " => COC
 inoremap <silent><expr> <C-n>
-      \ coc#refresh()
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()

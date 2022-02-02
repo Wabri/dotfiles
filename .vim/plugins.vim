@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'kamwitsta/nordisk'
 
 " Fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Defaults everyone can agree on
@@ -25,7 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 
 " Completion and syntax of code
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax and indentation support
 Plug 'sheerun/vim-polyglot'
