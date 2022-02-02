@@ -244,6 +244,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # Move container
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -284,7 +286,7 @@ exec --no-startup-id picom -b
 #######################
 
 # Polkit-gnome
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Display
 exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
@@ -300,6 +302,12 @@ exec --no-startup-id blueberry-tray
 
 # Network
 exec --no-startup-id nm-applet
+
+# Autotiling
+exec_always --no-startup-id autotiling
+
+# Updater
+exec --no-startup-id pamac-tray
 
 #######################
 # === Floating ========
@@ -354,7 +362,7 @@ bar {
         statusline #88C0D0
         separator #ECEFF4
 
-	      # class            border  backgr. text
+        # class            border  backgr. text
         focused_workspace  #2E3440 #2E3440 #A3BE8C
         active_workspace   #2E3440 #2E3440 #D08770
         inactive_workspace #2E3440 #2E3440 #4C566A

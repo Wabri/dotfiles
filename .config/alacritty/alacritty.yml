@@ -25,7 +25,7 @@ window:
      y: 7
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   # Values for `decorations`:
@@ -35,7 +35,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: buttonless
+  decorations: full
 
 
 
@@ -48,11 +48,11 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Fullscreen
+  startup_mode: Windowed
 
 
 # Background opacity
-window.opacity: 0.9
+window.opacity: 1.0
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
