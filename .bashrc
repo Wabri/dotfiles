@@ -32,7 +32,14 @@ bind 'set completion-ignore-case on'
 
 # === Update size ===
 shopt -s checkwinsize
+# === Change named directory ===
 shopt -s autocd
+# === Autocorrects cd misspellings ===
+shopt -s cdspell
+# === Save multi-line commands in history as single line ===
+shopt -s cmdhist
+# === Expand aliases ===
+shopt -s expand_aliases 
 
 # === Environment ===
 if [ -f ~/.env ]; then
