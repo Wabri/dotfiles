@@ -9,6 +9,16 @@
     mode: '0755'
     remote_src: yes
 
+- name: Copy i3wm configurations
+  copy:
+    src: Pictures
+    dest: "{{ home_dir }}/Pictures"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    directory_mode: yes
+    mode: '0755'
+    remote_src: yes
+
 - name: Restart i3
   shell: "sudo -u {{ username }} i3-msg restart"
 

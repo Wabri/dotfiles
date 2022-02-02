@@ -134,7 +134,7 @@ bindsym Print exec \
 scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 
 # lock
-bindsym $mod+shift+x i3exit lock
+bindsym $mod+shift+x exec ~/.local/bin/i3-commands/i3exit lock
 
 #######################
 # === Modes ===========
@@ -142,11 +142,11 @@ bindsym $mod+shift+x i3exit lock
 # i3exit
 set $mode_system System (l) (s) (h) (r)(p)(q)
 mode "$mode_system" {
-    bindsym l exec i3exit logout, mode "default"
-    bindsym s exec i3exit suspend, mode "default"
-    bindsym h exec i3exit hibernate, mode "default"
-    bindsym r exec i3exit reboot, mode "default"
-    bindsym p exec i3exit shutdown, mode "default"
+    bindsym l exec ~/.local/bin/i3-commands/i3exit logout, mode "default"
+    bindsym s exec ~/.local/bin/i3-commands/i3exit suspend, mode "default"
+    bindsym h exec ~/.local/bin/i3-commands/i3exit hibernate, mode "default"
+    bindsym r exec ~/.local/bin/i3-commands/i3exit reboot, mode "default"
+    bindsym p exec ~/.local/bin/i3-commands/i3exit shutdown, mode "default"
 
     # back to normal
     bindsym q mode "default"
@@ -155,16 +155,16 @@ mode "$mode_system" {
 bindsym $mod+p mode "$mode_system"
 
 set $mode_power_profiles System (p) (b)  (s) (q)
-mode "$mode_system" {
-    bindsym p exec i3power-profiles performance, mode "default"
-    bindsym b exec i3power-profiles balanced, mode "default"
-    bindsym s exec i3power-profiles powerSaver, mode "default"
+mode "$mode_power_profiles" {
+    bindsym p exec ~/.local/bin/i3-commands/i3power-profiles performance, mode "default"
+    bindsym b exec ~/.local/bin/i3-commands/i3power-profiles balanced, mode "default"
+    bindsym s exec ~/.local/bin/i3-commands/i3power-profiles powerSaver, mode "default"
 
     # back to normal
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+p mode "$mode_power_profiles"
+bindsym $mod+shift+p mode "$mode_power_profiles"
 
 # Resize
 # Pixels per resize
