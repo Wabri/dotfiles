@@ -85,7 +85,7 @@ bindsym $mod+e layout toggle split
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym $mod+space exec ~/.local/bin/chkey
+bindsym ctrl+space exec ~/.local/bin/chkey
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun
