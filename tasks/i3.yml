@@ -12,7 +12,7 @@
 - name: Copy i3wm configurations
   copy:
     src: Pictures
-    dest: "{{ home_dir }}/Pictures"
+    dest: "{{ home_dir }}"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     directory_mode: yes

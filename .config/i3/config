@@ -81,14 +81,11 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+e layout toggle split
 
-# Bar
-bindsym $mod+b bar mode toggle
-
 # Display
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym $mod+space exec chkey
+bindsym $mod+space exec ~/.local/bin/chkey
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun
@@ -135,6 +132,9 @@ scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 
 # lock
 bindsym $mod+shift+x exec ~/.local/bin/i3-commands/i3exit lock
+
+# Bar toggle
+bindsym $mod+b exec ~/.config/polybar/toggle.sh
 
 #######################
 # === Modes ===========
@@ -309,9 +309,6 @@ exec --no-startup-id nm-applet
 # Autotiling
 exec_always --no-startup-id autotiling
 
-# Updater
-exec --no-startup-id pamac-tray
-
 #######################
 # === Floating ========
 #######################
@@ -331,46 +328,6 @@ for_window [window_role="About"] floating enable
 # === Bar ============
 #######################
 
-bar {
-    status_command i3status -c ~/.config/i3/i3status.conf
-    font pango:JetBrains Mono 10
-    # dock|hide|invisible
-    mode dock
-    # hide|show
-    hidden_state hide
-    # <Modifier>|none
-    modifier $mod
-    # disable clicking on workspace buttons
-    # bindsym button1 nop
-    bindsym button3 exec --no-startup-id pavucontrol
-    bindsym button2 exec --no-startup-id arandr
-    # bottom|top
-    position bottom
-    # primary|<output>
-    # tray_output none|primary|<output>
-    tray_output primary
-    # <px> [px]
-    tray_padding 0
-    separator_symbol " | "
-    # yes|no
-    workspace_buttons yes
-    # yes|no
-    # strip_workspace_numbers yes
-    # yes|no
-    # strip_workspace_name no
-    # yes|no
-    binding_mode_indicator yes
-    colors {
-        background #2E3440
-        statusline #88C0D0
-        separator #ECEFF4
-
-        # class            border  backgr. text
-        focused_workspace  #2E3440 #2E3440 #A3BE8C
-        active_workspace   #2E3440 #2E3440 #D08770
-        inactive_workspace #2E3440 #2E3440 #4C566A
-        urgent_workspace   #BF616A #2E3440 #BF616A
-        binding_mode       #2E3440 #2E3440 #A3BE8C
-    }
-}
+# Polybar
+exec_always ~/.config/polybar/launch.sh &
 
