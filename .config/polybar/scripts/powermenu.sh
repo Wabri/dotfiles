@@ -8,27 +8,26 @@
 dir="~/.config/polybar/scripts/rofi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
-rofi_command="rofi"
+rofi_command="rofi -no-case-sensitive -hover-select"
 
 # Options
-shutdown=" Shutdown"
-reboot=" Restart"
-lock=" Lock"
-suspend=" Sleep"
-logout=" Logout"
+shutdown=" shutdown"
+reboot=" restart"
+lock=" lock"
+suspend=" sleep"
+logout=" logout"
 
 # Confirmation
 confirm_exit() {
 	rofi -dmenu\
 		-i\
 		-no-fixed-num-lines\
-		-p "Are You Sure? : "\
-		-theme $dir/confirm.rasi
+		-p "Are You Sure? : "
 }
 
 # Message
 msg() {
-	rofi -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
+	rofi -e "Available Options  -  yes / y / no / n"
 }
 
 # Variable passed to rofi
