@@ -5,6 +5,9 @@ call plug#begin('~/.vim/plugged')
 " Colorschemes
 Plug 'kamwitsta/nordisk'
 
+" Colorized for hexa colors
+Plug 'BourgeoisBear/clrzr'
+
 " Fuzzy finder
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
