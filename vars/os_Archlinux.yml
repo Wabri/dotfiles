@@ -25,7 +25,6 @@ ide_packages:
   - fzf
   - nerd-fonts-source-code-pro 
   - ttf-iosevka-nerd
-  - ttf-fantasque-sans-mono
   - ripgrep
   - exa
   - bat
