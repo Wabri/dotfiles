@@ -12,7 +12,16 @@
 - name: Install bash configuration dependencies
   shell: "sudo -u {{ username }} {{ install_command }} {{ bash_package }}"
   loop:
-    - starship
     - bash-completion
   loop_control:
     loop_var: bash_package
+
+- name: Download bash starship installation
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: "/tmp/starship.sh"
+
+- name: Run starship install script
+  shell: "sudo -u {{ username }} sh /tmp/starship.sh -y"
+  register: starship_result
+  ignore_errors: true

@@ -4,8 +4,8 @@ os: Archlinux
 
 # === System configuration ===
 username: wabri
-install_command: yay --noconfirm -S
-update_command: yay -Syyu --noconfirm
+install_command: paru -S --noconfirm 
+update_command: paru -Syyu --noconfirm
 home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
@@ -23,7 +23,9 @@ ide_packages:
   - vim
   - tmux
   - fzf
-  - nerd-fonts-complete-mono-glyphs
+  - nerd-fonts-source-code-pro 
+  - ttf-iosevka-nerd
+  - ttf-fantasque-sans-mono
   - ripgrep
   - exa
   - bat
@@ -39,11 +41,9 @@ system_packages:
   - dunst
   - blueberry
   - rofi
-  - power-profiles-daemon
   - nordic-theme
   - breeze-icons
-  - bibata-cursor-theme
-  - betterlockscreen-git
+  - betterlockscreen
   - autotiling
   - polybar
 

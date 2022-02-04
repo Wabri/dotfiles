@@ -13,6 +13,9 @@
   git:
     repo: https://github.com/lr-tech/rofi-themes-collection.git
     dest: "/tmp/rofi-themes/"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
 
 - name: Install rofi themes collection 
   copy:
@@ -20,7 +23,7 @@
     dest: "{{ home_dir }}/.local/share/rofi/"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
-    mode: '0755'
+    mode: '0766'
     directory_mode: yes
     remote_src: yes
 

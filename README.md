@@ -28,6 +28,14 @@ I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutori
 
 ## How to install this dotfiles
 
+In order to use one profiles you need to install this package manager:
+
+ - ArchBTW: I use [Paru](https://github.com/Morganamilo/paru)
+ - MacOs: I use [homebrew](https://brew.sh/)
+ - Fedora: TBD
+
+Be sure to have python3, than follow this steps:
+
 - Install [Poetry](https://python-poetry.org/) by follow the docs [here](https://python-poetry.org/docs/#installation).
 
     ```bash
@@ -49,6 +57,4 @@ I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutori
     ```
 
 Ansible install everything and once is done the system should work.
-
-**NB: run outside tmux otherwise it does not work**
 

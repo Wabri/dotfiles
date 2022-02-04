@@ -11,11 +11,12 @@ uptime=$(uptime -p | sed -e 's/up //g')
 rofi_command="rofi -no-case-sensitive -hover-select"
 
 # Options
-shutdown=" shutdown"
-reboot=" restart"
-lock=" lock"
-suspend=" sleep"
-logout=" logout"
+shutdown=" shutdown"
+reboot="累 restart"
+hibernate=" hibernate"
+lock=" lock"
+suspend="鈴 sleep"
+logout=" logout"
 
 # Confirmation
 confirm_exit() {

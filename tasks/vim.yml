@@ -49,7 +49,11 @@
 
     - name: Install vim plugins
       shell: "sudo -u {{ username }} vim +PlugInstall! +qa!"
+      args:
+        stdin: "\n"
 
     - name: Clean vim plugins
       shell: "sudo -u {{ username }} vim +PlugClean! +qa!"
+      args:
+        stdin: "\n"
 
