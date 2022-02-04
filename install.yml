@@ -12,7 +12,7 @@
 
     - name: Create Workspaces directory
       file:
-        path: "{{ home_dir }}/{{ workspace_dir }}"
+        path: "{{ home_dir }}/{{ workspace_dir }}/Personal/Dotfiles"
         owner: "{{ username }}"
         group: "{{ group | default(username) }}"
         state: directory

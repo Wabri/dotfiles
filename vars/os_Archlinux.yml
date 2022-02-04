@@ -42,9 +42,11 @@ system_packages:
   - rofi
   - nordic-theme
   - breeze-icons
+  - graphite-cursor-theme-git
   - betterlockscreen
   - autotiling
   - polybar
+  - nautilus
 
 general_packages:
   - vagrant
@@ -74,6 +76,7 @@ system_config:
   - dunst
   - rofi
   - gtk3
+  - nitrogen
   - polybar
   - i3
 
