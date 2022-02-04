@@ -12,7 +12,7 @@ default_shell: zsh
 default_keyboard: us
 ide_install: true
 system_install: true
-general_install: false
+general_install: true
 
 # === Packages ===
 ide_packages:
@@ -23,7 +23,7 @@ ide_packages:
   - vim
   - tmux
   - fzf
-  - nerd-fonts-complete
+  - nerd-fonts-complete-mono-glyphs
   - ripgrep
   - exa
   - bat
@@ -39,13 +39,12 @@ system_packages:
   - dunst
   - blueberry
   - rofi
-  - power-profiles-daemon-git
+  - power-profiles-daemon
   - nordic-theme
   - breeze-icons
-  - graphite-cursor-theme-git
+  - bibata-cursor-theme
   - betterlockscreen-git
   - autotiling
-  - ttf-font-awesome
   - polybar
 
 general_packages:

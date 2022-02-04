@@ -6,6 +6,7 @@
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     directory_mode: yes
+    mode: '0755'
     remote_src: yes
 
 - name: Install rofi themes
