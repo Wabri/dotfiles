@@ -59,7 +59,7 @@ general_packages:
   - tldr
   - etcher-bin
   - vlc
-  - telegram-desktop-git
+  - telegram-desktop
   - whatsapp-for-linux
 
 # === Configurations ===
