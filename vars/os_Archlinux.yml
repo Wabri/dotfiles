@@ -44,9 +44,9 @@ system_packages:
   - breeze-icons
   - graphite-cursor-theme-git
   - betterlockscreen
-  - autotiling
   - polybar
   - nautilus
+  - pavucontrol
 
 general_packages:
   - vagrant

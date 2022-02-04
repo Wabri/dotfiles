@@ -131,7 +131,7 @@ bindsym Print exec \
 scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 
 # lock
-bindsym $mod+shift+x exec ~/.local/bin/i3-commands/i3exit lock
+bindsym $mod+shift+x exec betterlockscreen -l dimblur -- --time-str="%H:%M"
 
 # Bar toggle
 bindsym $mod+b exec ~/.config/polybar/toggle.sh
@@ -142,29 +142,17 @@ bindsym $mod+b exec ~/.config/polybar/toggle.sh
 # i3exit
 set $mode_system System (l) (s) (h) (r)(p)(q)
 mode "$mode_system" {
-    bindsym l exec ~/.local/bin/i3-commands/i3exit logout, mode "default"
-    bindsym s exec ~/.local/bin/i3-commands/i3exit suspend, mode "default"
-    bindsym h exec ~/.local/bin/i3-commands/i3exit hibernate, mode "default"
-    bindsym r exec ~/.local/bin/i3-commands/i3exit reboot, mode "default"
-    bindsym p exec ~/.local/bin/i3-commands/i3exit shutdown, mode "default"
+    bindsym l exec i3-msg exit, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
+    bindsym h exec systemctl hibernate, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym p exec systemctl poweroff, mode "default"
 
     # back to normal
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+p mode "$mode_system"
-
-set $mode_power_profiles System (p) (b)  (s) (q)
-mode "$mode_power_profiles" {
-    bindsym p exec ~/.local/bin/i3-commands/i3power-profiles performance, mode "default"
-    bindsym b exec ~/.local/bin/i3-commands/i3power-profiles balanced, mode "default"
-    bindsym s exec ~/.local/bin/i3-commands/i3power-profiles powerSaver, mode "default"
-
-    # back to normal
-    bindsym q mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+shift+p mode "$mode_power_profiles"
 
 # Resize
 # Pixels per resize
@@ -288,9 +276,6 @@ exec --no-startup-id picom -b
 # === Autostart =======
 #######################
 
-# Polkit-gnome
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
 # Display
 exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
 
@@ -306,9 +291,6 @@ exec --no-startup-id blueberry-tray
 # Network
 exec --no-startup-id nm-applet
 
-# Autotiling
-exec_always --no-startup-id autotiling
-
 #######################
 # === Floating ========
 #######################
@@ -317,11 +299,8 @@ floating_modifier $mod
 
 # set floating (nontiling)for apps needing it
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-
-# set floating (nontiling) for special apps
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [window_role="About"] floating enable
 
 #######################
