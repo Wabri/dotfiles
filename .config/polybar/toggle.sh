@@ -13,5 +13,6 @@ if [[ $? == 1 ]] ; then
 
   # Launch the bar
   polybar -q main -c "$DIR"/config.ini &
+  polybar -q second -c "$DIR"/config.ini &
 fi
 
