@@ -47,6 +47,7 @@ system_packages:
   - polybar
   - nautilus
   - pavucontrol
+  - sddm
 
 general_packages:
   - vagrant

@@ -11,6 +11,16 @@
 
 - name: Copy i3wm configurations
   copy:
+    src: .screenlayout/
+    dest: "{{ home_dir }}/.screenlayout/"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    directory_mode: yes
+    mode: '0755'
+    remote_src: yes
+
+- name: Copy i3wm configurations
+  copy:
     src: Pictures
     dest: "{{ home_dir }}"
     owner: "{{ username }}"
