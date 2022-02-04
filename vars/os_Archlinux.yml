@@ -50,7 +50,6 @@ system_packages:
 general_packages:
   - vagrant
   - spotify
-  - steam
   - firefox
   - obinskit
   - htop
