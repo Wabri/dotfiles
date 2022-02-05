@@ -15,7 +15,7 @@
 - name: Exec spotify to setup configuration
   shell: >
     sudo -u {{ username }} spotify &
-    sleep 5 ; killall spotify
+    sleep 5 ; killall -q spotify
 
 - name: Init spicetify configuration
   shell: "sudo -u {{ username }} spicetify"

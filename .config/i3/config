@@ -140,7 +140,7 @@ bindsym $mod+b exec ~/.config/polybar/toggle.sh
 # === Modes ===========
 #######################
 # i3exit
-set $mode_system System (l) (s) (h) (r)(p)(q)
+set $mode_system System
 mode "$mode_system" {
     bindsym l exec i3-msg exit, mode "default"
     bindsym s exec systemctl suspend, mode "default"
@@ -157,7 +157,7 @@ bindsym $mod+p mode "$mode_system"
 # Resize
 # Pixels per resize
 set $pxpr 10
-set $mode_resize Resize (h) (j) (k) (l) (q)
+set $mode_resize Resize 
 mode "$mode_resize" {
         bindsym h resize shrink width $pxpr px or $pxpr ppt
         bindsym j resize grow height $pxpr px or $pxpr ppt
@@ -170,7 +170,7 @@ mode "$mode_resize" {
 bindsym $mod+r mode $mode_resize
 
 # Move workspace
-set $workspace_move Workspace (h) (j) (k) (l) (q)
+set $workspace_move Workspace
 mode "$workspace_move" {
 
     # Move workspace between outputs
@@ -197,7 +197,7 @@ mode "$workspace_move" {
 bindsym $mod+Shift+w mode "$workspace_move"
 
 # Output move orientations
-set $output_move Output (h) (k) (q)
+set $output_move Output 
 mode "$output_move" {
     
     # Secondary screen orientation
@@ -264,6 +264,18 @@ for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Nautilus"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
+
+# Multiple monitor setup (works even with one screen)
+workspace $ws1 output $o_primary
+workspace $ws2 output $o_primary
+workspace $ws3 output $o_primary
+workspace $ws4 output $o_primary
+workspace $ws5 output $o_primary
+workspace $ws6 output $o_secondary
+workspace $ws7 output $o_secondary
+workspace $ws8 output $o_secondary
+workspace $ws9 output $o_secondary
+workspace $ws10 output $o_secondary
 
 #######################
 # === Compositor ======

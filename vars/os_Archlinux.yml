@@ -80,6 +80,7 @@ system_config:
   - nitrogen
   - polybar
   - i3
+  - sddm
 
 general_config:
   - spotify

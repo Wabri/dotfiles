@@ -8,7 +8,7 @@
 
 - name: Copy i3wm configurations
   copy:
-    src: /usr/lib/sddm/sddm.conf.d/sddm.conf
+    src: /usr/lib/sddm/sddm.conf.d/default.conf
     dest: /etc/sddm.conf
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
@@ -20,5 +20,10 @@
   replace:
     path: /etc/sddm.conf
     regexp: '^Current=$'
-    replace: 'Current=sugar-candy'
+    replace: 'Current=Sugar-Candy'
 
+- name: Update theme of sddm
+  replace:
+    path: /usr/share/sddm/themes/Sugar-Candy/theme.conf
+    regexp: '^Background="Mountain.jpg"'
+    replace: "Background=\"{{ home_dir }}/Pictures/wallpaper.png\""
