@@ -201,9 +201,9 @@ set $output_move Output
 mode "$output_move" {
     
     # Secondary screen orientation
-    bindsym h exec ~/.screenlayout/left.sh, exec sleep 2 && nitrogen --restore, mode "default"
-    bindsym k exec ~/.screenlayout/up.sh, exec sleep 2 && nitrogen --restore, mode "default"
-    
+    bindsym h exec ~/.screenlayout/left.sh, exec sleep 2 && nitrogen --restore && ~/.config/polybar/launch.sh, mode "default"
+    bindsym k exec ~/.screenlayout/up.sh, exec sleep 2 && nitrogen --restore && ~/.config/polybar/launch.sh, mode "default"
+
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
