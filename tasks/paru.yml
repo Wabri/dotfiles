@@ -12,7 +12,7 @@
     repo: https://github.com/Morganamilo/paru
     dest: "/tmp/paru"
 
-- name: Recursively change ownership of a directory
+- name: Recursively change ownership of paru directory
   file:
     path: "/tmp/paru"
     state: directory

@@ -10,9 +10,9 @@ home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
-ide_install: false
-system_install: false
-general_install: false
+ide_install: true
+system_install: true
+general_install: true
 
 # === Before ===
 before:
@@ -46,6 +46,7 @@ system_packages:
   - picom
   - nitrogen
   - dunst
+  - arc-x-icons-theme
   - blueberry
   - rofi
   - nordic-theme
@@ -71,7 +72,7 @@ general_packages:
   - vlc
   - telegram-desktop
   - whatsapp-for-linux
-  - slack
+  - slack-desktop
   - bitwarden
   - obs-studio
 
