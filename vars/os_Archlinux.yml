@@ -10,13 +10,17 @@ home_dir: /home/wabri
 workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
-ide_install: true
-system_install: true
-general_install: true
+ide_install: false
+system_install: false
+general_install: false
 
 # === Before ===
 before:
   - paru
+   
+# === After ===
+after:
+  - bluetooth
 
 # === Packages ===
 ide_packages:
