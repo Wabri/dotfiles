@@ -105,7 +105,7 @@ bindsym $mod+shift+slash layout toggle all
 
 # Volume
 bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- 
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bindsym $mod+XF86AudioRaiseVolume exec amixer sset Master 1%+
 bindsym $mod+XF86AudioLowerVolume exec amixer sset Master 1%-
 bindsym XF86AudioMute exec amixer sset Master toggle
@@ -121,14 +121,11 @@ bindsym XF86MonBrightnessUp exec xbacklight +10
 bindsym XF86MonBrightnessDown exec xbacklight -10
 
 # Screenshot
-bindsym $mod+Shift+Print exec \
-scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym $mod+Shift+Print exec flameshot full -c -p ~/Pictures/Screenshot/
 # Selection
-bindsym --release $mod+Print exec \
-scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym $mod+Print exec flameshot gui -c -p ~/Pictures/Screenshot/
 # Focus window
-bindsym Print exec \
-scrot -u '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym Print exec flameshot screen -c -p ~/Pictures/Screenshot/
 
 # lock
 bindsym $mod+shift+x exec betterlockscreen -l dimblur -- --time-str="%H:%M"
@@ -257,14 +254,14 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # bind program to workspace and focus to them on startup:
 assign [class="(?i)firefox"] $ws2
+assign [class="Steam"] → $ws7
+assign [class="Lutris"] → $ws7
 assign [class="Bitwarden"] → $ws8
 assign [class="TelegramDesktop"] → $ws9
-assign [class="Whatsapp-for-linux"] → $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Nautilus"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="ObinsKit"] floating enable
 
 # Multiple monitor setup (works even with one screen)
 workspace $ws1 output $o_primary

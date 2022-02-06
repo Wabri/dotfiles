@@ -71,6 +71,9 @@ general_packages:
   - vlc
   - telegram-desktop
   - whatsapp-for-linux
+  - slack
+  - bitwarden
+  - obs-studio
 
 # === Configurations ===
 ide_config:

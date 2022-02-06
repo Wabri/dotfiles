@@ -9,7 +9,7 @@
     mode: '0755'
     remote_src: yes
 
-- name: Copy i3wm configurations
+- name: Copy screenlayout directory
   copy:
     src: .screenlayout/
     dest: "{{ home_dir }}/.screenlayout/"
@@ -19,7 +19,7 @@
     mode: '0755'
     remote_src: yes
 
-- name: Copy i3wm configurations
+- name: Copy Pictures directory
   copy:
     src: Pictures
     dest: "{{ home_dir }}"
@@ -28,6 +28,14 @@
     directory_mode: yes
     mode: '0755'
     remote_src: yes
+
+- name: Create Screenshot directory
+  file:
+    path: "{{ home_dir }}/Pictures/Screenshot"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    state: directory
+    mode: "0755"
 
 - name: Restart i3
   shell: "sudo -u {{ username }} i3-msg restart"
