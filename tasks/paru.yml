@@ -1,0 +1,33 @@
+---
+- name: Install base-devel packages
+  shell: sudo pacman -S --needed base-devel
+
+- name: Install paru
+  block:
+    - name: Clone paru repository
+      git:
+        repo: https://github.com/Morganamilo/paru
+        dest: "/tmp/paru"
+    
+    - name: Recursively change ownership of a directory
+      file:
+        path: "/tmp/paru"
+        state: directory
+        recurse: yes
+        owner: "{{ username }}"
+        group: "{{ group | default(username) }}"
+        mode: '0755'
+    
+    - name: Build paru
+      shell:
+        cmd: "makepkg -si"
+        chdir: "/tmp/paru"
+      become_user: "{{ username }}"
+      register: paru_result
+      ignore_errors: true
+
+    - name: Check if paru is already install
+      debug:
+        msg: "Paru is probably already installed"
+      when: paru_result.rc != 0
+

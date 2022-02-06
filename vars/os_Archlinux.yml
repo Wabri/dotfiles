@@ -14,6 +14,10 @@ ide_install: true
 system_install: true
 general_install: true
 
+# === Before ===
+before:
+  - paru
+
 # === Packages ===
 ide_packages:
   - git
