@@ -22,8 +22,11 @@
     regexp: '^Current=$'
     replace: 'Current=Sugar-Candy'
 
-- name: Update theme of sddm
-  replace:
-    path: /usr/share/sddm/themes/Sugar-Candy/theme.conf
-    regexp: '^Background="Mountain.jpg"'
-    replace: "Background=\"{{ home_dir }}/Pictures/wallpaper.png\""
+- name: Update sddm sugar-candy theme
+  copy:
+    remote_src: yes
+    src: sddm/theme.conf
+    dest: "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
