@@ -85,7 +85,7 @@ bindsym $mod+e layout toggle split
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym ctrl+space exec ~/.local/bin/chkey
+bindsym ctrl+space exec ~/.local/bin/chkey && notify-send --expire-time=1000 --urgency=low "Change layout to $(setxkbmap -v | awk -F '+' '/symbols/ {print $2}')"
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun
@@ -104,7 +104,7 @@ bindsym $mod+slash split toggle
 bindsym $mod+shift+slash layout toggle all
 
 # Volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && notify-send --expire-time=1000 --urgency=normal "Master +5%"
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bindsym $mod+XF86AudioRaiseVolume exec amixer sset Master 1%+
 bindsym $mod+XF86AudioLowerVolume exec amixer sset Master 1%-
