@@ -30,3 +30,14 @@
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     mode: '0755'
+
+- name: Disable display-manager to change it
+  systemd:
+    name: display-manager
+    enabled: no
+
+- name: Enable sddm as diplay-manager
+  systemd:
+    name: sddm
+    enabled: yes
+
