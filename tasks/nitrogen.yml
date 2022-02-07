@@ -2,7 +2,7 @@
 - name: Copy nitrogen configuration
   copy:
     src: .config/nitrogen
-    dest: "{{ home_dir }}/.config/nitrogen"
+    dest: "{{ home_dir }}/.config"
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     directory_mode: yes

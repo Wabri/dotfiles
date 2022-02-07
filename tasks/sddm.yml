@@ -28,9 +28,18 @@
     remote_src: yes
     src: sddm/theme.conf
     dest: "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
-    owner: "{{ username }}"
-    group: "{{ group | default(username) }}"
-    mode: '0755'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy Pictures to sddm
+  copy:
+    src: Pictures/wallpaper.png
+    dest: "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/"
+    owner: root
+    group: root
+    mode: '0644'
+    remote_src: yes
 
 - name: Disable display-manager to change it
   systemd:

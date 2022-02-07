@@ -46,6 +46,7 @@ system_packages:
   - picom
   - nitrogen
   - dunst
+  - flameshot
   - arc-x-icons-theme
   - blueberry
   - rofi

@@ -1,6 +1,6 @@
 ---
 - name: Install base-devel packages
-  shell: sudo pacman -S --needed base-devel
+  shell: sudo pacman -S --noconfirm --needed base-devel
 
 - name: Remove paru repository if already exists
   file:
