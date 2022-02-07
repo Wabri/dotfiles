@@ -1,0 +1,110 @@
+---
+# === Archlinux ===
+os: Archlinux
+
+# === System configuration ===
+username: wabri
+install_command: paru -S --noconfirm 
+update_command: paru -Syyu --noconfirm
+home_dir: /home/wabri
+workspace_dir: Documents/Workspaces
+default_shell: zsh
+default_keyboard: us
+ide_install: true
+system_install: true
+general_install: true
+
+# === Before ===
+before:
+  - paru
+   
+# === After ===
+after:
+  - bluetooth
+
+# === Packages ===
+ide_packages:
+  - git
+  - alacritty
+  - bash
+  - zsh
+  - vim
+  - tmux
+  - fzf
+  - nerd-fonts-source-code-pro 
+  - ttf-iosevka-nerd
+  - ripgrep
+  - exa
+  - bat
+  - git-delta
+  - nodejs
+
+system_packages:
+  - i3-gaps
+  - playerctl
+  - arandr
+  - picom
+  - nitrogen
+  - dunst
+  - flameshot
+  - arc-x-icons-theme
+  - blueberry
+  - rofi
+  - nordic-theme
+  - breeze-icons
+  - graphite-cursor-theme-git
+  - betterlockscreen
+  - polybar
+  - nautilus
+  - pavucontrol
+  - sddm
+  - grub
+
+general_packages:
+  - vagrant
+  - spotify
+  - firefox
+  - obinskit
+  - htop
+  - gtop
+  - ncdu
+  - duf
+  - tldr
+  - etcher-bin
+  - vlc
+  - telegram-desktop
+  - whatsapp-for-linux
+  - slack-desktop
+  - bitwarden
+  - obs-studio
+
+# === Configurations ===
+ide_config:
+  - alacritty
+  - vim
+  - vim-plug
+  - tmux
+  - tpm
+  - bash
+  - ohmyzsh
+  - starship
+  - zsh
+  - starship
+  - ohmyzsh
+  - git
+
+system_config:
+  - dunst
+  - rofi
+  - rofithemes
+  - gtk3
+  - nitrogen
+  - polybar
+  - i3
+  - sddm
+  - sddm-sugar-candy
+  - grub2-themes
+
+general_config:
+  - spotify
+

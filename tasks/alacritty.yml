@@ -1,0 +1,17 @@
+---
+- name: Create alacritty configuration directory
+  file:
+    path: "{{ home_dir }}/.config/alacritty"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    state: directory
+
+- name: Init alacritty configuration 
+  copy:
+    remote_src: yes
+    src: .config/alacritty/alacritty.yml
+    dest: "{{ home_dir }}/.config/alacritty/alacritty.yml"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
+    backup: yes

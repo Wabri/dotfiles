@@ -1,0 +1,21 @@
+---
+- name: Copy sddm configurations
+  copy:
+    src: /usr/lib/sddm/sddm.conf.d/default.conf
+    dest: /etc/sddm.conf
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    directory_mode: yes
+    mode: '0755'
+    remote_src: yes
+
+- name: Disable display-manager to change it
+  systemd:
+    name: display-manager
+    enabled: no
+
+- name: Enable sddm as diplay-manager
+  systemd:
+    name: sddm
+    enabled: yes
+

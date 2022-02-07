@@ -1,0 +1,19 @@
+---
+- name: Init bashrc
+  copy:
+    remote_src: yes
+    src: .bashrc
+    dest: "{{ home_dir }}/.bashrc"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
+    backup: yes
+
+- name: Install bash configuration dependencies
+  shell: "{{ install_command }} {{ bash_package }}"
+  loop:
+    - bash-completion
+  loop_control:
+    loop_var: bash_package
+  become_user: "{{ username }}"
+

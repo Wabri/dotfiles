@@ -1,0 +1,37 @@
+---
+- name: Enable xcode-select
+  shell: "xcode-select --install"
+  register: xcode_result
+  ignore_errors: true
+  become_user: "{{ username }}"
+
+- name: Check if xcode is already installed
+  debug:
+    msg: "Xcode is already installed"
+  when: xcode_result.rc != 0
+
+- name: Install homebrew
+  block:
+    - name: Remove homebrew repository if already exists
+      file:
+        state: absent
+        path: "/tmp/homebrew.sh"
+
+    - name: Download homebrew installation
+      get_url:
+        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        dest: "/tmp/homebrew.sh"
+
+    - name: Recursively change ownership of homebrew script
+      file:
+        path: "/tmp/homebrew.sh"
+        owner: "{{ username }}"
+        group: "{{ group | default(username) }}"
+        mode: '0777'
+
+    - name: Run homebrew install script
+      shell: "NONINTERACTIVE=1 bash /tmp/homebrew.sh"
+      register: homebrew_result
+      ignore_errors: true
+      become_user: "{{ username }}"
+

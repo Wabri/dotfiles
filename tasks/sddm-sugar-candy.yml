@@ -1,0 +1,24 @@
+---
+- name: Install sddm themes and dependencies
+  shell: "{{ install_command }} {{ sddm_package }}"
+  loop:
+    - sddm-theme-sugar-candy-git
+  loop_control:
+    loop_var: sddm_package
+  become_user: "{{ username }}"
+
+- name: Update theme of sddm
+  replace:
+    path: /etc/sddm.conf
+    regexp: '^Current=$'
+    replace: 'Current=Sugar-Candy'
+
+- name: Update sddm sugar-candy theme
+  copy:
+    remote_src: yes
+    src: sddm/theme.conf
+    dest: "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
+

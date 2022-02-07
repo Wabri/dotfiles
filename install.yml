@@ -1,0 +1,144 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Get Profile variables
+      include_vars: "profiles/{{ profile }}.yml"
+      when: profile is defined
+
+    - name: Get Os variables if no profile
+      include_vars: "os_{{ ansible_facts['distribution'] }}.yml"
+      when: profile is undefined
+
+    - name: Before installation
+      block:
+        - name: Print before tasks
+          debug:
+            var: before
+
+        - name: Run before tasks
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ before }}"
+      when: before is defined
+
+    - name: Create Workspaces directory
+      file:
+        path: "{{ home_dir }}/{{ workspace_dir }}/Personal/Dotfiles"
+        owner: "{{ username }}"
+        group: "{{ group | default(username) }}"
+        state: directory
+        mode: "0755"
+
+    - name: Update packages
+      shell: "{{ update_command }}"
+      when: update_command is defined
+      become_user: "{{ username }}"
+
+    - name: Install IDE
+      block:
+        - name: Print ide packages
+          debug:
+            var: ide_packages
+
+        - name: Install IDE packages
+          shell: "{{ install_command }} {{ item }}"
+          with_items:
+            - "{{ ide_packages }}"
+          ignore_errors: true
+          become_user: "{{ username }}"
+
+        - name: Init IDE configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ ide_config }}"
+
+        - name: Copy user local directory
+          copy:
+            src: .local/
+            dest: "{{ home_dir }}/.local"
+            owner: "{{ username }}"
+            group: "{{ group | default(username) }}"
+            directory_mode: yes
+            remote_src: yes
+            mode: "0755"
+
+        - name: Copy environment configuration
+          copy:
+            src: .env
+            dest: "{{ home_dir }}/.env"
+            owner: "{{ username }}"
+            group: "{{ group | default(username) }}"
+            remote_src: yes
+            mode: "0755"
+
+        - name: Copy aliases
+          copy:
+            src: .aliases
+            dest: "{{ home_dir }}/.aliases"
+            owner: "{{ username }}"
+            group: "{{ group | default(username) }}"
+            remote_src: yes
+            mode: "0755"
+
+        - name: Set default shell
+          shell: "sudo usermod --shell /bin/{{ default_shell }} {{ username }}"
+          ignore_errors: true
+              
+        - name: Set default keyboard layout using setxkbmap
+          shell: "setxkbmap -layout {{ default_keyboard }}"
+          when: default_keyboard is defined
+          become_user: "{{ username }}"
+      when: ide_install
+
+    - name: Install system environment
+      block:
+        - name: Print system packages
+          debug:
+            var: system_packages
+
+        - name: Install system packages
+          shell: "{{ install_command }} {{ item }}"
+          with_items:
+            - "{{ system_packages }}"
+          ignore_errors: true
+          become_user: "{{ username }}"
+
+        - name: Init system configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ system_config }}"
+          when: system_config is defined
+      when: system_install
+
+    - name: Install general packages
+      block:
+        - name: Print system packages
+          debug:
+            var: general_packages
+
+        - name: Install general packages
+          shell: "{{ install_command }} {{ item }}"
+          with_items:
+            - "{{ general_packages }}"
+          ignore_errors: true
+          become_user: "{{ username }}"
+
+        - name: Init general configurations
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ general_config }}"
+          when: general_config is defined
+      when: general_install
+
+    - name: After installation
+      block:
+        - name: Print after tasks
+          debug:
+            var: after
+
+        - name: Run after tasks
+          include_tasks: "tasks/{{ item }}.yml"
+          with_items:
+            - "{{ after }}"
+      when: after is defined

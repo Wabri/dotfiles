@@ -1,3 +1,10 @@
-# VIM
+# === VIM ===
 *.swp
 Session.vim
+
+# === Poetry ===
+poetry.lock
+
+# === Kitchen ===
+kitchen.local.yml
+

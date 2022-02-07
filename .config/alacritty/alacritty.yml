@@ -25,7 +25,7 @@ window:
      y: 7
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   # Values for `decorations`:
@@ -35,7 +35,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
 
 
 
@@ -48,11 +48,11 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Fullscreen
+  startup_mode: Windowed
 
 
 # Background opacity
-background_opacity: 1.0
+window.opacity: 1.0
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -67,26 +67,26 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrains Mono
+    family: Source Code Pro
     style: Regular
 
   # Bold font face
   bold:
-    family: JetBrains Mono
+    family: Source Code Pro
     style: Bold
 
   # Italic font face
   italic:
-    family: JetBrains Mono
+    family: Source Code Pro
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: JetBrains Mono
+    family: Source Code Pro
     style: Bold Italic
 
   # Point size
-  size: 16.0
+  size: 9.0
   
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -98,10 +98,8 @@ colors:
     dim_foreground: '#a5abb6'
     cursor:
       text: '#2e3440'
-    cursor: '#d8dee9'
     vi_mode_cursor:
       text: '#2e3440'
-    cursor: '#d8dee9'
     selection:
       text: CellForeground
       background: '#4c566a'

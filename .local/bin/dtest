@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+pidof dunst && killall dunst 
+dunst &
+ notify-send --expire-time=80000 --urgency=critical critical
+ notify-send --expire-time=80000 --urgency=normal normal
+ notify-send --expire-time=80000 --urgency=low low
