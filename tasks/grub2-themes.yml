@@ -1,0 +1,16 @@
+---
+- name: Remove grub2-themes repository if already exists
+  file:
+    state: absent
+    path: "/tmp/grub2-themes"
+
+- name: Clone grub2-themes repository
+  git:
+    repo: https://github.com/Morganamilo/grub2-themes
+    dest: "/tmp/grub2-themes"
+
+- name: Install grub2 whitesur theme
+  shell:
+    cmd: "./install.sh -t whitesur -i color"
+    chdir: "/tmp/grub2-themes"
+

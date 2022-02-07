@@ -58,6 +58,7 @@ system_packages:
   - nautilus
   - pavucontrol
   - sddm
+  - grub
 
 general_packages:
   - vagrant
@@ -100,6 +101,7 @@ system_config:
   - i3
   - sddm
   - sddm-sugar-candy
+  - grub2-themes
 
 general_config:
   - spotify
