@@ -22,7 +22,6 @@
             - "{{ before }}"
       when: before is defined
 
-      when: system_install
     - name: Create Workspaces directory
       file:
         path: "{{ home_dir }}/{{ workspace_dir }}/Personal/Dotfiles"
