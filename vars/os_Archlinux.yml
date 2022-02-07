@@ -81,19 +81,25 @@ general_packages:
 ide_config:
   - alacritty
   - vim
+  - vim-plug
   - tmux
+  - tpm
   - bash
   - zsh
+  - starship
+  - ohmyzsh
   - git
 
 system_config:
   - dunst
   - rofi
+  - rofithemes
   - gtk3
   - nitrogen
   - polybar
   - i3
   - sddm
+  - sddm-sugar-candy
 
 general_config:
   - spotify

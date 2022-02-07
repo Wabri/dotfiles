@@ -12,7 +12,7 @@
 
 - name: Install homebrew
   block:
-    - name: Remove paru repository if already exists
+    - name: Remove homebrew repository if already exists
       file:
         state: absent
         path: "/tmp/homebrew.sh"
@@ -34,3 +34,4 @@
       register: homebrew_result
       ignore_errors: true
       become_user: "{{ username }}"
+

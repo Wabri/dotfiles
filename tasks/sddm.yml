@@ -1,13 +1,5 @@
 ---
-- name: Install sddm themes and dependencies
-  shell: "{{ install_command }} {{ sddm_package }}"
-  loop:
-    - sddm-theme-sugar-candy-git
-  loop_control:
-    loop_var: sddm_package
-  become_user: "{{ username }}"
-
-- name: Copy i3wm configurations
+- name: Copy sddm configurations
   copy:
     src: /usr/lib/sddm/sddm.conf.d/default.conf
     dest: /etc/sddm.conf
@@ -15,30 +7,6 @@
     group: "{{ group | default(username) }}"
     directory_mode: yes
     mode: '0755'
-    remote_src: yes
-
-- name: Update theme of sddm
-  replace:
-    path: /etc/sddm.conf
-    regexp: '^Current=$'
-    replace: 'Current=Sugar-Candy'
-
-- name: Update sddm sugar-candy theme
-  copy:
-    remote_src: yes
-    src: sddm/theme.conf
-    dest: "/usr/share/sddm/themes/Sugar-Candy/theme.conf"
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Copy Pictures to sddm
-  copy:
-    src: Pictures/wallpaper.png
-    dest: "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/"
-    owner: root
-    group: root
-    mode: '0644'
     remote_src: yes
 
 - name: Disable display-manager to change it

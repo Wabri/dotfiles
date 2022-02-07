@@ -1,0 +1,21 @@
+---
+- name: Install rofi themes
+  git:
+    repo: https://github.com/lr-tech/rofi-themes-collection.git
+    dest: "/tmp/rofi-themes/"
+
+- name: Install rofi themes collection
+  copy:
+    src: /tmp/rofi-themes/themes
+    dest: "{{ home_dir }}/.local/share/rofi/"
+    directory_mode: yes
+    remote_src: yes
+
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ home_dir }}/.local/share/rofi/"
+    state: directory
+    recurse: yes
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    mode: '0755'
