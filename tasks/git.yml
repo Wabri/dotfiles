@@ -18,4 +18,3 @@
     group: "{{ group | default(username) }}"
     mode: '0755'
     backup: yes
-
