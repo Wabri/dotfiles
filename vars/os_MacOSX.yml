@@ -13,6 +13,10 @@ ide_install: true
 system_install: true
 general_install: true
 
+# === Before ===
+before:
+  - homebrew
+
 # === Packages ===
 ide_packages:
   - git
@@ -25,6 +29,7 @@ ide_packages:
   - exa
   - bat
   - git-delta
+  - starship
 
 system_packages:
   - vagrant
