@@ -41,4 +41,3 @@
   shell: "i3-msg restart"
   become_user: "{{ username }}"
 
-

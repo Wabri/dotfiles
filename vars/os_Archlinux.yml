@@ -86,6 +86,8 @@ ide_config:
   - tmux
   - tpm
   - bash
+  - ohmyzsh
+  - starship
   - zsh
   - starship
   - ohmyzsh
@@ -105,3 +107,4 @@ system_config:
 
 general_config:
   - spotify
+
