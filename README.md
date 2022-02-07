@@ -8,12 +8,13 @@
 * High **usability** and **performance**
 * **Optimized** for a 60% keyboard
 * **Low resources** used
-* **Colors and palette**: [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
+* **Colors and palette**: Mostly [Nord Theme](https://www.nordtheme.com/docs/colors-and-palettes)
 
 ## Table of contents
 
 - [Why nord?](#why-nord)
 - [How I maintain those dotfiles](#how-i-maintain-those-dotfiles)
+- [How to install this dotfiles](#how-to-install-this-dotfiles)
 
 ## Why nord?
 
@@ -24,15 +25,15 @@ Now I'm using nord everywhere I can, from vim to firefox and I'm well settled.
 
 ## How I maintain those dotfiles
 
-I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutorials/dotfiles) to Ansible automation. This add more complexity in order to get more efficency.
+I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutorials/dotfiles) to [Daje](https://github.com/Wabri/Daje).
 
 ## How to install this dotfiles
 
-In order to use one profiles you need to install this package manager:
+There are 3 dotfiles here and the definitions are stored in those profiles:
 
- - ArchBTW: I use [Paru](https://github.com/Morganamilo/paru)
- - MacOs: I use [homebrew](https://brew.sh/)
- - Fedora: TBD
+ - [ArchBTW](vars/os_Archlinux.yml)
+ - [MacOSX](vars/os_MacOSX.yml)
+ - [Fedora](vars/): TBD
 
 Be sure to have python3, than follow this steps:
 
@@ -49,12 +50,12 @@ Be sure to have python3, than follow this steps:
     cd dotfiles
     ```
 
-- Run poetry install and run ansible-playbook:
+- Run poetry install and run ansible-playbook, depending on the os the specific dotfiles will be installed:
 
     ```bash
     poetry install
     poetry run ansible-playbook -K install.yml 
     ```
 
-Ansible install everything and once is done the system should work.
+Ansible install everything and once is done the system should work. In some cases (ArchBTW) a reboot is necessary.
 
