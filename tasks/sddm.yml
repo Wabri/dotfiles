@@ -1,10 +1,11 @@
 ---
 - name: Install sddm themes and dependencies
-  shell: "sudo -u {{ username }} {{ install_command }} {{ sddm_package }}"
+  shell: "{{ install_command }} {{ sddm_package }}"
   loop:
     - sddm-theme-sugar-candy-git
   loop_control:
     loop_var: sddm_package
+  become_user: "{{ username }}"
 
 - name: Copy i3wm configurations
   copy:

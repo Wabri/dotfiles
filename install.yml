@@ -32,8 +32,9 @@
         mode: "0755"
 
     - name: Update packages
-      shell: "sudo -u {{ username }} {{ update_command }}"
+      shell: "{{ update_command }}"
       when: update_command is defined
+      become_user: "{{ username }}"
 
     - name: Install IDE
       block:
@@ -42,10 +43,11 @@
             var: ide_packages
 
         - name: Install IDE packages
-          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+          shell: "{{ install_command }} {{ item }}"
           with_items:
             - "{{ ide_packages }}"
           ignore_errors: true
+          become_user: "{{ username }}"
 
         - name: Init IDE configurations
           include_tasks: "tasks/{{ item }}.yml"
@@ -85,8 +87,9 @@
           ignore_errors: true
               
         - name: Set default keyboard layout using setxkbmap
-          shell: "sudo -u {{ username }} setxkbmap -layout {{ default_keyboard }}"
+          shell: "setxkbmap -layout {{ default_keyboard }}"
           when: default_keyboard is defined
+          become_user: "{{ username }}"
       when: ide_install
 
     - name: Install system environment
@@ -96,10 +99,11 @@
             var: system_packages
 
         - name: Install system packages
-          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+          shell: "{{ install_command }} {{ item }}"
           with_items:
             - "{{ system_packages }}"
           ignore_errors: true
+          become_user: "{{ username }}"
 
         - name: Init system configurations
           include_tasks: "tasks/{{ item }}.yml"
@@ -115,10 +119,11 @@
             var: general_packages
 
         - name: Install general packages
-          shell: "sudo -u {{ username }} {{ install_command }} {{ item }}"
+          shell: "{{ install_command }} {{ item }}"
           with_items:
             - "{{ general_packages }}"
           ignore_errors: true
+          become_user: "{{ username }}"
 
         - name: Init general configurations
           include_tasks: "tasks/{{ item }}.yml"

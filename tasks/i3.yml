@@ -38,6 +38,7 @@
     mode: "0755"
 
 - name: Restart i3
-  shell: "sudo -u {{ username }} i3-msg restart"
+  shell: "i3-msg restart"
+  become_user: "{{ username }}"
 
 

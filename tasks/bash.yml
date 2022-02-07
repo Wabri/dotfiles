@@ -10,11 +10,12 @@
     backup: yes
 
 - name: Install bash configuration dependencies
-  shell: "sudo -u {{ username }} {{ install_command }} {{ bash_package }}"
+  shell: "{{ install_command }} {{ bash_package }}"
   loop:
     - bash-completion
   loop_control:
     loop_var: bash_package
+  become_user: "{{ username }}"
 
 - name: Download bash starship installation
   get_url:
@@ -22,6 +23,7 @@
     dest: "/tmp/starship.sh"
 
 - name: Run starship install script
-  shell: "sudo -u {{ username }} sh /tmp/starship.sh -y"
+  shell: "sh /tmp/starship.sh -y"
   register: starship_result
   ignore_errors: true
+  become_user: "{{ username }}"

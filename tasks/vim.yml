@@ -9,7 +9,7 @@
     mode: '0755'
     backup: yes
 
-- name: Init plugins 
+- name: Init vim-plug
   block:
     - name: Create vim directory
       file:
@@ -48,12 +48,14 @@
         dest: "{{ home_dir }}/.vim/autoload/plug.vim"
 
     - name: Install vim plugins
-      shell: "sudo -u {{ username }} vim +PlugInstall! +qa!"
+      shell: "vim +PlugInstall! +qa!"
       args:
         stdin: "\n"
+      become_user: "{{ username }}"
 
     - name: Clean vim plugins
-      shell: "sudo -u {{ username }} vim +PlugClean! +qa!"
+      shell: "vim +PlugClean! +qa!"
       args:
         stdin: "\n"
+      become_user: "{{ username }}"
 
