@@ -29,7 +29,7 @@ Now I'm using nord everywhere I can, from vim to firefox and I'm well settled.
 
 ## How I maintain those dotfiles
 
-I switch from Atlassian bare git repository(https://www.atlassian.com/git/tutorials/dotfiles) to [Daje](https://github.com/Wabri/Daje).
+With [Daje](https://github.com/Wabri/Daje) of course.
 
 ## How to install this dotfiles
 
