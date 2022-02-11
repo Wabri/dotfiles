@@ -61,7 +61,10 @@ system_packages:
   - grub
 
 general_packages:
+  - neofetch
+  - wget
   - vagrant
+  - virtualbox
   - spotify
   - firefox
   - obinskit
@@ -106,5 +109,6 @@ system_config:
   - grub2-themes
 
 general_config:
+  - neofetch
   - spotify
 
