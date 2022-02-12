@@ -104,11 +104,11 @@ bindsym $mod+slash split toggle
 bindsym $mod+shift+slash layout toggle all
 
 # Volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && notify-send --expire-time=1000 --urgency=low "ﱛ +5%"
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && notify-send --expire-time=1000 --urgency=low "ﱜ -5%"
-bindsym $mod+XF86AudioRaiseVolume exec amixer sset Master 1%+ && notify-send --expire-time=1000 --urgency=low "ﱛ +1%"
-bindsym $mod+XF86AudioLowerVolume exec amixer sset Master 1%- && notify-send --expire-time=1000 --urgency=low "ﱜ -1%"
-bindsym XF86AudioMute exec amixer sset Master toggle && notify-send --expire-time=1500 --urgency=critical "ﱝ Mute"
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && notify-send --expire-time=1000 --urgency=low 'Volume 墳 +5'
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && notify-send --expire-time=1000 --urgency=low 'Volume 奔 -5'
+bindsym $mod+XF86AudioRaiseVolume exec amixer sset Master 1%+ && notify-send --expire-time=1000 --urgency=low 'Volume 墳 +1'
+bindsym $mod+XF86AudioLowerVolume exec amixer sset Master 1%- && notify-send --expire-time=1000 --urgency=low 'Volume 奔 -1 '
+bindsym XF86AudioMute exec pactl -- set-sink-mute 0 toggle && notify-send --expire-time=1500 --urgency=critical 'Volume 婢 toggle mute '
 
 # Media
 #          
@@ -138,7 +138,7 @@ bindsym $mod+b exec ~/.config/polybar/toggle.sh
 #######################
 # === Modes ===========
 #######################
-# i3exit
+# System
 set $mode_system System
 mode "$mode_system" {
     bindsym l exec i3-msg exit, mode "default"
@@ -147,15 +147,14 @@ mode "$mode_system" {
     bindsym r exec systemctl reboot, mode "default"
     bindsym p exec systemctl poweroff, mode "default"
 
-    # back to normal
-    bindsym q mode "default"
-    bindsym Escape mode "default"
+    bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit System Mode"
+    bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit System Mode"
 }
-bindsym $mod+p mode "$mode_system"
+bindsym $mod+p mode "$mode_system", exec notify-send --expire-time=2500 --urgency=critical "System Mode"
 
 # Resize
 # Pixels per resize
-set $pxpr 10
+set $pxpr 3
 set $mode_resize Resize 
 mode "$mode_resize" {
         bindsym h resize shrink width $pxpr px or $pxpr ppt
@@ -163,10 +162,10 @@ mode "$mode_resize" {
         bindsym k resize shrink height $pxpr px or $pxpr ppt
         bindsym l resize grow width $pxpr px or $pxpr ppt
 
-        bindsym Escape mode "default"
-        bindsym q mode "default"
+        bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Resize Mode"
+        bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Resize Mode"
 }
-bindsym $mod+r mode $mode_resize
+bindsym $mod+r mode $mode_resize, exec notify-send --expire-time=2500 --urgency=critical "Resize Mode"
 
 # Move workspace
 set $workspace_move Workspace
@@ -190,10 +189,10 @@ mode "$workspace_move" {
     bindsym $mod+Shift+k move up
     bindsym $mod+Shift+l move right
     
-    bindsym q mode "default"
-    bindsym Escape mode "default"
+    bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Workspace Mode"
+    bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Workspace Mode"
 }
-bindsym $mod+Shift+w mode "$workspace_move"
+bindsym $mod+Shift+w mode "$workspace_move", exec notify-send --expire-time=2500 --urgency=critical "Workspace Mode"
 
 # Output move orientations
 set $output_move Output 
@@ -204,10 +203,26 @@ mode "$output_move" {
     bindsym k exec ~/.screenlayout/up.sh, exec sleep 2 && nitrogen --restore && ~/.config/polybar/launch.sh, mode "default"
     bindsym s exec ~/.screenlayout/solo.sh, exec sleep 2 && nitrogen --restore && ~/.config/polybar/launch.sh, mode "default"
 
-    bindsym q mode "default"
-    bindsym Escape mode "default"
+    bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Output Mode"
+    bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Output Mode"
 }
-bindsym $mod+Shift+m mode "$output_move"
+bindsym $mod+Shift+m mode "$output_move", exec notify-send --expire-time=2500 --urgency=critical "Output Mode"
+
+# Media
+#          
+set $media_mode Media
+mode "$media_mode" {
+    bindsym j exec playerctl play && notify-send --expire-time=1500 --urgency=low "Media "
+    bindsym k exec playerctl pause && notify-send --expire-time=1500 --urgency=low "Media "
+    bindsym l exec playerctl next && notify-send --expire-time=1500 --urgency=low "Media "
+    bindsym h exec playerctl previous && notify-send --expire-time=1500 --urgency=low "Media "
+
+    bindsym s exec playerctl play-pause && notify-send --expire-time=1500 --urgency=low "Media  " && notify-send --expire-time=2000 --urgency=critical "Exit Media Mode", mode "default"
+
+    bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode"
+    bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode"
+}
+bindsym $mod+s mode "$media_mode", exec notify-send --expire-time=2500 --urgency=critical "Media Mode"
 
 #######################
 # === Workspace =======
@@ -260,10 +275,9 @@ assign [class="Steam"] → $ws7
 assign [class="Lutris"] → $ws7
 assign [class="Bitwarden"] → $ws8
 assign [class="TelegramDesktop"] → $ws9
+assign [class="Whatsapp-for-linux"] → $ws9
+assign [class="Slack"] → $ws9
 for_window [class="Spotify"] move to workspace $ws10
-for_window [class="Nautilus"] floating enable
-for_window [class="Arandr"] floating enable
-for_window [class="Pavucontrol"] floating enable
 
 # Multiple monitor setup (works even with one screen)
 workspace $ws1 output $o_primary
@@ -310,10 +324,13 @@ exec --no-startup-id nm-applet
 floating_modifier $mod
 
 # set floating (nontiling)for apps needing it
+for_window [window_role="About"] floating enable
+for_window [class="Arandr"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Nautilus"] floating enable
+for_window [class="ObinsKit"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [window_role="About"] floating enable
 
 #######################
 # === Bar ============
