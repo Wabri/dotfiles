@@ -43,6 +43,7 @@ general_packages:
   - homebrew/cask-drivers/obinskit
   - spotify
   - balenaetcher
+  - neofetch
 
 # === Configurations ===
 ide_config:

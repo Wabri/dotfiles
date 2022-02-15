@@ -51,11 +51,15 @@ let g:workspace_persist_undo_history = 1
 " => lightline
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ 'component_function' : {
-      \    'gitbranch': 'FugitiveHead'
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
       \ },
-    \ }
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste', 'bufnum' ],
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
+      \ },
+      \ }
 
 " => coc
 function! s:check_back_space() abort
