@@ -178,6 +178,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " =========================================================================== "
 " => Augroup
 
+autocmd BufWritePre * :%s/\s\+$//e
+
 autocmd BufNewFile,BufRead */recipes/*.rb set ft=chef syntax=ruby
 
 augroup ansible_ft
