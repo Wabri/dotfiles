@@ -4,6 +4,7 @@
 alias ls='exa -lgh --group-directories-first'
 alias la='exa -lgha --group-directories-first'
 alias cat='bat'
+alias cd='command cd; exa --grid --all'
 
 # => Git
 alias g='git status -s'

@@ -8,6 +8,7 @@
 
 [alias]
 	l = log -p
+	graph = log --oneline --graph --all
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive
