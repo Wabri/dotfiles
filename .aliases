@@ -3,8 +3,12 @@
 # => ls
 alias ls='exa -lgh --group-directories-first'
 alias la='exa -lgha --group-directories-first'
+
+# => cat
 alias cat='bat'
-alias cd='command cd; exa --grid --all'
+
+# => cd 
+cd () { builtin cd "$@" && exa --grid --all }
 
 # => Git
 alias g='git status -s'
@@ -14,7 +18,7 @@ alias kd='kitchen destroy -f ;'
 alias kc='kitchen converge ;'
 alias kl='kitchen login ;'
 
-if [[ $(uname -s) -eq 'Linux' ]] ; then
+if [ $(uname -s) = 'Linux' ] ; then
   alias update='sudo pacman -Syyu'
   alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
   alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
