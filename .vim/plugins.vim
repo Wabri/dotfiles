@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " Colorschemes
 Plug 'kamwitsta/nordisk'
+Plug 'edeneast/nightfox.nvim'
 
 " Colorized for hexa colors
 Plug 'BourgeoisBear/clrzr'
@@ -54,29 +55,17 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \ },
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'nightfox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', 'bufnum' ],
       \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
       \ },
       \ }
 
-" => coc
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+" => COC
+let g:coc_global_extensions = ['coc-git', 'coc-yaml', 'coc-vimlsp', 'coc-marketplace', '@yaegassy/coc-ansible', 'coc-sh', 'coc-tabnine', 'coc-jedi']
 
 let g:coc_filetype_map = {
   \ 'yaml.ansible': 'ansible',
   \ }
+

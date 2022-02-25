@@ -41,12 +41,15 @@ let g:netrw_browse_split = 0
 let g:netrw_winsize = 13
 
 " === COLORSCHEME ===
-colorscheme nordisk
+colorscheme nightfox
 
 " === MAPPING ===
 
 " => Mapleader
 let mapleader=" "
+
+" => Reload vimrc
+nnoremap <leader>. :source ~/.vimrc<CR>
 
 " => Save & Quit
 nnoremap <leader>w :w<CR>
@@ -54,7 +57,6 @@ nnoremap <leader>q :q<CR>
 
 " => Reload open file
 nnoremap <leader>R :e!<CR>
-
 
 " => Windows moving
 nnoremap <C-h> <C-W>h
@@ -167,18 +169,32 @@ nmap <leader>gl :Git log --oneline<CR>
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " => COC
+" Completion
 inoremap <silent><expr> <C-n>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+" Documentation
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Diagnostic
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Go to
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 " =========================================================================== "
 " => Augroup
-
-autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd BufNewFile,BufRead */recipes/*.rb set ft=chef syntax=ruby
 
@@ -212,4 +228,22 @@ autocmd StdinReadPre * let s:std_in=1
 if has("autocmd")
   autocmd BufRead *-vault.yml ! ansible-vault edit %
 endif
+
+" =========================================================================== "
+" => Functions
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
