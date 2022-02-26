@@ -29,6 +29,7 @@
         group: "{{ group | default(username) }}"
         state: directory
         mode: "0755"
+      when: workspace_dir is defined
 
     - name: Update packages
       shell: "{{ update_command }}"

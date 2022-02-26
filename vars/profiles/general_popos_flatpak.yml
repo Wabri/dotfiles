@@ -1,0 +1,22 @@
+---
+# === Archlinux ===
+os: Pop!_OS
+
+# === System configuration ===
+username: wabri
+install_command: flatpak install --noninteractive
+update_command: flatpak update --noninteractive
+home_dir: /home/wabri
+ide_install: false
+system_install: false
+general_install: true
+
+# === Packages ===
+general_packages:
+  - com.spotify.Client
+  - com.valvesoftware.Steam
+  - org.telegram.desktop
+  - com.obsproject.Studio
+  - io.bit3.WhatsAppQT
+  - com.bitwarden
+
