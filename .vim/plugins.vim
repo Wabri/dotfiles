@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 
 " Colorschemes
 Plug 'kamwitsta/nordisk'
-Plug 'edeneast/nightfox.nvim'
 
 " Colorized for hexa colors
 Plug 'BourgeoisBear/clrzr'
@@ -55,7 +54,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \ },
-      \ 'colorscheme': 'nightfox',
+      \ 'colorscheme': 'nordisk',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', 'bufnum' ],
       \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],

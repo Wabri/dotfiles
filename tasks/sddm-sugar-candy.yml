@@ -13,6 +13,16 @@
     regexp: '^Current=$'
     replace: 'Current=Sugar-Candy'
 
+- name: Copy background pictures
+  copy:
+    src: Pictures/wallpaper.png
+    dest: "/usr/share/sddm/themes/Sugar-Candy/Backgrounds/wallpaper.png"
+    owner: "{{ username }}"
+    group: "{{ group | default(username) }}"
+    directory_mode: yes
+    mode: '0777'
+    remote_src: yes
+
 - name: Update sddm sugar-candy theme
   copy:
     remote_src: yes

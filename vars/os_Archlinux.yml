@@ -38,6 +38,7 @@ ide_packages:
   - bat
   - git-delta
   - nodejs
+  - npm
 
 system_packages:
   - i3-gaps
@@ -59,6 +60,7 @@ system_packages:
   - pavucontrol
   - sddm
   - grub
+  - grub-customizer
 
 general_packages:
   - neofetch
