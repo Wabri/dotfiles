@@ -40,8 +40,8 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 1.0, 'xoffset': 1.8, 'yoffset': 0.0 } }
-let g:fzf_preview_window = ['down:60%', 'ctrl-/']
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
 " => workspace
 let g:workspace_autocreate = 0
@@ -54,7 +54,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \ },
-      \ 'colorscheme': 'nordisk',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', 'bufnum' ],
       \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
