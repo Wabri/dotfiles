@@ -64,11 +64,7 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
-tnoremap <C-h> <C-W>h
-tnoremap <C-j> <C-W>j
-tnoremap <C-k> <C-W>k
-tnoremap <C-l> <C-W>l
-
+" => Netrw Mapping
 function! NetrwMapping()
     nmap <buffer> <C-h> <C-w>h
     nmap <buffer> <C-j> <C-w>j
@@ -168,35 +164,10 @@ nmap <leader>gl :Git log --oneline<CR>
 " => FZF
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
-" => COC
-" Completion
-inoremap <silent><expr> <C-n>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Documentation
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" Diagnostic
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Go to
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
 " =========================================================================== "
 " => Augroup
 
-autocmd BufNewFile,BufRead */recipes/*.rb set ft=chef syntax=ruby
+"autocmd BufNewFile,BufRead */recipes/*.rb set ft=chef syntax=ruby
 
 augroup ansible_ft
     au!
@@ -228,22 +199,4 @@ autocmd StdinReadPre * let s:std_in=1
 if has("autocmd")
   autocmd BufRead *-vault.yml ! ansible-vault edit %
 endif
-
-" =========================================================================== "
-" => Functions
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
 
