@@ -59,6 +59,10 @@ syntax enable
 " => colorscheme
 colorscheme nordisk
 
+" Laststatus
+set laststatus=3
+highlight WinSeparator guibg=None
+
 " === MAPPING ===
 
 " => Mapleader
@@ -125,18 +129,21 @@ nnoremap <up> <C-w>5-
 nnoremap <leader>e :e .<CR>
 
 " => New
-nnoremap <leader>t :tabnew <CR><cmd>Telescope find_files<CR>
-nnoremap <leader>s :split<CR><cmd>Telescope find_files<CR>
-nnoremap <leader>v :vsplit<CR><cmd>Telescope find_files<CR>
+nnoremap <leader>t :tabnew <CR>:Files<CR>
+nnoremap <leader>s :split<CR>:Files<CR>
+nnoremap <leader>v :vsplit<CR>:Files<CR>
 nnoremap <leader>nt :tabnew <CR>:e
 nnoremap <leader>ns :split<CR>:e
 nnoremap <leader>nv :vsplit<CR>:e
 nnoremap <leader>nn :e
 
-" => Telescope
-nnoremap <leader>ff <cmd>Telescope find_files<CR>
-nnoremap <leader>fg <cmd>Telescope git_files<CR>
-nnoremap <c-f> <cmd>Telescope live_grep<CR>
+" => fzf
+nmap <c-f> :Rg<CR>
+nmap <leader>ff :Files<CR>
+nmap <leader>fg :GitFiles<CR>
+nmap <leader>fl :Lines<CR>
+nmap <leader>ft :Filetypes<CR>
+imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " => Yank to clipboard
 nnoremap <leader>y "*y

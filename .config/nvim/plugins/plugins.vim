@@ -5,6 +5,8 @@
 
 " === PLUGINS ===
 call plug#begin()
+	" Treesitter
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
@@ -23,25 +25,31 @@ call plug#begin()
 	" Snippets
 	Plug 'rafamadriz/friendly-snippets'
 
-	" Treesitter
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 	" Code format
 	Plug 'sbdchd/neoformat'
 
-	" Telescope & dependencies
-	Plug 'nvim-lua/popup.nvim'
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+	" Fuzzy finder
+	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
 
 	" Colorscheme
 	Plug 'kamwitsta/nordisk'
+
+	" Statusline
+	Plug 'nvim-lualine/lualine.nvim'
 
 	" Git wrapper
 	Plug 'tpope/vim-fugitive'
 	Plug 'rbong/vim-flog'
 
+	" Defaults everyone can agree on
+	Plug 'tpope/vim-sensible'
+	
+	" Continuously updated session files
+	Plug 'thaerkh/vim-workspace'
+
+	" Colorize all text
+	Plug 'lilydjwg/colorizer'
 call plug#end()
 
 set completeopt=menu,menuone,noselect
@@ -97,7 +105,7 @@ lua <<EOF
 
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-	local servers = { 'solargraph', 'bashls', 'pylsp' }
+	local servers = { 'solargraph', 'bashls', 'pylsp', 'ansiblels' }
 	for _, lsp in pairs(servers) do
 	  require('lspconfig')[lsp].setup {
 	    on_attach = on_attach,
@@ -121,4 +129,18 @@ lua <<EOF
 		};
 	})
 EOF
+
+" => fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+"let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 1.0, 'xoffset': 0.0, 'yoffset': 0.0 } }
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+
+" => workspace
+let g:workspace_autocreate = 0
+let g:workspace_session_name = 'Session.vim'
+let g:workspace_persist_undo_history = 1
 
