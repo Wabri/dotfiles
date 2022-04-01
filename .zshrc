@@ -36,3 +36,13 @@ fi
 
 # === Prompt ===
 eval "$(starship init zsh)"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+if [ -z "${TMUX}" ]; then
+  tmux start-server
+	sleep 5
+  ~/.local/bin/tmux-commands/tmux-workspace full
+fi
+

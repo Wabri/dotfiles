@@ -3,6 +3,8 @@ workspace_dir=~/Documents/Workspaces
 
 fzf_args='--border=rounded --margin=2,4,2,4 --layout=reverse --keep-right'
 
+tmux start-server
+
 case "$1" in
 "full")
     project_fullpath=`ls -d $workspace_dir/*/*/* | fzf --prompt='Choose the project>' ${fzf_args}`
@@ -41,19 +43,17 @@ esac
 
 project_fullname=$group/$scope/$project_basename
 
-echo $project_fullname
+[ -z "${TMUX}" ] && tmux attach-session -t $project_fullname && exit 0
 
 tmux has-session -t $project_fullname >/dev/null
-
-[ -z "${TMUX}" ] && tmux attach-session -t $project_fullname && exit 0
 
 if [ $? != 0 ]; then
   tmux new-session -d -s $project_fullname -c $workspace_dir/$project_fullname/main-dev
   tmux rename-window -t $project_fullname:1 "main-dev"
-  tmux send-keys 'vim' 'C-m'
+  tmux send-keys 'nvim' 'C-m'
+	tmux split-window -v -l 20% -c "$workspace_dir/$project_fullname/main-dev"
+	tmux split-window -h -l 40% -c "$workspace_dir/$project_fullname/main-dev"
 fi
 
 tmux switch-client -t $project_fullname
-tmux split-window -v -l 20% -c "$workspace_dir/$project_fullname/main-dev"
-tmux split-window -h -l 40% -c "$workspace_dir/$project_fullname/main-dev"
 
