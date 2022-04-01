@@ -21,7 +21,7 @@ set splitright
 set splitbelow
 
 " => More space on command
-set cmdheight=2
+set cmdheight=1
 
 " => Cursor position
 set ruler
@@ -57,7 +57,7 @@ set background=dark
 " => Enable syntax
 syntax enable
 " => colorscheme
-colorscheme nordisk
+colorscheme nordic
 
 " Laststatus
 set laststatus=3
@@ -84,13 +84,6 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
-
-function! NetrwMapping()
-    nmap <buffer> <C-h> <C-w>h
-    nmap <buffer> <C-j> <C-w>j
-    nmap <buffer> <C-k> <C-w>k
-    nmap <buffer> <C-l> <C-w>l
-endfunction
 
 " => Buffers
 nnoremap <leader>bb :b#<CR>
@@ -139,8 +132,8 @@ nnoremap <leader>nn :e
 
 " => fzf
 nmap <c-f> :Rg<CR>
-nmap <leader>ff :Files<CR>
-nmap <leader>fg :GitFiles<CR>
+nmap <leader>ff :GitFiles<CR>
+nmap <leader>F :Files<CR>
 nmap <leader>fl :Lines<CR>
 nmap <leader>ft :Filetypes<CR>
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -155,6 +148,8 @@ nnoremap Y y$
 " => Dont let focus go away when searching mode
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap <c-o> <c-o>zzzv
+nnoremap <c-i> <c-i>zzzv
 
 " => Undo, but undo in the right way
 inoremap , ,<c-g>u
@@ -181,4 +176,5 @@ nmap <leader>gp :Git push<CR>
 nmap <leader>gd :Git diff<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
+
 

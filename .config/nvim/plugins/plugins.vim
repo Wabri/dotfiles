@@ -33,10 +33,11 @@ call plug#begin()
 	Plug 'junegunn/fzf.vim'
 
 	" Colorscheme
-	Plug 'kamwitsta/nordisk'
+	Plug 'andersevenrud/nordic.nvim'
 
 	" Statusline
 	Plug 'nvim-lualine/lualine.nvim'
+	Plug 'kyazdani42/nvim-web-devicons'
 
 	" Git wrapper
 	Plug 'tpope/vim-fugitive'
@@ -104,6 +105,26 @@ lua <<EOF
   })
 
   -- Setup lspconfig.
+	local on_attach = function(client, bufnr)
+		local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+		-- Mappings.
+		local opts = { noremap=true, silent=true }
+		
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+		buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+		buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+		buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+		buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+		buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+		buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+		buf_set_keymap('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+		buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+		buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	end
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 	local servers = { 'solargraph', 'bashls', 'pylsp', 'ansiblels' }
 	for _, lsp in pairs(servers) do
@@ -115,7 +136,6 @@ lua <<EOF
 			capabilities = capabilities
 	  }
 	end
-
 	-- Setup tabnine
 	local tabnine = require('cmp_tabnine.config')
 	tabnine:setup({
@@ -128,6 +148,38 @@ lua <<EOF
 			-- lua = true
 		};
 	})
+EOF
+
+lua << EOF
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+    globalstatus = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
 EOF
 
 " => fzf
@@ -143,4 +195,3 @@ let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 let g:workspace_autocreate = 0
 let g:workspace_session_name = 'Session.vim'
 let g:workspace_persist_undo_history = 1
-
