@@ -38,6 +38,7 @@ system_packages:
   - ncdu
   - duf
   - gtop
+  - asdf
 
 general_packages:
   - homebrew/cask-drivers/obinskit

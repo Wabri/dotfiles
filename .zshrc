@@ -46,3 +46,10 @@ if [ -z "${TMUX}" ]; then
   ~/.local/bin/tmux-commands/tmux-workspace full
 fi
 
+# Add asdf with completion
+if [ -f $HOME/.asdf/asdf.sh ]; then
+  source $HOME/.asdf/asdf.sh
+fi
+if [ -f $HOME/.asdf/completions/asdf.bash ]; then
+  source $HOME/.asdf/completions/asdf.bash
+fi
