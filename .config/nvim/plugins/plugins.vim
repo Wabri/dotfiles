@@ -49,6 +49,9 @@ call plug#begin()
 	" Continuously updated session files
 	Plug 'thaerkh/vim-workspace'
 
+	" 
+	Plug 'christoomey/vim-tmux-navigator'
+
 	" Colorize all text
 	Plug 'lilydjwg/colorizer'
 call plug#end()

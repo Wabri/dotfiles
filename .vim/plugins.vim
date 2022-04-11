@@ -21,6 +21,9 @@ Plug 'sheerun/vim-polyglot'
 " Git wrapper
 Plug 'tpope/vim-fugitive'
 
+" Tmux integration
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 " => fzf
