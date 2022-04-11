@@ -42,6 +42,8 @@ call plug#begin()
 	" Git wrapper
 	Plug 'tpope/vim-fugitive'
 	Plug 'rbong/vim-flog'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'sindrets/diffview.nvim'
 
 	" Defaults everyone can agree on
 	Plug 'tpope/vim-sensible'
@@ -49,7 +51,7 @@ call plug#begin()
 	" Continuously updated session files
 	Plug 'thaerkh/vim-workspace'
 
-	" 
+	" Vim-tmux integration
 	Plug 'christoomey/vim-tmux-navigator'
 
 	" Colorize all text

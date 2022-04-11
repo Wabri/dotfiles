@@ -177,4 +177,8 @@ nmap <leader>gd :Git diff<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
 
+" => Git Diffview
+nmap <leader>df :DiffviewFileHistory<CR>
+nmap <leader>dd :DiffviewOpen<CR>
+nmap <leader>dc :DiffviewClose<CR>
 
