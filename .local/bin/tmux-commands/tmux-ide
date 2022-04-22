@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+tmux send-keys 'nvim' 'C-m'
+tmux split-window -v -l 20% -c $@
+tmux split-window -h -l 40% -c $@
