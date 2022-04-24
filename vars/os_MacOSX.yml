@@ -23,6 +23,7 @@ ide_packages:
   - alacritty
   - zsh
   - vim
+  - neovim --head
   - tmux
   - fzf
   - ripgrep

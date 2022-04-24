@@ -11,8 +11,8 @@ workspace_dir: Documents/Workspaces
 default_shell: zsh
 default_keyboard: us
 ide_install: true
-system_install: true
-general_install: true
+system_install: false
+general_install: false
 
 # === Before ===
 before:
@@ -29,6 +29,7 @@ ide_packages:
   - bash
   - zsh
   - vim
+  - neovim
   - tmux
   - fzf
   - nerd-fonts-source-code-pro 
@@ -88,6 +89,8 @@ ide_config:
   - alacritty
   - vim
   - vim-plug
+  - neovim
+  - neovim-plug
   - tmux
   - tpm
   - bash
