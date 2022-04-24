@@ -19,8 +19,6 @@ call plug#begin()
 	Plug 'hrsh7th/vim-vsnip'
 	" Ruby
 	Plug 'neovim/neovim-ruby'
-	" Tabnine
-	Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
 	" Snippets
 	Plug 'rafamadriz/friendly-snippets'
@@ -141,18 +139,6 @@ lua <<EOF
 			capabilities = capabilities
 	  }
 	end
-	-- Setup tabnine
-	local tabnine = require('cmp_tabnine.config')
-	tabnine:setup({
-		max_lines = 1000;
-		max_num_results = 20;
-		sort = true;
-		run_on_every_keystroke = true;
-		snippet_placeholder = '..';
-		ignored_file_types = {
-			-- lua = true
-		};
-	})
 EOF
 
 lua << EOF
