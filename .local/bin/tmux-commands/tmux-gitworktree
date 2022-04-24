@@ -65,7 +65,9 @@ fi
 
 if [ "$action" = "Remove" ]; then
 	while read -r line; do
-		worktree_list+=($(echo $line | awk '{print($1)}'))
+		if [[ $line != *main-dev* ]]; then
+			worktree_list+=($(echo $line | awk '{print($1)}'))
+		fi
 	done <<< "$(git worktree list)" 
 
 	worktree_path=$(for i in ${worktree_list[@]}
