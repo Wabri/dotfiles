@@ -1,7 +1,7 @@
 # ===== Aliases ======
 
 # Environment
-alias home='tmux new -A -s Home
+alias home='tmux new -A -s Home'
 # Ide
 alias n='nvim'
 # Editor
