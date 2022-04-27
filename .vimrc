@@ -123,6 +123,7 @@ nmap <leader>ff :Files<CR>
 nmap <leader>fg :GitFiles<CR>
 nmap <leader>fl :Lines<CR>
 nmap <leader>ft :Filetypes<CR>
+imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " => Yank to clipboard
 nnoremap <leader>y "*y
@@ -161,18 +162,13 @@ nmap <leader>gd :Git diff<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gl :Git log --oneline<CR>
 
-" => FZF
-imap <c-x><c-f> <plug>(fzf-complete-path)
+" => Vimwiki
+nnoremap <leader>W :VimwikiIndex<CR> 
+nnoremap <leader>D :VimwikiDiaryIndex<CR>
+nnoremap <leader>N :VimwikiMakeDiaryNote<CR>
 
 " =========================================================================== "
 " => Augroup
-
-"autocmd BufNewFile,BufRead */recipes/*.rb set ft=chef syntax=ruby
-
-augroup ansible_ft
-    au!
-    au BufRead,BufNewFile playbook.yml setfiletype yaml.ansible
-augroup END
 
 augroup vagrant_ft
     au!
