@@ -1,5 +1,12 @@
 # ===== Aliases ======
 
+# Environment
+alias home='tmux new -A -s Home
+# Ide
+alias n='nvim'
+# Editor
+alias v='vim'
+
 # => ls
 alias ls='exa -lgh --group-directories-first'
 alias la='exa -lgha --group-directories-first'

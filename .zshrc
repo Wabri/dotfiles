@@ -16,6 +16,7 @@ plugins=(
   git 
   docker 
   asdf
+  dnote
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -51,7 +52,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 if [ -z "${TMUX}" ]; then
   tmux start-server
-	sleep 5
-  ~/.local/bin/tmux-commands/tmux-workspace full
 fi
 
