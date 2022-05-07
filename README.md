@@ -2,9 +2,21 @@
 
 ***Forever work in progress***
 
-![unixporn](Screenshots/unixporn.png)
+Nautilus + Neofetch + vim:
 
-![unixporn2](Screenshots/unixporn2.png)
+![RANDOM](Screenshots/unixporn.png)
+
+Tmux+zsh+NeoVim+Vimwiki:
+
+![TMUX+VIM](Screenshots/unixporn2.png)
+
+Spotify:
+
+![SPOTIFY](Screenshots/unixporn3.png)
+
+Wallpaper:
+
+![Wallpaper](Pictures/wallpaper.png)
 
 ## About this config
 
