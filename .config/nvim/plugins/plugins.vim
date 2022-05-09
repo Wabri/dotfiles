@@ -54,7 +54,7 @@ call plug#begin()
 	Plug 'christoomey/vim-tmux-navigator'
 
 	" Colorize all text
-	Plug 'lilydjwg/colorizer'
+	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 call plug#end()
 
 set completeopt=menu,menuone,noselect
@@ -208,3 +208,8 @@ let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 let g:workspace_autocreate = 0
 let g:workspace_session_name = 'Session.vim'
 let g:workspace_persist_undo_history = 1
+
+" => hexokinase
+let g:Hexokinase_highlighters = ['sign_column']
+set signcolumn=yes:2
+
