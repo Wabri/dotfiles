@@ -10,6 +10,7 @@ call plug#begin()
 
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
+	Plug 'williamboman/nvim-lsp-installer'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/cmp-path'
@@ -59,53 +60,84 @@ call plug#end()
 set completeopt=menu,menuone,noselect
 
 lua <<EOF
+	local has_words_before = function()
+  	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+	end
+
+	local feedkey = function(key, mode)
+  	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+	end
+
   -- Setup nvim-cmp.
-  local cmp = require'cmp'
+	local cmp = require'cmp'
 
   cmp.setup({
     snippet = {
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
       end,
     },
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' },
-      { name = 'cmp_tabnine' },
+      { name = 'vsnip' }, -- For vsnip users.
     }, {
       { name = 'buffer' },
     })
   })
+
+	cmp.setup {
+	  mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+			["<C-n>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif vim.fn["vsnip#available"](1) == 1 then
+					feedkey("<Plug>(vsnip-expand-or-jump)", "")
+				elseif has_words_before() then
+					cmp.complete()
+				else
+					fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+				end
+				end, { "i", "s" }),
+			["<C-p>"] = cmp.mapping(function()
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+					feedkey("<Plug>(vsnip-jump-prev)", "")
+				end
+			end, { "i", "s" }),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	  })
+	}
+
+  -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-      { name = 'cmp_git' },
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
     }, {
       { name = 'buffer' },
     })
   })
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+
+	-- Setup lsp installer
+	require("nvim-lsp-installer").setup({
+	ensure_installed = { "solargraph", "bashls", "pylsp", "gopls" },
+	automatic_installation = true,
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗"
+			}
+		}
+	})
 
   -- Setup lspconfig.
 	local on_attach = function(client, bufnr)
@@ -129,16 +161,6 @@ lua <<EOF
 		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 	end
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-	local servers = { 'solargraph', 'bashls', 'pylsp', 'ansiblels' }
-	for _, lsp in pairs(servers) do
-	  require('lspconfig')[lsp].setup {
-	    on_attach = on_attach,
-	    flags = {
-	      debounce_text_changes = 150,
-	    },
-			capabilities = capabilities
-	  }
-	end
 EOF
 
 lua << EOF
