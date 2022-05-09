@@ -128,7 +128,7 @@ lua <<EOF
 
 	-- Setup lsp installer
 	require("nvim-lsp-installer").setup({
-	ensure_installed = { "solargraph", "bashls", "pylsp", "gopls" },
+	ensure_installed = { "ansiblels", "solargraph", "bashls", "pylsp", "gopls" },
 	automatic_installation = true,
 	ui = {
 		icons = {
