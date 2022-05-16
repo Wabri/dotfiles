@@ -7,7 +7,6 @@
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     mode: '0755'
-    backup: yes
 
 - name: Add Global gitconfig
   copy:
@@ -17,4 +16,3 @@
     owner: "{{ username }}"
     group: "{{ group | default(username) }}"
     mode: '0755'
-    backup: yes
