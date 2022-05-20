@@ -27,6 +27,19 @@
     interfaces.wlp5s0.useDHCP = true;
   };
 
+  # Hardware enable
+  hardware = {
+    pulseaudio.enable = true;
+    bluetooth.enable = true;
+  };
+
+  # Enable sound.
+  sound.enable = true;
+  services.mpd.enable = true;
+
+  # Enable Bluetooth
+  services.blueman.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Rome";
 
@@ -95,11 +108,6 @@
     source-code-pro
   ];
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  services.mpd.enable = true;
-
   # Enable zsh
   programs.zsh = {
     enable = true;
@@ -156,6 +164,7 @@
     virtualbox
     bitwarden
     obs-studio
+    etcher
   ];
 
   # Docker
