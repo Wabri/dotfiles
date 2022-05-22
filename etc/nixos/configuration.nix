@@ -92,8 +92,8 @@
       brightnessctl
       playerctl
       libinput
-      xev
       wl-clipboard
+      xorg.xev
       autotiling
       flashfocus
       grim
@@ -166,6 +166,7 @@
     appimage-run
 
     # App
+    gnome.nautilus
     spotify
     obinskit
     vlc
