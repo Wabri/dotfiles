@@ -1,62 +1,62 @@
 # Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
 
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
+# Modifier
 set $mod Mod4
-# Home row direction keys, like vim
+# Home row
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+# Terminal emulator
 set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu wofi --show run
+# Application launcher
+set $menu wofi --show run | xargs swaymsg exec --
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+output * bg ~/Pictures/wallpaper.png fill
+
+### Theme
+# class                 border  backgr. text    indicator child_border
+client.focused          #4C566A #81A1C1 #2E3440 #EBCB8B   #5E81AC
+client.focused_inactive #2E3440 #4C566A #ECEFF4 #8FBCBB   #434C5E
+client.unfocused        #2E3440 #2E3440 #4C566A #8FBCBB   #3B4252
+client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
+client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
+
+### General settings
+
+default_border pixel 4
+default_floating_border pixel 3
+gaps inner 15
+smart_gaps on
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 resolution 1920x1080 position 1920,0
 
 ### Idle configuration
-#
-# Example configuration:
 #
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 #
-# Example configuration:
-#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
 input "2:7:SynPS/2_Synaptics_TouchPad" {
     dwt enabled
     tap enabled
     natural_scroll disabled
     middle_emulation enabled
 }
+
+### Xwayland configuration
 #
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+xwayland enable
+
+exec swaymsg border none
 
 ### Key bindings
 #
@@ -70,13 +70,6 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
     # Start your launcher
     bindsym $mod+d exec $menu
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -122,38 +115,61 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+
+    assign [class="(?i)firefox"] workspace 2
+    assign [class="(?i)rambox"] workspace 3
+    assign [class="(?i)bitwarden"] workspace 4
+    assign [class="(?i)virtualbox manager"] workspace 5
+    #assign [class="(?i)"] workspace 6
+    assign [class="(?i)steam"] workspace 7
+    #assign [class="(?i)"] workspace 8
+    assign [class="(?i)obs-studio"] workspace 9
+    for_window [class="Spotify"] move container to workspace 10
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+t split toggle
+    bindsym $mod+shift+t layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
+    # Floating
+    floating_modifier $mod normal
     bindsym $mod+Shift+o floating toggle
-
-    # Swap focus between the tiling area and the floating area
     bindsym $mod+o focus mode_toggle
+#
+# Brightness
+#
+    bindsym XF86MonBrightnessDown exec "brightnessctl set 2%-"
+    bindsym XF86MonBrightnessUp exec "brightnessctl set +2%"
+
+#
+# Volume
+#
+    bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+    bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+    bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+#
+# Media
+#
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
+
+# 
+# Screenshot
+# 
+    bindsym $mod+Shift+Print exec grim -t png ~/Pictures/Screenshot/full-$(date "+%F-%T").png
+    # Selection
+    bindsym $mod+Print exec grim -g "$(slurp)" -t png ~/Pictures/Screenshot/full-$(date "+%F-%T").png
+    # Focus window
+    bindsym Print exec grim -g "$(slurp)" - | wl-copy
+
 #
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
@@ -166,7 +182,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
-# Status Bar:
+# Status Bar
 exec waybar
 
 include /etc/sway/config.d/*

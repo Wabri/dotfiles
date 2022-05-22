@@ -85,15 +85,19 @@
       xwayland
       swaylock
       swayidle
-      wl-clipboard
       mako
       alacritty
       wofi
       waybar
       brightnessctl
+      playerctl
       libinput
-      nitrogen
-      flameshot
+      xev
+      wl-clipboard
+      autotiling
+      flashfocus
+      grim
+      slurp
     ];
   };
   programs.waybar = {
@@ -125,7 +129,8 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
-         "electron-11.5.0"
+      "electron-11.5.0"
+      "electron-14.2.9"
     ];
   };
   environment.systemPackages = with pkgs; [
@@ -157,6 +162,9 @@
     # Web
     firefox
 
+    # Appimage
+    appimage-run
+
     # App
     spotify
     obinskit
@@ -167,6 +175,11 @@
     etcher
   ];
 
+  # Steam
+  programs.steam = {
+    enable = true;
+  };
+  
   # Docker
   virtualisation.docker.enable = true;
 
