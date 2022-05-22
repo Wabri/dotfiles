@@ -70,7 +70,7 @@
       };
     };
     displayManager = {
-      sddm = {
+      gdm = {
         enable = true;
       };
       defaultSession = "sway";
@@ -98,6 +98,7 @@
       flashfocus
       grim
       slurp
+      xdg-desktop-portal-wlr
     ];
   };
   programs.waybar = {

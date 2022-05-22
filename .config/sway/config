@@ -184,5 +184,7 @@ bindsym $mod+r mode "resize"
 #
 # Status Bar
 exec waybar
+exec autotiling
+exec flashfocus
 
 include /etc/sway/config.d/*
