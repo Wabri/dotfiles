@@ -33,12 +33,22 @@
     bluetooth.enable = true;
   };
 
+  # Printer
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
+
   # Enable sound.
   sound.enable = true;
   services.mpd.enable = true;
 
   # Enable Bluetooth
   services.blueman.enable = true;
+
+  # Enable Virtualization
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Rome";
@@ -54,13 +64,15 @@
       "networkmanager" 
       "video" 
       "docker"
+      "libvirtd"
     ];
     shell = pkgs.zsh;
   };
 
-  # Xserver = libinput + sddm
+  # Xserver = libinput + gdm
   services.xserver = {
     enable = true;
+    layout = "us";
     libinput = {
       enable = true;
       touchpad = {
@@ -70,10 +82,27 @@
       };
     };
     displayManager = {
-      gdm = {
+      sddm = {
         enable = true;
       };
       defaultSession = "sway";
+    };
+    
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+        polybar
+        lxappearance
+        arandr
+        rofi
+        flameshot
+        betterlockscreen
+        picom
+        nitrogen
+        dunst
+        blueberry
+     ];
     };
   };
 
@@ -86,7 +115,6 @@
       swaylock
       swayidle
       mako
-      alacritty
       wofi
       waybar
       brightnessctl
@@ -138,6 +166,9 @@
     # Shell
     bash
     zsh
+
+    # Terminal
+    alacritty
     
     # Tools, cli, tui
     git
@@ -155,6 +186,7 @@
     vagrant
     starship
     fzf
+    lsof
 
     # Editors
     vim
@@ -171,10 +203,11 @@
     spotify
     obinskit
     vlc
-    virtualbox
+    virt-manager
     bitwarden
     obs-studio
-    etcher
+    rpi-imager
+    ventoy-bin
   ];
 
   # Steam

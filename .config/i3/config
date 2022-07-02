@@ -67,10 +67,9 @@ bindsym $mod+Shift+l move right
 
 # Terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e tmux new -A -s Home
 
 # Kill
-bindsym $mod+BackSpace kill
+bindsym $mod+Shift+q kill
 
 # Restart i3
 bindsym $mod+Shift+r restart
@@ -85,7 +84,7 @@ bindsym $mod+e layout toggle split
 bindsym XF86Display exec arandr
 
 # Keyboard layout
-bindsym ctrl+space exec ~/.local/bin/chkey && notify-send --expire-time=1000 --urgency=low "Change layout to $(setxkbmap -v | awk -F '+' '/symbols/ {print $2}')"
+#bindsym ctrl+space exec ~/.local/bin/chkey && notify-send --expire-time=1000 --urgency=low "Change layout to $(setxkbmap -v | awk -F '+' '/symbols/ {print $2}')"
 
 # Drun
 bindsym $mod+d exec rofi -modi drun -show drun
@@ -274,9 +273,6 @@ assign [class="(?i)firefox"] $ws2
 assign [class="Steam"] → $ws7
 assign [class="Lutris"] → $ws7
 assign [class="Bitwarden"] → $ws8
-assign [class="TelegramDesktop"] → $ws9
-assign [class="Whatsapp-for-linux"] → $ws9
-assign [class="Slack"] → $ws9
 for_window [class="Spotify"] move to workspace $ws10
 
 # Multiple monitor setup (works even with one screen)
@@ -303,7 +299,7 @@ exec --no-startup-id picom -b
 #######################
 
 # Display
-exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
+#exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
 
 # Wallpaper
 exec --no-startup-id sleep 2 && nitrogen --restore
