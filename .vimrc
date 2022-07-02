@@ -9,6 +9,9 @@
 " Alias: Wabri (https://github.com/Wabri)                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" === RUNTIME ===
+set runtimepath=/home/wabri/.vim,$VIMRUNTIME
+
 " === PLUGINS ===
 source ~/.vim/plugins.vim
 
