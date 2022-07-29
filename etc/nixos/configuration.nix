@@ -5,26 +5,34 @@
     [
       <nixos-hardware/lenovo/thinkpad/x220>
       ./hardware-configuration.nix
+      ./i3.nix
+      ./sway.nix
+      ./packages.nix
     ];
 
   # EFI boot loader
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    efiSupport = true;
-    useOSProber = true;
-    device = "nodev";
+  boot.loader = {
+    grub = {
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      device = "nodev";
+    };
+    efi = {
+      canTouchEfiVariables = true; 
+      efiSysMountPoint = "/boot";
+    };
   };
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
   networking = {
     hostName = "fabulinus"; # Define your hostname.
     networkmanager.enable = true;
     useDHCP = false;
-    interfaces.enp4s0.useDHCP = true;
-    interfaces.wlp5s0.useDHCP = true;
+    interfaces = {
+      enp4s0.useDHCP = true;
+      wlp5s0.useDHCP = true;
+    };
   };
 
   # Hardware enable
@@ -63,13 +71,15 @@
       "wheel" 
       "networkmanager" 
       "video" 
+      "audio" 
       "docker"
       "libvirtd"
+      "storage"
     ];
     shell = pkgs.zsh;
   };
 
-  # Xserver = libinput + gdm
+  # Xserver
   services.xserver = {
     enable = true;
     layout = "us";
@@ -82,55 +92,11 @@
       };
     };
     displayManager = {
-      sddm = {
+      gdm = {
         enable = true;
       };
-      defaultSession = "sway";
+      defaultSession = "none+i3";
     };
-    
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [
-        polybar
-        lxappearance
-        arandr
-        rofi
-        flameshot
-        betterlockscreen
-        picom
-        nitrogen
-        dunst
-        blueberry
-     ];
-    };
-  };
-
-  # Sway
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      xwayland
-      swaylock
-      swayidle
-      mako
-      wofi
-      waybar
-      brightnessctl
-      playerctl
-      libinput
-      wl-clipboard
-      xorg.xev
-      autotiling
-      flashfocus
-      grim
-      slurp
-      xdg-desktop-portal-wlr
-    ];
-  };
-  programs.waybar = {
-    enable = true;
   };
 
   # Fonts
@@ -141,94 +107,16 @@
     source-code-pro
   ];
 
-  # Enable zsh
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-    };
-  };
-  programs.zsh.enableCompletion = true;
-
   # Enable power management
   powerManagement.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-11.5.0"
-      "electron-14.2.9"
-    ];
-  };
-  environment.systemPackages = with pkgs; [
-    # Shell
-    bash
-    zsh
-
-    # Terminal
-    alacritty
-    
-    # Tools, cli, tui
-    git
-    tmux
-    neofetch
-    htop
-    ncdu
-    duf
-    tldr
-    poetry
-    ripgrep
-    exa
-    bat
-    wget
-    vagrant
-    starship
-    fzf
-    lsof
-
-    # Editors
-    vim
-    neovim
-
-    # Web
-    firefox
-
-    # Appimage
-    appimage-run
-
-    # App
-    gnome.nautilus
-    spotify
-    obinskit
-    vlc
-    virt-manager
-    bitwarden
-    obs-studio
-    rpi-imager
-    ventoy-bin
-  ];
-
-  # Steam
-  programs.steam = {
-    enable = true;
-  };
-  
   # Docker
   virtualisation.docker.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
-  system.stateVersion = "21.11"; # Did you read the comment?
 }
 
