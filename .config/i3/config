@@ -124,7 +124,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -10 && notify-send --expire-time=1
 # Screenshot
 bindsym $mod+Shift+Print exec flameshot full -c -p ~/Pictures/Screenshot/
 # Selection
-bindsym $mod+Print exec flameshot gui -c -p ~/Pictures/Screenshot/
+bindsym $mod+Print exec flameshot gui -p ~/Pictures/Screenshot/
 # Focus window
 bindsym Print exec flameshot screen -c -p ~/Pictures/Screenshot/
 
@@ -217,6 +217,8 @@ mode "$media_mode" {
     bindsym h exec playerctl previous && notify-send --expire-time=1500 --urgency=low "Media "
 
     bindsym s exec playerctl play-pause && notify-send --expire-time=1500 --urgency=low "Media  " && notify-send --expire-time=2000 --urgency=critical "Exit Media Mode", mode "default"
+    bindsym a exec amixer sset Master 5%- && notify-send --expire-time=1000 --urgency=low 'Volume 墳 -5'
+    bindsym d exec amixer sset Master 5%+ && notify-send --expire-time=1000 --urgency=low 'Volume 奔 +5'
 
     bindsym q mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode"
     bindsym Escape mode "default", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode"
@@ -270,22 +272,23 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # bind program to workspace and focus to them on startup:
 assign [class="(?i)firefox"] $ws2
+assign [class="(?i)rambox"] → $ws3
 assign [class="Steam"] → $ws7
 assign [class="Lutris"] → $ws7
 assign [class="Bitwarden"] → $ws8
 for_window [class="Spotify"] move to workspace $ws10
 
 # Multiple monitor setup (works even with one screen)
-workspace $ws1 output $o_primary
-workspace $ws2 output $o_primary
-workspace $ws3 output $o_primary
-workspace $ws4 output $o_primary
-workspace $ws5 output $o_primary
-workspace $ws6 output $o_secondary
-workspace $ws7 output $o_secondary
-workspace $ws8 output $o_secondary
-workspace $ws9 output $o_secondary
-workspace $ws10 output $o_secondary
+#workspace $ws1 output $o_primary
+#workspace $ws2 output $o_primary
+#workspace $ws3 output $o_primary
+#workspace $ws4 output $o_primary
+#workspace $ws5 output $o_primary
+#workspace $ws6 output $o_secondary
+#workspace $ws7 output $o_secondary
+#workspace $ws8 output $o_secondary
+#workspace $ws9 output $o_secondary
+#workspace $ws10 output $o_secondary
 
 #######################
 # === Compositor ======
@@ -299,7 +302,7 @@ exec --no-startup-id picom -b
 #######################
 
 # Display
-#exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
+exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
 
 # Wallpaper
 exec --no-startup-id sleep 2 && nitrogen --restore
@@ -334,4 +337,5 @@ for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 
 # Polybar
 exec_always ~/.config/polybar/launch.sh &
+exec flameshot
 
