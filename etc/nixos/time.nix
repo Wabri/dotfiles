@@ -1,0 +1,6 @@
+{ ... }:
+
+{
+  time.timeZone = "Europe/Rome";
+}
+

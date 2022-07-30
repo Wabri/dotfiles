@@ -34,6 +34,15 @@
     { device = "/dev/disk/by-uuid/90740ce2-c04e-430c-ac15-652367e011a9"; }
   ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = lib.mkDefault "powersave";
+  };
+
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    pulseaudio.enable = true;
+    bluetooth.enable = true;
+  };
+
 }

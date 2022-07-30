@@ -1,0 +1,5 @@
+{ pkgs, ... }:
+
+{
+  sound.enable = true;
+}
