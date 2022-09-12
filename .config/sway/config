@@ -73,6 +73,9 @@ exec swaymsg border none
     bindsym $mod+d exec $menu
 
     # Reload the configuration file
+    bindsym $mod+Shift+x swaylock
+
+    # Reload the configuration file
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
@@ -105,7 +108,8 @@ exec swaymsg border none
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
+
+    # Move fcused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
@@ -117,14 +121,15 @@ exec swaymsg border none
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
 
-    assign [class="(?i)firefox"] workspace 2
-    assign [class="(?i)rambox"] workspace 3
-    assign [class="(?i)bitwarden"] workspace 4
-    assign [class="(?i)virtualbox manager"] workspace 5
-    #assign [class="(?i)"] workspace 6
+    assign [class="Brave-browser"] workspace 2
+    assign [app_id="telegramdesktop"] workspace 3
+    assign [app_id="whatsapp-for-linux"] workspace 3
+    assign [class="Bitwarden"] workspace 4
+    assign [app_id="virt-manager"] workspace 5
+    assign [app_id="libreoffice-*"] workspace 6
     assign [class="(?i)steam"] workspace 7
     #assign [class="(?i)"] workspace 8
-    assign [class="(?i)obs-studio"] workspace 9
+    assign [app_id="com.obs*"] workspace 9
     for_window [class="Spotify"] move container to workspace 10
 #
 # Layout stuff:
@@ -142,17 +147,16 @@ exec swaymsg border none
 #
 # Brightness
 #
-    bindsym XF86MonBrightnessDown exec "brightnessctl set 2%-"
-    bindsym XF86MonBrightnessUp exec "brightnessctl set +2%"
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+    bindsym XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
 
 #
 # Volume
-#
-    bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
-    bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
-    bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
-    bindsym Shift+XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +10%'
-    bindsym Shift+XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -10%'
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+    bindsym Shift+XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+    bindsym Shift+XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
 #
 # Media
 #
@@ -163,11 +167,11 @@ exec swaymsg border none
 # 
 # Screenshot
 # 
-    bindsym $mod+Shift+Print exec grim -t png ~/Pictures/Screenshot/full-$(date "+%F-%T").png
+    bindsym $mod+Shift+Print exec grimshot --notify save output ~/Pictures/Screenshot/full-$(date "+%F-%T").png
     # Selection
-    bindsym $mod+Print exec grim -g "$(slurp)" -t png ~/Pictures/Screenshot/full-$(date "+%F-%T").png
+    bindsym $mod+Print exec grimshot --notify save area ~/Pictures/Screenshot/area-$(date "+%F-%T").png
     # Focus window
-    bindsym Print exec grim -g "$(slurp)" - | wl-copy
+    bindsym Print exec grimshot --notify copy area
 
 #
 # Resizing containers:
@@ -187,7 +191,18 @@ bindsym $mod+r mode "resize"
 #
 # Status Bar
 exec waybar
+
+#
+# Autotiling
 exec autotiling
+
+#
+# Fade-in Fade-out window
 exec flashfocus
+
+#
+# wob
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 include /etc/sway/config.d/*
