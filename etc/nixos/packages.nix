@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 { 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
@@ -37,15 +35,13 @@
     starship
     fzf
     lsof
-    qbittorrent
-    koreader
 
     # Editors
     vim
     neovim
 
     # Web
-    firefox
+    brave
 
     # Appimage
     appimage-run
@@ -64,6 +60,11 @@
     rpi-imager
     ventoy-bin
     mupdf
+    qbittorrent
+    tdesktop
+    whatsapp-for-linux
+    discord
+    libreoffice
   ];
 
   # Steam

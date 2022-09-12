@@ -19,5 +19,11 @@
         blueberry
       ];
     };
+    displayManager = {
+      gdm = {
+        enable = true;
+      };
+      defaultSession = "none+i3";
+    };
   };
 }

@@ -21,9 +21,20 @@
       grim
       slurp
       xdg-desktop-portal-wlr
+      pavucontrol
+      sway-contrib.grimshot
+      wob
     ];
   };
   programs.waybar = {
     enable = true;
+  };
+  services.xserver = {
+    displayManager = {
+      gdm = {
+        enable = true;
+      };
+      defaultSession = "sway";
+    };
   };
 }
