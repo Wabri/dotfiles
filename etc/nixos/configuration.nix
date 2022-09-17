@@ -3,7 +3,7 @@
 {
   imports =
     [
-      <nixos-hardware/lenovo/thinkpad/x220>
+      <nixos-hardware/lenovo/thinkpad/e470>
       ./hardware-configuration.nix
       ./efi-bootloader.nix
       ./networking.nix
@@ -16,15 +16,8 @@
       ./services.nix
       ./theme.nix
       ./packages.nix
-      ./sway.nix
+      ./gnome.nix
     ];
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;

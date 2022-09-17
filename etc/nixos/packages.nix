@@ -16,7 +16,7 @@
 
     # Terminal
     alacritty
-    
+
     # Tools, cli, tui
     killall
     git
@@ -57,6 +57,7 @@
     virt-manager
     bitwarden
     obs-studio
+    obs-studio-plugins.wlrobs
     rpi-imager
     ventoy-bin
     mupdf
@@ -78,6 +79,6 @@
     ohMyZsh = {
       enable = true;
     };
+    enableCompletion = true;
   };
-  programs.zsh.enableCompletion = true;
 }
