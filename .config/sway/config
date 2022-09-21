@@ -2,7 +2,7 @@
 
 ### Variables
 # Modifier
-set $mod Mod4
+set $mod Mod1
 # Home row
 set $left h
 set $down j

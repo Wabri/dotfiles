@@ -9,6 +9,7 @@
     padding-right: 4px;
     padding: 0 10px;
     border-radius: 20px;
+    border: 2px solid transparent;
     box-shadow: none;
     transition-duration: 1s;
     background: transparent;
@@ -37,7 +38,7 @@
 }
 
 #workspaces * {
-    border-radius: 14px;
+    border-radius: 10px;
     margin-left: 3px;
     margin-right: 3px;
     padding: 0 3px;
@@ -45,8 +46,8 @@
 }
 
 #workspaces button {
-    color: #5E81AC;
-    background: transparent;
+    color: #4C566A;
+    background: #2E3440;
 }
 
 #workspaces button.visible {
@@ -54,21 +55,31 @@
 }
 
 #workspaces button.focused {
-    border-top: 2px solid #8FBCBB;
-    border-bottom: 2px solid #8FBCBB;
+    border: 3px solid #8FBCBB;
+    border-bottom: 3px solid #8FBCBB;
+    transition: 500ms;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: #2E3440;
     color: #8FBCBB;
 }
 
 #workspaces button:hover {
-    border-top: 2px solid #B48EAD;
-    transition: none;
+    border-radius: 10px;
+    border: 4px solid #A3BE8C;
+    transition: 500ms;
     box-shadow: inherit;
     text-shadow: inherit;
+    background: #2E3440;
     color: #B48EAD;
 }
 
 #workspaces button.urgent {
-    color: #BF616A;
+    transition: 500ms;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    border: 3px solid #BF616A;
+    color: #EBCB8B;
 }
 
 #network,
