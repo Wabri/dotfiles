@@ -9,17 +9,21 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Not Gnome
+    wofi
+
     # Tweaks
     gnome.gnome-tweaks
 
     # Extensions
-    gnomeExtensions.forge
+    gnomeExtensions.pop-shell
     gnomeExtensions.appindicator
     gnomeExtensions.audio-output-switcher
     gnomeExtensions.burn-my-windows
     gnomeExtensions.just-perfection
     gnomeExtensions.space-bar
     gnomeExtensions.transparent-top-bar-adjustable-transparency
+    gnomeExtensions.gsconnect
   ];
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];

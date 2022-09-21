@@ -4,6 +4,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
+      "electron-12.2.3"
       "electron-13.6.9"
       "electron-14.2.9"
       "python3.9-poetry-1.1.12"
@@ -35,6 +36,7 @@
     starship
     fzf
     lsof
+    etcher
 
     # Editors
     vim

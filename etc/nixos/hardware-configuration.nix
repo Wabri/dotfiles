@@ -43,6 +43,7 @@
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     pulseaudio.enable = false; # true if not using pipewire
     bluetooth.enable = true;
+    nvidia.modesetting.enable = true;
   };
 
 }
