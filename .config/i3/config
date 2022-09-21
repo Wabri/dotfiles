@@ -46,7 +46,7 @@ mouse_warping output
 #######################
 # === Variables =======
 #######################
-set $mod Mod4
+set $mod Mod1
 set $o_primary HDMI-1
 set $o_secondary eDP-1
 
