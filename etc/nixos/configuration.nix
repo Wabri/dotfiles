@@ -10,17 +10,15 @@
       ./users.nix
       ./time.nix
       ./virtualization.nix
-      ./printer.nix
-      ./sound.nix
-      ./bluetooth.nix
       ./services.nix
-      ./theme.nix
+      ./security.nix
+      ./fonts.nix
       ./packages.nix
-      ./gnome.nix
+      ./desktop/plasma.nix
     ];
 
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.allowReboot = false;
   system.stateVersion = "unstable"; 
 }
 

@@ -11,6 +11,8 @@
   environment.systemPackages = with pkgs; [
     # Not Gnome
     wofi
+    nordzy-cursor-theme
+    nordzy-icon-theme
 
     # Tweaks
     gnome.gnome-tweaks

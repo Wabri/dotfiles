@@ -7,5 +7,4 @@
     nerdfonts
     source-code-pro
   ];
-  programs.dconf.enable = true;
 }

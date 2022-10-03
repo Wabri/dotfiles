@@ -15,28 +15,11 @@
     bash
     zsh
 
+    # Shell Themes
+    zsh-powerlevel10k
+
     # Terminal
     alacritty
-
-    # Tools, cli, tui
-    killall
-    git
-    tmux
-    neofetch
-    htop
-    ncdu
-    duf
-    tldr
-    poetry
-    ripgrep
-    exa
-    bat
-    wget
-    vagrant
-    starship
-    fzf
-    lsof
-    etcher
 
     # Editors
     vim
@@ -45,6 +28,25 @@
     # Web
     brave
 
+    # Tools, cli, tui
+    killall
+    git
+    tmux
+    neofetch
+    htop
+    gtop
+    ncdu
+    duf
+    tldr
+    ripgrep
+    exa
+    bat
+    wget
+    vagrant
+    fzf
+    lsof
+    asdf-vm
+
     # Appimage
     appimage-run
 
@@ -52,7 +54,6 @@
     nordic
 
     # App
-    gnome.nautilus
     spotify
     obinskit
     vlc
@@ -64,16 +65,14 @@
     ventoy-bin
     mupdf
     qbittorrent
-    tdesktop
-    whatsapp-for-linux
-    discord
-    libreoffice
-  ];
+    onlyoffice-bin
+    etcher
 
-  # Steam
-  programs.steam = {
-    enable = true;
-  };
+    # Chat
+    tdesktop
+    discord
+    slack
+  ];
 
   # Enable zsh
   programs.zsh = {
@@ -82,5 +81,6 @@
       enable = true;
     };
     enableCompletion = true;
+    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
 }
