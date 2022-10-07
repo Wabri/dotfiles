@@ -27,6 +27,7 @@
 
     # Web
     brave
+    firefox
 
     # Tools, cli, tui
     killall
@@ -46,6 +47,8 @@
     fzf
     lsof
     asdf-vm
+    lazygit
+    lazydocker
 
     # Appimage
     appimage-run

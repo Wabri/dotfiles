@@ -3,7 +3,7 @@
 {
   imports =
     [
-      <nixos-hardware/lenovo/thinkpad/e470>
+       "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/e470"
       ./hardware-configuration.nix
       ./efi-bootloader.nix
       ./networking.nix

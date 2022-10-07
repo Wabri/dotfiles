@@ -7,6 +7,7 @@
     createHome = true;
     group = "users";
     isNormalUser = true;
+    initialPassword = "asdf";
     extraGroups = [ 
       "wheel" 
       "networkmanager" 

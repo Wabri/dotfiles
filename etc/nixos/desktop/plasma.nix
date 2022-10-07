@@ -10,6 +10,7 @@
       displayManager = {
         sddm = {
           enable = true;
+          theme = "Nordic";
         };
         defaultSession = "plasma";
       };
