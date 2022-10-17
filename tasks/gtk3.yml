@@ -1,9 +1,0 @@
----
-- name: Copy gtk3 session
-  copy:
-    src: .config/gtk-3.0/
-    dest: "{{ home_dir }}/.config/gtk-3.0/"
-    owner: "{{ username }}"
-    group: "{{ group | default(username) }}"
-    directory_mode: yes
-    remote_src: yes

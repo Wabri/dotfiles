@@ -1,7 +1,0 @@
----
-- name: Enable and start bluetooth
-  systemd:
-    name: bluetooth
-    state: started
-    enabled: yes
-
