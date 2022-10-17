@@ -3,22 +3,27 @@
 {
   services = {
     xserver = {
-      enable = true; # Enable the X11 windowing system.
-      desktopManager.plasma5 = {
-        enable = true;
+      enable = true;
+      desktopManager = {
+        xterm.enable = false;
+        plasma5 = {
+          enable = true;
+        };
       };
       displayManager = {
         sddm = {
           enable = true;
           theme = "Nordic";
         };
-        defaultSession = "plasma";
+        defaultSession = "plasmawayland";
       };
     };
   };
   environment.systemPackages = with pkgs; [
     # Tiling Window Management
-    libsForQt5.bismuth
+    # libsForQt5.bismuth
+
+    # Phone connection
     libsForQt5.kdeconnect-kde
   ];
   programs.dconf.enable = true;

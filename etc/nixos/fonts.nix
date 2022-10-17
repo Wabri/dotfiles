@@ -6,5 +6,6 @@
     powerline-fonts
     nerdfonts
     source-code-pro
+    material-icons
   ];
 }

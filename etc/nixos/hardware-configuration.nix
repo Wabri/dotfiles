@@ -44,6 +44,7 @@
     pulseaudio.enable = false; # true if not using pipewire
     bluetooth.enable = true;
     nvidia.modesetting.enable = true;
+    acpilight.enable = true;
   };
 
 }

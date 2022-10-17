@@ -14,7 +14,7 @@
       ./security.nix
       ./fonts.nix
       ./packages.nix
-      ./desktop/plasma.nix
+      ./desktop/i3.nix
     ];
 
   system.autoUpgrade.enable = true;

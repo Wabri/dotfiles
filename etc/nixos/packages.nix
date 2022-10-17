@@ -27,9 +27,9 @@
 
     # Web
     brave
-    firefox
 
     # Tools, cli, tui
+    jq
     killall
     git
     tmux
@@ -49,6 +49,8 @@
     asdf-vm
     lazygit
     lazydocker
+    ffmpeg
+    onefetch
 
     # Appimage
     appimage-run
@@ -70,7 +72,7 @@
     qbittorrent
     onlyoffice-bin
     etcher
-
+    
     # Chat
     tdesktop
     discord
