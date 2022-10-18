@@ -105,21 +105,21 @@ bindsym $mod+slash split toggle
 bindsym $mod+shift+slash layout toggle all
 
 # Volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && notify-send --expire-time=500 --urgency=normal "墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && notify-send --expire-time=500 --urgency=normal "奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-bindsym XF86AudioMute exec amixer sset Master toggle && notify-send --expire-time=1500 --urgency=critical '婢 toggle mute'
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+, exec notify-send --expire-time=500 --urgency=normal "墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))", exec play ~/.config/i3/tick.mp3
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-, exec notify-send --expire-time=500 --urgency=normal "奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))", exec play ~/.config/i3/tick.mp3
+bindsym XF86AudioMute exec amixer sset Master toggle, exec notify-send --expire-time=1500 --urgency=critical '婢 toggle mute', exec play ~/.config/i3/tick.mp3
 bindsym $mod+XF86AudioMute exec pavucontrol
 
 # Media
 #          
-bindsym XF86AudioPlay exec playerctl play-pause && notify-send --expire-time=1000 --urgency=normal ""
-bindsym XF86AudioPause exec playerctl pause && notify-send --expire-time=1000 --urgency=normal ""
-bindsym XF86AudioNext exec playerctl next && notify-send --expire-time=1000 --urgency=normal ""
-bindsym XF86AudioPrev exec playerctl previous && notify-send --expire-time=1000 --urgency=normal ""
+bindsym XF86AudioPlay exec playerctl play-pause, exec notify-send --expire-time=1000 --urgency=normal ""
+bindsym XF86AudioPause exec playerctl pause, exec notify-send --expire-time=1000 --urgency=normal ""
+bindsym XF86AudioNext exec playerctl next, exec notify-send --expire-time=1000 --urgency=normal ""
+bindsym XF86AudioPrev exec playerctl previous, exec notify-send --expire-time=1000 --urgency=normal ""
 
 # Backlight
-bindsym XF86MonBrightnessUp exec light -A 10 && notify-send --expire-time=500 --urgency=normal " $(light -G)"
-bindsym XF86MonBrightnessDown exec light -U 10 && notify-send --expire-time=500 --urgency=normal " $(light -G)"
+bindsym XF86MonBrightnessUp exec light -A 10, exec notify-send --expire-time=500 --urgency=normal " $(light -G)"
+bindsym XF86MonBrightnessDown exec light -U 10, exec notify-send --expire-time=500 --urgency=normal " $(light -G)"
 
 # Screenshot
 bindsym $mod+Shift+Print exec flameshot gui -c
@@ -218,16 +218,16 @@ bindsym $mod+Shift+m mode "$output_move", exec notify-send --expire-time=1500 --
 #          
 set $media_mode Media
 mode "$media_mode" {
-    bindsym j exec playerctl play && notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym k exec playerctl pause && notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym l exec playerctl next && notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym h exec playerctl previous && notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym j exec playerctl play, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym k exec playerctl pause, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym l exec playerctl next, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym h exec playerctl previous, exec notify-send --expire-time=1000 --urgency=normal "Media "
 
-    bindsym s exec playerctl play-pause && notify-send --expire-time=1000 --urgency=normal "Media  " && notify-send --expire-time=2000 --urgency=normal "Exit Media Mode", mode "default"
+    bindsym s exec playerctl play-pause, exec notify-send --expire-time=1000 --urgency=normal "Media  ", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode", mode "default"
 
-    bindsym a exec amixer sset Master 5%- && notify-send --expire-time=500 --urgency=normal "Media 奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-    bindsym d exec amixer sset Master 5%+ && notify-send --expire-time=500 --urgency=normal "Media 墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-    bindsym m exec amixer sset Master toggle && notify-send --expire-time=500 --urgency=normal '婢 toggle mute'
+    bindsym a exec amixer sset Master 5%-, exec notify-send --expire-time=500 --urgency=normal "Media 奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
+    bindsym d exec amixer sset Master 5%+, exec notify-send --expire-time=500 --urgency=normal "Media 墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
+    bindsym m exec amixer sset Master toggle, exec notify-send --expire-time=500 --urgency=normal '婢 toggle mute'
 
     bindsym q mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
     bindsym Escape mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
@@ -260,8 +260,8 @@ bindsym $mod+7 workspace $ws7, exec notify-send --expire-time=575 --urgency=norm
 bindsym $mod+8 workspace $ws8, exec notify-send --expire-time=575 --urgency=normal "ﬓ 8"
 bindsym $mod+9 workspace $ws9, exec notify-send --expire-time=575 --urgency=normal "ﬓ 9"
 bindsym $mod+0 workspace $ws10, exec notify-send --expire-time=575 --urgency=normal "ﬓ 10"
-bindsym $mod+bracketright workspace next, exec notify-send --expire-time=575 --urgency=normal "ﰳ"
-bindsym $mod+bracketleft workspace prev, exec notify-send --expire-time=575 --urgency=normal "ﰰ"
+bindsym $mod+bracketright workspace next, exec notify-send --expire-time=575 --urgency=normal "ﰳ", exec play ~/.config/i3/whoosh.mp3 
+bindsym $mod+bracketleft workspace prev, exec notify-send --expire-time=575 --urgency=normal "ﰰ", exec play ~/.config/i3/whoosh.mp3 
 
 # Move container
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -325,13 +325,16 @@ exec --no-startup-id blueberry-tray
 exec --no-startup-id nm-applet
 
 # Battery notification
-exec --no-startup-id batsignal -b -w 50 -c 25 -d 10 -f 90 -D "nvlc --play-and-exit ~/.config/i3/low_battery.mp3"
+exec --no-startup-id batsignal -b -w 50 -c 25 -d 10 -f 90 -D "play ~/.config/i3/low_battery.mp3"
 
 # Screenshot
 exec --no-startup-id flameshot
 
 # Screenshot
-exec --no-startup-id kdeconnect-indicator
+exec_always --no-startup-id kdeconnect-indicator
+
+# Auto layout
+exec_always --no-startup-id libinput-gestures
 
 #######################
 # === Floating ========
