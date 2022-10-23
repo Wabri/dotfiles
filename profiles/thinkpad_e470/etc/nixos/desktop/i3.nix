@@ -29,6 +29,10 @@
         batsignal
         acpi
         libsForQt5.kdeconnect-kde
+        libinput-gestures
+        wmctrl
+        sox
+        tty-clock
       ];
     };
     desktopManager = {

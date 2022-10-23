@@ -16,6 +16,7 @@
       "docker"
       "libvirtd"
       "storage"
+      "input"
     ];
     shell = pkgs.zsh;
   };

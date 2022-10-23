@@ -17,6 +17,10 @@
       };
     };
 
+    logind = {
+      lidSwitch = "lock";
+    };
+
     # External device automounting
     devmon.enable = true; # Enable external device automounting.
     udisks2.enable = true; # Enable udisks2.

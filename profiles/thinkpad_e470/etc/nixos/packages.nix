@@ -4,10 +4,8 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      "electron-12.2.3"
       "electron-13.6.9"
-      "electron-14.2.9"
-      "python3.9-poetry-1.1.12"
+      "electron-12.2.3"
     ];
   };
   environment.systemPackages = with pkgs; [
@@ -20,10 +18,6 @@
 
     # Terminal
     alacritty
-
-    # Editors
-    vim
-    neovim
 
     # Web
     brave
@@ -45,18 +39,16 @@
     wget
     vagrant
     fzf
-    lsof
     asdf-vm
     lazygit
     lazydocker
     ffmpeg
     onefetch
 
-    # Appimage
-    appimage-run
-
     # Themes
     nordic
+    nordzy-cursor-theme
+    nordzy-icon-theme
 
     # App
     spotify
@@ -64,8 +56,6 @@
     vlc
     virt-manager
     bitwarden
-    obs-studio
-    obs-studio-plugins.wlrobs
     rpi-imager
     ventoy-bin
     mupdf
@@ -79,7 +69,20 @@
     slack
   ];
 
-  # Enable zsh
+  # Overlays
+  nixpkgs.overlays = [
+    ( self: super: {
+      discord = super.discord.overrideAttrs (
+        _: { 
+          src = builtins.fetchTarball {
+            url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+          };
+        }
+      );
+    })
+  ];
+
+  # ZSH
   programs.zsh = {
     enable = true;
     ohMyZsh = {
@@ -87,5 +90,10 @@
     };
     enableCompletion = true;
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+  };
+
+  # Vim
+  programs.vim = {
+    defaultEditor = true;
   };
 }
