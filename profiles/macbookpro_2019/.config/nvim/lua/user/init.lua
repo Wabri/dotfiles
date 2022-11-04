@@ -211,10 +211,9 @@ local config = {
       ["<right>"] = { "<C-w>5>", desc = "Resize right" },
       ["<down>"] = { "<C-w>5+", desc = "Resize down" },
       ["<up>"] = { "<C-w>5-", desc = "Resize up" },
-      -- New
-      ["<leader>t"] = { "<cmd>tabnew<CR>", desc = "New tab" },
+      -- Split
       ["<leader>s"] = { "<cmd>split<CR>", desc = "Split" },
-      ["<leader>v"] = { "<cmd>vsplit", desc = "Vertical Split" },
+      ["<leader>v"] = { "<cmd>vsplit<CR>", desc = "Vertical Split" },
       -- Dont let focus go away when searching
       ["n"] = { "nzzzv" },
       ["N"] = { "Nzzzv" },
