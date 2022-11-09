@@ -1,9 +1,13 @@
 { pkgs, ... }:
 
+let
+  user="wabri";
+  description="Wabri";
+in
 {
   # Users --> Don't forget to set a password with ‘passwd’.
-  users.users.wabri = {
-    description = "Wabri";
+  users.users.${user} = {
+    description = "${description}";
     createHome = true;
     group = "users";
     isNormalUser = true;

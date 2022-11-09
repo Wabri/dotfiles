@@ -22,6 +22,9 @@
     # Web
     brave
 
+    # Editors
+    neovim
+
     # Tools, cli, tui
     jq
     killall
@@ -39,11 +42,17 @@
     wget
     vagrant
     fzf
-    asdf-vm
     lazygit
     lazydocker
     ffmpeg
     onefetch
+    direnv
+    nix-direnv
+    unzip
+    jump
+    fd
+    tree-sitter
+    pueue
 
     # Themes
     nordic
@@ -64,22 +73,31 @@
     etcher
     
     # Chat
-    tdesktop
-    discord
-    slack
+    # tdesktop
+    # discord
+    # slack
   ];
 
   # Overlays
-  nixpkgs.overlays = [
-    ( self: super: {
-      discord = super.discord.overrideAttrs (
-        _: { 
-          src = builtins.fetchTarball {
-            url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-          };
-        }
-      );
-    })
+  #nixpkgs.overlays = [
+  #  ( self: super: {
+  #    discord = super.discord.overrideAttrs (
+  #      _: { 
+  #        src = builtins.fetchTarball {
+  #          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+  #        };
+  #      }
+  #    );
+  #  })
+  #];
+
+  # nix options for derivations to persist garbage collection
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+  environment.pathsToLink = [
+    "/share/nix-direnv"
   ];
 
   # ZSH
