@@ -3,10 +3,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'kamwitsta/nordisk'
-
-" Colorized for hexa colors
-Plug 'BourgeoisBear/clrzr'
+Plug 'morhetz/gruvbox'
 
 " Fuzzy finder
 Plug 'junegunn/fzf'
@@ -20,9 +17,6 @@ Plug 'sheerun/vim-polyglot'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'
-
-" VimWiki
-Plug 'vimwiki/vimwiki'
 
 " Tmux integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -38,18 +32,3 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
-" => vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/Personal/Wiki'}]
-let g:vimwiki_key_mappings =
-\ {
-\   'all_maps': 1,
-\   'global': 0,
-\   'headers': 1,
-\   'text_objs': 1,
-\   'table_format': 1,
-\   'table_mappings': 1,
-\   'lists': 1,
-\   'links': 1,
-\   'html': 1,
-\   'mouse': 1,
-\ }

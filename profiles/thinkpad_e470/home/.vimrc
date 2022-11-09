@@ -13,6 +13,9 @@
 set runtimepath=/home/wabri/.vim,$VIMRUNTIME
 
 " === PLUGINS ===
+set viminfo+=n~/.cache/vim/info
+
+" === PLUGINS ===
 source ~/.vim/plugins.vim
 
 " === SETTINGS ===
@@ -37,6 +40,9 @@ set undofile
 " => More space on command
 set cmdheight=2
 
+" => offset line
+set scrolloff=10
+
 " === NETRW ===
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -44,7 +50,8 @@ let g:netrw_browse_split = 0
 let g:netrw_winsize = 13
 
 " === COLORSCHEME ===
-colorscheme nordisk
+colorscheme gruvbox
+set background=dark
 
 " === MAPPING ===
 
@@ -73,6 +80,7 @@ function! NetrwMapping()
     nmap <buffer> <C-j> <C-w>j
     nmap <buffer> <C-k> <C-w>k
     nmap <buffer> <C-l> <C-w>l
+    set number
 endfunction
 
 " => Buffers
@@ -109,7 +117,12 @@ nnoremap <down> <C-w>5+
 nnoremap <up> <C-w>5-
 
 " => NETRW
-nnoremap <leader>e :e .<CR>
+nnoremap <leader>e :Ex<CR>
+command! Ex :call Netrw()
+function! Netrw()
+   Explore
+   set number relativenumber
+endfunction
 
 " => New
 nnoremap <leader>t :tabnew <CR>:Files<CR>
