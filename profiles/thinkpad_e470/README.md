@@ -3,12 +3,23 @@
 ***Forever work in progress***
 ***Images could not be the same as my actual configuration***
 
-## TL;DR
+# Screenshots
 
-I have two machine:
+Nautilus + Neofetch + vim:
 
-* MacBookPro15 (WORK) => [here the dotfiles](profiles/macbookpro_2019/)
-* Thinkpad E470 (Personal) => [here the dotfiles](profiles/thinkpad_e470/)
+![RANDOM](../../Screenshots/unixporn.png)
+
+Tmux+zsh+NeoVim+Vimwiki:
+
+![TMUX+VIM](../../Screenshots/unixporn2.png)
+
+Spotify:
+
+![SPOTIFY](../../Screenshots/unixporn3.png)
+
+Wallpaper:
+
+![Wallpaper](../../Pictures/wallpaper.png)
 
 ## About this config
 
