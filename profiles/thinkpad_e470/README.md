@@ -19,7 +19,7 @@ Spotify:
 
 Wallpaper:
 
-![Wallpaper](../../Pictures/wallpaper.png)
+![Wallpaper](home/Pictures/wallpaper.png)
 
 ## About this config
 
