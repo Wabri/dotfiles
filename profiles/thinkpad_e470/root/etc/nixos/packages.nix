@@ -49,10 +49,12 @@
     direnv
     nix-direnv
     unzip
-    jump
     fd
     tree-sitter
     pueue
+    tlp
+    trash-cli
+    delta
 
     # Themes
     nordic
