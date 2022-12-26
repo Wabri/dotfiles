@@ -29,3 +29,4 @@ in
     shell = pkgs.zsh;
   };
 }
+

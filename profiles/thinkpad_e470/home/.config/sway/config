@@ -2,7 +2,7 @@
 
 ### Variables
 # Modifier
-set $mod Mod1
+set $mod Mod4
 # Home row
 set $left h
 set $down j
@@ -33,8 +33,8 @@ smart_gaps on
 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 resolution 1920x1080 position 3840,0
-output HDMI-A-1 resolution 1920x1080 position 1920,0
+#output eDP-1 resolution 1920x1080 position 3840,0
+#output HDMI-A-1 resolution 1920x1080 position 1920,0
 
 ### Idle configuration
 #
@@ -194,15 +194,15 @@ exec waybar
 
 #
 # Autotiling
-exec autotiling
+#exec autotiling
 
 #
 # Fade-in Fade-out window
-exec flashfocus
+#exec flashfocus
 
 #
 # wob
-set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+#set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+#exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 include /etc/sway/config.d/*

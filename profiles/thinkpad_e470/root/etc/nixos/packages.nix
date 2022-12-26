@@ -21,6 +21,7 @@
 
     # Web
     brave
+    firefox
 
     # Editors
     neovim
@@ -55,6 +56,7 @@
     tlp
     trash-cli
     delta
+    distrobox
 
     # Themes
     nordic

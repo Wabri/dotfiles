@@ -7,7 +7,7 @@
       ./hardware-configuration.nix
       ./efi-bootloader.nix
       ./networking.nix
-      ./users.nix
+      ./wabri.nix
       ./time.nix
       ./virtualization.nix
       ./services.nix

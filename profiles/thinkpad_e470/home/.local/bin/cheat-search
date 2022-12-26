@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-read -p "Cheatsheet: " search && [ ! -z $search ] || exit 1
-
-cheat $search
-
-exit 0
-
-

@@ -34,9 +34,10 @@ workspace_layout default
 new_window pixel 2
 
 # Gaps
-smart_gaps on
-gaps inner 6
-gaps outer 3
+smart_gaps off
+hide_edge_borders none
+gaps inner 20
+gaps outer 20
 for_window [class=".*"] border pixel 6
 
 # Mouse
@@ -147,16 +148,16 @@ bindsym $mod+Shift+n exec dunstctl close-all
 # System
 set $mode_system System
 mode "$mode_system" {
-    bindsym l exec i3-msg exit, mode "default"
-    bindsym s exec systemctl suspend, mode "default"
-    bindsym h exec systemctl hibernate, mode "default"
+    bindsym l exec exec dunstctl close, exec i3-msg exit, mode "default"
+    bindsym s exec dunstctl close, exec systemctl suspend, mode "default"
+    bindsym h exec dunstctl close, exec systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
     bindsym p exec systemctl poweroff, mode "default"
 
-    bindsym q mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit System Mode"
-    bindsym Escape mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit System Mode"
+    bindsym q mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit System Mode"
+    bindsym Escape mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit System Mode"
 }
-bindsym $mod+p mode "$mode_system", exec notify-send --expire-time=1500 --urgency=critical "System Mode"
+bindsym $mod+p mode "$mode_system", exec notify-send --expire-time=10000 --urgency=critical 'System Mode' "$(echo -e "l => logout\ns => suspend\nh => hibernate\nr => reboot\np => poweroff\nq or escape => go back")"
 
 # Resize
 # Pixels per resize
@@ -168,10 +169,10 @@ mode "$mode_resize" {
         bindsym k resize shrink height $pxpr px or $pxpr ppt
         bindsym l resize grow width $pxpr px or $pxpr ppt
 
-        bindsym q mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Resize Mode"
-        bindsym Escape mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Resize Mode"
+        bindsym q mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit Resize Mode"
+        bindsym Escape mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit Resize Mode"
 }
-bindsym $mod+r mode $mode_resize, exec notify-send --expire-time=1500 --urgency=critical "Resize Mode"
+bindsym $mod+r mode $mode_resize, exec notify-send --expire-time=10000 --urgency=critical "Resize Mode" "$(echo -e "h => resize left \n j => resize down \n k => resize up \n l => resize right\nq or escape => go back")"
 
 # Move workspace
 set $workspace_move Workspace
@@ -218,21 +219,21 @@ bindsym $mod+Shift+m mode "$output_move", exec notify-send --expire-time=1500 --
 #          
 set $media_mode Media
 mode "$media_mode" {
-    bindsym j exec playerctl play, exec notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym k exec playerctl pause, exec notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym l exec playerctl next, exec notify-send --expire-time=1000 --urgency=normal "Media "
-    bindsym h exec playerctl previous, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym j exec playerctl play, exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym k exec playerctl pause, exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym l exec playerctl next, exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Media "
+    bindsym h exec playerctl previous, exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Media "
 
-    bindsym s exec playerctl play-pause, exec notify-send --expire-time=1000 --urgency=normal "Media  ", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode", mode "default"
+    bindsym s exec playerctl play-pause, exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Media  ", exec notify-send --expire-time=2000 --urgency=normal "Exit Media Mode", mode "default"
 
-    bindsym a exec amixer sset Master 5%-, exec notify-send --expire-time=500 --urgency=normal "Media 奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-    bindsym d exec amixer sset Master 5%+, exec notify-send --expire-time=500 --urgency=normal "Media 墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
-    bindsym m exec amixer sset Master toggle, exec notify-send --expire-time=500 --urgency=normal '婢 toggle mute'
+    bindsym a exec amixer sset Master 5%-, exec dunstctl close, exec notify-send --expire-time=500 --urgency=normal "Media 奔 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
+    bindsym d exec amixer sset Master 5%+, exec dunstctl close, exec notify-send --expire-time=500 --urgency=normal "Media 墳 $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"
+    bindsym m exec amixer sset Master toggle, exec dunstctl close, exec notify-send --expire-time=500 --urgency=normal '婢 toggle mute'
 
-    bindsym q mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
-    bindsym Escape mode "default", exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
+    bindsym q mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
+    bindsym Escape mode "default", exec dunstctl close, exec notify-send --expire-time=1000 --urgency=normal "Exit Media Mode"
 }
-bindsym $mod+s mode "$media_mode", exec notify-send --expire-time=1500 --urgency=critical "Media Mode"
+bindsym $mod+s mode "$media_mode", exec notify-send --expire-time=8000 --urgency=critical "Media Mode" "$(echo -e "h => previous \n j => play \n k => pause \n l => next\ns => toggle play and exit\na => lower audio\nd => upper audio\nm => toggle mute\nq or escape => go back")"
 
 #######################
 # === Workspace =======
@@ -247,7 +248,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws0 "0"
 
 # Switch workspace
 bindsym $mod+1 workspace $ws1, exec notify-send --expire-time=575 --urgency=normal "ﬓ 1"
@@ -259,7 +260,7 @@ bindsym $mod+6 workspace $ws6, exec notify-send --expire-time=575 --urgency=norm
 bindsym $mod+7 workspace $ws7, exec notify-send --expire-time=575 --urgency=normal "ﬓ 7"
 bindsym $mod+8 workspace $ws8, exec notify-send --expire-time=575 --urgency=normal "ﬓ 8"
 bindsym $mod+9 workspace $ws9, exec notify-send --expire-time=575 --urgency=normal "ﬓ 9"
-bindsym $mod+0 workspace $ws10, exec notify-send --expire-time=575 --urgency=normal "ﬓ 10"
+bindsym $mod+0 workspace $ws0, exec notify-send --expire-time=575 --urgency=normal "ﬓ 0"
 bindsym $mod+bracketright workspace next, exec notify-send --expire-time=575 --urgency=normal "ﰳ", exec play ~/.config/i3/whoosh.mp3 
 bindsym $mod+bracketleft workspace prev, exec notify-send --expire-time=575 --urgency=normal "ﰰ", exec play ~/.config/i3/whoosh.mp3 
 
@@ -273,7 +274,7 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+0 move container to workspace $ws0
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -284,19 +285,20 @@ assign [class="(?i)brave"] $ws2
 assign [class="(?i)telegramdesktop"] → $ws3
 assign [class="(?i)discord"] → $ws3
 assign [class="Bitwarden"] → $ws8
-for_window [class="Spotify"] move to workspace $ws10
+assign [class="obs"] → $ws9
+for_window [class="Spotify"] move to workspace $ws0
 
 # Multiple monitor setup (works even with one screen)
-#workspace $ws1 output $o_primary
-#workspace $ws2 output $o_primary
-#workspace $ws3 output $o_primary
-#workspace $ws4 output $o_primary
-#workspace $ws5 output $o_primary
-#workspace $ws6 output $o_secondary
-#workspace $ws7 output $o_secondary
-#workspace $ws8 output $o_secondary
-#workspace $ws9 output $o_secondary
-#workspace $ws10 output $o_secondary
+workspace $ws1 output $o_secondary
+workspace $ws2 output $o_secondary
+workspace $ws3 output $o_secondary
+workspace $ws4 output $o_secondary
+workspace $ws5 output $o_secondary
+workspace $ws6 output $o_primary
+workspace $ws7 output $o_primary
+workspace $ws8 output $o_primary
+workspace $ws9 output $o_primary
+workspace $ws0 output $o_primary
 
 #######################
 # === Compositor ======
@@ -310,10 +312,10 @@ exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 #######################
 
 # Display
-exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
+#exec --no-startup-id sleep 1 && ~/.screenlayout/default.sh
 
 # Wallpaper
-exec --no-startup-id sleep 2 && nitrogen --restore
+exec --no-startup-id nitrogen --restore
 
 # Desktop notifications
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
@@ -348,7 +350,7 @@ for_window [window_role="About"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
-for_window [class="Thunar"] floating enable
+# for_window [class="Thunar"] floating enable
 for_window [class="ObinsKit"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="kdeconnect.app"] floating enable

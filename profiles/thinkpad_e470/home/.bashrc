@@ -50,6 +50,3 @@ fi
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
-
-# === PROMPT ===
-eval "$(starship init bash)"

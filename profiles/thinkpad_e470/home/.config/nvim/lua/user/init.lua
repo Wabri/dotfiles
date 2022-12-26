@@ -218,6 +218,9 @@ local config = {
       -- Dont let focus go away when searching
       ["n"] = { "nzzzv" },
       ["N"] = { "Nzzzv" },
+      -- Dont let focus go away when searching
+      ["<C-u>"] = { "<C-u>zz" },
+      ["<C-d>"] = { "<C-d>zz" },
     },
     i = {
       -- Undo in the right way
@@ -243,6 +246,9 @@ local config = {
       },
       {
         "almo7aya/neogruvbox.nvim",
+      },
+      {
+        "ThePrimeagen/vim-be-good",
       },
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"

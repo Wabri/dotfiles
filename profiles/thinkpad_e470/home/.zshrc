@@ -15,7 +15,6 @@ ZSH_TMUX_DEFAULT_SESSION_NAME="Home"
 ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 
 plugins=(
-  asdf
   command-not-found
   docker 
   git 
@@ -24,6 +23,7 @@ plugins=(
   tmux 
   vi-mode 
   vagrant 
+  direnv 
 )
 
 source $ZSH/oh-my-zsh.sh
