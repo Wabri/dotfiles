@@ -7,8 +7,8 @@
 
 I have two machine:
 
-* MacBookPro15 (WORK) => [here the dotfiles](profiles/macbookpro_2019/)
-* Thinkpad E470 (Personal) => [here the dotfiles](profiles/thinkpad_e470/)
+* MacBookPro15 (WORK) => [here the dotfiles](profiles/Mac/)
+* Thinkpad E470 (Personal) => [here the dotfiles](profiles/Fabulinus/)
 
 ## About this config
 
