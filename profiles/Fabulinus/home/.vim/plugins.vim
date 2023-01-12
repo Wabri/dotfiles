@@ -1,9 +1,8 @@
 " =========================================================================== "
 " => Plugins
 call plug#begin('~/.vim/plugged')
-
-" Colorschemes
-Plug 'morhetz/gruvbox'
+" Theme
+Plug 'arcticicestudio/nord-vim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf'
@@ -17,9 +16,6 @@ Plug 'sheerun/vim-polyglot'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'
-
-" Tmux integration
-Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 

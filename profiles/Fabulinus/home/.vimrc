@@ -50,8 +50,8 @@ let g:netrw_browse_split = 0
 let g:netrw_winsize = 13
 
 " === COLORSCHEME ===
-colorscheme gruvbox
 set background=dark
+colorscheme nord
 
 " === MAPPING ===
 
@@ -134,10 +134,9 @@ nnoremap <leader>nv :vsplit<CR>:e
 nnoremap <leader>nn :e
 
 " => fzf
-nmap <c-f> :Rg<CR>
+nmap <leader>fw :Rg<CR>
 nmap <leader>ff :Files<CR>
 nmap <leader>fg :GitFiles<CR>
-nmap <leader>fl :Lines<CR>
 nmap <leader>ft :Filetypes<CR>
 imap <c-x><c-f> <plug>(fzf-complete-path)
 

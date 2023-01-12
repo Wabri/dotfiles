@@ -26,7 +26,7 @@ local config = {
   },
 
   -- Set colorscheme to use
-  colorscheme = "neogruvbox",
+  colorscheme = "default_theme",
 
   -- Add highlight groups in any theme
   highlights = {
@@ -70,12 +70,12 @@ local config = {
 
   -- Set dashboard header
   header = {
-    "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
-    "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
-    "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
-    "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-    "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
-    "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+   " ███████╗ █████╗ ██████╗ ██╗   ██╗██╗     ██╗███╗   ██╗██╗   ██╗███████╗",
+   " ██╔════╝██╔══██╗██╔══██╗██║   ██║██║     ██║████╗  ██║██║   ██║██╔════╝",
+   " █████╗  ███████║██████╔╝██║   ██║██║     ██║██╔██╗ ██║██║   ██║███████╗",
+   " ██╔══╝  ██╔══██║██╔══██╗██║   ██║██║     ██║██║╚██╗██║██║   ██║╚════██║",
+   " ██║     ██║  ██║██████╔╝╚██████╔╝███████╗██║██║ ╚████║╚██████╔╝███████║",
+   " ╚═╝     ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝",
   },
 
   -- Default theme configuration
@@ -243,12 +243,6 @@ local config = {
       {
           "aserowy/tmux.nvim",
           config = function() require("tmux").setup() end
-      },
-      {
-        "almo7aya/neogruvbox.nvim",
-      },
-      {
-        "ThePrimeagen/vim-be-good",
       },
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
