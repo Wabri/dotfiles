@@ -51,7 +51,6 @@ let g:netrw_winsize = 13
 
 " === COLORSCHEME ===
 set background=dark
-colorscheme nord
 
 " === MAPPING ===
 

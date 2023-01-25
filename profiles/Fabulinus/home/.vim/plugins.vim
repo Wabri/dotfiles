@@ -1,8 +1,6 @@
 " =========================================================================== "
 " => Plugins
 call plug#begin('~/.vim/plugged')
-" Theme
-Plug 'arcticicestudio/nord-vim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf'
