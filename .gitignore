@@ -8,3 +8,5 @@ poetry.lock
 # === Kitchen ===
 kitchen.local.yml
 
+# === Direnv ===
+.direnv
