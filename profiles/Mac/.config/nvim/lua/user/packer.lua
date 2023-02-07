@@ -1,27 +1,34 @@
 vim.cmd [[packadd packer.nvim]]
 
+-- Mapping
+require("which-key").register({
+    p = {
+        name = "Packer",
+        s = { "Sync" },
+    },
+}, { prefix = "<leader>" })
+vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync)
+--
+
+-- List
 return require('packer').startup(function(use)
     -- Leave this here
     use 'wbthomason/packer.nvim'
     --
 
     -- Utility
-    use 'nvim-lua/plenary.nvim'
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
+    use 'nvim-tree/nvim-tree.lua'
+    use 'akinsho/toggleterm.nvim'
+    use 'folke/which-key.nvim'
+    use 'lewis6991/impatient.nvim'
     --
 
     -- Themes
     use 'shaunsingh/nord.nvim'
+    use 'nvim-lualine/lualine.nvim'
     --
 
     -- File
-    use 'mbbill/undotree'
     use({
         'ThePrimeagen/harpoon',
         requires = { {'nvim-lua/plenary.nvim'} }
@@ -36,12 +43,12 @@ return require('packer').startup(function(use)
     --
 
     -- Treesitter = generate syntax tree
-    use(
-    'nvim-treesitter/nvim-treesitter',
-    {
-        run = ':TSUpdate'
-    }
-    )
+    use({
+        'nvim-treesitter/nvim-treesitter',
+        {
+            run = ':TSUpdate'
+        }
+    })
     use('nvim-treesitter/playground')
     --
 
@@ -70,3 +77,4 @@ return require('packer').startup(function(use)
     }
     --
 end)
+
