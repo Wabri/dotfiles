@@ -41,11 +41,13 @@ vim.keymap.set("n", "<leader>j", ":m .+1<CR>==")
 require("which-key").register({
     t = {
         name = "Terminal",
-        t = { "New Terminal"},
+        j = { "New Terminal (down)"},
+        l = { "New Terminal (right)"},
         g = { "Lazygit"},
     },
 }, { prefix = "<leader>" })
-vim.keymap.set("n", "<leader>tt", ":split | resize 10 | terminal<CR>i")
+vim.keymap.set("n", "<leader>tj", ":split | resize 10 | terminal<CR>i")
+vim.keymap.set("n", "<leader>tl", ":vsplit | terminal<CR>i")
 vim.keymap.set("n", "<leader>tg", ":terminal lazygit<CR>i")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")

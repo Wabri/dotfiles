@@ -21,6 +21,7 @@ return require('packer').startup(function(use)
     use 'akinsho/toggleterm.nvim'
     use 'folke/which-key.nvim'
     use 'lewis6991/impatient.nvim'
+    use 'mbbill/undotree'
     --
 
     -- Themes
@@ -45,9 +46,7 @@ return require('packer').startup(function(use)
     -- Treesitter = generate syntax tree
     use({
         'nvim-treesitter/nvim-treesitter',
-        {
-            run = ':TSUpdate'
-        }
+        { run = ':TSUpdate' }
     })
     use('nvim-treesitter/playground')
     --
