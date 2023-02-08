@@ -22,6 +22,7 @@ return require('packer').startup(function(use)
     use 'folke/which-key.nvim'
     use 'lewis6991/impatient.nvim'
     use 'mbbill/undotree'
+    use 'tpope/vim-fugitive'
     --
 
     -- Themes
