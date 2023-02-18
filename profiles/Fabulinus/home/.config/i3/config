@@ -284,7 +284,9 @@ bindsym $mod+Shift+0 move container to workspace $ws0
 assign [class="(?i)brave"] $ws2
 assign [class="(?i)telegramdesktop"] → $ws3
 assign [class="(?i)discord"] → $ws3
-assign [class="Bitwarden"] → $ws8
+assign [class="(?i)virt-manager"] → $ws6
+assign [class="(?i)bitwarden"] → $ws7
+assign [class="(?i)steam"] → $ws8
 assign [class="obs"] → $ws9
 for_window [class="Spotify"] move to workspace $ws0
 
