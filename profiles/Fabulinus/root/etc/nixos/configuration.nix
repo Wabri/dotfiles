@@ -7,14 +7,11 @@
       ./hardware-configuration.nix
       ./efi-bootloader.nix
       ./networking.nix
-      ./wabri.nix
       ./time.nix
       ./virtualization.nix
       ./services.nix
       ./security.nix
-      ./fonts.nix
-      ./packages.nix
-      ./desktop/i3.nix
+      ./users/wabri/main.nix
     ];
 
   nix.gc = {
@@ -23,13 +20,13 @@
     options = "--delete-older-than 8d";
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "weekly";
-    channel = "https://nixos.org/channels/nixos-unstable";
-  };
+#  system.autoUpgrade = {
+#    enable = true;
+#    allowReboot = false;
+#    dates = "weekly";
+#    channel = "https://nixos.org/channels/nixos-unstable";
+#  };
 
-  system.stateVersion = "unstable"; 
+  system.stateVersion = "22.11"; 
 }
 

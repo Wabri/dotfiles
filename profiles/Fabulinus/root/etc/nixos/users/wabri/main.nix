@@ -5,6 +5,13 @@ let
   description="Wabri";
 in
 {
+  imports = 
+    [
+      ./fonts.nix
+      ./packages.nix
+      ../../desktop/gnome.nix
+    ];
+
   # Users --> Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     description = "${description}";

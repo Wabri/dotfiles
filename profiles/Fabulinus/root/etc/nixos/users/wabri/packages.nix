@@ -25,6 +25,7 @@
 
     # Editors
     neovim
+    vimPlugins.packer-nvim
 
     # Tools, cli, tui
     jq
@@ -57,6 +58,7 @@
     trash-cli
     delta
     distrobox
+    clang
 
     # Themes
     nordic
@@ -64,7 +66,6 @@
     nordzy-icon-theme
 
     # App
-    spotify
     obinskit
     vlc
     virt-manager
@@ -75,25 +76,7 @@
     qbittorrent
     onlyoffice-bin
     etcher
-    
-    # Chat
-    # tdesktop
-    # discord
-    # slack
   ];
-
-  # Overlays
-  #nixpkgs.overlays = [
-  #  ( self: super: {
-  #    discord = super.discord.overrideAttrs (
-  #      _: { 
-  #        src = builtins.fetchTarball {
-  #          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-  #        };
-  #      }
-  #    );
-  #  })
-  #];
 
   # nix options for derivations to persist garbage collection
   nix.extraOptions = ''

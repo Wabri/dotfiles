@@ -34,7 +34,7 @@
       gdm = {
         enable = true;
       };
-      # defaultSession = "sway";
+      defaultSession = "sway";
     };
   };
 }

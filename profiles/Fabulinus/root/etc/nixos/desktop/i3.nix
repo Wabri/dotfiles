@@ -17,22 +17,20 @@
         nitrogen
         dunst
         libnotify
-        blueberry
         alsa-utils
         playerctl
         xorg.xev
         light
         font-manager
         networkmanagerapplet
+        blueberry
         xfce.thunar
         pavucontrol
         batsignal
         acpi
-        libsForQt5.kdeconnect-kde
         libinput-gestures
         wmctrl
         sox
-        tty-clock
       ];
     };
     desktopManager = {

@@ -12,4 +12,9 @@ in {
     enable = true;
     package = hyprland.packages.${pkgs.system}.default;
   };
+
+  environment.systemPackages = with pkgs; [
+    wofi
+  ];
+
 }

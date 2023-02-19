@@ -17,6 +17,9 @@
     # Tweaks
     gnome.gnome-tweaks
 
+    # Filemanager
+    gnome.nautilus
+
     # Extensions
     gnomeExtensions.pop-shell
     gnomeExtensions.appindicator
@@ -25,7 +28,6 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.space-bar
     gnomeExtensions.transparent-top-bar-adjustable-transparency
-    gnomeExtensions.gsconnect
   ];
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
