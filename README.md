@@ -2,11 +2,11 @@
 
 ***Forever work in progress***
 
-## TL;DR
+## Profiles
 
 I have two machine:
 
-* MacBookPro15 (WORK) => Macos => [here the dotfiles](profiles/Mac/)
 * Thinkpad E470 (Personal) => Nixos => [here the dotfiles](profiles/Fabulinus/)
+* MacBookPro15 (WORK) => Macos => [here the dotfiles](profiles/Mac/)
 * Ideapad (Personal) => Fedora => [here the dotfiles](profiles/Mitra/)
 
