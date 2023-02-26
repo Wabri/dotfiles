@@ -1,4 +1,4 @@
-{  pkgs, ... }:
+{ pkgs, ... }:
 
 { 
   services.xserver = {
@@ -9,6 +9,9 @@
       extraPackages = with pkgs; [
         polybar
         lxappearance
+        nordic
+        nordzy-cursor-theme
+        nordzy-icon-theme
         arandr
         rofi
         flameshot
@@ -31,6 +34,8 @@
         libinput-gestures
         wmctrl
         sox
+        xclip
+	xss-lock
       ];
     };
     desktopManager = {
@@ -44,3 +49,4 @@
     };
   };
 }
+

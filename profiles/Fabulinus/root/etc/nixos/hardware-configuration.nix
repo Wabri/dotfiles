@@ -4,47 +4,37 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ 
-    "xhci_pci" 
-    "ahci" 
-    "usb_storage" 
-    "sd_mod" 
-    "sdhci_pci" 
-  ];
-
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/44fbc3f4-671e-4af2-8c50-0e039b8be775";
+    { device = "/dev/disk/by-uuid/2f2ae3e0-5ead-4412-87d1-117ead95255a";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/268E-D723";
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/DD9D-993A";
       fsType = "vfat";
     };
 
-  swapDevices = [ 
-    { device = "/dev/disk/by-uuid/90740ce2-c04e-430c-ac15-652367e011a9"; }
-  ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/fd4ea5ac-7270-4265-9cbf-c4f0e869852d"; }
+    ];
 
-  powerManagement = {
-    enable = true;
-    cpuFreqGovernor = lib.mkDefault "powersave";
-  };
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
-  hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    pulseaudio.enable = false; # true if not using pipewire
-    bluetooth.enable = true;
-    nvidia.modesetting.enable = true;
-    acpilight.enable = true;
-  };
-
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  # EFI boot loader
   boot.loader = {
     grub = {
       enable = true;
@@ -10,8 +9,8 @@
       device = "nodev";
     };
     efi = {
-      canTouchEfiVariables = true; 
-      efiSysMountPoint = "/boot";
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
     };
   };
 }

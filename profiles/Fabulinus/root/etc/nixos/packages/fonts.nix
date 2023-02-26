@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  # Fonts
   fonts.fonts = with pkgs; [
     iosevka
     powerline-fonts
