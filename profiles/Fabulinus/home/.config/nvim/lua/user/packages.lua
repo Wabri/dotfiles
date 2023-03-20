@@ -19,7 +19,7 @@ require('lazy').setup({
   'mbbill/undotree',
 
   -- Git related plugins
-  { 'tpope/vim-fugitive', 
+  { 'tpope/vim-fugitive',
     config = function()
     end,
   },
@@ -39,7 +39,7 @@ require('lazy').setup({
     dependencies = {
       -- LSP Support
       'neovim/nvim-lspconfig',
-      { 'williamboman/mason.nvim', 
+      { 'williamboman/mason.nvim',
         config = function()
           require("mason").setup({
             ui = {
@@ -86,7 +86,7 @@ require('lazy').setup({
           plugins = true,
         },
         setup_jsonls = true,
-        override = function(root_dir, options) end,
+        -- override = function(root_dir, options) end,
         lspconfig = true,
         pathStrict = true,
       } },
@@ -102,10 +102,11 @@ require('lazy').setup({
   { 'folke/which-key.nvim', opts = {} },
 
   { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'EdenEast/nightfox.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'nightfox'
     end,
   },
 
