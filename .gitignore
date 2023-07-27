@@ -5,8 +5,8 @@ Session.vim
 # === Poetry ===
 poetry.lock
 
-# === Kitchen ===
-kitchen.local.yml
+# === lazy lock ===
+lazy-lock.json
 
 # === Direnv ===
 .direnv
