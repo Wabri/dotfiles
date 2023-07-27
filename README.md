@@ -2,11 +2,7 @@
 
 ***Forever work in progress***
 
-## Profiles
+## Profiles list
 
-I have two machine:
-
-* Thinkpad E470 (Personal) => Nixos => [here the dotfiles](profiles/Fabulinus/)
-* MacBookPro15 (WORK) => Macos => [here the dotfiles](profiles/Mac/)
-* Ideapad (Personal) => Fedora => [here the dotfiles](profiles/Mitra/)
-
+- [Zeus-Tuxedo-TuxedoOS](https://github.com/Wabri/dotfiles/tree/zeus)
+- [Suse-MacBookPro-Macos](https://github.com/Wabri/dotfiles/tree/suse)

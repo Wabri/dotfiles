@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-git reset --mix --quiet HEAD~1
-echo "Unfasted"
-git status -s
