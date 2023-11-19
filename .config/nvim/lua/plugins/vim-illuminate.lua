@@ -1,5 +1,0 @@
-return {
-  {
-    'RRethy/vim-illuminate',
-  }
-}
