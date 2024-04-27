@@ -1,0 +1,11 @@
+{
+  "custom/launcher": {
+    "format": "",
+    "on-click": "wofi --show drun"
+  },
+
+  "custom/power-menu": {
+    "format": "⏻",
+    "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &"
+  },
+}

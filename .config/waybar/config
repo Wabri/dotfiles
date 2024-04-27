@@ -1,0 +1,127 @@
+[{
+  "include": "~/.config/waybar/custom_modules/modules",
+  "layer": "top",
+  "height": 30,
+  "margin-top": 0,
+  "margin-left": 2,
+  "margin-bottom": 0,
+  "margin-right": 2,
+  "spacing": 8,
+
+  "modules-left": [
+    "custom/launcher",
+    "backlight",
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "temperature"
+  ],
+
+  "modules-center": ["hyprland/workspaces"],
+
+  "modules-right": [
+    "tray",
+    "bluetooth",
+    "network",
+    "clock",
+    "battery",
+    "custom/power-menu",
+  ],
+
+  "clock": {
+    "format": "<b>{:%H:%M}</b>",
+    "format-alt": "<b>{:%a.%d,%b}</b>",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "backlight": {
+    "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}%  ",
+    "format-source-muted": " ",
+    "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "cpu": {
+    "interval": 10,
+    "format": " <b>{usage}%</b>",
+    "max-length": 10,
+    "tooltip": false
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": " <b>{used}GiB</b>",
+    "format-alt": " <b>{used:0.1f}G</b>",
+    "max-length": 10
+  },
+
+  "temperature": {
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format-critical": " {temperatureC}°C</b>",
+    "format": " <b>{temperatureC}°C</b>"
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "<b>{name}</b>",
+    "format-icons": {
+      "urgent": "",
+      "default": ""
+    }
+  },
+
+  "tray": {
+    "icon-size": 20,
+    "spacing": 4
+  },
+
+  "battery": {
+    "bat": "BAT1",
+    "interval": 30,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<b>{icon} {capacity}%</b>",
+    "format-charging": "<b>{icon}⚡{capacity}%</b>",
+    "format-icons": [" ", " ", " ", " "],
+    "max-length": 25,
+    "tooltip": false
+  },
+
+  "network": {
+    "format-wifi": "<b> {signalStrength}%</b>",
+    "tooltip": false,
+    "format-disconnected": "Disconnected ⚠",
+    "on-click": "nm-connection-editor", 
+  },
+
+  "bluetooth": {
+    "format": "<b></b>",
+    "format-connected": "<b> {device_alias}</b>",
+    "format-disabled": "<b></b>",
+    "interval": 30,
+    "on-click" : "blueman-manager",
+    "tooltip": false,
+    }
+}]
