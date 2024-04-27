@@ -6,3 +6,4 @@
 
 - [Zeus-Tuxedo-TuxedoOS](https://github.com/Wabri/dotfiles/tree/zeus)
 - [Suse-MacBookPro-Macos](https://github.com/Wabri/dotfiles/tree/suse)
+- [Mitra-Ideapad-Fedora](https://github.com/Wabri/dotfiles/tree/mitra)
