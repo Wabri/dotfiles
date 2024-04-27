@@ -1,0 +1,357 @@
+################################################################
+# ___ _______        ____  __
+#|_ _|___ /\ \      / /  \/  |
+# | |  |_ \ \ \ /\ / /| |\/| |
+# | | ___) | \ V  V / | |  | |
+#|___|____/   \_/\_/  |_|  |_|
+################################################################
+# Maintainer: Wabri <gabriele.puliti@proton.me>                #
+# Alias: Wabri (https://github.com/Wabri)                      #
+################################################################
+
+#######################
+# === Font ============
+#######################
+#font pango:monospace 8
+font pango:DejaVu Sans Mono 8
+
+#######################
+# === Themes ==========
+#######################
+# Colors setup
+# class                 border  backgr. text    indicator child_border
+client.focused          #4C566A #81A1C1 #2E3440 #EBCB8B   #81A1C1
+client.focused_inactive #2E3440 #4C566A #ECEFF4 #8FBCBB   #434C5E
+client.unfocused        #2E3440 #2E3440 #4C566A #8FBCBB   #3B4252
+client.urgent           #BF616A #BF616A #2E3440 #BF616A   #BF616A
+client.placeholder      #88C0D0 #2E3440 #B48EAD #2E3440   #2E3440
+client.background       #D8DEE9
+
+#######################
+# === Settings ========
+#######################
+workspace_layout default
+
+new_window pixel 10
+
+# Gaps
+hide_edge_borders none
+for_window [class=".*"] border pixel 10
+
+# Mouse
+# yes|no
+focus_follows_mouse no
+# output|none
+mouse_warping output
+
+#######################
+# === Variables =======
+#######################
+# Main key
+set $mod Mod4
+
+# Output alias
+set $o_main eDP-1-1
+set $o_front HDMI-1-1
+set $o_right DP-1-3-3
+
+#######################
+# === Keybindings =====
+#######################
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Terminal
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec kitty tmux new -A -s local
+
+# Kill
+bindsym $mod+Shift+q kill
+
+# Restart i3
+bindsym $mod+Shift+r restart
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+e layout toggle split
+
+# Display
+#bindsym XF86Display exec arandr
+
+# Drun
+#bindsym $mod+d exec rofi -modi drun -show drun
+bindsym $mod+space exec rofi -show drun
+
+# Windows
+bindsym $mod+Tab exec rofi -show window
+
+# Floating
+bindsym $mod+Shift+o floating toggle
+bindsym $mod+o focus mode_toggle
+
+# Layout
+# toggle|horizontal|vertical
+bindsym $mod+slash split toggle
+# stacking/tabbed/splith/splitv:
+bindsym $mod+shift+slash layout toggle all
+
+# Volume
+# Use pactl to adjust volume in PulseAudio.
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%, exec ~/.config/i3/scripts/notify_vol.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%, exec ~/.config/i3/scripts/notify_vol.sh down
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle, exec dunstify --timeout=1500 --urgency=critical "Volume Toggle mute"
+bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle 
+
+# Media
+bindsym XF86AudioPlay exec playerctl play-pause, exec dunstify --timeout=1000 --urgency=normal "Play/Pause"
+bindsym XF86AudioPause exec playerctl pause, exec dunstify --timeout=1000 --urgency=normal "Pause"
+bindsym XF86AudioNext exec playerctl next, exec dunstify --timeout=1000 --urgency=normal "Next"
+bindsym XF86AudioPrev exec playerctl previous, exec dunstify --timeout=1000 --urgency=normal "Previous"
+
+# Backlight
+bindsym XF86MonBrightnessUp exec light -A 10, exec dunstify --timeout=500 --urgency=normal "Brightness $(light -G)"
+bindsym XF86MonBrightnessDown exec light -U 10, exec dunstify --timeout=500 --urgency=normal "Brightness $(light -G)"
+
+# Screenshot
+# Selection
+bindsym Print exec flameshot gui
+# Focus window
+bindsym $mod+Print exec flameshot screen -c -p ~/Pictures/Screenshots/
+
+# lock
+bindsym $mod+shift+x exec ~/.local/bin/betterlockscreen -l dim
+
+# Bar toggle
+bindsym $mod+b exec ~/.config/polybar/config/toggle.sh
+
+# Info notify
+bindsym $mod+i exec dunstify --timeout=10000 --urgency=low "$(~/.config/i3/scripts/infos.sh)"
+
+# Dunst
+bindsym $mod+n exec dunstctl close
+bindsym $mod+Shift+n exec dunstctl close-all
+
+#######################
+# === Modes ===========
+#######################
+# System
+set $mode_system System
+mode "$mode_system" {
+    bindsym l exec dunstctl close, exec i3-msg exit, mode "default"
+    bindsym s exec dunstctl close, exec systemctl suspend, mode "default"
+    bindsym h exec dunstctl close, exec systemctl hibernate, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym p exec systemctl poweroff, mode "default"
+
+    bindsym q mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit System Mode"
+    bindsym Escape mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit System Mode"
+}
+bindsym $mod+p mode $mode_system, exec --no-startup-id ~/.config/i3/scripts/notify_mode.sh system
+
+# Resize
+# Pixels per resize
+set $pxpr 3
+set $mode_resize Resize
+mode "$mode_resize" {
+        bindsym h resize shrink width $pxpr px or $pxpr ppt
+        bindsym j resize grow height $pxpr px or $pxpr ppt
+        bindsym k resize shrink height $pxpr px or $pxpr ppt
+        bindsym l resize grow width $pxpr px or $pxpr ppt
+
+        bindsym q mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Resize Mode"
+        bindsym Escape mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Resize Mode"
+}
+bindsym $mod+r mode $mode_resize, exec --no-startup-id ~/.config/i3/scripts/notify_mode.sh resize
+
+# Move workspace
+set $workspace_move Workspace
+mode "$workspace_move" {
+    # Move workspace between outputs
+    bindsym h move workspace to output left
+    bindsym l move workspace to output right
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+
+    # Change focus window
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+
+    # Move focused window
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+
+    bindsym q mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Workspace Mode"
+    bindsym Escape mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Workspace Mode"
+}
+bindsym $mod+Shift+w mode $workspace_move, exec --no-startup-id ~/.config/i3/scripts/notify_mode.sh workspace
+
+# Output move orientations
+set $monitor_mode Monitor
+mode "$monitor_mode" {
+
+    # Secondary screen orientation
+    bindsym h exec ~/.screenlayout/home_desk.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Home Desk Layout", mode "default"
+    bindsym d exec ~/.screenlayout/home_desk_down.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Home Desk Down Layout", mode "default"
+    bindsym v exec ~/.screenlayout/home_desk_vertical.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Home Desk Vertical", mode "default"
+    bindsym s exec ~/.screenlayout/solo.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Solo Layout", mode "default"
+    bindsym r exec ~/.screenlayout/front_right.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Only front Layout", mode "default"
+    bindsym f exec ~/.screenlayout/front.sh, exec sleep 2 && nitrogen --restore, exec dunstctl close, exec dunstify --timeout=1000 --urgency=normal "Only front Layout", mode "default"
+
+    # Open arandr for customization
+    bindsym m exec arandr, exec dunstctl close, exec dunstify --timeout=1500 --urgency=critical "Output Mode", mode "default"
+
+    bindsym q mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Output Mode"
+    bindsym Escape mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Output Mode"
+}
+bindsym $mod+Shift+m mode $monitor_mode, exec --no-startup-id ~/.config/i3/scripts/notify_mode.sh monitor
+
+# Media
+set $media_mode Media
+mode "$media_mode" {
+    bindsym j exec playerctl play, exec dunstify --timeout=1000 --urgency=normal "Media Play"
+    bindsym k exec playerctl pause, exec dunstify --timeout=1000 --urgency=normal "Media Pause"
+    bindsym l exec playerctl next, exec dunstify --timeout=1000 --urgency=normal "Media Next"
+    bindsym h exec playerctl previous, exec dunstify --timeout=1000 --urgency=normal "Media Previous"
+
+    bindsym s exec playerctl play-pause, exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Media Play/Pause", exec dunstify --timeout=2000 --urgency=normal "Exit Media Mode", mode "default"
+
+    bindsym a exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%, exec ~/.config/i3/scripts/notify_vol.sh down
+    bindsym d exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%, exec ~/.config/i3/scripts/notify_vol.sh up
+    bindsym m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle, exec dunstify --timeout=500 --urgency=normal 'Vol. toggle mute'
+
+    bindsym q mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Media Mode"
+    bindsym Escape mode "default", exec dunstctl close-all, exec dunstify --timeout=1000 --urgency=normal "Exit Media Mode"
+}
+bindsym $mod+s mode $media_mode, exec --no-startup-id ~/.config/i3/scripts/notify_mode.sh media
+
+#######################
+# === Workspace =======
+#######################
+# Workspace definition
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
+
+# Switch workspace
+bindsym $mod+1 workspace $ws1, exec dunstify --timeout=575 --urgency=normal "1"
+bindsym $mod+2 workspace $ws2, exec dunstify --timeout=575 --urgency=normal "2"
+bindsym $mod+3 workspace $ws3, exec dunstify --timeout=575 --urgency=normal "3"
+bindsym $mod+4 workspace $ws4, exec dunstify --timeout=575 --urgency=normal "4"
+bindsym $mod+5 workspace $ws5, exec dunstify --timeout=575 --urgency=normal "5"
+bindsym $mod+6 workspace $ws6, exec dunstify --timeout=575 --urgency=normal "6"
+bindsym $mod+7 workspace $ws7, exec dunstify --timeout=575 --urgency=normal "7"
+bindsym $mod+8 workspace $ws8, exec dunstify --timeout=575 --urgency=normal "8"
+bindsym $mod+9 workspace $ws9, exec dunstify --timeout=575 --urgency=normal "9"
+bindsym $mod+0 workspace $ws0, exec dunstify --timeout=575 --urgency=normal "0"
+bindsym $mod+bracketright workspace next, exec dunstify --timeout=575 --urgency=normal "$(i3-msg -t get_workspaces | jq 'map(select(.focused==true))[0].name' | cut -d '\"' -f 2)"
+bindsym $mod+bracketleft workspace prev, exec dunstify --timeout=575 --urgency=normal "$(i3-msg -t get_workspaces | jq 'map(select(.focused==true))[0].name' | cut -d '\"' -f 2)"
+
+# Move container
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
+
+##########################################
+# configuration for workspace behaviour: #
+##########################################
+
+# bind program to workspace and focus to them on startup:
+assign [class="(?i)firefox"] $ws1
+assign [class="(?i)brave"] $ws2
+assign [class="(?i)steam"] $ws2
+assign [class="(?i)lutris"] $ws2
+assign [class="obs"] → $ws2
+# move terminal with tmux to workspace 3
+for_window [title="local:*"] move to workspace $ws3
+assign [title="^Remmina*"]  → $ws4
+assign [class="(?i)virtualbox manager"] → $ws5
+assign [class="(?i)virt-manager"] → $ws5
+for_window [class="(?i)virtualbox machine"] move to workspace $ws6
+for_window [title="(?i)*on QEMU/KVM*"] move to workspace $ws6
+assign [class="(?i)logseq"] → $ws7
+for_window [class="Spotify"] move to workspace $ws8
+assign [class="Bitwarden"] → $ws9
+assign [class="(?i)rambox"] → $ws0
+
+# Multiple monitor setup (works even with one screen)
+workspace $ws1 output $o_main
+workspace $ws2 output $o_main
+workspace $ws3 output $o_front
+workspace $ws4 output $o_front
+workspace $ws5 output $o_front
+workspace $ws6 output $o_front
+workspace $ws7 output $o_front
+workspace $ws8 output $o_front
+workspace $ws9 output $o_front
+workspace $ws0 output $o_right
+
+#######################
+# === Compositor ======
+#######################
+
+# Picom
+exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
+
+#######################
+# === Autostart =======
+#######################
+
+# Display
+#exec --no-startup-id sleep 1 && ~/.screenlayout/solo.sh
+
+# Wallpaper
+exec --no-startup-id sleep 2 && nitrogen --restore
+
+# Screenshot
+exec --no-startup-id flameshot
+
+# Autostart desktop application
+exec --no-startup-id dex --autostart --environment i3
+
+# Manage lockscreen when lid
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.local/bin/betterlockscreen -l dim
+
+#######################
+# === Floating ========
+#######################
+# Floating modifier
+floating_modifier $mod
+default_floating_border none
+
+# set floating (nontiling)for apps needing it
+for_window [window_role="About"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="ObinsKit"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="kdeconnect.app"] floating enable
+
