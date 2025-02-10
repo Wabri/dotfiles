@@ -1,0 +1,34 @@
+[general]
+
+live_config_reload = true
+
+[window]
+
+opacity = 1.0
+blur = true
+
+padding.x = 30
+padding.y = 30
+
+decorations = "Full"
+decorations_theme_variant = "Dark" # "Dark"
+
+dynamic_title = true
+
+[font]
+
+normal.family = "JetBrainsMono"
+bold.family = "JetBrainsMono"
+italic.family = "JetBrainsMono"
+bold_italic.family = "JetBrainsMono"
+
+size = 16.0
+
+[selection]
+
+save_to_clipboard = true
+
+[mouse]
+
+hide_when_typing = true
+
