@@ -1,35 +1,30 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# Gloabl variable
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
-export FZF_BASE=/usr/bin/fzf
 
+# OMZ variable
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git vi-mode fzf asdf vagrant tmux golang)
+COMPLETION_WAITING_DOTS="true"
+
+plugins=(git vi-mode fzf ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.aliases
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
+export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+export VISUAL='nvim'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.aliases ]] || source ~/.aliases
 
-# Load direnv
-eval "$(direnv hook zsh)"
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+PATH="/home/wabri/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/wabri/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/wabri/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/wabri/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/wabri/perl5"; export PERL_MM_OPT;
 
-export PATH=$PATH:/home/wabri/.spicetify
+eval "$(asdf exec direnv hook zsh)"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+autoload -Uz compinit && compinit
