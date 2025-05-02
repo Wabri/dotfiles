@@ -1,0 +1,24 @@
+[custom0]
+binding='<Super>space'
+command='wofi --show drun'
+name='application launcher'
+
+[custom1]
+binding='<Super>Return'
+command='alacritty'
+name='alacritty terminal'
+
+[custom2]
+binding='<Shift><Super>Return'
+command='alacritty --class=tmux-ide -e tmux new -As local'
+name='Tmux-ide'
+
+[custom3]
+binding='<Super>b'
+command='browsir_run'
+name='Brun'
+
+[custom4]
+binding='<Super>s'
+command='alacritty -e bashtop'
+name='Bashtop'
