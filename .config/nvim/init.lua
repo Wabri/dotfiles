@@ -1,4 +1,28 @@
--- Bootstrap Lazy.nvim
+-- Basic Settings
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.wrap = true
+vim.opt.clipboard = "unnamedplus"
+vim.g.mapleader = " "
+vim.o.scrolloff = 10
+
+-- Tabs and Indentation
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+
+-- Diagnostics
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- PackageManagement:Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,197 +36,192 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Basic Settings
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.wrap = true
-vim.opt.clipboard = "unnamedplus"
-vim.g.mapleader = " "
-
--- Tabs and Spaces Settings
-vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.smartindent = true
-
--- Plugin Setup
+-- PackageManagement:LazyPlugins
 require("lazy").setup({
+  -- LSP
   { "github/copilot.vim" },
-  { "neovim/nvim-lspconfig" },
-  { "williamboman/mason.nvim", build = ":MasonUpdate" },
-  { "williamboman/mason-lspconfig.nvim" },
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- { "neovim/nvim-lspconfig" },
+  -- { "williamboman/mason.nvim", build = ":MasonUpdate" },
+  -- { "williamboman/mason-lspconfig.nvim" },
+  -- { "hrsh7th/nvim-cmp" },
+  -- { "hrsh7th/cmp-nvim-lsp" },
+  -- {
+  --   "L3MON4D3/LuaSnip",
+  --   lazy = true,
+  --   dependencies = { { "rafamadriz/friendly-snippets", lazy = true } },
+  --   opts = {
+  --     history = true,
+  --     delete_check_events = "TextChanged",
+  --     region_check_events = "CursorMoved",
+  --   },
+  -- },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { "kdheepak/lazygit.nvim" },
-  { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
-  { "akinsho/toggleterm.nvim", version = "*" },
-  { "nvim-lualine/lualine.nvim" },
-  { "AstroNvim/astrotheme" },
-  { "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
-  { "folke/which-key.nvim" },
-  { "echasnovski/mini.icons", version = false },
+
+  -- Harpoon
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
+
+  -- Git
+  { "lewis6991/gitsigns.nvim" },
+
+  -- UI
+  { "folke/which-key.nvim" },
   {
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    dependencies = { { "rafamadriz/friendly-snippets", lazy = true } },
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
     opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-      region_check_events = "CursorMoved",
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = false },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
     },
   },
-  { "lewis6991/gitsigns.nvim" },
+  { "nvim-lualine/lualine.nvim" },
+  { "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
+  { "echasnovski/mini.icons", version = false },
+
+  -- Themes
+  { "AstroNvim/astrotheme" },
   {
-    'SuperBo/fugit2.nvim',
-    build = false,
+    "f-person/auto-dark-mode.nvim",
     opts = {
-      width = 100,
-    },
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'nvim-lua/plenary.nvim',
-      {
-        'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
-        dependencies = { 'stevearc/dressing.nvim' }
-      },
-    },
-    cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph' },
-    keys = {
-      { '<leader>F', mode = 'n', '<cmd>Fugit2<cr>' }
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.o.background = "dark"
+        require("astrotheme").setup({
+          palette = "astrodark",
+          background = {
+            dark = "astrodark",
+          },
+        })
+        vim.cmd("colorscheme astrodark")
+      end,
+      set_light_mode = function()
+        vim.o.background = "light"
+        require("astrotheme").setup({
+          palette = "astrolight",
+          background = {
+            light = "astrolight",
+          },
+        })
+        vim.cmd("colorscheme astrolight")
+      end,
     }
+  }
+})
+
+-- UI
+
+-- UI:Noice
+require("noice").setup({
+  -- lsp = {
+  --   override = {
+  --     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+  --     ["vim.lsp.util.stylize_markdown"] = true,
+  --     ["cmp.entry.get_documentation"] = true,
+  --   },
+  -- },
+  presets = {
+    bottom_search = true,
+    command_palette = true,
+    long_message_to_split = true,
+    inc_rename = true,
+    lsp_doc_border = false,
   },
 })
 
--- Mini Icons Setup
+-- UI:MiniIcons
 require("mini.icons").setup()
 
--- Gitsigns
+-- UI:Gitsigns
 require('gitsigns').setup()
 
--- LSP Configuration
-local lspconfig = require("lspconfig")
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { "gopls", "bashls", "pyright", "html", "cssls", "ts_ls", "perlnavigator" },
-})
+-- UI:Lualine
+require("lualine").setup({ options = { theme = "auto" } })
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- LSP
 
-local servers = { "gopls", "bashls", "pyright", "html", "cssls", "ts_ls" }
-for _, server in ipairs(servers) do
-  lspconfig[server].setup({ capabilities = capabilities })
-end
+-- LSP:mason
+-- require("mason").setup()
+-- require("mason-lspconfig").setup({
+--   ensure_installed = { "gopls", "bashls", "pyright", "html", "cssls", "ts_ls", "perlnavigator" },
+-- })
 
-lspconfig.perlnavigator.setup{ cmd = { "perlnavigator" } }
-
--- Diagnostics
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-})
-
--- nvim-cmp Setup
-local cmp = require("cmp")
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      local ls = require("luasnip")
-      ls.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = cmp.config.sources({ { name = "nvim_lsp" } }),
-})
-require("luasnip.loaders.from_vscode").lazy_load()
-
-
--- Treesitter Setup
+-- LSP:lspconfig
+-- local lspconfig = require("lspconfig")
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local servers = { "gopls", "bashls", "pyright", "html", "cssls", "ts_ls" }
+-- for _, server in ipairs(servers) do
+--   lspconfig[server].setup({ capabilities = capabilities })
+-- end
+--
+-- lspconfig.perlnavigator.setup{ cmd = { "perlnavigator" } }
+--
+-- -- LSP:cmp
+-- local cmp = require("cmp")
+-- cmp.setup({
+--   snippet = {
+--     expand = function(args)
+--       local ls = require("luasnip")
+--       ls.lsp_expand(args.body)
+--     end,
+--   },
+--   mapping = cmp.mapping.preset.insert({
+--     ["<C-Space>"] = cmp.mapping.complete(),
+--     ["<CR>"] = cmp.mapping.confirm({ select = true }),
+--     ["<Tab>"] = cmp.mapping(function(fallback)
+--       if cmp.visible() then
+--         cmp.select_next_item()
+--       else
+--         fallback()
+--       end
+--     end, { "i", "s" }),
+--     ["<S-Tab>"] = cmp.mapping(function(fallback)
+--       if cmp.visible() then
+--         cmp.select_prev_item()
+--       else
+--         fallback()
+--       end
+--     end, { "i", "s" }),
+--   }),
+--   sources = cmp.config.sources({ { name = "nvim_lsp" } }),
+-- })
+--
+-- -- LSP:luasnip
+-- require("luasnip.loaders.from_vscode").lazy_load()
+--
+-- LSP:treesitter
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "go", "bash", "python", "html", "css", "javascript", "lua", "perl" },
   highlight = { enable = true },
 })
 
--- Lualine Setup
-require("lualine").setup({ options = { theme = "auto" } })
+-- Harpoon
+local harpoon = require("harpoon")
+harpoon.setup()
 
--- nvim-tree Setup
-require("nvim-tree").setup()
+-- Keybindings
 
--- toggleterm Setup
-require("toggleterm").setup({
-  open_mapping = [[<c-\>]],
-  direction = "float",
-})
+-- Keybindings::snacks
+local snacks = require("snacks")
 
--- Telescope Setup
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-j>"] = require("telescope.actions").move_selection_next,
-        ["<C-k>"] = require("telescope.actions").move_selection_previous,
-      },
-    },
-  },
-})
+-- Keybindings
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
--- Astrotheme Setup
-require("astrotheme").setup({
-  palette = "astrodark",
-  background = { light = "astrolight", dark = "astrodark" },
-  termguicolors = true,
-  terminal_color = true,
-})
-vim.cmd("colorscheme astrodark")
-
--- Noice Setup
-require("noice").setup({
-  lsp = {
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  presets = {
-    bottom_search = true,
-    command_palette = true,
-    long_message_to_split = true,
-    inc_rename = false,
-    lsp_doc_border = false,
-  },
-})
-
--- Which-Key Setup
+-- Keybindings::WhichKey
 local wk = require("which-key")
 wk.setup({
   plugins = {
@@ -214,10 +233,6 @@ wk.setup({
   layout = { spacing = 6 },
 })
 
--- Keybindings
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
 -- Keybindings::helpers
 function ToggleDiagnosticSigns()
   diagnostic = not vim.diagnostic.config().virtual_text
@@ -225,82 +240,68 @@ function ToggleDiagnosticSigns()
   vim.diagnostic.config({virtual_text = diagnostic})
 end 
 
--- basic telescope configuration
-local harpoon = require('harpoon')
-harpoon:setup({})
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-    end
-
-    require("telescope.pickers").new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table({
-            results = file_paths,
-        }),
-        previewer = conf.file_previewer({}),
-        sorter = conf.generic_sorter({}),
-    }):find()
-end
-
 local function copy_file_name()
   local file_name = vim.fn.expand("%:t")
   vim.fn.setreg("+", file_name)
   print("File name copied to clipboard: " .. file_name)
 end
 
--- Keybindings::Window Navigation
-map("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
-
 wk.add({
-  -- File Explorer
-  { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Explorer", mode = "n" },
+  -- Keymaps:LSP
+  { "gd", function() snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+  { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+  { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+  { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
 
-  -- Telescope
-  { "<leader>f", group = "Files" }, -- group
-  { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
-  { "<leader>fw", "<cmd>Telescope live_grep<cr>", desc = "Grep Words", mode = "n" },
+  -- Keymaps:Navigation
+  { "<C-h>", "<C-w>h", desc = "Move to left window", mode = "n" },
+  { "<C-j>", "<C-w>j", desc = "Move to lower window", mode = "n" },
+  { "<C-k>", "<C-w>k", desc = "Move to upper window", mode = "n" },
+  { "<C-l>", "<C-w>l", desc = "Move to right window", mode = "n" },
 
-  -- Buffers
+  -- Keymaps:NvimTree
+  { "<leader>e", function() snacks.explorer() end, desc = "File Explorer", mode = "n" },
+
+  -- Keymaps:Pickers
+  { "<leader>f", group = "Find" }, -- group
+  { "<leader>ff", function() snacks.picker.files { hidden = false, ignored = true } end, desc = "File", mode = "n" },
+  { "<leader>fF", function() snacks.picker.files { hidden = true, ignored = true } end, desc = "Hidden File", mode = "n" },
+  { "<leader>fw", function() snacks.picker.grep() end, desc = "Grep" },
+  { "<leader>fW", function() snacks.picker.grep { hidden = true, ignored = true } end, desc = "Grep" },
+  { "<leader>fc", function() snacks.picker.colorschemes() end, desc = "Colorschemes" },
+  { "<leader>fu", function() snacks.picker.undo() end, desc = "Undo tree" },
+
+  -- Keymaps:Buffers
   { "<leader>b", group = "Buffers" }, -- group
-  { "<leader>bb", "<C-^>", desc = "Switch Buffer", mode = "n" },
-  { "<leader>bn", "<cmd>bnext<cr>", desc = "Next Buffer", mode = "n" },
-  { "<leader>bp", "<cmd>bprevious<cr>", desc = "Previous Buffer", mode = "n" },
-  { "<leader>bd", "<cmd>bdelete<cr>", desc = "Close Buffer", mode = "n" },
+  { "<leader>bb", "<C-^>", desc = "Back-n-Forth", mode = "n" },
+  { "<leader>bn", "<cmd>bnext<cr>", desc = "Next", mode = "n" },
+  { "<leader>bp", "<cmd>bprevious<cr>", desc = "Previous", mode = "n" },
+  { "<leader>bd", "<cmd>bdelete<cr>", desc = "Close", mode = "n" },
+  { "<leader>bf", function() snacks.picker.buffers() end, desc = "Find", mode = "n" },
 
-  -- Terminal
-  { "<leader>t", group = "Terminal" }, -- group
-  { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal", mode = "n" },
-
-  -- Miscellaneous
+  -- Keymaps:Miscellaneous
   {
-    mode = { "n", "v" }, -- NORMAL and VISUAL mode
+    mode = { "n", "v" },
     { "<leader>q", "<cmd>q<cr>", desc = "Quit" },
     { "<leader>w", "<cmd>w<cr>", desc = "Write" },
   },
 
-  -- Yank
+  -- Keymaps:Yank
   {
     { "<leader>y", group = "Yank" }, -- group
     { "<leader>yf", function() copy_file_name() end, desc = "Copy File Name" },
   },
 
-  -- GIT
+  -- Keymaps:Git
   { "<leader>g", group = "Git" }, -- group
-  { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit", mode = "n" },
+  { "<leader>gg", function() snacks.lazygit() end, desc = "Lazygit" },
   { "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "Toggle blame", mode = "n" },
 
-  -- UI
+  -- Keymaps:UI
   { "<leader>u", group = "UI" }, -- group
   { "<leader>ud", ToggleDiagnosticSigns, desc = "Toggle diagnostic signs", mode = "n" },
 
-  -- Harpoon
-  { "<leader>hf", function() toggle_telescope(harpoon:list()) end, desc = "File Harpoon", mode = "n"},
+  -- Keymaps:Harpoon
   { "<leader>ha", function() harpoon:list():add() end, desc = "Harpoon current file",mode = "n"},
   { "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "List all the harpooned files",mode = "n"},
   { "<leader>h1", function() harpoon:list():select(1) end, desc = "GoTo 1",mode = "n"},
