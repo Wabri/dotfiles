@@ -11,7 +11,7 @@ padding.x = 30
 padding.y = 30
 
 decorations = "Full"
-decorations_theme_variant = "Dark" # "Dark"
+decorations_theme_variant = "None"
 
 dynamic_title = true
 
