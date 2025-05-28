@@ -39,7 +39,6 @@ vim.opt.rtp:prepend(lazypath)
 -- PackageManagement:LazyPlugins
 require("lazy").setup({
   -- LSP
-  { "github/copilot.vim" },
   -- { "neovim/nvim-lspconfig" },
   -- { "williamboman/mason.nvim", build = ":MasonUpdate" },
   -- { "williamboman/mason-lspconfig.nvim" },
