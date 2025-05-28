@@ -1,0 +1,7 @@
+export EZA_OPTIONS="--icons=auto --git --time-style=relative"
+alias ls="eza $EZA_OPTIONS -l"
+alias la="eza $EZA_OPTIONS -la"
+alias tree="eza $EZA_OPTIONS -T"
+alias lssize="eza $EZA_OPTIONS -l --total-size --sort=size --hyperlink"
+alias lasize="eza $EZA_OPTIONS -la --total-size --sort=size --hyperlink"
+alias distrobox="SHELL=/bin/bash command distrobox"

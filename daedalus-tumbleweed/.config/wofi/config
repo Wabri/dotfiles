@@ -1,0 +1,13 @@
+width=300
+height=720
+show=dmenu
+no_actions=true
+halign=center
+content_halign=center
+orientation=vertical
+insensitive=true
+allow_images=true
+image_size=30
+gtk_dark=true
+key_up=Ctrl-k
+key_down=Ctrl-j
