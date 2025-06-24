@@ -1,0 +1,48 @@
+/* openSUSE Inspired Theme */
+
+@define-color suse-green       #73ba25;  /* Core SUSE green */
+@define-color suse-dark        #0e141b;  /* Dark background */
+@define-color suse-light       #d5e5d0;  /* Light text/accents */
+@define-color suse-accent      #9ecf99;  /* Soft green accent */
+@define-color suse-warning     #f9e2af;  /* Warm yellow */
+@define-color suse-critical    #e05f5f;  /* Red for alerts */
+
+/* Background/Foreground/Border */
+
+@define-color shadow           rgba(14, 20, 27, 0.4);
+@define-color main-bg          rgba(14, 20, 27, 0.6);
+@define-color main-fg          @suse-light;
+@define-color main-br          @suse-accent;
+
+@define-color active-bg        @suse-accent;
+@define-color active-fg        @suse-dark;
+
+@define-color hover-bg         alpha(@suse-green, 0.15);
+@define-color hover-fg         @suse-light;
+
+/* Modules */
+
+@define-color module-fg        @suse-light;
+@define-color workspaces       #1a221f;
+
+@define-color temperature      #324736;
+@define-color memory           #2a3e31;
+@define-color cpu              #334c3d;
+
+@define-color distro-fg        #0e141b;
+@define-color distro-bg        @suse-green;
+
+@define-color time             #1f2d26;
+@define-color date             #27382d;
+@define-color tray             #1a221f;
+
+@define-color pulseaudio       #1f2d26;
+@define-color backlight        #27382d;
+@define-color battery          #2e3f31;
+@define-color power            @suse-green;
+
+/* States */
+
+@define-color warning          @suse-warning;
+@define-color critical         @suse-critical;
+@define-color charging         @suse-light;

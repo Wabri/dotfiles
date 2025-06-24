@@ -7,6 +7,9 @@ profiles:
   - name: work
     profile_dir: Work
     description: Work profile
+  - name: sh
+    profile_dir: SchroedingerHat
+    description: SH profile
 shortcuts:
   # General
   search: https://search.brave.com
@@ -25,14 +28,22 @@ shortcuts:
   bitwarden: https://vault.bitwarden.eu
   github-copilot: https://github.com/copilot
   # Personal
+  whatsapp: https://web.whatsapp.com
+  personal-giuls-orario: https://docs.google.com/spreadsheets/d/1esy0Yiw6dO-fcWAadAh9cxezF0rkodJHTLcJ3lpwOZ4/edit?gid=481747151#gid=481747151
   personal-monkeytype: https://monkeytype.com/
-  personal-nextcloud: http://192.168.1.220/nextcloud
+  personal-etoro: https://www.etoro.com/
+  personal-traderepublic: https://app.traderepublic.com/portfolio/
+  # SH - Schroedinger Hat
+  sh-site: https://schroedinger-hat.org
+  sh-libro-soci: https://docs.google.com/spreadsheets/d/1DHzulqzdexjAid6Ol8SxINlQhCWBfyaHfPmf4vC6xSA/edit?usp=sharing
+  sh-trello: https://trello.com/w/schroedingerhataps
+  sh-osday: https://osday.dev
+  sh-sessionize: https://sessionize.com
+  sh-gh-notification: https://github.com/notifications?query=org%3ASchroedinger-Hat
   # Suse
-  suse-benefits: https://sites.google.com/suse.com/rewards/benefits/emea/italy
   suse-okta: https://suse.okta.com/
   suse-confluence: https://confluence.suse.com/
   suse-intranet: https://sites.google.com/suse.com/suseverse/home
-  suse-tools-assigned: https://progress.opensuse.org/issues?assigned_to_id=47527&set_filter=1&sort=priority%3Adesc%2Cupdated_on%3Adesc
   suse-tools-task: https://progress.opensuse.org/my/page
   suse-tools-wiki: https://progress.opensuse.org/projects/qa/wiki/Tools
   suse-tools-office: https://play.workadventu.re/@/suse/suse-office/space-station-office
@@ -47,7 +58,7 @@ shortcuts:
   suse-tools-backlog-status: https://os-autoinst.github.io/qa-tools-backlog-assistant/
   suse-tools-backlog-toplevel: https://progress.opensuse.org/issues?query_id=524
   suse-tools-daily-infra: https://progress.opensuse.org/issues?query_id=757
-  suse-tools-daily-dev: https://progress.opensuse.org/issues?per_page=50&query_id=754
+  suse-tools-daily-dev: https://progress.opensuse.org/issues?query_id=754
   suse-tools-fortnightly-coordination: https://progress.opensuse.org/issues?query_id=572
   suse-tools-infra-est: https://progress.opensuse.org/issues?query_id=1025
   suse-tools-dev-estimations: https://progress.opensuse.org/issues?query_id=717

@@ -20,8 +20,10 @@
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
 font-family = JetBrains Mono
-# window-padding-x = 2
-#
+font-size = 18
+window-padding-x = 12
+window-padding-y = 10
+
 # # Spacing around the equals sign does not matter.
 # # All of these are identical:
 # key=value
@@ -44,7 +46,7 @@ font-family = JetBrains Mono
 
 
 # User Configuration
-theme = dark:Adwaita Dark,light:Adwaita
+theme = dark:GruvboxDark,light:GruvboxLight
 confirm-close-surface = false
 keybind = alt+one=unbind
 keybind = alt+two=unbind

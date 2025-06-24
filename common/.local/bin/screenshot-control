@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Define filename and path
+FILENAME="$(date +%Y-%m-%d_%H-%M-%S).png"
+FILEPATH="$HOME/Pictures/Screenshots/$FILENAME"
+
+# Create directory if it doesn't exist
+mkdir -p "$HOME/Pictures/Screenshots"
+
+# Take screenshot
+if [ "$1" == "area" ]; then
+    grim -g "$(slurp)" "$FILEPATH"
+else
+    grim "$FILEPATH"
+fi
+
+# Copy image to clipboard
+wl-copy < "$FILEPATH"
+
+# Show notification
+notify-send "📸 $FILEPATH" "📋 Copied to clipboard" --icon=dialog-information --app-name="Screenshot"
