@@ -2,7 +2,9 @@
 
 Daedalus is my work laptop.
 
-![screenshot-tmux-ide](README.md.assets/screenshot-tmux-ide.png)
+## Showcase 
+
+https://github.com/user-attachments/assets/268d66b6-1777-440d-8a6f-e402b7feadfa
 
 ## Requirements
 
@@ -10,7 +12,10 @@ Daedalus is my work laptop.
 - sway
 - waybar
 
-## Showcase 
+## More dots
 
-https://github.com/user-attachments/assets/268d66b6-1777-440d-8a6f-e402b7feadfa
+I also use scripts that are located here: [wabri/dotfiles/common/](../common)
 
+## Screenshots
+
+![screenshot-tmux-ide](README.md.assets/screenshot-tmux-ide.png)
