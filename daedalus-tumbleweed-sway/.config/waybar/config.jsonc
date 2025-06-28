@@ -315,6 +315,7 @@
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", "", "", "", "", ""],
     "tooltip": false,
+    "on-click": "~/.local/bin/theme-switcher",
     "on-scroll-up": "brightness-control -o i",
     "on-scroll-down": "brightness-control -o d",
     "min-length": 6
