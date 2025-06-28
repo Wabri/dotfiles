@@ -12,5 +12,5 @@ Daedalus is my work laptop.
 
 ## Showcase 
 
-![showcase](README.md.assets/showcase.mp4)
+https://github.com/user-attachments/assets/268d66b6-1777-440d-8a6f-e402b7feadfa
 
