@@ -1,0 +1,9 @@
+{
+  "cpu": {
+    "format": "󰻠 {usage}%",
+    "tooltip": false,
+    "interval": 5,
+    "min-length": 6,
+    "max-length": 6
+  }
+}

@@ -1,0 +1,11 @@
+export OPENQA_BASEDIR=/home/wabri/openqa-sandbox
+export OPENQA_CONFIG=$OPENQA_BASEDIR/config
+export OPENQA_LIBPATH=$OPENQA_BASEDIR/repos/openQA/lib
+export OPENQA_LOCAL_CODE=/home/wabri/Workspaces/Github-Suse/os-autoinst/openQA/wt5
+export OPENQA_CGROUP_SLICE=systemd/openqa/$USER
+export OPENQA_KEY=set_later
+export OPENQA_SECRET=set_later
+export OPENQA_SCHEDULER_WAKEUP_ON_REQUEST=1
+export OPENQA_SCHEDULER_SCHEDULE_TICK_MS=1000
+export EXTRA_PROVE_ARGS="-v"
+export PATH="$PATH:/usr/lib64/chromium:$OPENQA_BASEDIR/repos/openQA-helper/scripts"

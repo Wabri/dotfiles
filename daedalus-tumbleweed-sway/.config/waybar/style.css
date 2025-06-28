@@ -1,0 +1,303 @@
+@import "theme.css";
+
+/* ───────────────────────────────────────────────────────────────┤ global ├───
+*/
+* {
+  min-height: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ──────────────────────────────────────────────────────────┤ drop shadow ├───
+*/
+window#waybar {
+  background: @shadow;
+}
+
+/* ───────────────────────────────────────────────────────────┤ background ├───
+*/
+window#waybar > box {
+  background: @main-bg;
+  margin: 2px;
+  font-size: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────┤ tooltips ├───
+*/
+tooltip {
+  background: @main-bg;
+  border: 1.5px solid @main-br;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @main-fg;
+  margin: -1.5px 3px;
+}
+
+/* ──────────────────────────────────────────────────────────────┤ general ├───
+*/
+#workspaces,
+#window,
+#custom-temperature,
+#memory,
+#cpu,
+#idle_inhibitor,
+#clock,
+#custom-wifi,
+#bluetooth,
+#custom-update,
+#mpris,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-power {
+  opacity: 1;
+  color: @module-fg;
+  padding: 0 4px;
+}
+
+/* ───────────────────────────────────────────────────────┤ theme switcher ├───
+*/
+#custom-theme {
+  background: @main-bg;
+}
+
+#custom-theme:hover {
+  color: @hover-fg;
+}
+
+/* ───────────────────────────────────────────────────────────┤ workspaces ├───
+*/
+
+#workspaces {
+  background: @workspaces;
+}
+
+#workspaces button {
+  color: @module-fg;
+  border-radius: 8px;
+  box-shadow: none;
+  margin: 2px 0;
+  padding: 0 2px;
+  transition: none;
+}
+
+#workspaces button:hover {
+  color: @hover-fg;
+  background: @hover-bg;
+  text-shadow: none;
+}
+
+#workspaces button.active {
+  color: @active-fg;
+  background: @active-bg;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+  margin: 2px;
+  padding: 0 6px;
+}
+
+/* ──────────────────────────────────────────────────────────┤ temperature ├───
+*/
+#custom-paddc {
+  padding-right: 22px;
+}
+
+#custom-temperature {
+  background: @temperature;
+  padding: 0 0 0 1px;
+}
+
+/* ───────────────────────────────────────────────────────────────┤ memory ├───
+*/
+
+#memory {
+  background: @memory;
+  padding: 0 0 0 1px;
+}
+
+#memory.warning {
+  color: @warning;
+}
+
+#memory.critical {
+  color: @critical;
+}
+
+/* ──────────────────────────────────────────────────────────────────┤ cpu ├───
+*/
+
+#cpu {
+  background: @cpu;
+}
+
+/* ──────────────────────────────────────────────────────────┤ distro icon ├───
+*/
+
+#custom-distro {
+  color: @distro-fg;
+  background: @distro-bg;
+  margin: 0 -1px -2px 0;
+  padding: 0 0 0 3px;
+  text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────────┤ time ├───
+*/
+
+#idle_inhibitor {
+  background: @time;
+  padding: 0 0 0 7px;
+}
+
+#idle_inhibitor:hover {
+  color: @hover-fg;
+}
+
+#clock.time {
+  background: @time;
+  margin-left: -2px;
+  padding: 0 3px 0 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────┤ date ├───
+*/
+#clock.date {
+  background: @date;
+}
+
+#clock.date:hover {
+  color: @hover-fg;
+}
+
+/* ────────────────────────────────────────────────────────────────┤ wi-fi ├───
+*/
+#custom-wifi {
+  background: @tray;
+  padding: 0 8px 0 5px;
+}
+
+#custom-wifi:hover {
+  color: @hover-fg;
+}
+
+/* ────────────────────────────────────────────────────────────┤ bluetooth ├───
+*/
+#bluetooth {
+  background: @tray;
+  padding-right: 5px;
+}
+
+#bluetooth:hover {
+  color: @hover-fg;
+}
+
+/* ───────────────────────────────────────────────────────────┤ media info ├───
+*/
+#mpris {
+  background: @main-bg;
+  padding: 0 8px 0;
+}
+
+#mpris:hover {
+  color: @hover-fg;
+}
+
+/* ────────────────────────────────────────────────────────┤ output device ├───
+*/
+
+#pulseaudio {
+  background: @pulseaudio;
+}
+
+#pulseaudio:hover {
+  color: @hover-fg;
+}
+
+/* ───────────────────────────────────────────────────────────┤ brightness ├───
+*/
+
+#backlight {
+  background: @backlight;
+}
+
+/* ──────────────────────────────────────────────────────────────┤ battery ├───
+*/
+
+#battery {
+  color: @module-fg;
+  background: @battery;
+}
+
+#battery.warning {
+  color: @warning;
+}
+
+#battery.critical {
+  color: @critical;
+}
+
+#battery.charging {
+  color: @charging;
+}
+
+/* ─────────────────────────────────────────────────────────┤ power button ├───
+*/
+
+#custom-power {
+  color: @main-bg;
+  background: @power;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  margin: 2px 4px 2px 0;
+  padding: 0 6px 0 9px;
+}
+
+#custom-power:hover {
+  color: @hover-fg;
+  background: @hover-bg;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+/* ───────────────────────────────────────────────────────────┤ font sizes ├───
+*/
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  font-weight: bold;
+}
+
+tooltip label,
+#window label,
+#mpris {
+  font-weight: normal;
+}
+
+/* ──────────────────────────────────────────────────────────┤ distro icon ├───
+*/
+#custom-distro {
+  font-size: 30px;
+}
+
+/* ───────────────────────────────────────────────────────────┤ workspaces ├───
+*/
+#workspaces button {
+  border-radius: 8px;
+  padding: 0 2px;
+}
+
+#workspaces button.active {
+  padding: 0 6px;
+}
+
+/* ─────────────────────────────────────────────────────────┤ power button ├───
+*/
+#custom-power {
+  border-radius: 10px;
+  padding: 0 6px 0 9px;
+}

@@ -1,0 +1,20 @@
+### Main
+
+#
+# Load Default config
+# 
+  #include /etc/sway/config.d/*.conf
+
+# 
+# Assure that the most important config are loaded first
+# 
+  # I'm not sure if sway load in alphanumerically order so I include file by file
+  include ~/.config/sway/config.d/0a
+  include ~/.config/sway/config.d/0b
+  include ~/.config/sway/config.d/0c
+
+#
+# Load all the remaining modules
+#
+  include ~/.config/sway/config.d/*
+

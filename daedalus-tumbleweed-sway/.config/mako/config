@@ -1,0 +1,36 @@
+font=JetBrainsMono Nerd Font 18
+format=<b>%a ></b> %s\n%b
+sort=-time
+layer=overlay
+anchor=bottom-right
+
+background-color=#0e141b
+text-color=#cfd8dc
+border-color=#73ba25
+
+width=620
+height=320
+margin=12
+padding=15,20,20
+
+border-size=8
+border-radius=12
+
+icons=1
+max-icon-size=64
+
+default-timeout=6000
+ignore-timeout=1
+
+[urgency=normal]
+border-color=#73ba25
+
+[urgency=high]
+border-color=#e53935
+default-timeout=12000
+
+[app-name=lightcord]
+border-color=#66ccff
+
+[summary~="log-.*"]
+border-color=#b4ff39
