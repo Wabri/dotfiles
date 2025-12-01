@@ -12,6 +12,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
+-- vim.opt.wrapmargin = 79
+-- vim.opt.textwidth = 79
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -39,7 +41,7 @@ vim.opt.rtp:prepend(lazypath)
 -- PackageManagement:LazyPlugins
 require("lazy").setup({
     -- LSP
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { import = "plugins.lsp" },
 
     -- Harpoon
     {
@@ -130,27 +132,25 @@ require("lazy").setup({
                         section = "terminal",
                         cmd = "distrobox ls | tail -n +2",
                     },
-                    -- {
-                    --     pane = 3,
-                    --     icon = "󰜘 ",
-                    --     title = "Git Logs",
-                    --     section = "terminal",
-                    --     enabled = function()
-                    --         return Snacks.git.get_root() ~= nil
-                    --     end,
-                    --     cmd = "git log --oneline --graph",
-                    --     height = 15,
-                    --     padding = 1,
-                    -- },
                 },
             },
             dim = { enable = true },
             explorer = { 
-  replace_netrw = true, -- Replace netrw with the snacks explorer
- },
+                replace_netrw = true, -- Replace netrw with the snacks explorer
+            },
+            lazygit = { 
+                win = {
+                    style = "lazygit",
+                },
+            },
             indent = { enabled = true },
             input = { enabled = true },
-            picker = { enabled = true },
+            picker = { 
+                enabled = true,
+                layout = {
+                    preset = "ivy",
+                },
+            },
             notifier = { enabled = false },
             quickfile = { enabled = true },
             scope = { enabled = true },
@@ -159,6 +159,7 @@ require("lazy").setup({
             words = { enabled = true },
         },
     },
+
     {
         'developedbyed/marko.nvim',
         config = function()
@@ -170,12 +171,16 @@ require("lazy").setup({
             })
         end,
     },
+
     { "nvim-lualine/lualine.nvim" },
+
     { "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
+
     { "echasnovski/mini.icons", version = false },
 
     -- Themes
     { "ellisonleao/gruvbox.nvim" },
+
     {
         "f-person/auto-dark-mode.nvim",
         opts = {
@@ -189,7 +194,7 @@ require("lazy").setup({
                 vim.cmd("colorscheme gruvbox")
             end,
         }
-    }
+    },
 })
 
 -- UI
@@ -213,12 +218,6 @@ require('gitsigns').setup()
 
 -- UI:Lualine
 require("lualine").setup({ options = { theme = "auto" } })
-
--- LSP:treesitter
-require("nvim-treesitter.configs").setup({
-    ensure_installed = { "go", "bash", "python", "html", "css", "javascript", "lua", "perl" },
-    highlight = { enable = true },
-})
 
 -- Harpoon
 local harpoon = require("harpoon")
@@ -311,6 +310,7 @@ wk.add({
     -- Keymaps:Git
     { "<leader>g", group = "Git" }, -- group
     { "<leader>gg", function() snacks.lazygit() end, desc = "Lazygit" },
+    { "<leader>gl", function() snacks.picker.git_log() end, desc = "Lazygit Log" },
     { "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "Toggle blame", mode = "n" },
 
     -- Keymaps:UI
@@ -318,6 +318,7 @@ wk.add({
     { "<leader>ud", ToggleDiagnosticSigns, desc = "Toggle diagnostic signs", mode = "n" },
 
     -- Keymaps:Harpoon
+    { "<leader>h", group = "Harpoon" }, -- group
     { "<leader>ha", function() harpoon:list():add() end, desc = "Harpoon current file",mode = "n"},
     { "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "List all the harpooned files",mode = "n"},
     { "<leader>h1", function() harpoon:list():select(1) end, desc = "GoTo 1",mode = "n"},
