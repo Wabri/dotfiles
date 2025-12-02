@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# ====== EDIT THIS ======
+REPO="/home/wabri/Workspaces/Github-Wabri/Personal/SecondBrain/wt1"
+BRANCH="main"
+UNIT_GIT_SSH_COMMAND="${GIT_SSH_COMMAND-}"
+# =======================
+
+# Load env from three levels up (supports "export VAR=..." lines)
+ENVRC="$(realpath -m "$REPO/../../../.envrc")"
+if [[ -f "$ENVRC" ]]; then
+    set -a
+    # shellcheck disable=SC1090
+    . "$ENVRC"
+    set +a
+fi
+
+# Prefer the unit's SSH command
+if [[ -n "${UNIT_GIT_SSH_COMMAND:-}" ]]; then
+    export GIT_SSH_COMMAND="$UNIT_GIT_SSH_COMMAND"
+fi
+
+# Log helper (goes to journald)
+log() { printf '[logseq-sync] %s\n' "$*" >&2; }
+trap 'log "ERROR on line $LINENO"; exit 1' ERR
+
+log "Using GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-<unset>}"
+
+# Sanity checks
+[[ -d "$REPO/.git" ]] || { log "Not a git repo: $REPO"; exit 3; }
+
+# Prevent overlapping runs
+LOCKFILE="$REPO/.git/.logseq-sync.lock"
+exec 9>"$LOCKFILE"
+flock -n 9 || { log "Another sync is running for $REPO"; exit 0; }
+
+# Skip if there is an unfinished merge/rebase
+if git -C "$REPO" merge HEAD &>/dev/null; then :; else
+    log "Unfinished merge/rebase in $REPO; skipping"
+    exit 0
+fi
+
+# Fetch + rebase with autostash (equivalent to stash/rebase/pop)
+log "Fetching from origin..."
+git -C "$REPO" fetch --prune
+
+log "Pulling --rebase --autostash on $BRANCH..."
+if ! git -C "$REPO" pull --rebase --autostash origin "$BRANCH"; then
+    log "pull --rebase failed; will retry next run"
+    exit 0
+fi
+
+# Add/commit if there are changes
+if ! git -C "$REPO" diff --quiet || ! git -C "$REPO" diff --cached --quiet; then
+    log "Staging changes..."
+    git -C "$REPO" add --all
+    if ! git -C "$REPO" diff --cached --quiet; then
+        log "Committing..."
+        git -C "$REPO" commit -m "Update on $(date -Iseconds)"
+    fi
+fi
+
+# Push (idempotent if nothing to push)
+log "Pushing to origin/$BRANCH..."
+if ! git -C "$REPO" push origin "HEAD:$BRANCH"; then
+    log "push failed; will retry next run"
+    exit 0
+fi
+
+log "Done."

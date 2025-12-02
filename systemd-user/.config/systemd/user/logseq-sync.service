@@ -1,0 +1,20 @@
+[Unit]
+Description=Logseq Git sync (hardcoded repo)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/home/wabri/Workspaces/Github-Wabri/Personal/SecondBrain/wt1/.git
+
+[Service]
+Type=oneshot
+# Avoid interactive prompts hanging the unit
+Environment=GIT_TERMINAL_PROMPT=0
+Environment="GIT_SSH_COMMAND=/usr/bin/ssh -F /dev/null -i /home/wabri/.ssh/personal-github -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new"
+ExecStart=/home/wabri/.local/bin/logseq-sync
+
+Nice=10
+IOSchedulingClass=idle
+PrivateTmp=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=default.target

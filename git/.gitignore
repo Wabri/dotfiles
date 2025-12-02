@@ -1,0 +1,12 @@
+# === Tmux-Tsaheylu ===
+.template.tsaheylu
+
+# === asdf ===
+.tool-versions
+
+# === VIM ===
+*.swp
+Session.vim
+
+# === Direnv ===
+.envrc

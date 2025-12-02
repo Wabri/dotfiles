@@ -1,0 +1,11 @@
+[Unit]
+Description=Periodic Logseq Git sync (every 1h)
+
+[Timer]
+OnUnitActiveSec=60min
+RandomizedDelaySec=3min
+AccuracySec=2min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
