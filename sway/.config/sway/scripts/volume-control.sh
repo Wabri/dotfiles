@@ -17,8 +17,9 @@ EOF
 # Get current volume and mute state
 get_volume() {
   RAW=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
-  MUTE=$(echo "$RAW" | grep -q MUTED && echo "true" || echo "false")
-  volume=$(echo "$RAW" | awk '{print int($2 * 100)}')
+  [[ $RAW == *MUTED* ]] && MUTE="true" || MUTE="false"
+  volume=${RAW#* } # remove everything starting from whitespace
+  volume=$(printf "%.0f" "$(echo "$volume * 100" | bc -l)")
 }
 
 # Determine icon based on volume level
@@ -37,12 +38,10 @@ get_icon() {
 # Send notification with volume info
 send_notification() {
   get_icon
-  if [ -f "$IDFILE" ]; then
-    ID=$(cat "$IDFILE")
-    [[ -z "$ID" ]] && ID=0
-  else
-    ID=0
-  fi
+
+  ID=0
+  [ -f "$IDFILE" ] && ID=$(cat "$IDFILE") || ID=0
+  [[ -z "$ID" ]] && ID=0
 
   if [ "$MUTE" = "true" ]; then
     LABEL="Muted"
@@ -50,8 +49,7 @@ send_notification() {
     LABEL="${volume}%"
   fi
 
-  NEW_ID=$(notify-send -a "state" "$ICON $LABEL" -h int:value:"$volume" -u low --replace-id=$ID --print-id --app-name="Volume")
-  echo "$NEW_ID" > "$IDFILE"
+  (notify-send -a "state" "$ICON $LABEL" -h int:value:"$volume" -u low --replace-id="$ID" --print-id --app-name="Volume" > "$IDFILE") &
 }
 
 # Save current volume to track changes

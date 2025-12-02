@@ -13,6 +13,14 @@ Valid actions are:
 EOF
 }
 
+# Get the current brightness percentage
+get_brightness() {
+  # Use parameter expansion instead of grep + head
+  local raw=$(brightnessctl -m)
+  brightness=${raw#*,}
+  brightness=${brightness%%\%*}
+}
+
 # Determine icon based on brightness level
 get_icon() {
   if ((brightness <= 5)); then
@@ -36,28 +44,19 @@ get_icon() {
   fi
 }
 
-# Get the current brightness percentage and device name
-get_brightness() {
-  brightness=$(brightnessctl -m | grep -o '[0-9]\+%' | head -c-2)
-}
-
-# Send a notification with brightness info and persistent ID
+# Send a notification with brightness info (backgrounded)
 send_notification() {
   get_icon
   # Load notification ID
-  if [ -f "$IDFILE" ]; then
-    ID=$(cat "$IDFILE")
-    [[ -z "$ID" ]] && ID=0
-  else
-    ID=0
-  fi
+  ID=0
+  [[ -f "$IDFILE" ]] && ID=$(cat "$IDFILE")
+  [[ -z "$ID" ]] && ID=0
 
-  # Show notification and store new ID
-  NEW_ID=$(notify-send -a "state" "$ICON ${brightness}%" -h int:value:"$brightness" -u low --replace-id=$ID --print-id --app-name="Brightness")
-  echo "$NEW_ID" > "$IDFILE"
+  # Show notification in background and store new ID
+  (notify-send -a "state" "$ICON ${brightness}%" -h int:value:"$brightness" -u low --replace-id=$ID --print-id --app-name="Brightness" > "$IDFILE") &
 }
 
-# Save current brightness level to track changes
+# Save current brightness level
 save_prev_brightness() {
   echo "$brightness" > "$PREVFILE"
 }
@@ -70,7 +69,7 @@ while getopts o: opt; do
   o)
     case $OPTARG in
     i) # Increase brightness
-      if [[ $brightness -lt 10 ]]; then
+      if ((brightness < 10)); then
         brightnessctl set +1%
       else
         brightnessctl set +2%
@@ -80,9 +79,9 @@ while getopts o: opt; do
       save_prev_brightness
       ;;
     d) # Decrease brightness
-      if [[ $brightness -le 1 ]]; then
+      if ((brightness <= 1)); then
         brightnessctl set 1%
-      elif [[ $brightness -le 10 ]]; then
+      elif ((brightness <= 10)); then
         brightnessctl set 1%-
       else
         brightnessctl set 2%-
