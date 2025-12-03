@@ -11,12 +11,12 @@ script_dir=$(dirname "$(readlink -f "$0")")
 config_file="$script_dir/fuzzel.conf"
 
 # Fallback if config not found
-if [ ! -r "$config_file" ]; then
-  echo "WARNING: fuzzel config not found at $config_file, continuing without it."
-  config_file=""
-fi
+[[ ! -r "$config_file" ]] && config_file=""
 
-IDFILE="/tmp/power_menu_notify_id"
+# Notify function (backgrounded)
+notify() {
+    (notify-send "$@" --app-name="System") &
+}
 
 # Show power options
 options=(
@@ -28,31 +28,31 @@ options=(
   "󰞘 Logout"
 )
 
-choice=$(printf "%s\n" "${options[@]}" | fuzzel --dmenu --config "$config_file")
+choice=$(printf "%s\n" "${options[@]}" | fuzzel --dmenu ${config_file:+--config "$config_file"})
 
 case "$choice" in
   *Lock)
-    notify-send -r 9991 -u low -a "System" "󰍁 Locking..."
+    notify "󰍁 Locking..." --urgency=low
     hyprlock
     ;;
   *Shutdown)
-    notify-send -r 9992 -u critical -a "System" " Shutting down..."
+    notify " Shutting down..." --urgency=low
     systemctl poweroff
     ;;
   *Reboot)
-    notify-send -r 9993 -u normal -a "System" " Rebooting..."
+    notify " Rebooting..." --urgency=low
     systemctl reboot
     ;;
   *Suspend)
-    notify-send -r 9994 -u low -a "System" " Suspending..."
+    notify " Suspending..." --urgency=low
     systemctl suspend
     ;;
   *Hibernate)
-    notify-send -r 9995 -u low -a "System" " Hibernating..."
+    notify " Hibernating..." --urgency=low
     systemctl hibernate
     ;;
   *Logout)
-    notify-send -r 9996 -u low -a "System" "󰞘 Logging out..."
+    notify "󰞘 Logging out..." --urgency=low
     loginctl kill-session "$XDG_SESSION_ID"
     ;;
   *)

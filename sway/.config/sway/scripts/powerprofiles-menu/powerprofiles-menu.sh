@@ -7,34 +7,59 @@ script_dir=$(dirname "$(readlink -f "$0")")
 config_file="$script_dir/fuzzel.conf"
 
 # Fallback if config not found
-if [ ! -r "$config_file" ]; then
-  echo "WARNING: fuzzel config not found at $config_file, continuing without it."
-  config_file=""
-fi
+[[ ! -r "$config_file" ]] && config_file=""
 
-choice=$(echo "[p] Performance
-[b] Balanced
-[s] Power Saver
-[q] Quit" | fuzzel --dmenu --config "$config_file")
+# Get current profile to highlight it
+CURRENT=$(powerprofilesctl get 2>/dev/null || echo "balanced")
 
-key=$(echo "$choice" | grep -oP '^\[\K.\b')
+# Build menu with current selection marked
+MENU="[p] Performance"
+[[ $CURRENT == "performance" ]] && MENU+=" ✓"
+MENU+="
+[b] Balanced"
+[[ $CURRENT == "balanced" ]] && MENU+=" ✓"
+MENU+="
+[s] Power Saver"
+[[ $CURRENT == "power-saver" ]] && MENU+=" ✓"
 
-case "$key" in
-  p|P)
+# Show menu
+choice=$(fuzzel --dmenu ${config_file:+--config "$config_file"} <<< "$MENU")
 
-  NEW_ID=$()
-    powerprofilesctl set performance && notify-send "󰢾 Switched to performance mode" --app-name="PowerProfiles" 
+# Exit if user cancelled
+[[ -z $choice ]] && exit 0
+
+# Extract key (first character inside brackets)
+key=${choice:1:1}
+
+# Notify function (backgrounded)
+notify() {
+    (notify-send "$@" --app-name="PowerProfiles") &
+}
+
+# Switch profile
+case "${key,,}" in  # ${key,,} converts to lowercase
+  p)
+    if powerprofilesctl set performance 2>/dev/null; then
+        notify "󰢾 Performance Mode" "Switched to performance mode"
+    else
+        notify "❌ Failed" "Could not switch to performance mode" --urgency=critical
+    fi
     ;;
-  b|B)
-    powerprofilesctl set balanced && notify-send "󰢽 Switched to Balanced mode." --app-name="PowerProfiles"
+  b)
+    if powerprofilesctl set balanced 2>/dev/null; then
+        notify "󰢽 Balanced Mode" "Switched to balanced mode"
+    else
+        notify "❌ Failed" "Could not switch to balanced mode" --urgency=critical
+    fi
     ;;
-  s|S)
-    powerprofilesctl set power-saver && notify-send "󰢼 Switched to Power Saver mode." --app-name="PowerProfiles"
-    ;;
-  q|Q)
-    echo "No changes made."
+  s)
+    if powerprofilesctl set power-saver 2>/dev/null; then
+        notify "󰢼 Power Saver Mode" "Switched to power saver mode"
+    else
+        notify "❌ Failed" "Could not switch to power saver mode" --urgency=critical
+    fi
     ;;
   *)
-    echo "Invalid option."
+    # Invalid or quit - do nothing
     ;;
 esac

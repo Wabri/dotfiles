@@ -22,32 +22,47 @@ fi
 # Scan for Wi-Fi networks (backgrounded for speed)
 nmcli dev wifi rescan &>/dev/null &
 
-# Get Wi-Fi list
-LIST=$(nmcli --fields SSID,SECURITY device wifi list | sed '1d;/^--/d')
-
-# Calculate dimensions
-RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length}') + 2))
-LINENUM=$(wc -l <<< "$LIST")
+# Get Wi-Fi list (remove the starred entry as we'll mark it ourselves)
+LIST=$(nmcli --fields IN-USE,SSID device wifi list | sed '1d;/^--/d;/^\*/d' | tr -d "[:blank:]")
 
 # Current connection info
 CURRSSID=$(nmcli -t -f active,ssid dev wifi | awk -F: '$1 == "yes" {print $2; exit}')
 
-# Determine highlight line (offset by 2 due to toggle and manual options)
-HIGHLINE=0
-if [[ -n $CURRSSID ]]; then
-  # Find line number of current SSID in the list
-  HIGHLINE=$(awk -v ssid="$CURRSSID" '$1 == ssid {print NR+2; exit}' <<< "$LIST")
-fi
+# Mark current network with checkmark
+MARKED_LIST=""
+while IFS= read -r line; do
+    SSID=$(awk '{print $1}' <<< "$line")
+    if [[ $SSID == "$CURRSSID" ]]; then
+        MARKED_LIST+="$line ✓"$'\n'
+    else
+        MARKED_LIST+="$line"$'\n'
+    fi
+done <<< "$LIST"
+
+# Remove trailing newline
+MARKED_LIST=${MARKED_LIST%$'\n'}
+
+# Calculate dimensions
+RWIDTH=$(($(echo "$MARKED_LIST" | head -n 1 | awk '{print length}') + 8))
+LINENUM=$(wc -l <<< "$MARKED_LIST")
 
 # Build menu entries
 TOGGLE="toggle off"
-MENU_ENTRIES=$(printf "%s\n%s\n%s" "$TOGGLE" "manual" "$LIST")
+MENU_ENTRIES=$(printf "%s\n%s\n%s\n%s" "$TOGGLE" "manual" "━━━━━━━━━━━━━━━━" "$MARKED_LIST")
 
 # Show menu
-CHENTRY=$(fuzzel --dmenu ${config_file:+--config "$config_file"} --lines "$LINENUM" --width "$RWIDTH" <<< "$MENU_ENTRIES")
+CHENTRY=$(fuzzel --dmenu ${config_file:+--config "$config_file"} --lines "$((LINENUM + 3))" --width "$RWIDTH" <<< "$MENU_ENTRIES")
+
+# Remove checkmark if present
+CHENTRY=${CHENTRY% ✓}
 
 # Extract SSID from chosen entry
 CHSSID=$(awk '{print $1}' <<< "$CHENTRY")
+
+# Notify function (backgrounded)
+notify() {
+    (notify-send "$@" --app-name="WiFi") &
+}
 
 # Handle choices
 case "$CHENTRY" in
@@ -59,15 +74,15 @@ case "$CHENTRY" in
     
     if [[ -z $MPASS ]]; then
       if nmcli dev wifi con "$SSID" 2>/dev/null; then
-        notify-send "📶 Wi-Fi Connected" "Successfully connected to $SSID" --icon=network-wireless --app-name="WIFI"
+        notify "📶 Wi-Fi Connected" "Successfully connected to $SSID" --icon=network-wireless
       else
-        notify-send "❌ Connection Failed" "Could not connect to $SSID" --icon=dialog-error --urgency=critical --app-name="WIFI"
+        notify "❌ Connection Failed" "Could not connect to $SSID" --icon=dialog-error --urgency=critical
       fi
     else
       if nmcli dev wifi con "$SSID" password "$MPASS" 2>/dev/null; then
-        notify-send "📶 Wi-Fi Connected" "Successfully connected to $SSID" --icon=network-wireless --app-name="WIFI"
+        notify "📶 Wi-Fi Connected" "Successfully connected to $SSID" --icon=network-wireless
       else
-        notify-send "❌ Connection Failed" "Wrong password or network unavailable" --icon=dialog-error --urgency=critical --app-name="WIFI"
+        notify "❌ Connection Failed" "Wrong password or network unavailable" --icon=dialog-error --urgency=critical
       fi
     fi
     ;;
@@ -91,9 +106,9 @@ case "$CHENTRY" in
     if nmcli -t -f NAME connection show | grep -Fxq "$CHSSID"; then
       # Known network - just connect
       if nmcli con up "$CHSSID" 2>/dev/null; then
-        notify-send "📶 Wi-Fi Connected" "Successfully connected to $CHSSID" --icon=network-wireless --app-name="WIFI"
+        notify "📶 Wi-Fi Connected" "Successfully connected to $CHSSID" --icon=network-wireless
       else
-        notify-send "❌ Connection Failed" "Could not connect to $CHSSID" --icon=dialog-error --urgency=critical --app-name="WIFI"
+        notify "❌ Connection Failed" "Could not connect to $CHSSID" --icon=dialog-error --urgency=critical
       fi
     else
       # New network - check if password needed
@@ -104,9 +119,9 @@ case "$CHENTRY" in
       fi
       
       if nmcli dev wifi con "$CHSSID" ${WIFIPASS:+password "$WIFIPASS"} 2>/dev/null; then
-        notify-send "📶 Wi-Fi Connected" "Successfully connected to $CHSSID" --icon=network-wireless --app-name="WIFI"
+        notify "📶 Wi-Fi Connected" "Successfully connected to $CHSSID" --icon=network-wireless
       else
-        notify-send "❌ Connection Failed" "Wrong password or network unavailable" --icon=dialog-error --urgency=critical --app-name="WIFI"
+        notify "❌ Connection Failed" "Wrong password or network unavailable" --icon=dialog-error --urgency=critical
       fi
     fi
     ;;
