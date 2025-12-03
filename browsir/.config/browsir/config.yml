@@ -10,9 +10,6 @@ profiles:
   - name: sh
     profile_dir: SchroedingerHat
     description: SH profile
-  - name: etsy-shop 
-    profile_dir: etsy-shop
-    description: Etsy-shop profile
 shortcuts:
   # General
   search: https://search.brave.com
