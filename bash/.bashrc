@@ -10,4 +10,4 @@
 # here, since multilingual X sessions would not work properly if LANG is over-
 # ridden in every subshell.
 
-test -s ~/.alias && . ~/.alias || true
+test -s ~/.aliases && . ~/.aliases || true
