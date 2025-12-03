@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+# Log helper (goes to journald) - MUST BE FIRST
+log() { printf '[logseq-sync] %s\n' "$*" >&2; }
+trap 'log "ERROR on line $LINENO"; exit 1' ERR
+
 # ====== EDIT THIS ======
 REPO="/home/wabri/Workspaces/Github-Wabri/Personal/SecondBrain/wt1"
 BRANCH="main"
@@ -14,6 +18,7 @@ if [[ -f "$ENVRC" ]]; then
     # shellcheck disable=SC1090
     . "$ENVRC"
     set +a
+    log "Loaded environment from $ENVRC"
 fi
 
 # Prefer the unit's SSH command
@@ -21,10 +26,7 @@ if [[ -n "${UNIT_GIT_SSH_COMMAND:-}" ]]; then
     export GIT_SSH_COMMAND="$UNIT_GIT_SSH_COMMAND"
 fi
 
-# Log helper (goes to journald)
-log() { printf '[logseq-sync] %s\n' "$*" >&2; }
-trap 'log "ERROR on line $LINENO"; exit 1' ERR
-
+log "Starting sync for $REPO"
 log "Using GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-<unset>}"
 
 # Sanity checks
@@ -33,39 +35,84 @@ log "Using GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-<unset>}"
 # Prevent overlapping runs
 LOCKFILE="$REPO/.git/.logseq-sync.lock"
 exec 9>"$LOCKFILE"
-flock -n 9 || { log "Another sync is running for $REPO"; exit 0; }
+if ! flock -n 9; then
+    log "Another sync is running for $REPO"
+    exit 0
+fi
 
 # Skip if there is an unfinished merge/rebase
-if git -C "$REPO" merge HEAD &>/dev/null; then :; else
+if ! git -C "$REPO" rev-parse --verify HEAD &>/dev/null; then
+    log "Repository HEAD is invalid; skipping"
+    exit 0
+fi
+
+if [[ -f "$REPO/.git/MERGE_HEAD" ]] || [[ -d "$REPO/.git/rebase-merge" ]] || [[ -d "$REPO/.git/rebase-apply" ]]; then
     log "Unfinished merge/rebase in $REPO; skipping"
     exit 0
 fi
 
-# Fetch + rebase with autostash (equivalent to stash/rebase/pop)
+# Fetch + rebase with autostash
 log "Fetching from origin..."
-git -C "$REPO" fetch --prune
-
-log "Pulling --rebase --autostash on $BRANCH..."
-if ! git -C "$REPO" pull --rebase --autostash origin "$BRANCH"; then
-    log "pull --rebase failed; will retry next run"
+if ! git -C "$REPO" fetch --prune; then
+    log "Fetch failed; will retry next run"
     exit 0
 fi
 
+log "Pulling --rebase --autostash on $BRANCH..."
+if ! git -C "$REPO" pull --rebase --autostash origin "$BRANCH"; then
+    log "Pull --rebase failed; will retry next run"
+    exit 0
+fi
+
+# DEBUG: Check repository status
+log "Checking repository status..."
+UNSTAGED=$(git -C "$REPO" diff --name-only)
+STAGED=$(git -C "$REPO" diff --cached --name-only)
+UNTRACKED=$(git -C "$REPO" ls-files --others --exclude-standard)
+
+if [[ -n "$UNSTAGED" ]]; then
+    log "Unstaged changes detected:"
+    log "$UNSTAGED"
+fi
+
+if [[ -n "$STAGED" ]]; then
+    log "Staged changes detected:"
+    log "$STAGED"
+fi
+
+if [[ -n "$UNTRACKED" ]]; then
+    log "Untracked files detected:"
+    log "$UNTRACKED"
+fi
+
 # Add/commit if there are changes
-if ! git -C "$REPO" diff --quiet || ! git -C "$REPO" diff --cached --quiet; then
-    log "Staging changes..."
+if ! git -C "$REPO" diff --quiet || ! git -C "$REPO" diff --cached --quiet || [[ -n "$UNTRACKED" ]]; then
+    log "Staging all changes..."
     git -C "$REPO" add --all
+    
     if ! git -C "$REPO" diff --cached --quiet; then
-        log "Committing..."
-        git -C "$REPO" commit -m "Update on $(date -Iseconds)"
+        log "Committing changes..."
+        COMMIT_MSG="Update on $(date -Iseconds)"
+        if git -C "$REPO" commit -m "$COMMIT_MSG"; then
+            log "Commit successful: $COMMIT_MSG"
+        else
+            log "Commit failed!"
+            exit 0
+        fi
+    else
+        log "No changes to commit after staging"
     fi
+else
+    log "No changes detected in repository"
 fi
 
 # Push (idempotent if nothing to push)
 log "Pushing to origin/$BRANCH..."
-if ! git -C "$REPO" push origin "HEAD:$BRANCH"; then
-    log "push failed; will retry next run"
+if git -C "$REPO" push origin "HEAD:$BRANCH"; then
+    log "Push successful"
+else
+    log "Push failed; will retry next run"
     exit 0
 fi
 
-log "Done."
+log "Sync completed successfully"
