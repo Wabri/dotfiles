@@ -1,0 +1,17 @@
+[Unit]
+Description=Git auto-sync for multiple repositories
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=GIT_TERMINAL_PROMPT=0
+ExecStart=/home/wabri/.local/bin/git-auto-sync
+
+Nice=10
+IOSchedulingClass=idle
+PrivateTmp=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=default.target
