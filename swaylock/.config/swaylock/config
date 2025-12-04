@@ -1,0 +1,63 @@
+### Swaylock Configuration
+
+#
+# Colors match the sway theme (green accent with dark background)
+#
+
+# Display
+daemonize
+show-failed-attempts
+show-keyboard-layout
+indicator-radius=120
+indicator-thickness=10
+indicator-idle-visible
+image=$HOME/.config/sway/wallpaper.png
+
+# Colors - Matching sway theme
+# Primary green: #73ba25
+# Light green: #a0c980
+# Dark background: #1c1c1c
+# Light text: #dcdccc
+# Urgent red: #e53935
+
+# Background
+color=1c1c1c
+
+# Ring colors
+ring-color=a0c980
+ring-clear-color=73ba25
+ring-caps-lock-color=a0c980
+ring-ver-color=73ba25
+ring-wrong-color=e53935
+
+# Key highlight (when typing)
+key-hl-color=dcdccc
+
+# Backspace highlight
+bs-hl-color=e53935
+
+# Separator color (line between ring and text)
+separator-color=00000000
+
+# Inside colors (the center of the ring indicator)
+inside-color=1c1c1c88
+inside-clear-color=1c1c1c88
+inside-caps-lock-color=1c1c1c88
+inside-ver-color=1c1c1c88
+inside-wrong-color=1c1c1c88
+
+# Text colors
+text-color=dcdccc
+text-clear-color=dcdccc
+text-caps-lock-color=dcdccc
+text-ver-color=dcdccc
+text-wrong-color=e53935
+
+# Layout colors
+layout-bg-color=1c1c1c
+layout-border-color=73ba25
+layout-text-color=dcdccc
+
+# Caps lock key highlight - also using text color
+caps-lock-key-hl-color=dcdccc
+caps-lock-bs-hl-color=e53935
