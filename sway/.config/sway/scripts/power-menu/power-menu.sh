@@ -33,7 +33,7 @@ choice=$(printf "%s\n" "${options[@]}" | fuzzel --dmenu ${config_file:+--config 
 case "$choice" in
   *Lock)
     notify "󰍁 Locking..." --urgency=low
-    hyprlock
+    swaylock
     ;;
   *Shutdown)
     notify " Shutting down..." --urgency=low
