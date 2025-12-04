@@ -2,6 +2,7 @@
 Description=Periodic Git auto-sync (every 3h)
 
 [Timer]
+OnStartupSec=30min
 OnUnitActiveSec=180min
 RandomizedDelaySec=30min
 AccuracySec=2min
