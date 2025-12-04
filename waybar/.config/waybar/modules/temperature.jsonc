@@ -1,6 +1,6 @@
 {
   "custom/temperature": {
-    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "exec": "$HOME/.config/waybar/scripts/cpu-temp.sh",
     "return-type": "json",
     "format": "{}",
     "interval": 5,

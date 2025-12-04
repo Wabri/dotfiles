@@ -1,47 +1,56 @@
-/* openSUSE Inspired Theme */
+/* System-wide Color Scheme */
+/* Matches Sway and Fuzzel configurations */
 
-@define-color suse-green       #73ba25;  /* Core SUSE green */
-@define-color suse-dark        #0e141b;  /* Dark background */
-@define-color suse-light       #d5e5d0;  /* Light text/accents */
-@define-color suse-accent      #9ecf99;  /* Soft green accent */
-@define-color suse-warning     #f9e2af;  /* Warm yellow */
-@define-color suse-critical    #e05f5f;  /* Red for alerts */
+/* Core Colors (from Fuzzel & Sway) */
+@define-color base-dark        #0e141b;  /* Fuzzel background */
+@define-color base-light       #e8f5e9;  /* Fuzzel text */
+@define-color primary-green    #73ba25;  /* Sway focused, SUSE green */
+@define-color accent-green     #a8ff60;  /* Fuzzel match */
+@define-color border-green     #b4ff39;  /* Fuzzel border */
+@define-color selection-dark   #264d32;  /* Fuzzel selection */
+@define-color warning-yellow   #f9e2af;  /* Warning state */
+@define-color critical-red     #e05f5f;  /* Critical state */
 
 /* Background/Foreground/Border */
 
 @define-color shadow           rgba(14, 20, 27, 0.4);
-@define-color main-bg          rgba(14, 20, 27, 0.6);
-@define-color main-fg          @suse-light;
-@define-color main-br          @suse-accent;
+@define-color main-bg          rgba(14, 20, 27, 0.7);
+@define-color main-fg          @base-light;
+@define-color main-br          @accent-green;
 
-@define-color active-bg        @suse-accent;
-@define-color active-fg        @suse-dark;
+@define-color active-bg        @primary-green;
+@define-color active-fg        @base-dark;
 
-@define-color hover-bg         alpha(@suse-green, 0.15);
-@define-color hover-fg         @suse-light;
+@define-color hover-bg         alpha(@accent-green, 0.2);
+@define-color hover-fg         @border-green;
 
-/* Modules */
+/* Modules - Simplified with consistent transparency */
 
-@define-color module-fg        @suse-light;
-@define-color workspaces       #1a221f;
 
-@define-color distro-fg        #0e141b;
-@define-color distro-bg        @suse-green;
+@define-color module-fg        @base-light;
+@define-color module-bg-base   rgba(14, 20, 27, 0.5);
+@define-color module-bg-accent rgba(38, 77, 50, 0.4);
 
-@define-color date             #27382d;
-@define-color tray             #1a221f;
-@define-color time             #1f2d26;
+@define-color workspaces       @module-bg-base;
 
-@define-color pulseaudio       #1f2d26;
-@define-color backlight        #27382d;
-@define-color temperature      #324736;
-@define-color memory           #2a3e31;
-@define-color cpu              #334c3d;
-@define-color battery          #2e3f31;
-@define-color power            @suse-green;
+@define-color temperature      @module-bg-accent;
+@define-color memory           @module-bg-accent;
+@define-color cpu              @module-bg-accent;
+
+@define-color distro-fg        @base-dark;
+@define-color distro-bg        @primary-green;
+
+@define-color time             @module-bg-base;
+@define-color date             @module-bg-accent;
+@define-color tray             @module-bg-base;
+
+@define-color pulseaudio       @module-bg-base;
+@define-color backlight        @module-bg-accent;
+@define-color battery          @module-bg-accent;
+@define-color power            @primary-green;
 
 /* States */
 
-@define-color warning          @suse-warning;
-@define-color critical         @suse-critical;
-@define-color charging         @suse-light;
+@define-color warning          @warning-yellow;
+@define-color critical         @critical-red;
+@define-color charging         @accent-green;

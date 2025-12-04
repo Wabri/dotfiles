@@ -19,7 +19,8 @@ window#waybar {
 */
 window#waybar > box {
   background: @main-bg;
-  margin: 2px;
+  margin: 3px;
+  border-radius: 12px;
   font-size: 8px;
 }
 
@@ -27,8 +28,8 @@ window#waybar > box {
 */
 tooltip {
   background: @main-bg;
-  border: 1.5px solid @main-br;
-  border-radius: 8px;
+  border: 2px solid @main-br;
+  border-radius: 10px;
 }
 
 tooltip label {
@@ -81,7 +82,7 @@ tooltip label {
   box-shadow: none;
   margin: 2px 0;
   padding: 0 2px;
-  transition: none;
+  transition: all 0.2s ease-in-out;
 }
 
 #workspaces button:hover {
@@ -93,8 +94,8 @@ tooltip label {
 #workspaces button.focused {
   color: @active-fg;
   background: @active-bg;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   margin: 2px;
   padding: 0 6px;
 }
@@ -247,20 +248,21 @@ tooltip label {
 */
 
 #custom-power {
-  color: @main-bg;
+  color: @base-dark;
   background: @power;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 4px rgba(115, 186, 37, 0.5);
   border-radius: 10px;
   margin: 2px 4px 2px 0;
   padding: 0 6px 0 9px;
+  transition: all 0.2s ease-in-out;
 }
 
 #custom-power:hover {
-  color: @hover-fg;
-  background: @hover-bg;
-  text-shadow: none;
-  box-shadow: none;
+  color: @base-dark;
+  background: @accent-green;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 6px rgba(168, 255, 96, 0.6);
 }
 
 /* ───────────────────────────────────────────────────────────┤ font sizes ├───
@@ -282,22 +284,4 @@ tooltip label,
 */
 #custom-distro {
   font-size: 30px;
-}
-
-/* ───────────────────────────────────────────────────────────┤ workspaces ├───
-*/
-#workspaces button {
-  border-radius: 8px;
-  padding: 0 2px;
-}
-
-#workspaces button.active {
-  padding: 0 6px;
-}
-
-/* ─────────────────────────────────────────────────────────┤ power button ├───
-*/
-#custom-power {
-  border-radius: 10px;
-  padding: 0 6px 0 9px;
 }

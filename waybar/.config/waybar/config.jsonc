@@ -62,7 +62,7 @@
     "rewrite": {
       // ────────────────────────────────────────────────────────── desktop ───
       "": 
-        "<span foreground='#89b4fa'> </span> Sway",
+        "<span foreground='#73ba25'> </span> Sway",
 
       // ───────────────────────────────────────────────────────── terminal ───
 
@@ -72,27 +72,27 @@
       "alacritty": "  Terminal",
 
       "tmux(.*)": 
-        "<span foreground='#a6e3a1'> </span> Tmux",
+        "<span foreground='#a8ff60'> </span> Tmux",
 
       "nvim": 
-        "<span foreground='#a6e3a1'> </span> Neovim",
+        "<span foreground='#a8ff60'> </span> Neovim",
       "nvim (.*)": 
-        "<span foreground='#a6e3a1'> </span> $1",
+        "<span foreground='#a8ff60'> </span> $1",
 
       // ──────────────────────────────────────────────────────────── media ───
 
       "(.*)Spotify": 
-        "<span foreground='#a6e3a1'> </span> Spotify",
+        "<span foreground='#a8ff60'> </span> Spotify",
       "(.*)Spotify Premium": 
-        "<span foreground='#a6e3a1'> </span> Spotify Premium",
+        "<span foreground='#a8ff60'> </span> Spotify Premium",
 
       "OBS(.*)": 
-        "<span foreground='#a6adc8'>󰻃 </span> OBS Studio",
+        "<span foreground='#a8ff60'>󰻃 </span> OBS Studio",
 
       "VLC media player": 
-        "<span foreground='#fab387'>󰕼 </span> VLC Media Player",
+        "<span foreground='#a8ff60'>󰕼 </span> VLC Media Player",
       "(.*) - VLC media player": 
-        "<span foreground='#fab387'>󰕼 </span> $1",
+        "<span foreground='#a8ff60'>󰕼 </span> $1",
 
       "qView": "󰋩  qView",
 
@@ -103,21 +103,21 @@
       // ──────────────────────────────────────────────────────── Communication ───
 
       "Telegram": 
-        "<span foreground='#f38ba8'> </span> Telegram",
+        "<span foreground='#a8ff60'> </span> Telegram",
 
       // ──────────────────────────────────────────────────────── documents ───
 
       "ONLYOFFICE Desktop Editors": 
-        "<span foreground='#f38ba8'> </span> OnlyOffice Desktop",
+        "<span foreground='#a8ff60'> </span> OnlyOffice Desktop",
 
       "(.*).docx": 
-        "<span foreground='#89b4fa'>󰈭 </span> $1.docx",
+        "<span foreground='#a8ff60'>󰈭 </span> $1.docx",
       "(.*).xlsx": 
-        "<span foreground='#a6e3a1'>󰈜 </span> $1.xlsx",
+        "<span foreground='#a8ff60'>󰈜 </span> $1.xlsx",
       "(.*).pptx": 
-        "<span foreground='#fab387'>󰈨 </span> $1.pptx",
+        "<span foreground='#a8ff60'>󰈨 </span> $1.pptx",
       "(.*).pdf": 
-        "<span foreground='#f38ba8'> </span> $1.pdf",
+        "<span foreground='#a8ff60'> </span> $1.pdf",
 
       // ─────────────────────────────────────────────────────────── system ───
 
@@ -128,7 +128,7 @@
   // ────────────────────────────────────────────────────────┤ temperature ├───
 
   "custom/temperature": {
-    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "exec": "$HOME/.config/waybar/scripts/cpu-temp.sh",
     "return-type": "json",
     "format": "{}",
     "interval": 5,
@@ -209,11 +209,11 @@
 
       "format": {
         "months": 
-          "<span color='#b4befe'><b>{}</b></span>",
+          "<span color='#b4ff39'><b>{}</b></span>",
         "weekdays": 
-          "<span color='#a6adc8'>{}</span>",
+          "<span color='#e8f5e9'>{}</span>",
         "today": 
-          "<span color='#f38ba8'><b>{}</b></span>"
+          "<span color='#e05f5f'><b>{}</b></span>"
       }
     },
 
@@ -229,10 +229,10 @@
   // ──────────────────────────────────────────────────────────────┤ wi-fi ├───
 
   "custom/wifi": {
-    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "exec": "$HOME/.config/waybar/scripts/wifi-status.sh",
     "return-type": "json",
     "format": "{}",
-    "on-click": "~/.local/bin/wifi-menu",
+    "on-click": "$HOME/.config/sway/scripts/wifi-menu/wifi-menu.sh",
     "interval": 1
   },
 
@@ -255,20 +255,8 @@
     "tooltip-format-enumerate-connected-battery": 
       ":: {device_alias}: 󱊣 {device_battery_percentage}%",
 
-    "on-click": "~/.local/bin/bluetooth-menu",
+    "on-click": "$HOME/.config/sway/scripts/bluethoot-menu/bluethoot-menu.sh",
     "interval": 1
-  },
-
-  // ──────────────────────────────────────────────────────┤ system update ├───
-
-  "custom/update": {
-    "exec": "~/.config/waybar/scripts/system-update.sh",
-    "return-type": "json",
-    "format": "{}",
-    "on-click": "~/.config/waybar/scripts/system-update.sh up",
-    "interval": 30,
-    "min-length": 1,
-    "max-length": 1
   },
 
   // ─────────────────────────────────────────────────────────┤ media info ├───
@@ -279,10 +267,10 @@
 
     "player-icons": {
       "default": "󰝚 ",
-      "spotify": "<span foreground='#a6e3a1'>󰓇 </span>"
+      "spotify": "<span foreground='#a8ff60'>󰓇 </span>"
     },
     "status-icons": {
-      "paused": "<span color='#b4befe'>\u200A\u200A󰏤\u2009\u2009</span>"
+      "paused": "<span color='#b4ff39'>\u200A\u200A󰏤\u2009\u2009</span>"
     },
 
     "tooltip-format": "Playing: {title} - {artist}",
@@ -304,10 +292,10 @@
     },
 
     "tooltip-format": "Device: {desc}",
-    "on-click": "~/.config/waybar/scripts/volume-control.sh -o m",
+    "on-click": "$HOME/.config/sway/scripts/volume-control.sh -o m",
     "on-click-right": "pavucontrol",
-    "on-scroll-up": "~/.config/waybar/scripts/volume-control.sh -o i",
-    "on-scroll-down": "~/.config/waybar/scripts/volume-control.sh -o d",
+    "on-scroll-up": "$HOME/.config/sway/scripts/volume-control.sh -o i",
+    "on-scroll-down": "$HOME/.config/sway/scripts/volume-control.sh -o d",
     "min-length": 6,
     "max-length": 6
   },
@@ -318,9 +306,9 @@
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", "", "", "", "", ""],
     "tooltip": false,
-    "on-click": "~/.local/bin/theme-switcher",
-    "on-scroll-up": "brightness-control -o i",
-    "on-scroll-down": "brightness-control -o d",
+    "on-click": "$HOME/.config/sway/scripts/theme-switcher.sh",
+    "on-scroll-up": "$HOME/.config/sway/scripts/brightness-control.sh -o i",
+    "on-scroll-down": "$HOME/.config/sway/scripts/brightness-control.sh -o d",
     "min-length": 6
   },
 
@@ -342,7 +330,7 @@
     "min-length": 6,
     "max-length": 6,
 
-    "on-click": "~/.local/bin/powerprofiles-menu"
+    "on-click": "$HOME/.config/sway/scripts/powerprofiles-menu/powerprofiles-menu.sh"
   },
 
   // ───────────────────────────────────────────────────────┤ power button ├───
@@ -350,7 +338,7 @@
   "custom/power": {
     "format": " ",
     "tooltip": false,
-    "on-click": "~/.local/bin/power-menu"
+    "on-click": "$HOME/.config/sway/scripts/power-menu/power-menu.sh"
   },
 
   // ────────────────────────────────────────────────────────────┤ padding ├───
