@@ -5,6 +5,10 @@ vim.opt.wrap = true
 vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 vim.o.scrolloff = 10
+vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 -- Tabs and Indentation
 vim.opt.expandtab = true
@@ -12,8 +16,10 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
--- vim.opt.wrapmargin = 79
--- vim.opt.textwidth = 79
+
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -60,11 +66,11 @@ require("lazy").setup({
         priority = 1000,
         lazy = false,
         opts = {
-            bigfile = { 
+            bigfile = {
                 enabled = true,
                 notify = true
             },
-            dashboard = { 
+            dashboard = {
                 enabled = true,
                 -- width = 80,
                 preset = {
@@ -88,10 +94,10 @@ require("lazy").setup({
                         action = "<leader>e",
                         key = "e"
                     },
-                    { 
-                        section = "keys", 
-                        gap = 1, 
-                        padding = 1 
+                    {
+                        section = "keys",
+                        gap = 1,
+                        padding = 1
                     },
                     { section = "startup" },
                     {
@@ -135,10 +141,10 @@ require("lazy").setup({
                 },
             },
             dim = { enable = true },
-            explorer = { 
-                replace_netrw = true, -- Replace netrw with the snacks explorer
+            explorer = {
+                replace_netrw = true,
             },
-            lazygit = { 
+            lazygit = {
                 win = {
                     style = "lazygit",
                 },
@@ -246,7 +252,7 @@ wk.setup({
 
 -- Keybindings::helpers
 function ToggleDiagnosticSigns()
-    diagnostic = not vim.diagnostic.config().virtual_text
+    local diagnostic = not vim.diagnostic.config().virtual_text
     vim.diagnostic.config({signs = diagnostic})
     vim.diagnostic.config({virtual_text = diagnostic})
 end 
@@ -263,6 +269,9 @@ wk.add({
     { "gD", function() snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "<leader>l", group = "LSP" },
+    { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" },
+    { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Restart LSP" },
 
     -- Keymaps:Dim
     { "zd", function() snacks.dim.enable() end, desc = "Dimming enable" },
@@ -282,7 +291,7 @@ wk.add({
     { "<leader>ff", function() snacks.picker.files { hidden = false, ignored = true } end, desc = "File", mode = "n" },
     { "<leader>fF", function() snacks.picker.files { hidden = true, ignored = true } end, desc = "Hidden File", mode = "n" },
     { "<leader>fw", function() snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>fW", function() snacks.picker.grep { hidden = true, ignored = true } end, desc = "Grep" },
+    { "<leader>fW", function() snacks.picker.grep { hidden = true, ignored = true } end, desc = "Grep All" },
     { "<leader>fc", function() snacks.picker.colorschemes() end, desc = "Colorschemes" },
     { "<leader>fu", function() snacks.picker.undo() end, desc = "Undo tree" },
 
@@ -310,7 +319,7 @@ wk.add({
     -- Keymaps:Git
     { "<leader>g", group = "Git" }, -- group
     { "<leader>gg", function() snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gl", function() snacks.picker.git_log() end, desc = "Lazygit Log" },
+    { "<leader>gl", function() snacks.picker.git_log() end, desc = "Git Log" },
     { "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "Toggle blame", mode = "n" },
 
     -- Keymaps:UI
@@ -319,13 +328,13 @@ wk.add({
 
     -- Keymaps:Harpoon
     { "<leader>h", group = "Harpoon" }, -- group
-    { "<leader>ha", function() harpoon:list():add() end, desc = "Harpoon current file",mode = "n"},
-    { "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "List all the harpooned files",mode = "n"},
-    { "<leader>h1", function() harpoon:list():select(1) end, desc = "GoTo 1",mode = "n"},
-    { "<leader>h2", function() harpoon:list():select(2) end, desc = "GoTo 2",mode = "n"},
-    { "<leader>h3", function() harpoon:list():select(3) end, desc = "GoTo 3",mode = "n"},
-    { "<leader>h4", function() harpoon:list():select(4) end, desc = "GoTo 4",mode = "n"},
-    { "<leader>hp", function() harpoon:list():prev() end, desc = "GoTo previous",mode = "n"},
-    { "<leader>hn", function() harpoon:list():next() end, desc = "GoTo next",mode = "n"},
+    { "<leader>ha", function() harpoon:list():add() end, desc = "Harpoon current file", mode = "n"},
+    { "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "List all the harpooned files", mode = "n"},
+    { "<leader>h1", function() harpoon:list():select(1) end, desc = "GoTo 1", mode = "n"},
+    { "<leader>h2", function() harpoon:list():select(2) end, desc = "GoTo 2", mode = "n"},
+    { "<leader>h3", function() harpoon:list():select(3) end, desc = "GoTo 3", mode = "n"},
+    { "<leader>h4", function() harpoon:list():select(4) end, desc = "GoTo 4", mode = "n"},
+    { "<leader>hp", function() harpoon:list():prev() end, desc = "GoTo previous", mode = "n"},
+    { "<leader>hn", function() harpoon:list():next() end, desc = "GoTo next", mode = "n"},
 })
 
