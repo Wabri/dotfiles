@@ -13,7 +13,7 @@
 
   "modules-left": [
     "custom/paddc",
-    "custom/distro",        // distro icon
+    "tray",
     "custom/paddc",
     "sway/workspaces",  // workspaces
     "custom/paddw",
@@ -25,7 +25,7 @@
   "modules-center": [
     "clock#date",           // date
     "custom/paddc",
-    "tray",
+    "custom/distro",        // distro icon
     "custom/paddc",
     "clock#time"           // time
   ],
