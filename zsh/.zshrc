@@ -1,5 +1,5 @@
 # Gloabl variable
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export "PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.npm/global/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
 # OMZ variables

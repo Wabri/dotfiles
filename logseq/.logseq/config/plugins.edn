@@ -1,7 +1,6 @@
 {:logseq-bullet-threading {:version "v1.1.4", :repo "pengx17/logseq-plugin-bullet-threading", :effect false, :theme false}
- :logseq-journals-calendar {:version "v0.11.0", :repo "xyhp915/logseq-journals-calendar", :effect false, :theme false}
+ :logseq-journals-calendar {:version "v0.11.1", :repo "xyhp915/logseq-journals-calendar", :effect false, :theme false}
  :gruvbox-theme {:version "v0.1.9", :repo "OddDev/oddbox", :effect false, :theme true}
- :logseq-vim-editor {:version "v0.0.6", :repo "vipzhicheng/logseq-plugin-vim-editor", :effect true, :theme false}
  :logseq-vim-shortcuts {:version "v0.1.22", :repo "vipzhicheng/logseq-plugin-vim-shortcuts", :effect true, :theme false}
  :logseq-mark-map {:version "v0.4.6", :repo "vipzhicheng/logseq-plugin-mark-map", :effect false, :theme false}
  :logseq-copy-code-plugin {:version "v.1.2.0", :repo "vyleung/logseq-copy-code-plugin", :effect true, :theme false}

@@ -21,6 +21,7 @@ DOTFILES_TO_BACKUP=(
     ".config/mako"
     ".config/dunst"
     ".config/hypr"
+    ".config/gnome_scripts"
 )
 
 backup_dotfiles() {
