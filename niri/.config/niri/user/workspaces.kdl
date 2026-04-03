@@ -1,0 +1,6 @@
+workspace "Browsers" // 1
+workspace "Notes" // 2
+workspace "Tmux Ide" // 3
+workspace "Security" // 4
+workspace "Chats" // 5
+workspace "Music" // 6

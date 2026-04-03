@@ -1,0 +1,57 @@
+// === Configuration ===
+environment {
+  MOZ_ENABLE_WAYLAND "1"
+  QT_QPA_PLATFORM "wayland-egl"
+  CLUTTER_BACKEND "wayland"
+  ECORE_EVAS_ENGINE "wayland-egl"
+  ELM_ENGINE "wayland_egl"
+  SDL_VIDEODRIVER "wayland"
+  _JAVA_AWT_WM_NONREPARENTING "1"
+  NO_AT_BRIDGE "1"
+  QT_QPA_PLATFORMTHEME "qt5ct"
+  XDG_CURRENT_DESKTOP "niri"
+}
+
+config-notification {
+    disable-failed
+}
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+// === Including dms configuration ===
+include "dms/animations.kdl"
+include "dms/inputs.kdl"
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/outputs.kdl"
+include "dms/cursor.kdl"
+include "dms/windowrules.kdl"
+
+// === Including user configuration ===
+include "user/binds.kdl"
+include "user/colors.kdl"
+include "user/cursor.kdl"
+include "user/layout.kdl"
+include "user/windowrules.kdl"
+include "user/workspaces.kdl"
