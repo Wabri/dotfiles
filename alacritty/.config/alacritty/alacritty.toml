@@ -1,6 +1,9 @@
 [general]
 
 live_config_reload = true
+import = [
+    "dank-theme.toml"
+]
 
 [window]
 
