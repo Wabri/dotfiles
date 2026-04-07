@@ -40,7 +40,6 @@ debug {
 
 // === Including dms configuration ===
 include "dms/animations.kdl"
-include "dms/inputs.kdl"
 include "dms/colors.kdl"
 include "dms/layout.kdl"
 include "dms/alttab.kdl"
@@ -52,6 +51,7 @@ include "dms/windowrules.kdl"
 include "user/binds.kdl"
 include "user/colors.kdl"
 include "user/cursor.kdl"
+include "user/inputs.kdl"
 include "user/layout.kdl"
 include "user/windowrules.kdl"
 include "user/workspaces.kdl"

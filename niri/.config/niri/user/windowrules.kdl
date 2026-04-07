@@ -29,12 +29,15 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^com.mitchellh.ghostty$" title="^tmux-ide$$"
+    match app-id="^com.mitchellh.ghostty$" title="^tmux-ide$"
     open-on-workspace "Tmux Ide"
+    default-column-width { proportion 0.66667; }
+    open-focused false
 }
 
 window-rule {
     match app-id="Slack$"
+    match app-id="telegram.desktop$"
     open-on-workspace "Chats"
 }
 
