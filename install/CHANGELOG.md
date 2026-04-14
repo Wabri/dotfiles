@@ -12,6 +12,10 @@
   - Made version configurable via variable
   - Added comment with update instructions
   - Version now displayed during installation
+- 📝 **README.md**: Added installation section to main README
+  - Quick start instructions
+  - Link to detailed documentation
+  - Requirements and features overview
 
 ### Fixed
 - 🐛 **CRITICAL**: `stow.sh` now correctly excludes `install` directory from stowable packages

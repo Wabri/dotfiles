@@ -63,46 +63,11 @@ validate_packages() {
 
 ---
 
-### 2. ℹ️ Missing `install.sh` in `.gitignore` or documentation
-
-**Severity**: Very Low  
-**File**: N/A
-
-**Observation**:
-The main `install.sh` is at the repository root, which is correct, but there's no mention of it in the main README.
-
-**Enhancement**:
-Add installation instructions to main `README.md`:
-```markdown
-## Installation
-
-See [install/README.md](install/README.md) for detailed instructions.
-
-Quick start:
-\`\`\`bash
-./install.sh --full
-\`\`\`
-```
-
----
-
-## Documentation Issues
-
-### 3. ℹ️ No main repository README documentation for install system
-
-**Severity**: Low  
-**File**: `README.md` (root)
-
-**Issue**:
-Main README doesn't document the installation system. Users might not know about `install.sh`.
-
-**Fix**: Add installation section to main README (see issue #5)
-
 ---
 
 ## Feature Gaps (Enhancement Ideas)
 
-### 4. 💡 No rollback mechanism
+### 2. 💡 No rollback mechanism
 
 **Enhancement**: Add ability to rollback to backup
 
@@ -137,7 +102,7 @@ rollback() {
 
 ---
 
-### 5. 💡 No diff/preview mode
+### 3. 💡 No diff/preview mode
 
 **Enhancement**: Show what will change before applying
 
@@ -154,7 +119,7 @@ preview_stow() {
 
 ---
 
-### 6. 💡 No logging to file
+### 4. 💡 No logging to file
 
 **Enhancement**: Keep installation log for debugging
 
@@ -171,7 +136,7 @@ main() {
 
 ---
 
-### 7. 💡 No update mechanism
+### 5. 💡 No update mechanism
 
 **Enhancement**: Add `./install.sh --update` to pull changes and restow
 
@@ -202,16 +167,15 @@ update_dotfiles() {
 - ~~Exclude `install` directory from stow~~ - FIXED
 - ~~Add `column` fallback~~ - FIXED  
 - ~~Update ASDF version~~ - FIXED
+- ~~Add installation docs to main README~~ - FIXED
 
 See CHANGELOG.md for details.
 
 ### Remaining Issues
 
-#### Should Fix (Nice to Have)
-- **Issue #2-3**: Add installation docs to main README
-
 #### Optional Enhancements
-- **Issues #4-7**: Rollback, preview, logging, update mechanisms
+- **Issues #2-5**: Rollback, preview, logging, update mechanisms
+- **Issue #1**: Package validation (not recommended - adds overhead)
 
 ---
 
