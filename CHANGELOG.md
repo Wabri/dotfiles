@@ -13,9 +13,19 @@
   - Lists available backups if none specified
 - 👁️ **Preview/dry-run mode**: `./install/stow.sh -n <package>`
   - See what will change before actually stowing
-  - Shows which symlinks would be created
+  - **Enhanced**: Shows actual file content diffs (unified diff format)
+  - Color-coded diff output (green for additions, red for deletions)
+  - Shows preview of new files (first 10 lines)
+  - Indicates already-symlinked files and their targets
+  - Handles conflicts gracefully by manually finding files
   - Highlights warnings and conflicts
   - Safe way to test before applying changes
+- 🔍 **Repository diff command**: `dotfiles diff`
+  - Compare local dotfiles with remote repository
+  - Shows commits ahead of remote (not yet pushed)
+  - Shows commits behind remote (not yet pulled)
+  - Displays file changes statistics
+  - Automatically fetches latest remote state
 - 🚀 **Unified CLI tool**: `dotfiles` command
   - Single command for all operations
   - Installed to PATH via `./install-cli.sh`
@@ -85,10 +95,50 @@
 + fi
 ```
 
+#### Enhancement: Preview mode with content diffs
+**Location**: `install/stow.sh:preview_package()`
+
+The preview function now shows actual file content differences instead of just symlink operations:
+
+```bash
+# Parse stow output to find files that would be linked
+# If stow fails due to conflicts, manually find files with find command
+# For each file:
+if [[ -f "$target_file" ]] && [[ ! -L "$target_file" ]]; then
+    # Show unified diff with colored output
+    diff -u "$target_file" "$source_file" | tail -n +3 | while IFS= read -r diffline; do
+        # Color code: red for -, green for +, blue for @@
+    done
+elif [[ -L "$target_file" ]]; then
+    # Show current symlink target
+else
+    # Show preview of new file (first 10 lines)
+fi
+```
+
+Key improvements:
+- Uses `diff -u` for unified diff format
+- Handles conflicts by falling back to `find` command
+- Escapes regex metacharacters in pattern matching (`^\-` and `^\+`)
+- Excludes `.stow-local-ignore` and `packages.txt` from preview
+
+#### New feature: Repository diff command
+**Location**: `dotfiles:cmd_diff()`
+
+```bash
+git fetch --quiet 2>/dev/null || true
+git log @{upstream}..HEAD --oneline    # Commits ahead
+git log HEAD..@{upstream} --oneline    # Commits behind  
+git diff @{upstream}..HEAD --stat      # File changes
+```
+
 ### Testing
 - ✅ Syntax validation passed for all scripts
 - ✅ Verified `install` directory no longer appears in stow package list
 - ✅ Tested column fallback behavior
+- ✅ Enhanced preview mode shows actual file content diffs
+- ✅ Preview mode handles conflicts gracefully
+- ✅ Repository diff command shows correct ahead/behind status
 
 ---
 

@@ -13,6 +13,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 log_info() {
@@ -100,25 +101,90 @@ preview_package() {
     log_info "Preview: $package"
     echo ""
 
-    # Run stow in dry-run mode (-n) with verbose output
-    local output=$(stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -n -v "$package" 2>&1)
+    # First show what stow would do (capture both stdout and stderr, allow errors)
+    local stow_output=$(stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -n -v "$package" 2>&1) || true
 
-    if [[ -z "$output" ]]; then
-        log_info "  No changes (already stowed or no conflicts)"
-    else
-        echo "$output" | while IFS= read -r line; do
-            if [[ "$line" =~ LINK:.*-\> ]]; then
-                echo -e "  ${GREEN}+${NC} $line"
-            elif [[ "$line" =~ WARNING ]]; then
-                echo -e "  ${YELLOW}!${NC} $line"
-            elif [[ "$line" =~ ERROR ]]; then
-                echo -e "  ${RED}✗${NC} $line"
-            else
-                echo "  $line"
-            fi
-        done
+    if [[ -z "$stow_output" ]]; then
+        log_info "  No changes (already stowed)"
+        echo ""
+        return 0
     fi
-    echo ""
+
+    # Parse stow output to find files that would be linked
+    local files_to_link=()
+    while IFS= read -r line; do
+        if [[ "$line" =~ LINK:\ (.*)\ =\>\ (.*) ]]; then
+            local link_path="${BASH_REMATCH[1]}"
+            files_to_link+=("$link_path")
+        fi
+    done <<< "$stow_output"
+
+    # If no LINK lines found, check for conflicts and manually find files
+    if [[ ${#files_to_link[@]} -eq 0 ]]; then
+        # Find all files in the package directory (exclude .stow-local-ignore and packages.txt)
+        while IFS= read -r file; do
+            local rel_path="${file#$DOTFILES_DIR/$package/}"
+            files_to_link+=("$rel_path")
+        done < <(find "$DOTFILES_DIR/$package" -type f -not -name ".stow-local-ignore" -not -name "packages.txt")
+    fi
+
+    # Show diff for each file
+    for link_path in "${files_to_link[@]}"; do
+        local target_file="$TARGET_DIR/$link_path"
+        local source_file="$DOTFILES_DIR/$package/$link_path"
+
+        echo -e "${CYAN}File: $link_path${NC}"
+
+        if [[ -f "$target_file" ]] && [[ ! -L "$target_file" ]]; then
+            # File exists and is not a symlink - show diff
+            echo -e "${YELLOW}  → Will replace existing file with symlink${NC}"
+            echo ""
+
+            if command -v diff &> /dev/null; then
+                # Show actual content diff
+                echo "  Content changes:"
+                diff -u "$target_file" "$source_file" 2>/dev/null | tail -n +3 | while IFS= read -r diffline; do
+                    if [[ "$diffline" =~ ^\- ]]; then
+                        echo -e "  ${RED}$diffline${NC}"
+                    elif [[ "$diffline" =~ ^\+ ]]; then
+                        echo -e "  ${GREEN}$diffline${NC}"
+                    elif [[ "$diffline" =~ ^@ ]]; then
+                        echo -e "  ${BLUE}$diffline${NC}"
+                    else
+                        echo "  $diffline"
+                    fi
+                done || echo -e "  ${YELLOW}(Binary file or no diff tool)${NC}"
+            fi
+        elif [[ -L "$target_file" ]]; then
+            # Already a symlink
+            local current_target=$(readlink "$target_file")
+            echo -e "${BLUE}  → Already symlinked to: $current_target${NC}"
+        else
+            # New file
+            echo -e "${GREEN}  → Will create new symlink${NC}"
+
+            if [[ -f "$source_file" ]] && command -v wc &> /dev/null; then
+                local lines=$(wc -l < "$source_file")
+                echo -e "  ${BLUE}  New file: $lines lines${NC}"
+
+                # Show first few lines
+                echo "  Preview (first 10 lines):"
+                head -10 "$source_file" 2>/dev/null | while IFS= read -r line; do
+                    echo -e "  ${GREEN}+ $line${NC}"
+                done
+            fi
+        fi
+        echo ""
+    done
+
+    # Show stow simulation warnings
+    if echo "$stow_output" | grep -q "WARNING\|ERROR"; then
+        echo -e "${YELLOW}Stow warnings:${NC}"
+        echo "$stow_output" | grep "WARNING\|ERROR" | while IFS= read -r line; do
+            echo "  $line"
+        done
+        echo ""
+    fi
 }
 
 show_help() {

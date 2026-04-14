@@ -70,6 +70,7 @@ COMMANDS:
     rollback <backup-dir>       Restore from backup
 
     status                      Show dotfiles repository status
+    diff                        Show differences between local and remote
     update                      Pull latest changes and restow all
 
     help                        Show this help message
@@ -142,6 +143,46 @@ cmd_rollback() {
         exit 1
     fi
     exec "$DOTFILES_DIR/install.sh" --rollback "$1"
+}
+
+cmd_diff() {
+    if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+        log_error "Not a git repository"
+        exit 1
+    fi
+
+    cd "$DOTFILES_DIR"
+
+    # Fetch latest remote changes
+    git fetch --quiet 2>/dev/null || true
+
+    # Show commits that differ
+    log_info "Commits ahead of remote:"
+    local ahead_commits=$(git log @{upstream}..HEAD --oneline 2>/dev/null)
+    if [[ -z "$ahead_commits" ]]; then
+        echo "  None"
+    else
+        echo "$ahead_commits"
+    fi
+    echo ""
+
+    log_info "Commits behind remote:"
+    local behind_commits=$(git log HEAD..@{upstream} --oneline 2>/dev/null)
+    if [[ -z "$behind_commits" ]]; then
+        echo "  None"
+    else
+        echo "$behind_commits"
+    fi
+    echo ""
+
+    # Show file changes
+    log_info "File changes vs remote:"
+    local file_changes=$(git diff @{upstream}..HEAD --stat 2>/dev/null)
+    if [[ -z "$file_changes" ]]; then
+        echo "  No differences"
+    else
+        echo "$file_changes"
+    fi
 }
 
 cmd_status() {
@@ -295,6 +336,9 @@ main() {
             ;;
         status|st)
             cmd_status
+            ;;
+        diff)
+            cmd_diff
             ;;
         update|up)
             cmd_update
