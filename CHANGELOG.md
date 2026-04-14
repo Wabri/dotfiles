@@ -26,6 +26,16 @@
   - Shows commits behind remote (not yet pulled)
   - Displays file changes statistics
   - Automatically fetches latest remote state
+- 💾 **Commit command**: `dotfiles commit [message]`
+  - Stage all changes and commit in one command
+  - Prompts for commit message if not provided
+  - Shows what will be committed before committing
+  - Displays commit summary after success
+- 📤 **Push command**: `dotfiles push`
+  - Push local commits to remote repository
+  - Requires clean working tree (no uncommitted changes)
+  - Shows what will be pushed before pushing
+  - Confirms successful push with commit count
 - 🚀 **Unified CLI tool**: `dotfiles` command
   - Single command for all operations
   - Installed to PATH via `./install-cli.sh`
@@ -132,6 +142,49 @@ git log HEAD..@{upstream} --oneline    # Commits behind
 git diff @{upstream}..HEAD --stat      # File changes
 ```
 
+#### New feature: Commit command
+**Location**: `dotfiles:cmd_commit()`
+
+Simplified git workflow - stage all changes and commit in one command:
+
+```bash
+# Check for changes (both tracked and untracked)
+git diff-index --quiet HEAD -- && git ls-files --others --exclude-standard
+
+# Show changes to be committed
+git status --short
+
+# Stage all changes
+git add -A
+
+# Commit with message (from argument or prompt)
+git commit -m "$message"
+```
+
+Usage:
+- `dotfiles commit "message"` - Provide message as argument
+- `dotfiles commit` - Interactive prompt for message
+
+#### New feature: Push command
+**Location**: `dotfiles:cmd_push()`
+
+Push local commits to remote with safety checks:
+
+```bash
+# Require clean working tree
+git diff-index --quiet HEAD --
+
+# Fetch and check ahead count
+git fetch --quiet
+git rev-list --count @{upstream}..HEAD
+
+# Show what will be pushed
+git log @{upstream}..HEAD --oneline
+
+# Push to remote
+git push
+```
+
 ### Testing
 - ✅ Syntax validation passed for all scripts
 - ✅ Verified `install` directory no longer appears in stow package list
@@ -139,6 +192,10 @@ git diff @{upstream}..HEAD --stat      # File changes
 - ✅ Enhanced preview mode shows actual file content diffs
 - ✅ Preview mode handles conflicts gracefully
 - ✅ Repository diff command shows correct ahead/behind status
+- ✅ Commit command stages all changes and creates commit
+- ✅ Commit command prompts for message when not provided
+- ✅ Push command successfully pushes to remote
+- ✅ Push command requires clean working tree
 
 ---
 

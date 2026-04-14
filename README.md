@@ -30,9 +30,11 @@ dotfiles help                    # Show all commands
 dotfiles stow nvim zsh           # Stow specific configs
 dotfiles preview sway            # Preview changes before applying (shows file diffs)
 dotfiles packages nvim zsh       # Install packages for specific tools
-dotfiles diff                    # Show differences between local and remote
-dotfiles update                  # Pull latest changes and restow
 dotfiles status                  # Check repository status
+dotfiles diff                    # Show differences between local and remote
+dotfiles commit "message"        # Stage all changes and commit
+dotfiles push                    # Push local commits to remote
+dotfiles update                  # Pull latest changes and restow
 ```
 
 ## Documentation
