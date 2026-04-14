@@ -141,14 +141,17 @@ install_fonts() {
 }
 
 setup_asdf() {
+    # Update this version periodically - check https://github.com/asdf-vm/asdf/releases
+    local ASDF_VERSION="v0.18.1"
+
     if [[ ! -d "$HOME/.asdf" ]]; then
         log_info "ASDF version manager not found. Install it? [y/N]"
         read -p "" -n 1 -r
         echo ""
 
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            log_info "Installing ASDF..."
-            git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.14.1
+            log_info "Installing ASDF $ASDF_VERSION..."
+            git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch "$ASDF_VERSION"
             log_success "ASDF installed. Restart your shell to use it"
         fi
     else

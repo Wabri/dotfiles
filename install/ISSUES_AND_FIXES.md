@@ -1,129 +1,17 @@
 # Installation Scripts - Issues & Fixes
 
 **Date**: 2026-04-14  
-**Status**: Issues identified, fixes proposed
+**Status**: Active issues requiring fixes
+
+> **Note**: Fixed issues are documented in CHANGELOG.md
 
 ---
 
-## Critical Issues
+## Issues To Fix
 
-### 1. ❌ `stow.sh` - Incorrectly includes `install` directory
 
-**Severity**: High  
-**File**: `install/stow.sh:46`
 
-**Issue**:
-The `get_stow_packages()` function excludes the `scripts` directory but **not** the `install` directory. This causes the install scripts themselves to be stowed to the home directory, which is incorrect.
-
-**Current Code** (line 44-48):
-```bash
-# Get all directories that contain dotfiles (exclude hidden dirs and scripts)
-for dir in "$DOTFILES_DIR"/*; do
-    if [[ -d "$dir" ]] && [[ ! "$(basename "$dir")" =~ ^\. ]] && [[ "$(basename "$dir")" != "scripts" ]]; then
-        packages+=("$(basename "$dir")")
-    fi
-done
-```
-
-**Problem**:
-- ✅ Excludes: hidden directories (`.git`, `.config`)
-- ✅ Excludes: `scripts` directory
-- ❌ Does NOT exclude: `install` directory
-
-**Fix**:
-```bash
-# Get all directories that contain dotfiles (exclude hidden dirs, scripts, and install)
-for dir in "$DOTFILES_DIR"/*; do
-    local dirname="$(basename "$dir")"
-    if [[ -d "$dir" ]] && [[ ! "$dirname" =~ ^\. ]] && [[ "$dirname" != "scripts" ]] && [[ "$dirname" != "install" ]]; then
-        packages+=("$dirname")
-    fi
-done
-```
-
-**Impact**:
-- Without fix: `~/install/` directory created with script symlinks
-- With fix: Only actual dotfile packages are stowed
-
----
-
-### 2. ⚠️ `packages.sh` - Missing dependency check for `column` command
-
-**Severity**: Medium  
-**File**: `install/packages.sh:130`
-
-**Issue**:
-The script uses `column` command to format package listing but doesn't check if it's installed.
-
-**Current Code** (line 130):
-```bash
-printf '%s\n' "${packages[@]}" | column
-```
-
-**Problem**:
-- If `column` is not installed, the command fails silently or shows raw output
-- Not all minimal Linux installations include `column` (part of `util-linux`)
-
-**Fix Option 1** - Graceful fallback:
-```bash
-if command -v column &> /dev/null; then
-    printf '%s\n' "${packages[@]}" | column
-else
-    printf '  - %s\n' "${packages[@]}"
-fi
-```
-
-**Fix Option 2** - Check at start:
-```bash
-check_dependencies() {
-    if ! command -v column &> /dev/null; then
-        log_warning "column command not found (install util-linux for better formatting)"
-    fi
-}
-```
-
-**Impact**:
-- Minor: Only affects visual formatting of package list
-- Workaround: User can still see packages, just not in columns
-
----
-
-## Minor Issues
-
-### 3. ℹ️ `post-install.sh` - Hardcoded ASDF version
-
-**Severity**: Low  
-**File**: `install/post-install.sh:151`
-
-**Issue**:
-ASDF version is hardcoded to `v0.14.1`, which may become outdated.
-
-**Current Code** (line 151):
-```bash
-git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.14.1
-```
-
-**Recommendation**:
-```bash
-# Option 1: Use latest stable release
-local ASDF_VERSION="v0.15.0"  # Update periodically
-
-# Option 2: Use latest tag dynamically
-local ASDF_VERSION=$(git ls-remote --tags https://github.com/asdf-vm/asdf.git | 
-                     grep -o 'v[0-9]*\.[0-9]*\.[0-9]*$' | 
-                     sort -V | 
-                     tail -n1)
-
-git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch "$ASDF_VERSION"
-```
-
-**Impact**:
-- Users might install an older version of asdf
-- asdf itself can be updated later with `asdf update`
-
----
-
-### 4. ℹ️ No validation for `packages.txt` format
+### 1. ℹ️ No validation for `packages.txt` format
 
 **Severity**: Low  
 **File**: `install/packages.sh`
@@ -175,7 +63,7 @@ validate_packages() {
 
 ---
 
-### 5. ℹ️ Missing `install.sh` in `.gitignore` or documentation
+### 2. ℹ️ Missing `install.sh` in `.gitignore` or documentation
 
 **Severity**: Very Low  
 **File**: N/A
@@ -200,7 +88,7 @@ Quick start:
 
 ## Documentation Issues
 
-### 6. ℹ️ No main repository README documentation for install system
+### 3. ℹ️ No main repository README documentation for install system
 
 **Severity**: Low  
 **File**: `README.md` (root)
@@ -214,7 +102,7 @@ Main README doesn't document the installation system. Users might not know about
 
 ## Feature Gaps (Enhancement Ideas)
 
-### 7. 💡 No rollback mechanism
+### 4. 💡 No rollback mechanism
 
 **Enhancement**: Add ability to rollback to backup
 
@@ -249,7 +137,7 @@ rollback() {
 
 ---
 
-### 8. 💡 No diff/preview mode
+### 5. 💡 No diff/preview mode
 
 **Enhancement**: Show what will change before applying
 
@@ -266,7 +154,7 @@ preview_stow() {
 
 ---
 
-### 9. 💡 No logging to file
+### 6. 💡 No logging to file
 
 **Enhancement**: Keep installation log for debugging
 
@@ -283,7 +171,7 @@ main() {
 
 ---
 
-### 10. 💡 No update mechanism
+### 7. 💡 No update mechanism
 
 **Enhancement**: Add `./install.sh --update` to pull changes and restow
 
@@ -310,28 +198,20 @@ update_dotfiles() {
 
 ## Summary
 
-### Must Fix (Before Production Use)
-- ✅ **Issue #1**: Exclude `install` directory from stow (CRITICAL)
+### Fixed ✅
+- ~~Exclude `install` directory from stow~~ - FIXED
+- ~~Add `column` fallback~~ - FIXED  
+- ~~Update ASDF version~~ - FIXED
 
-### Should Fix (Nice to Have)
-- ⚠️ **Issue #2**: Add `column` fallback or check
-- ℹ️ **Issue #3**: Update ASDF version periodically
+See CHANGELOG.md for details.
 
-### Optional Enhancements
-- Issues #7-10: Rollback, preview, logging, update mechanisms
+### Remaining Issues
 
----
+#### Should Fix (Nice to Have)
+- **Issue #2-3**: Add installation docs to main README
 
-## Priority Fix Script
-
-Here's a quick patch for the critical issue:
-
-```bash
-# Fix issue #1
-sed -i 's/!= "scripts"/!= "scripts" ]] \&\& [[ "$dirname" != "install"/' install/stow.sh
-```
-
-**Or manual fix**: Edit `install/stow.sh` line 46 as shown in Issue #1.
+#### Optional Enhancements
+- **Issues #4-7**: Rollback, preview, logging, update mechanisms
 
 ---
 

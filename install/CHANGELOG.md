@@ -7,6 +7,12 @@
 - 📋 Issue tracker and fixes documentation in `install/ISSUES_AND_FIXES.md`
 - 📝 This changelog
 
+### Changed
+- 🔄 **post-install.sh**: Updated ASDF version from v0.14.1 to v0.18.1
+  - Made version configurable via variable
+  - Added comment with update instructions
+  - Version now displayed during installation
+
 ### Fixed
 - 🐛 **CRITICAL**: `stow.sh` now correctly excludes `install` directory from stowable packages
   - **Issue**: The `install` directory was being symlinked to `~/install/` 
