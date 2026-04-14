@@ -6,7 +6,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
-PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
+CORE_PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
 
 # Colors for output
 RED='\033[0;31m'
@@ -82,12 +82,12 @@ install_packages() {
     esac
 }
 
-read_packages() {
+read_packages_from_file() {
+    local file="$1"
     local packages=()
 
-    if [[ ! -f "$PACKAGES_FILE" ]]; then
-        log_error "Packages file not found: $PACKAGES_FILE"
-        return 1
+    if [[ ! -f "$file" ]]; then
+        return
     fi
 
     while IFS= read -r line; do
@@ -96,13 +96,83 @@ read_packages() {
         [[ -z "$line" ]] && continue
 
         packages+=("$line")
-    done < "$PACKAGES_FILE"
+    done < "$file"
 
     echo "${packages[@]}"
 }
 
+get_all_config_dirs() {
+    local dirs=()
+
+    for dir in "$DOTFILES_DIR"/*; do
+        if [[ -d "$dir" ]] && [[ -f "$dir/packages.txt" ]]; then
+            local dirname="$(basename "$dir")"
+            # Exclude special directories
+            if [[ "$dirname" != "install" ]] && [[ "$dirname" != "scripts" ]] && [[ ! "$dirname" =~ ^\. ]]; then
+                dirs+=("$dirname")
+            fi
+        fi
+    done
+
+    echo "${packages[@]}"
+}
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [OPTIONS] [DIRECTORIES...]
+
+Install packages from packages.txt files.
+
+OPTIONS:
+    -h, --help      Show this help message
+    -a, --all       Install core packages + all directory-specific packages
+    -c, --core-only Install only core packages (default if no directories specified)
+
+EXAMPLES:
+    $(basename "$0")              # Install only core packages
+    $(basename "$0") nvim zsh     # Install core + nvim + zsh packages
+    $(basename "$0") --all        # Install core + all directory packages
+
+PACKAGE FILES:
+    Core packages:  packages.txt (always installed)
+    Per-directory:  <dir>/packages.txt (optional, install with directory name)
+
+EOF
+}
+
 main() {
     check_root
+
+    local install_all=false
+    local selected_dirs=()
+    local all_packages=()
+
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            -a|--all)
+                install_all=true
+                shift
+                ;;
+            -c|--core-only)
+                # Just core packages (default behavior)
+                shift
+                ;;
+            -*)
+                log_error "Unknown option: $1"
+                show_help
+                exit 1
+                ;;
+            *)
+                selected_dirs+=("$1")
+                shift
+                ;;
+        esac
+    done
 
     log_info "Detecting package manager..."
     local pkg_manager=$(detect_package_manager)
@@ -114,23 +184,82 @@ main() {
 
     log_success "Detected package manager: $pkg_manager"
 
-    log_info "Reading packages from $PACKAGES_FILE..."
-    local packages=($(read_packages))
+    # Read core packages
+    log_info "Reading core packages from $CORE_PACKAGES_FILE..."
+    local core_packages=($(read_packages_from_file "$CORE_PACKAGES_FILE"))
 
-    if [[ ${#packages[@]} -eq 0 ]]; then
+    if [[ ${#core_packages[@]} -eq 0 ]]; then
+        log_warning "No core packages found in $CORE_PACKAGES_FILE"
+    else
+        log_info "Found ${#core_packages[@]} core packages"
+        all_packages+=("${core_packages[@]}")
+    fi
+
+    # Read directory-specific packages
+    if [[ "$install_all" == true ]]; then
+        log_info "Reading packages from all directories..."
+        for dir in "$DOTFILES_DIR"/*; do
+            if [[ -d "$dir" ]] && [[ -f "$dir/packages.txt" ]]; then
+                local dirname="$(basename "$dir")"
+                # Exclude special directories
+                if [[ "$dirname" != "install" ]] && [[ "$dirname" != "scripts" ]] && [[ ! "$dirname" =~ ^\. ]]; then
+                    local dir_packages=($(read_packages_from_file "$dir/packages.txt"))
+                    if [[ ${#dir_packages[@]} -gt 0 ]]; then
+                        log_info "  → $dirname: ${#dir_packages[@]} packages"
+                        all_packages+=("${dir_packages[@]}")
+                    fi
+                fi
+            fi
+        done
+    elif [[ ${#selected_dirs[@]} -gt 0 ]]; then
+        log_info "Reading packages from selected directories..."
+        for dirname in "${selected_dirs[@]}"; do
+            local dir="$DOTFILES_DIR/$dirname"
+            if [[ ! -d "$dir" ]]; then
+                log_error "Directory not found: $dirname"
+                exit 1
+            fi
+
+            if [[ -f "$dir/packages.txt" ]]; then
+                local dir_packages=($(read_packages_from_file "$dir/packages.txt"))
+                if [[ ${#dir_packages[@]} -gt 0 ]]; then
+                    log_info "  → $dirname: ${#dir_packages[@]} packages"
+                    all_packages+=("${dir_packages[@]}")
+                else
+                    log_warning "  → $dirname: no packages found"
+                fi
+            else
+                log_warning "  → $dirname: no packages.txt file"
+            fi
+        done
+    fi
+
+    # Deduplicate packages (preserving order)
+    local unique_packages=()
+    local seen_packages=()
+
+    for pkg in "${all_packages[@]}"; do
+        if [[ ! " ${seen_packages[@]} " =~ " ${pkg} " ]]; then
+            unique_packages+=("$pkg")
+            seen_packages+=("$pkg")
+        fi
+    done
+
+    if [[ ${#unique_packages[@]} -eq 0 ]]; then
         log_warning "No packages to install"
         exit 0
     fi
 
-    log_info "Found ${#packages[@]} packages to install"
+    echo ""
+    log_info "Total: ${#unique_packages[@]} unique packages to install"
+    echo ""
 
     # Ask for confirmation
-    echo ""
     log_warning "The following packages will be installed:"
     if command -v column &> /dev/null; then
-        printf '%s\n' "${packages[@]}" | column
+        printf '%s\n' "${unique_packages[@]}" | column
     else
-        printf '  - %s\n' "${packages[@]}"
+        printf '  - %s\n' "${unique_packages[@]}"
     fi
     echo ""
 
@@ -143,7 +272,7 @@ main() {
     fi
 
     # Install packages
-    if install_packages "$pkg_manager" "${packages[@]}"; then
+    if install_packages "$pkg_manager" "${unique_packages[@]}"; then
         log_success "All packages installed successfully"
     else
         log_error "Some packages failed to install"

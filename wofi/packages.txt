@@ -1,0 +1,2 @@
+# Wofi launcher (Wayland)
+wofi

@@ -1,0 +1,8 @@
+# Niri window manager and dependencies
+niri
+wl-clipboard
+wlr-randr
+xdg-desktop-portal-wlr
+grim
+wev
+wf-recorder

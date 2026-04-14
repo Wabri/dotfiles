@@ -1,0 +1,2 @@
+# i3 window manager (X11)
+i3wm

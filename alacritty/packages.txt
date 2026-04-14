@@ -1,0 +1,4 @@
+# Alacritty terminal emulator
+alacritty
+alacritty-bash-completion
+alacritty-zsh-completion

@@ -177,18 +177,38 @@ install.sh              # Main orchestrator - manages installation flow
 
 ### 3. `install/packages.sh` - Package Installation
 
-**Purpose**: Cross-distribution package installation from `packages.txt`.
+**Purpose**: Cross-distribution package installation with per-directory package management.
 
 **Features**:
 - Auto-detects package manager
-- Reads package list from `../packages.txt`
-- Skips comments and empty lines
+- Modular package structure (core + per-directory)
+- Selective installation support
+- Automatic deduplication
 - Shows preview before installation
 - Requires user confirmation
 
+**Package Structure**:
+```
+packages.txt               # Core system packages (always installed)
+niri/packages.txt          # Niri-specific packages
+nvim/packages.txt          # Neovim-specific packages
+zsh/packages.txt           # Zsh-specific packages
+packages.flatpak.txt       # Flatpak applications (manual install)
+```
+
 **Manual Usage**:
 ```bash
+# Install only core packages
 ./install/packages.sh
+
+# Install core + specific directories
+./install/packages.sh nvim zsh tmux
+
+# Install core + all directory packages
+./install/packages.sh --all
+
+# Show help
+./install/packages.sh --help
 ```
 
 **Package Manager Detection**:
@@ -215,6 +235,7 @@ zsh
 - Prevents running as root (requires sudo for actual installation)
 - Shows all packages before installation
 - Requires explicit confirmation
+- Deduplicates packages to avoid conflicts
 
 ---
 
@@ -365,8 +386,16 @@ git pull
 ```bash
 cd ~/dotfiles
 
-# Install packages from packages.txt
+# Install all packages (core + all directories)
 ./install.sh --packages-only
+# or
+./install/packages.sh --all
+
+# Install only core packages
+./install/packages.sh
+
+# Install core + specific tools
+./install/packages.sh nvim zsh tmux niri waybar
 ```
 
 ### Add/Remove Specific Configurations

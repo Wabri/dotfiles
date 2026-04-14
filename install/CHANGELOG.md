@@ -16,6 +16,13 @@
   - Quick start instructions
   - Link to detailed documentation
   - Requirements and features overview
+- 🎯 **Package management restructure**: Moved from single packages.txt to per-directory structure
+  - **packages.txt** (root): Core system packages (80+ packages)
+  - **<dir>/packages.txt**: Directory-specific packages (e.g., nvim/packages.txt, sway/packages.txt)
+  - **packages.flatpak.txt**: Flatpak applications (separate from system packages)
+  - **packages.sh**: Now supports selective installation (`./install/packages.sh nvim zsh`)
+  - Install all with `--all`, core-only by default, or specify directories
+  - Automatic deduplication of packages
 
 ### Fixed
 - 🐛 **CRITICAL**: `stow.sh` now correctly excludes `install` directory from stowable packages

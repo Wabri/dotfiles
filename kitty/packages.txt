@@ -1,0 +1,2 @@
+# Kitty terminal emulator
+kitty

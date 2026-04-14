@@ -1,0 +1,12 @@
+# Zsh shell and tools
+zsh
+bash-completion
+zsh-completion
+fzf
+fzf-tmux
+eza
+bat
+lazygit
+yazi
+jq
+yq
