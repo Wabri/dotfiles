@@ -191,23 +191,46 @@ Stow dotfiles to home directory using GNU Stow.
 OPTIONS:
     -h, --help      Show this help message
     -u, --unstow    Unstow (remove symlinks) instead of stow
-    -l, --list      List available packages
+    -l, --list      List packages (✓ = stowed, ○ = available)
     -n, --preview   Preview changes without applying (dry run)
 
 EXAMPLES:
     $(basename "$0")              # Stow all packages
     $(basename "$0") nvim zsh     # Stow only nvim and zsh
     $(basename "$0") -u sway      # Unstow sway
+    $(basename "$0") -l           # List all packages with status
     $(basename "$0") -n nvim      # Preview nvim changes (dry run)
 
 EOF
 }
 
+is_package_stowed() {
+    local package="$1"
+
+    # Use stow's dry-run to check if package is already stowed
+    # If stow output is empty or says no changes, it's already stowed
+    local stow_output=$(stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -n -v "$package" 2>&1)
+
+    # If output contains "LINK:" it means stow wants to create links (not stowed)
+    # If output is empty or only warnings, it's already stowed
+    if echo "$stow_output" | grep -q "LINK:"; then
+        return 1  # Not stowed
+    else
+        return 0  # Stowed (or empty package)
+    fi
+}
+
 list_packages() {
     local packages=($(get_stow_packages))
 
-    echo "Available packages:"
-    printf '  - %s\n' "${packages[@]}"
+    echo "Dotfile packages:"
+    for package in "${packages[@]}"; do
+        if is_package_stowed "$package"; then
+            echo -e "  ${GREEN}✓${NC} $package"
+        else
+            echo -e "  ${YELLOW}○${NC} $package"
+        fi
+    done
 }
 
 main() {

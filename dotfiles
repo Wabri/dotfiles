@@ -60,7 +60,7 @@ COMMANDS:
     stow <packages...>          Stow (symlink) dotfile packages
     unstow <packages...>        Unstow (remove symlinks) packages
     preview <packages...>       Preview what would be stowed (dry run)
-    list                        List available dotfile packages
+    list                        List packages (✓ = stowed, ○ = available)
 
     packages <packages...>      Install system packages for specific tools
     setup                       Run setup tasks (zsh, nvim, tmux, asdf)
@@ -75,6 +75,7 @@ COMMANDS:
     version                     Show version information
 
 EXAMPLES:
+    dotfiles list                       # List all packages with status
     dotfiles stow nvim zsh              # Stow nvim and zsh configs
     dotfiles preview sway               # Preview sway changes
     dotfiles packages nvim zsh          # Install packages for nvim and zsh
