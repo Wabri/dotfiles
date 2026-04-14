@@ -1,0 +1,8 @@
+# Flatpak applications
+# Install manually with: flatpak install flathub <app-id>
+
+com.blitzfc.qbz
+com.logseq.Logseq
+com.slack.Slack
+com.spotify.Client
+org.nickvision.money

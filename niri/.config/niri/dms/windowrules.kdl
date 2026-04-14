@@ -1,0 +1,114 @@
+// DMS Window Rules - Managed by DankMaterialShell
+// Do not edit manually - changes may be overwritten
+
+// @id=dms_rule_0 @name=
+window-rule {
+    open-focused false
+    default-column-width { proportion 0.75; }
+}
+
+// @id=dms_rule_1 @name=
+window-rule {
+    match app-id="^org\\.wezfurlong\\.wezterm$"
+}
+
+// @id=dms_rule_2 @name=
+window-rule {
+    match app-id="^org\\.gnome\\."
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+// @id=dms_rule_3 @name=
+window-rule {
+    match app-id="^nm-connection-editor$"
+    default-column-width { proportion 0.5; }
+}
+
+// @id=dms_rule_4 @name=
+window-rule {
+    match app-id="^xdg-desktop-portal$"
+    open-floating true
+}
+
+// @id=dms_rule_5 @name=
+window-rule {
+    match app-id="^steam$" title="^notificationtoasts_\\d+_desktop$"
+    open-focused false
+}
+
+// @id=dms_rule_6 @name=
+window-rule {
+    match app-id="kitty"
+    open-focused true
+    default-column-width { proportion 0.33; }
+    draw-border-with-background false
+}
+
+// @id=dms_rule_7 @name=
+window-rule {
+    match app-id="zoom" title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// @id=dms_rule_8 @name=
+window-rule {
+    match app-id="firefox$"
+    open-on-workspace "Browsers"
+}
+
+// @id=dms_rule_9 @name=
+window-rule {
+    match app-id="Logseq$"
+    open-on-workspace "Notes"
+}
+
+// @id=dms_rule_10 @name=
+window-rule {
+    match app-id="^com.mitchellh.ghostty$" title="^tmux-ide$$"
+    open-on-workspace "Tmux Ide"
+}
+
+// @id=dms_rule_11 @name=
+window-rule {
+    match app-id="Slack$"
+    open-on-workspace "Chats"
+}
+
+// @id=dms_rule_12 @name=
+window-rule {
+    match app-id="telegram.desktop$" title="^Media viewer$"
+    open-floating true
+    open-focused true
+}
+
+// @id=dms_rule_13 @name=
+window-rule {
+    match app-id="spotify"
+    open-on-workspace "Music"
+}
+
+// @id=dms_rule_14 @name=
+window-rule {
+    match app-id="Bitwarden$"
+    open-maximized true
+    open-on-workspace "Security"
+    block-out-from "screencast"
+}
+
+// @id=dms_rule_15 @name=
+window-rule {
+    match app-id="com.danklinux.dms$"
+    match app-id="org.quickshell"
+    match app-id="^org.gnome.Calculator$"
+    open-floating true
+    open-focused true
+}
+
+// @id=wr_1775049119173164019 @name=brave-nngceckbapebfimnlniiiahkandclblb-Personal
+window-rule {
+    match title="nngceckbapebfimnlniiiahkandclblb$"
+    open-floating true
+    open-focused true
+}

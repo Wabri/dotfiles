@@ -1,0 +1,6 @@
+# Hyprland compositor and dependencies
+hyprland
+wl-clipboard
+grim
+wev
+wf-recorder

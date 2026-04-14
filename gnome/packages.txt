@@ -1,0 +1,3 @@
+# GNOME desktop environment
+gnome
+gnome-extensions

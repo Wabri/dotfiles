@@ -1,0 +1,19 @@
+{
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 {volume}%",
+
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"],
+      "headphone": "󰋋",
+      "headset": "󰋋"
+    },
+
+    "tooltip-format": "Device: {desc}",
+    "on-click": "$HOME/.config/sway/scripts/volume-control.sh -o m",
+    "on-scroll-up": "$HOME/.config/sway/scripts/volume-control.sh -o i",
+    "on-scroll-down": "$HOME/.config/sway/scripts/volume-control.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  }
+}

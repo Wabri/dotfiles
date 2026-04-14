@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Generic Git Auto-Sync Script with Config File Support
+# Usage: git-auto-sync [config-file]
+# Config file format (one repo per line):
+#   /path/to/repo [branch] [--noenv]
+
+# Log helper (goes to journald) - MUST BE FIRST
+log() { printf '[git-auto-sync] %s\n' "$*" >&2; }
+trap 'log "ERROR on line $LINENO"; exit 1' ERR
+
+# Default config file location
+CONFIG_FILE="${1:-$HOME/.config/git-auto-sync/repos.conf}"
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    log "Config file not found: $CONFIG_FILE"
+    log "Create it with format: /path/to/repo [branch] [--noenv]"
+    exit 1
+fi
+
+log "Using config file: $CONFIG_FILE"
+
+# Sync a single repository
+sync_repo() {
+    local REPO="$1"
+    local BRANCH="${2:-main}"
+    local NO_ENV=""
+    
+    # Parse optional flags
+    shift 2 || true
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --noenv) NO_ENV="true" ;;
+        esac
+        shift
+    done
+    
+    REPO=$(realpath "$REPO" 2>/dev/null || echo "$REPO")
+    
+    log "=================================================="
+    log "Syncing: $REPO (branch: $BRANCH)"
+    
+    # Load env from three levels up (unless --noenv)
+    if [[ -z "$NO_ENV" ]]; then
+        ENVRC="$(realpath -m "$REPO/../../../.envrc" 2>/dev/null || echo "")"
+        if [[ -f "$ENVRC" ]]; then
+            set -a
+            # shellcheck disable=SC1090
+            . "$ENVRC"
+            set +a
+            log "Loaded environment from $ENVRC"
+        fi
+    fi
+    
+    log "Using GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-<unset>}"
+    
+    # Sanity checks
+    if [[ ! -d "$REPO/.git" ]]; then
+        log "Not a git repo: $REPO (skipping)"
+        return 0
+    fi
+    
+    # Prevent overlapping runs
+    LOCKFILE="$REPO/.git/.git-auto-sync.lock"
+    exec 9>"$LOCKFILE"
+    if ! flock -n 9; then
+        log "Another sync is running for $REPO (skipping)"
+        return 0
+    fi
+    
+    # Skip if there is an unfinished merge/rebase
+    if ! git -C "$REPO" rev-parse --verify HEAD &>/dev/null; then
+        log "Repository HEAD is invalid (skipping)"
+        return 0
+    fi
+    
+    if [[ -f "$REPO/.git/MERGE_HEAD" ]] || [[ -d "$REPO/.git/rebase-merge" ]] || [[ -d "$REPO/.git/rebase-apply" ]]; then
+        log "Unfinished merge/rebase (skipping)"
+        return 0
+    fi
+    
+    # Fetch + rebase with autostash
+    log "Fetching from origin..."
+    if ! git -C "$REPO" fetch --prune 2>&1 | sed 's/^/  /'; then
+        log "Fetch failed; will retry next run"
+        return 0
+    fi
+    
+    log "Pulling --rebase --autostash on $BRANCH..."
+    if ! git -C "$REPO" pull --rebase --autostash origin "$BRANCH" 2>&1 | sed 's/^/  /'; then
+        log "Pull --rebase failed; will retry next run"
+        return 0
+    fi
+    
+    # Check for changes
+    UNSTAGED=$(git -C "$REPO" diff --name-only)
+    STAGED=$(git -C "$REPO" diff --cached --name-only)
+    UNTRACKED=$(git -C "$REPO" ls-files --others --exclude-standard)
+    
+    # Add/commit if there are changes
+    if ! git -C "$REPO" diff --quiet || ! git -C "$REPO" diff --cached --quiet || [[ -n "$UNTRACKED" ]]; then
+        log "Staging all changes..."
+        git -C "$REPO" add --all
+        
+        if ! git -C "$REPO" diff --cached --quiet; then
+            # Simple commit message with timestamp
+            TIMESTAMP=$(date -Iseconds)
+            COMMIT_MSG="Auto-sync on $TIMESTAMP"
+            
+            log "Committing changes..."
+            if git -C "$REPO" commit -m "$COMMIT_MSG" 2>&1 | sed 's/^/  /'; then
+                log "Commit successful"
+            else
+                log "Commit failed!"
+                return 0
+            fi
+        else
+            log "No changes to commit after staging"
+        fi
+    else
+        log "No changes detected in repository"
+    fi
+    
+    # Push (idempotent if nothing to push)
+    log "Pushing to origin/$BRANCH..."
+    if git -C "$REPO" push origin "HEAD:$BRANCH" 2>&1 | sed 's/^/  /'; then
+        log "Push successful"
+    else
+        log "Push failed; will retry next run"
+        return 0
+    fi
+    
+    log "Sync completed successfully for $REPO"
+}
+
+# Read config file and sync each repo
+while IFS= read -r line || [[ -n "$line" ]]; do
+    # Skip empty lines and comments
+    [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+    
+    # Parse line into arguments
+    read -ra ARGS <<< "$line"
+    
+    # Sync the repo (with error handling so one failure doesn't stop others)
+    if ! sync_repo "${ARGS[@]}"; then
+        log "Failed to sync ${ARGS[0]}, continuing with next repo..."
+    fi
+    
+done < "$CONFIG_FILE"
+
+log "=================================================="
+log "All repositories processed"

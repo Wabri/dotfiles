@@ -1,0 +1,96 @@
+app_name: browsir
+browser_name: brave
+profiles:
+  - name: personal
+    profile_dir: Personal
+    description: Personal browsing
+  - name: work
+    profile_dir: Work
+    description: Work profile
+  - name: sh
+    profile_dir: SchroedingerHat
+    description: SH profile
+shortcuts:
+  # General
+  search: https://search.brave.com
+  translate: https://deepl.com
+  pmail: https://mail.proton.me
+  pcal: https://calendar.proton.me
+  gmail: https://gmail.com
+  gcal: https://calendar.google.com
+  gdrive: https://drive.google.com
+  gmeet: https://meet.google.com
+  github: https://github.com
+  youtube: https://youtube.com
+  chatgpt: https://chatgpt.com
+  perplexity: https://www.perplexity.ai
+  claude: https://claude.ai
+  linkedin: https://linkedin.com
+  reddit: https://reddit.com
+  bitwarden: https://vault.bitwarden.eu
+  coursera: https://www.coursera.org/
+  github-copilot: https://github.com/copilot
+  discord: https://discord.com/app
+  whatsapp: https://web.whatsapp.com/
+  etsy: https://www.etsy.com
+  vinted: https://vinted.it
+  wallapop: https://it.wallapop.com
+  subito: https://subito.it
+  # Personal
+  personal-monkeytype: https://monkeytype.com/
+  personal-traderepublic: https://app.traderepublic.com/portfolio/
+  personal-nextcloud: http://192.168.1.220/nextcloud
+  personal-babbel: https://my.babbel.com/dashboard
+  personal-aoe-insigth: https://www.aoe2insights.com/user/11781105/
+  personal-aoe-tech: https://aoe2techtree.net
+  personal-aoe-tournaments: https://aoe2tournaments.com/
+  personal-aoe-analysis: https://aoe.to/gg2g
+  personal-homer: http://192.168.1.205/homer/
+  personal-syncthing: http://127.0.0.1:8384/
+  personal-qobuz: https://play.qobuz.com/
+  personal-boardgamegeek: https://boardgamegeek.com
+  personal-postepec: https://postel.poste.it/postecertifica/webmail/
+  # SH - Schroedinger Hat
+  sh-site: https://schroedinger-hat.org
+  sh-libro-soci: https://docs.google.com/spreadsheets/d/1DHzulqzdexjAid6Ol8SxINlQhCWBfyaHfPmf4vC6xSA/edit?usp=sharing
+  sh-trello: https://trello.com/w/schroedingerhataps
+  sh-gh-notification: https://github.com/notifications?query=org%3ASchroedinger-Hat
+  # Suse
+  suse-verse: https://sites.google.com/suse.com/suseverse
+  suse-benefits: https://sites.google.com/suse.com/rewards/benefits/emea/italy
+  suse-okta: https://suse.okta.com/
+  suse-id: https://id.suse.com/if/user/#
+  suse-confluence: https://confluence.suse.com/
+  suse-intranet: https://sites.google.com/suse.com/suseverse/home
+  suse-tools-squads: https://confluence.suse.com/spaces/qasle/pages/1080262927/Squads
+  suse-tools-assigned: https://progress.opensuse.org/issues?assigned_to_id=47527&set_filter=1&sort=priority%3Adesc%2Cupdated_on%3Adesc
+  suse-tools-task: https://progress.opensuse.org/my/page
+  suse-tools-wiki: https://progress.opensuse.org/projects/qa/wiki/Tools
+  suse-tools-office: https://play.workadventu.re/@/suse/suse-office/space-station-office
+  suse-tools-meet: https://meet.opensuse.org/6blugd-meetopensuseorg
+  suse-tools-meet-infra: https://meet.opensuse.org/suse_qe_infra
+  suse-tools-meet-dev: https://meet.opensuse.org/suse_qe_dev
+  suse-tools-grafana: https://stats.openqa-monitor.qa.suse.de/
+  suse-tools-o3: https://openqa.opensuse.org/
+  suse-tools-osd: https://openqa.suse.de/
+  suse-tools-gh-notification: https://github.com/notifications?query=org%3AopenSUSE+org%3Aos-autoinst
+  suse-tools-gl-issues: https://gitlab.suse.de/dashboard/issues?sort=created_date&state=opened&assignee_username[]=gpuliti
+  suse-tools-gl-mr: https://gitlab.suse.de/dashboard/merge_requests?assignee_username=gpuliti
+  suse-tools-backlog-status: https://os-autoinst.github.io/qa-tools-backlog-assistant/
+  suse-tools-daily-infra: https://progress.opensuse.org/issues?query_id=757
+  suse-tools-daily-dev: https://progress.opensuse.org/agile/board?query_id=1130
+  suse-tools-backlog-dev: https://progress.opensuse.org/issues?per_page=50&query_id=754
+  suse-tools-fortnightly-coordination: https://progress.opensuse.org/issues?query_id=572
+  suse-tools-infra-est: https://progress.opensuse.org/issues?query_id=1025
+  suse-tools-dev-estimations: https://progress.opensuse.org/issues?query_id=717
+  suse-tools-zabbix: https://zabbix.suse.de/
+  suse-tools-ticket-duedate: https://progress.opensuse.org/issues?query_id=651
+  suse-tools-password: https://gitlab.suse.de/openqa/password
+  suse-workday: https://wd3.myworkday.com/suse/
+  suse-liquidspace: https://liquidspace.com/suse/main
+  suse-convenzioniaziendali: https://suse.convenzioniaziendali.it
+  suse-gemini: https://gemini.google.com/app
+  # OpenSuse
+  opensuse-gh-openqa: https://github.com/os-autoinst/openQA
+  opensuse-gh-os-autoinst: https://github.com/os-autoinst/os-autoinst
+  opensuse-matrix: https://app.element.io/#/room/#openqa:opensuse.org

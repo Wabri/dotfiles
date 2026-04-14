@@ -1,0 +1,8 @@
+# Sway window manager and dependencies
+sway
+wl-clipboard
+wlr-randr
+xdg-desktop-portal-wlr
+grim
+wev
+wf-recorder

@@ -1,0 +1,250 @@
+binds {
+    // === System & Overview ===
+    Mod+O repeat=false { toggle-overview; }
+    Mod+Tab repeat=false { toggle-overview; }
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // === Application Launchers ===
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+    Mod+Shift+Return hotkey-overlay-title="Open Tmux ide" { 
+        spawn "sh" "-c" "ghostty --title=tmux-ide -e zsh -c 'tmux new -As local'"; 
+    }
+
+    Mod+Space hotkey-overlay-title="Application Launcher" {
+        spawn "dms" "ipc" "call" "spotlight" "toggle";
+    }
+
+    Mod+V hotkey-overlay-title="Clipboard Manager" {
+        spawn "dms" "ipc" "call" "clipboard" "toggle";
+    }
+
+    Mod+M hotkey-overlay-title="Task Manager" {
+        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+    }
+
+    Super+P hotkey-overlay-title="Power Menu: Toggle" {
+        spawn "dms" "ipc" "call" "powermenu" "toggle"; 
+    }
+
+    Mod+Comma hotkey-overlay-title="Settings" {
+        spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+    }
+
+    Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+        spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+    }
+
+    Mod+N hotkey-overlay-title="Notification Center" { 
+        spawn "dms" "ipc" "call" "notifications" "toggle"; 
+    }
+
+    Mod+Shift+N hotkey-overlay-title="Notepad" { 
+        spawn "dms" "ipc" "call" "notepad" "toggle"; 
+    }
+
+    Mod+E hotkey-overlay-title="File manager" {
+        spawn "nautilus";
+    }
+
+    // === Scripts Menu ===
+    Mod+B hotkey-overlay-title="Browsir Keyboard-Focused Menu" {
+        spawn "sh" "-c" "~/.config/niri/scripts/browsir-menu/browsir-menu.sh";
+    }
+
+    Mod+Shift+W hotkey-overlay-title="Wifi Keyboard-Focused Menu" {
+        spawn "sh" "-c" "~/.config/niri/scripts/wifi-menu/wifi-menu.sh";
+    }
+
+    Mod+Shift+V hotkey-overlay-title="VPN Keyboard-Focused Menu" {
+        spawn "sh" "-c" "~/.config/niri/scripts/vpn-menu/vpn-menu.sh";
+    }
+
+    Mod+Shift+B hotkey-overlay-title="Bluethoot Keyboard-Focused Menu" {
+        spawn "sh" "-c" "~/.config/niri/scripts/bluethoot-menu/bluethoot-menu.sh";
+    }
+
+    // === Security ===
+    Mod+Shift+X hotkey-overlay-title="Lock Screen" {
+        spawn "dms" "ipc" "call" "lock" "lock";
+    }
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" {
+        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+    }
+
+    // === Audio Controls ===
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "increment" "3";
+    }
+    Mod+Shift+Period allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "increment" "3";
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "decrement" "3";
+    }
+    Mod+Shift+Comma allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "decrement" "3";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "mute";
+    }
+    Mod+Shift+M allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "mute";
+    }
+    XF86AudioMicMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "micmute";
+    }
+	XF86AudioPause allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "playPause";
+	}
+	XF86AudioPlay allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "playPause";
+	}
+	Mod+Shift+S allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "playPause";
+	}
+	XF86AudioPrev allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "previous";
+	}
+	Mod+Shift+A allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "previous";
+	}
+	XF86AudioNext allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "next";
+	}
+	Mod+Shift+D allow-when-locked=true {
+	    spawn "dms" "ipc" "call" "mpris" "next";
+	}
+    Ctrl+XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "mpris" "increment" "3";
+    }
+    Ctrl+XF86AudioLowerVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "mpris" "decrement" "3";
+    }
+
+    // === Brightness Controls ===
+    XF86MonBrightnessUp allow-when-locked=true {
+       spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+       spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+    }
+
+    // === Window Management ===
+    Mod+Shift+Q repeat=false { close-window; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+T { toggle-window-floating; }
+    Mod+Shift+T { switch-focus-between-floating-and-tiling; }
+    Mod+Ctrl+W hotkey-overlay-title="Create window rule" {
+        spawn "dms" "ipc" "call" "window-rules" "toggle";
+    }
+
+    // === Focus Navigation ===
+    Mod+H     { focus-column-left; }
+    Mod+L     { focus-column-right; }
+
+    // === Window Movement ===
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+L     { move-column-right; }
+
+    // === Column Navigation ===
+    Mod+BracketLeft { focus-column-first; }
+    Mod+BracketRight  { focus-column-last; }
+    Mod+Shift+BracketLeft { move-column-to-first; }
+    Mod+Shift+BracketRight  { move-column-to-last; }
+
+    // === Monitor Navigation ===
+    Mod+Ctrl+H     { focus-monitor-left; }
+    Mod+Ctrl+J     { focus-monitor-down; }
+    Mod+Ctrl+K     { focus-monitor-up; }
+    Mod+Ctrl+L     { focus-monitor-right; }
+
+    // === Move to Monitor ===
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+    // === Workspace Navigation ===
+    Mod+J      { focus-workspace-down; }
+    Mod+K        { focus-workspace-up; }
+    Mod+Shift+J         { move-column-to-workspace-down; }
+    Mod+Shift+K         { move-column-to-workspace-up; }
+
+    // === Workspace Management ===
+    Ctrl+Shift+R hotkey-overlay-title="Rename Workspace" {
+        spawn "dms" "ipc" "call" "workspace-rename" "open";
+    }
+
+    // === Move Workspaces ===
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
+
+    // === Mouse Wheel Navigation ===
+    Mod+WheelScrollDown      cooldown-ms=150 { toggle-overview; }
+    Mod+WheelScrollUp        cooldown-ms=150 { toggle-overview; }
+    Mod+Shift+WheelScrollDown      { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp        { focus-workspace-up; }
+    Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Shift+WheelScrollRight { move-column-right; }
+    Mod+Shift+WheelScrollLeft  { move-column-left; }
+    Mod+Ctrl+WheelScrollDown      { focus-column-right; }
+    Mod+Ctrl+WheelScrollUp        { focus-column-left; }
+
+    // === Numbered Workspaces ===
+    Mod+1 { focus-workspace "Browsers"; }
+    Mod+2 { focus-workspace "Notes"; }
+    Mod+3 { focus-workspace "Tmux Ide"; }
+    Mod+4 { focus-workspace "Security"; }
+    Mod+5 { focus-workspace "Chats"; }
+    Mod+6 { focus-workspace "Music"; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+
+    // === Move to Numbered Workspaces ===
+    Mod+Shift+1 { move-column-to-workspace "Browsers"; }
+    Mod+Shift+2 { move-column-to-workspace "Notes"; }
+    Mod+Shift+3 { move-column-to-workspace "Tmux Ide"; }
+    Mod+Shift+4 { move-column-to-workspace "Security"; }
+    Mod+Shift+5 { move-column-to-workspace "Chats"; }
+    Mod+Shift+6 { move-column-to-workspace "Music"; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
+
+    // === Column Management ===
+    // Mod+Shift+Period  { consume-window-into-column; }
+    // Mod+Period { expel-window-from-column; }
+
+    // === Sizing & Layout ===
+    Mod+R { switch-preset-column-width; }
+    Mod+C { center-column; }
+
+    // === Manual Sizing ===
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // === Screenshots ===
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // === System Controls ===
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+P { power-off-monitors; }
+}

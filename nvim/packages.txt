@@ -1,0 +1,6 @@
+# Neovim and related tools
+neovim
+tree-sitter
+ripgrep
+fd
+ctags

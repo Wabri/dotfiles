@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+IDFILE="/tmp/brightness_notify_id"
+PREVFILE="/tmp/brightness_prev_value"
+
+# Print error message for invalid arguments
+print_error() {
+  cat <<"EOF"
+Usage: ./brightnesscontrol.sh -o <action>
+Valid actions are:
+    i -- <i>ncrease brightness [+2%]
+    d -- <d>ecrease brightness [-2%]
+EOF
+}
+
+# Get the current brightness percentage
+get_brightness() {
+  # Use parameter expansion instead of grep + head
+  local raw=$(brightnessctl -m)
+  brightness=${raw#*,}
+  brightness=${brightness%%\%*}
+}
+
+# Determine icon based on brightness level
+get_icon() {
+  if ((brightness <= 5)); then
+    ICON=""
+  elif ((brightness <= 15)); then
+    ICON=""
+  elif ((brightness <= 30)); then
+    ICON=""
+  elif ((brightness <= 45)); then
+    ICON=""
+  elif ((brightness <= 55)); then
+    ICON=""
+  elif ((brightness <= 65)); then
+    ICON=""
+  elif ((brightness <= 80)); then
+    ICON=""
+  elif ((brightness <= 95)); then
+    ICON=""
+  else
+    ICON=""
+  fi
+}
+
+# Send a notification with brightness info (backgrounded)
+send_notification() {
+  get_icon
+  # Load notification ID
+  ID=0
+  [[ -f "$IDFILE" ]] && ID=$(cat "$IDFILE")
+  [[ -z "$ID" ]] && ID=0
+
+  # Show notification in background and store new ID
+  (notify-send -a "state" "$ICON ${brightness}%" -h int:value:"$brightness" -u low --replace-id=$ID --print-id --app-name="Brightness" > "$IDFILE") &
+}
+
+# Save current brightness level
+save_prev_brightness() {
+  echo "$brightness" > "$PREVFILE"
+}
+
+get_brightness
+
+# Handle options
+while getopts o: opt; do
+  case "${opt}" in
+  o)
+    case $OPTARG in
+    i) # Increase brightness
+      if ((brightness < 10)); then
+        brightnessctl set +1%
+      else
+        brightnessctl set +2%
+      fi
+      get_brightness
+      send_notification
+      save_prev_brightness
+      ;;
+    d) # Decrease brightness
+      if ((brightness <= 1)); then
+        brightnessctl set 1%
+      elif ((brightness <= 10)); then
+        brightnessctl set 1%-
+      else
+        brightnessctl set 2%-
+      fi
+      get_brightness
+      send_notification
+      save_prev_brightness
+      ;;
+    *)
+      print_error
+      ;;
+    esac
+    ;;
+  *)
+    print_error
+    ;;
+  esac
+done

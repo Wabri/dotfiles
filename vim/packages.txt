@@ -1,0 +1,2 @@
+# Vim text editor (already in core packages.txt)
+# No additional packages needed

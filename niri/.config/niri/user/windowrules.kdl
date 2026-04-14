@@ -1,0 +1,79 @@
+window-rule {
+    match app-id="com.danklinux.dms$"
+    match app-id="org.quickshell"
+    open-floating true
+    open-focused true
+}
+
+window-rule {
+    match app-id="^org.gnome.Calculator$"
+    match app-id="org.pulseaudio.pavucontrol$"
+    open-floating true
+    open-focused true
+    default-floating-position x=0 y=0 relative-to="bottom"
+    default-column-width { proportion 0.33; }
+    default-window-height { fixed 500; }
+}
+
+window-rule {
+    match app-id="ghostty$"
+    open-focused true
+    default-column-width { proportion 0.33333; }
+}
+
+window-rule {
+    match app-id="brave-browser$"
+    match app-id="Firefox"
+    open-on-workspace "Browsers"
+}
+
+window-rule {
+    match app-id="firefox$"
+    open-on-workspace "Browsers"
+}
+
+window-rule {
+    match app-id="Logseq$"
+    open-on-workspace "Notes"
+}
+
+window-rule {
+    match app-id="^com.mitchellh.ghostty$" title="^tmux-ide$"
+    open-on-workspace "Tmux Ide"
+    default-column-width { proportion 0.66667; }
+    open-focused false
+}
+
+window-rule {
+    match app-id="Slack$"
+    match app-id="telegram.desktop$"
+    open-on-workspace "Chats"
+}
+
+window-rule {
+    match app-id="telegram.desktop$" title="^Media viewer$"
+    open-floating true
+    open-focused true
+}
+
+window-rule {
+    match app-id="spotify"
+    match app-id="qbz"
+    open-on-workspace "Music"
+}
+
+window-rule {
+    match app-id="Bitwarden$"
+    match app-id="obsproject.Studio"
+    open-maximized true
+    open-on-workspace "Security"
+    block-out-from "screencast"
+}
+
+// bitwarden extension for brave
+window-rule {
+    match title="nngceckbapebfimnlniiiahkandclblb$"
+    block-out-from "screencast"
+    open-floating true
+    open-focused true
+}

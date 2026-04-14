@@ -1,0 +1,118 @@
+# Core system packages (always installed)
+# For application-specific packages, see <directory>/packages.txt
+
+# === Version Control & Build Tools ===
+git
+stow
+gcc
+make
+cmake
+
+# === Version Managers ===
+asdf
+
+# === Text Editors ===
+vim
+
+# === System Utilities ===
+bash
+curl
+wget
+bc
+coreutils
+coreutils-doc
+coreutils-systemd
+gpart
+gzip
+tree
+unzip
+zip
+
+# === Certificates & Security ===
+ca-certificates
+ca-certificates-mozilla
+ca-certificates-suse
+openssh
+
+# === Hardware & Power Management ===
+alsa
+alsa-utils
+bluez
+bluez-auto-enable-devices
+bluez-cups
+bluez-obexd
+bluez-zsh-completion
+bolt
+brightnessctl
+hdparm
+polkit
+power-profiles-daemon
+sensors
+
+# === Base Fonts ===
+fontawesome-fonts
+fontawesome-fonts-web
+adobe-sourcecodepro-fonts
+adobe-sourcesans3-fonts
+adobe-sourcesanspro-fonts
+adwaita-fonts
+adwaita-icon-theme
+jetbrains-mono-fonts
+
+# === Containers & Virtualization ===
+containerd
+docker
+docker-compose
+podman
+distrobox
+virt-manager
+
+# === System Monitoring ===
+btop
+bashtop
+perf
+
+# === Package Management ===
+flatpak
+opi
+osc
+
+# === Networking ===
+openvpn
+
+# === Desktop Integration (XDG) ===
+xdg-desktop-portal
+xdg-menu
+xdg-user-dirs
+xdg-utils
+xdm
+xwayland
+
+# === Applications ===
+# (Apps without dedicated config directories in this repo)
+act
+baobab
+bitwarden
+blanket
+cmatrix
+dconf
+dms
+evince
+evince-plugin-pdfdocument
+fastfetch
+gamescope
+gimp
+helm
+kdeconnect-kde
+nextcloud-cli
+nextcloud-desktop
+sl
+syncthing
+telegram-desktop
+vlc
+zenity
+
+# === Office & Productivity ===
+collaboraoffice
+libreoffice
+# Note: logseq installed via flatpak (see packages.flatpak.txt)

@@ -1,0 +1,20 @@
+{
+  "theme": null,
+  "themes": {
+    "mode": "dark",
+    "light": null,
+    "dark": {
+      "name": "OddBox",
+      "url": "file:///home/wabri/.logseq/plugins/gruvbox-theme/gruvbox.css",
+      "description": "A theme based on the popular Gruvbox color palette.",
+      "mode": "dark",
+      "pid": "gruvbox-theme"
+    }
+  },
+  "externals": [],
+  "pinnedToolbarItems": [
+    "logseq-journals-calendar:goto-today",
+    "logseq-journals-calendar:open-calendar",
+    "logseq-agenda:Agenda3"
+  ]
+}
