@@ -34,7 +34,12 @@ dotfiles update                  # Pull latest changes and restow
 dotfiles status                  # Check repository status
 ```
 
-**For detailed documentation**, see [install/README.md](install/README.md)
+## Documentation
+
+- **[install/README.md](install/README.md)** - Detailed installation guide
+- **[CHANGELOG.md](CHANGELOG.md)** - Release history and changes
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
+- **[DEVELOPMENT.md](DEVELOPMENT.md)** - Development notes and ideas
 
 ### Requirements
 - `git` and `stow` (required)
