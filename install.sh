@@ -56,18 +56,20 @@ Usage: $(basename "$0") [OPTIONS]
 Automated dotfiles installation for openSUSE Tumbleweed and other distros.
 
 OPTIONS:
-    -h, --help          Show this help message
-    -f, --full          Full installation (packages + dotfiles + post-install)
-    -d, --dotfiles-only Install dotfiles only (skip packages and post-install)
-    -p, --packages-only Install packages only (skip dotfiles)
-    -s, --skip-backup   Skip backup of existing dotfiles
-    -y, --yes           Automatic yes to prompts
+    -h, --help             Show this help message
+    -f, --full             Full installation (packages + dotfiles + post-install)
+    -d, --dotfiles-only    Install dotfiles only (skip packages and post-install)
+    -p, --packages-only    Install packages only (skip dotfiles)
+    -s, --skip-backup      Skip backup of existing dotfiles
+    -y, --yes              Automatic yes to prompts
+    --rollback <dir>       Restore dotfiles from backup directory
 
 EXAMPLES:
-    $(basename "$0")                  # Interactive installation
-    $(basename "$0") --full           # Full automated installation
-    $(basename "$0") --dotfiles-only  # Only stow dotfiles
-    $(basename "$0") --packages-only  # Only install packages
+    $(basename "$0")                                    # Interactive installation
+    $(basename "$0") --full                             # Full automated installation
+    $(basename "$0") --dotfiles-only                    # Only stow dotfiles
+    $(basename "$0") --packages-only                    # Only install packages
+    $(basename "$0") --rollback ~/.dotfiles_backup_*    # Restore from backup
 
 EOF
 }
@@ -208,6 +210,97 @@ interactive_install() {
     fi
 }
 
+rollback_dotfiles() {
+    local backup_dir="$1"
+
+    log_header "Rolling back dotfiles"
+
+    # Validate backup directory
+    if [[ -z "$backup_dir" ]]; then
+        log_error "No backup directory specified"
+        log_info "Usage: $(basename "$0") --rollback <backup-directory>"
+        log_info "Available backups:"
+        ls -dt ~/.dotfiles_backup_* 2>/dev/null | head -5 || log_info "  No backups found"
+        exit 1
+    fi
+
+    if [[ ! -d "$backup_dir" ]]; then
+        log_error "Backup directory not found: $backup_dir"
+        log_info "Available backups:"
+        ls -dt ~/.dotfiles_backup_* 2>/dev/null | head -5 || log_info "  No backups found"
+        exit 1
+    fi
+
+    # Show backup info
+    log_info "Backup directory: $backup_dir"
+    log_info "Created: $(stat -c %y "$backup_dir" 2>/dev/null | cut -d. -f1 || date -r "$backup_dir" "+%Y-%m-%d %H:%M:%S" 2>/dev/null)"
+    echo ""
+    log_info "Files in backup:"
+    find "$backup_dir" -type f | sed "s|$backup_dir/|  |" | head -20
+    echo ""
+
+    # Confirm rollback
+    log_warning "This will:"
+    echo "  1. Unstow all current dotfiles"
+    echo "  2. Restore files from backup: $backup_dir"
+    echo "  3. This will overwrite current dotfiles!"
+    echo ""
+    read -p "Are you sure you want to rollback? [y/N] " -n 1 -r
+    echo ""
+
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Rollback cancelled"
+        exit 0
+    fi
+
+    # Unstow all packages
+    log_info "Unstowing all current dotfiles..."
+    if [[ -f "$SCRIPT_DIR/install/stow.sh" ]]; then
+        bash "$SCRIPT_DIR/install/stow.sh" --unstow 2>/dev/null || log_warning "Some packages were not stowed"
+        log_success "Unstowed current dotfiles"
+    else
+        log_warning "Stow script not found, skipping unstow"
+    fi
+
+    # Restore from backup
+    log_info "Restoring files from backup..."
+    local restored=0
+    local failed=0
+
+    while IFS= read -r -d '' file; do
+        local rel_path="${file#$backup_dir/}"
+        local target="$HOME/$rel_path"
+        local target_dir="$(dirname "$target")"
+
+        # Create directory if needed
+        if [[ ! -d "$target_dir" ]]; then
+            mkdir -p "$target_dir"
+        fi
+
+        # Copy file
+        if cp -p "$file" "$target"; then
+            ((restored++))
+        else
+            log_error "Failed to restore: $rel_path"
+            ((failed++))
+        fi
+    done < <(find "$backup_dir" -type f -print0)
+
+    echo ""
+    log_success "Restored $restored file(s)"
+    if [[ $failed -gt 0 ]]; then
+        log_warning "Failed to restore $failed file(s)"
+    fi
+
+    # Done
+    log_header "Rollback complete!"
+    log_success "Your dotfiles have been restored from backup"
+    echo ""
+    log_info "Backup kept at: $backup_dir"
+    log_warning "Remember to restart your shell/WM for changes to take effect"
+    echo ""
+}
+
 main() {
     # Default options
     INSTALL_PACKAGES=false
@@ -247,6 +340,14 @@ main() {
             -y|--yes)
                 AUTO_YES=true
                 shift
+                ;;
+            --rollback)
+                if [[ -z "$2" ]]; then
+                    log_error "--rollback requires a backup directory"
+                    exit 1
+                fi
+                rollback_dotfiles "$2"
+                exit 0
                 ;;
             *)
                 log_error "Unknown option: $1"

@@ -6,6 +6,11 @@
 - ✨ Comprehensive documentation in `install/README.md`
 - 📋 Issue tracker and fixes documentation in `install/ISSUES_AND_FIXES.md`
 - 📝 This changelog
+- 🔄 **Rollback mechanism**: `./install.sh --rollback <backup-dir>`
+  - Restore dotfiles from any backup directory
+  - Automatically unstows current dotfiles first
+  - Shows backup info and confirms before proceeding
+  - Lists available backups if none specified
 
 ### Changed
 - 🔄 **post-install.sh**: Updated ASDF version from v0.14.1 to v0.18.1

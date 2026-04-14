@@ -63,46 +63,9 @@ validate_packages() {
 
 ---
 
----
-
 ## Feature Gaps (Enhancement Ideas)
 
-### 2. 💡 No rollback mechanism
-
-**Enhancement**: Add ability to rollback to backup
-
-**Implementation**:
-```bash
-# Add to install.sh
-rollback() {
-    local backup_dir="$1"
-    
-    if [[ ! -d "$backup_dir" ]]; then
-        log_error "Backup directory not found: $backup_dir"
-        exit 1
-    fi
-    
-    log_warning "This will restore files from: $backup_dir"
-    read -p "Continue? [y/N] " -n 1 -r
-    echo ""
-    
-    [[ ! $REPLY =~ ^[Yy]$ ]] && exit 0
-    
-    # Unstow all packages
-    ./install/stow.sh --unstow
-    
-    # Restore backup
-    cp -r "$backup_dir"/* "$HOME/"
-    
-    log_success "Rollback complete"
-}
-
-# Usage: ./install.sh --rollback ~/.dotfiles_backup_20260414_143022
-```
-
----
-
-### 3. 💡 No diff/preview mode
+### 2. 💡 Preview/diff mode
 
 **Enhancement**: Show what will change before applying
 
@@ -119,7 +82,7 @@ preview_stow() {
 
 ---
 
-### 4. 💡 No logging to file
+### 3. 💡 Logging to file
 
 **Enhancement**: Keep installation log for debugging
 
@@ -136,29 +99,6 @@ main() {
 
 ---
 
-### 5. 💡 No update mechanism
-
-**Enhancement**: Add `./install.sh --update` to pull changes and restow
-
-**Implementation**:
-```bash
-update_dotfiles() {
-    log_info "Updating dotfiles from git..."
-    git pull
-    
-    log_info "Restowing all packages..."
-    ./install/stow.sh --restow
-    
-    log_success "Update complete"
-}
-
-# Add to case statement in main()
---update)
-    update_dotfiles
-    exit 0
-    ;;
-```
-
 ---
 
 ## Summary
@@ -168,13 +108,15 @@ update_dotfiles() {
 - ~~Add `column` fallback~~ - FIXED  
 - ~~Update ASDF version~~ - FIXED
 - ~~Add installation docs to main README~~ - FIXED
+- ~~Rollback mechanism~~ - IMPLEMENTED
 
 See CHANGELOG.md for details.
 
 ### Remaining Issues
 
 #### Optional Enhancements
-- **Issues #2-5**: Rollback, preview, logging, update mechanisms
+- **Issue #2**: Preview/diff mode - Show what will change before stowing
+- **Issue #3**: Logging to file - Keep installation log for debugging
 - **Issue #1**: Package validation (not recommended - adds overhead)
 
 ---
