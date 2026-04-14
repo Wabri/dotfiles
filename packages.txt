@@ -88,7 +88,6 @@ ripgrep
 sensors
 sl
 stow
-sway
 syncthing
 telegram-desktop
 tmate
@@ -99,14 +98,11 @@ unzip
 vim
 virt-manager
 vlc
-waybar
 wev
 wf-recorder
 wget
 wl-clipboard
 wlr-randr
-wob
-wofi
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 xdg-menu
@@ -119,3 +115,5 @@ yq
 zenity
 zip
 zsh
+dms
+niri

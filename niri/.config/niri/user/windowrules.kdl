@@ -1,9 +1,18 @@
 window-rule {
     match app-id="com.danklinux.dms$"
     match app-id="org.quickshell"
-    match app-id="^org.gnome.Calculator$"
     open-floating true
     open-focused true
+}
+
+window-rule {
+    match app-id="^org.gnome.Calculator$"
+    match app-id="org.pulseaudio.pavucontrol$"
+    open-floating true
+    open-focused true
+    default-floating-position x=0 y=0 relative-to="bottom"
+    default-column-width { proportion 0.33; }
+    default-window-height { fixed 500; }
 }
 
 window-rule {
@@ -61,8 +70,10 @@ window-rule {
     block-out-from "screencast"
 }
 
+// bitwarden extension for brave
 window-rule {
     match title="nngceckbapebfimnlniiiahkandclblb$"
+    block-out-from "screencast"
     open-floating true
     open-focused true
 }
