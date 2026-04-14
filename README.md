@@ -14,11 +14,24 @@ This repository includes an intelligent installation system with automatic backu
 git clone https://github.com/Wabri/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
+# Install the CLI (adds 'dotfiles' command to PATH)
+./install-cli.sh
+
 # Interactive installation (recommended)
-./install.sh
+dotfiles install
 
 # Or full automated installation
-./install.sh --full
+dotfiles install --full
+```
+
+**Using the CLI:**
+```bash
+dotfiles help                    # Show all commands
+dotfiles stow nvim zsh           # Stow specific configs
+dotfiles preview sway            # Preview changes before applying
+dotfiles packages nvim zsh       # Install packages for specific tools
+dotfiles update                  # Pull latest changes and restow
+dotfiles status                  # Check repository status
 ```
 
 **For detailed documentation**, see [install/README.md](install/README.md)

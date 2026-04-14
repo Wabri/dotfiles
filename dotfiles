@@ -1,0 +1,317 @@
+#!/usr/bin/env bash
+
+# Wabri's Dotfiles CLI
+# Unified command-line interface for managing dotfiles
+
+set -e
+
+# Resolve symlinks to get the real dotfiles directory
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+while [[ -L "$SCRIPT_PATH" ]]; do
+    SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" && pwd)"
+    SCRIPT_PATH="$(readlink "$SCRIPT_PATH")"
+    [[ $SCRIPT_PATH != /* ]] && SCRIPT_PATH="$SCRIPT_DIR/$SCRIPT_PATH"
+done
+DOTFILES_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" && pwd)"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+log_info() {
+    echo -e "${BLUE}ℹ${NC} $1"
+}
+
+log_success() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+log_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+log_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+show_banner() {
+    cat << "EOF"
+╔══════════════════════════════════════════════════════╗
+║                                                      ║
+║             Wabri's Dotfiles CLI                     ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝
+EOF
+    echo ""
+}
+
+show_help() {
+    cat << EOF
+Usage: dotfiles <command> [options]
+
+Unified CLI for managing Wabri's dotfiles.
+
+COMMANDS:
+    install [options]           Run installation (see dotfiles install --help)
+    stow <packages...>          Stow (symlink) dotfile packages
+    unstow <packages...>        Unstow (remove symlinks) packages
+    restow <packages...>        Restow (recreate symlinks) packages
+    preview <packages...>       Preview what would be stowed (dry run)
+    list                        List available dotfile packages
+
+    packages [packages...]      Install system packages
+    backup                      Backup existing dotfiles
+    post-install                Run post-installation tasks
+    rollback <backup-dir>       Restore from backup
+
+    status                      Show dotfiles repository status
+    update                      Pull latest changes and restow all
+
+    help                        Show this help message
+    version                     Show version information
+
+EXAMPLES:
+    dotfiles install --full             # Full installation
+    dotfiles stow nvim zsh              # Stow nvim and zsh configs
+    dotfiles preview sway               # Preview sway changes
+    dotfiles packages nvim zsh tmux     # Install packages for nvim, zsh, tmux
+    dotfiles rollback ~/.dotfiles_backup_*  # Restore from backup
+    dotfiles update                     # Update dotfiles
+
+For more information on a specific command:
+    dotfiles <command> --help
+
+EOF
+}
+
+show_version() {
+    cat << EOF
+Dotfiles CLI v1.0.0
+Location: $DOTFILES_DIR
+Git branch: $(git -C "$DOTFILES_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+Git commit: $(git -C "$DOTFILES_DIR" rev-parse --short HEAD 2>/dev/null || echo "unknown")
+EOF
+}
+
+cmd_install() {
+    exec "$DOTFILES_DIR/install.sh" "$@"
+}
+
+cmd_stow() {
+    exec "$DOTFILES_DIR/install/stow.sh" "$@"
+}
+
+cmd_unstow() {
+    exec "$DOTFILES_DIR/install/stow.sh" --unstow "$@"
+}
+
+cmd_restow() {
+    exec "$DOTFILES_DIR/install/stow.sh" --restow "$@"
+}
+
+cmd_preview() {
+    exec "$DOTFILES_DIR/install/stow.sh" --preview "$@"
+}
+
+cmd_list() {
+    exec "$DOTFILES_DIR/install/stow.sh" --list
+}
+
+cmd_packages() {
+    exec "$DOTFILES_DIR/install/packages.sh" "$@"
+}
+
+cmd_backup() {
+    exec "$DOTFILES_DIR/install/backup.sh" "$@"
+}
+
+cmd_post_install() {
+    exec "$DOTFILES_DIR/install/post-install.sh" "$@"
+}
+
+cmd_rollback() {
+    if [[ -z "$1" ]]; then
+        log_error "Rollback requires a backup directory"
+        log_info "Available backups:"
+        ls -dt ~/.dotfiles_backup_* 2>/dev/null | head -5 || log_info "  No backups found"
+        exit 1
+    fi
+    exec "$DOTFILES_DIR/install.sh" --rollback "$1"
+}
+
+cmd_status() {
+    echo -e "${CYAN}${BOLD}Repository Status${NC}"
+    echo ""
+
+    if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+        log_error "Not a git repository"
+        exit 1
+    fi
+
+    cd "$DOTFILES_DIR"
+
+    # Show branch and commit
+    local branch=$(git rev-parse --abbrev-ref HEAD)
+    local commit=$(git rev-parse --short HEAD)
+    log_info "Branch: $branch"
+    log_info "Commit: $commit"
+    echo ""
+
+    # Check for uncommitted changes
+    if ! git diff-index --quiet HEAD -- 2>/dev/null; then
+        log_warning "You have uncommitted changes:"
+        echo ""
+        git status --short
+    else
+        log_success "Working tree is clean"
+    fi
+    echo ""
+
+    # Check if behind remote
+    git fetch --quiet 2>/dev/null || true
+    local behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null || echo "0")
+    local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null || echo "0")
+
+    if [[ "$behind" -gt 0 ]]; then
+        log_warning "Your branch is behind by $behind commit(s)"
+        echo "  Run: dotfiles update"
+    elif [[ "$ahead" -gt 0 ]]; then
+        log_info "Your branch is ahead by $ahead commit(s)"
+    else
+        log_success "Up to date with remote"
+    fi
+}
+
+cmd_update() {
+    echo -e "${CYAN}${BOLD}Updating Dotfiles${NC}"
+    echo ""
+
+    if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+        log_error "Not a git repository"
+        exit 1
+    fi
+
+    cd "$DOTFILES_DIR"
+
+    # Check for uncommitted changes
+    if ! git diff-index --quiet HEAD -- 2>/dev/null; then
+        log_warning "You have uncommitted changes"
+        echo ""
+        git status --short
+        echo ""
+        read -p "Continue with update anyway? [y/N] " -n 1 -r
+        echo ""
+
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            log_info "Update cancelled"
+            exit 0
+        fi
+    fi
+
+    # Pull changes
+    log_info "Pulling latest changes..."
+    if git pull; then
+        log_success "Successfully pulled latest changes"
+    else
+        log_error "Failed to pull changes"
+        exit 1
+    fi
+
+    # Check if anything changed
+    local changes=$(git log HEAD@{1}..HEAD --oneline)
+    if [[ -z "$changes" ]]; then
+        log_info "Already up to date"
+    else
+        echo ""
+        log_info "Changes pulled:"
+        echo "$changes"
+        echo ""
+    fi
+
+    # Restow all packages
+    log_info "Restowing all packages..."
+    if "$DOTFILES_DIR/install/stow.sh" --restow; then
+        log_success "All packages restowed"
+    else
+        log_error "Failed to restow packages"
+        exit 1
+    fi
+
+    echo ""
+    log_success "Update complete!"
+    echo ""
+    log_info "Remember to:"
+    echo "  • Restart your shell if configs changed"
+    echo "  • Restart your WM/compositor if needed"
+    echo "  • Run :Lazy sync in Neovim if plugin configs changed"
+    echo ""
+}
+
+main() {
+    if [[ $# -eq 0 ]]; then
+        show_banner
+        show_help
+        exit 0
+    fi
+
+    local command="$1"
+    shift
+
+    case "$command" in
+        install)
+            cmd_install "$@"
+            ;;
+        stow)
+            cmd_stow "$@"
+            ;;
+        unstow)
+            cmd_unstow "$@"
+            ;;
+        restow)
+            cmd_restow "$@"
+            ;;
+        preview)
+            cmd_preview "$@"
+            ;;
+        list|ls)
+            cmd_list
+            ;;
+        packages|pkg)
+            cmd_packages "$@"
+            ;;
+        backup)
+            cmd_backup "$@"
+            ;;
+        post-install|post)
+            cmd_post_install "$@"
+            ;;
+        rollback)
+            cmd_rollback "$@"
+            ;;
+        status|st)
+            cmd_status
+            ;;
+        update|up)
+            cmd_update
+            ;;
+        help|--help|-h)
+            show_help
+            ;;
+        version|--version|-v)
+            show_version
+            ;;
+        *)
+            log_error "Unknown command: $command"
+            echo ""
+            show_help
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

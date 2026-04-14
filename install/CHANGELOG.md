@@ -16,6 +16,12 @@
   - Shows which symlinks would be created
   - Highlights warnings and conflicts
   - Safe way to test before applying changes
+- 🚀 **Unified CLI tool**: `dotfiles` command
+  - Single command for all operations
+  - Installed to PATH via `./install-cli.sh`
+  - Subcommands: install, stow, unstow, preview, packages, backup, rollback, update, status
+  - Works from anywhere in the system
+  - Git-style interface (like `git`, `docker`, etc.)
 
 ### Changed
 - 🔄 **post-install.sh**: Updated ASDF version from v0.14.1 to v0.18.1
