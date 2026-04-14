@@ -11,6 +11,11 @@
   - Automatically unstows current dotfiles first
   - Shows backup info and confirms before proceeding
   - Lists available backups if none specified
+- 👁️ **Preview/dry-run mode**: `./install/stow.sh -n <package>`
+  - See what will change before actually stowing
+  - Shows which symlinks would be created
+  - Highlights warnings and conflicts
+  - Safe way to test before applying changes
 
 ### Changed
 - 🔄 **post-install.sh**: Updated ASDF version from v0.14.1 to v0.18.1

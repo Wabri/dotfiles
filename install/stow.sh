@@ -94,6 +94,33 @@ restow_package() {
     fi
 }
 
+preview_package() {
+    local package="$1"
+
+    log_info "Preview: $package"
+    echo ""
+
+    # Run stow in dry-run mode (-n) with verbose output
+    local output=$(stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -n -v "$package" 2>&1)
+
+    if [[ -z "$output" ]]; then
+        log_info "  No changes (already stowed or no conflicts)"
+    else
+        echo "$output" | while IFS= read -r line; do
+            if [[ "$line" =~ LINK:.*-\> ]]; then
+                echo -e "  ${GREEN}+${NC} $line"
+            elif [[ "$line" =~ WARNING ]]; then
+                echo -e "  ${YELLOW}!${NC} $line"
+            elif [[ "$line" =~ ERROR ]]; then
+                echo -e "  ${RED}✗${NC} $line"
+            else
+                echo "  $line"
+            fi
+        done
+    fi
+    echo ""
+}
+
 show_help() {
     cat << EOF
 Usage: $(basename "$0") [OPTIONS] [PACKAGES...]
@@ -105,12 +132,14 @@ OPTIONS:
     -u, --unstow    Unstow (remove symlinks) instead of stow
     -r, --restow    Restow (remove and recreate symlinks)
     -l, --list      List available packages
+    -n, --preview   Preview changes without applying (dry run)
 
 EXAMPLES:
     $(basename "$0")              # Stow all packages
     $(basename "$0") nvim zsh     # Stow only nvim and zsh
     $(basename "$0") -u sway      # Unstow sway
     $(basename "$0") -r nvim      # Restow nvim
+    $(basename "$0") -n nvim      # Preview nvim changes (dry run)
 
 EOF
 }
@@ -147,6 +176,10 @@ main() {
                 list_packages
                 exit 0
                 ;;
+            -n|--preview)
+                action="preview"
+                shift
+                ;;
             *)
                 selected_packages+=("$1")
                 shift
@@ -182,6 +215,9 @@ main() {
                 ;;
             restow)
                 restow_package "$package" || ((failed++))
+                ;;
+            preview)
+                preview_package "$package"
                 ;;
         esac
     done

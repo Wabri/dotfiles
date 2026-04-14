@@ -65,20 +65,26 @@ validate_packages() {
 
 ## Feature Gaps (Enhancement Ideas)
 
-### 2. 💡 Preview/diff mode
+### 2. ✅ Preview/diff mode [IMPLEMENTED]
+
+**Status**: ✅ Implemented on 2026-04-14
 
 **Enhancement**: Show what will change before applying
 
 **Implementation**:
 ```bash
-# Add to stow.sh
-preview_stow() {
-    local package="$1"
-    stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -n -v "$package"
-}
+# Usage
+./install/stow.sh -n nvim
+./install/stow.sh --preview nvim zsh
 
-# Usage: ./install/stow.sh --preview nvim
+# Shows what would be stowed without making changes
 ```
+
+**Features**:
+- Runs stow in dry-run mode (-n flag)
+- Color-coded output (green for links, yellow for warnings, red for errors)
+- Safe way to test before applying changes
+- Works with multiple packages
 
 ---
 
@@ -109,13 +115,13 @@ main() {
 - ~~Update ASDF version~~ - FIXED
 - ~~Add installation docs to main README~~ - FIXED
 - ~~Rollback mechanism~~ - IMPLEMENTED
+- ~~Preview/diff mode~~ - IMPLEMENTED
 
 See CHANGELOG.md for details.
 
 ### Remaining Issues
 
 #### Optional Enhancements
-- **Issue #2**: Preview/diff mode - Show what will change before stowing
 - **Issue #3**: Logging to file - Keep installation log for debugging
 - **Issue #1**: Package validation (not recommended - adds overhead)
 
