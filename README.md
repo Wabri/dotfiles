@@ -17,11 +17,14 @@ cd ~/dotfiles
 # Install the CLI (adds 'dotfiles' command to PATH)
 ./install-cli.sh
 
-# Interactive installation (recommended)
+# Install dotfiles (stow configs)
 dotfiles install
 
-# Or full automated installation
-dotfiles install --full
+# Install packages for specific tools only
+dotfiles packages nvim zsh tmux
+
+# Run post-installation tasks (ASDF, etc)
+dotfiles post-install
 ```
 
 **Using the CLI:**

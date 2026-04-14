@@ -60,6 +60,15 @@ stow_package() {
 
     if stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -v "$package" 2>&1 | grep -q "LINK"; then
         log_success "Stowed: $package"
+
+        # Check if package has dependencies
+        if [[ -f "$DOTFILES_DIR/$package/packages.txt" ]]; then
+            echo ""
+            log_info "Package '$package' has dependencies"
+            echo "  Install them with: ${BLUE}dotfiles packages $package${NC}"
+            echo ""
+        fi
+
         return 0
     else
         log_warning "Already stowed or no changes: $package"

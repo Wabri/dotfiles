@@ -53,23 +53,22 @@ show_help() {
     cat << EOF
 Usage: $(basename "$0") [OPTIONS]
 
-Automated dotfiles installation for openSUSE Tumbleweed and other distros.
+Automated dotfiles installation.
 
 OPTIONS:
     -h, --help             Show this help message
-    -f, --full             Full installation (packages + dotfiles + post-install)
-    -d, --dotfiles-only    Install dotfiles only (skip packages and post-install)
-    -p, --packages-only    Install packages only (skip dotfiles)
     -s, --skip-backup      Skip backup of existing dotfiles
     -y, --yes              Automatic yes to prompts
     --rollback <dir>       Restore dotfiles from backup directory
 
 EXAMPLES:
     $(basename "$0")                                    # Interactive installation
-    $(basename "$0") --full                             # Full automated installation
-    $(basename "$0") --dotfiles-only                    # Only stow dotfiles
-    $(basename "$0") --packages-only                    # Only install packages
     $(basename "$0") --rollback ~/.dotfiles_backup_*    # Restore from backup
+
+RECOMMENDED WORKFLOW:
+    $(basename "$0")                      # Install dotfiles (stow configs)
+    dotfiles packages nvim zsh            # Install packages for specific tools
+    dotfiles post-install                 # Run post-installation tasks
 
 EOF
 }
@@ -147,54 +146,15 @@ interactive_install() {
     log_warning "Make sure you have reviewed the configuration before proceeding"
     echo ""
 
-    # Ask what to install
-    log_info "What would you like to install?"
+    # Confirm installation
+    read -p "Proceed with installation? [Y/n] " -n 1 -r
     echo ""
-    echo "  1) Full installation (recommended)"
-    echo "  2) Dotfiles only"
-    echo "  3) Packages only"
-    echo "  4) Custom (choose components)"
     echo ""
 
-    read -p "Enter your choice [1-4]: " choice
-
-    case "$choice" in
-        1)
-            INSTALL_PACKAGES=true
-            INSTALL_DOTFILES=true
-            INSTALL_POST=true
-            ;;
-        2)
-            INSTALL_PACKAGES=false
-            INSTALL_DOTFILES=true
-            INSTALL_POST=false
-            ;;
-        3)
-            INSTALL_PACKAGES=true
-            INSTALL_DOTFILES=false
-            INSTALL_POST=false
-            ;;
-        4)
-            echo ""
-            read -p "Install packages? [Y/n] " -n 1 -r
-            echo ""
-            [[ $REPLY =~ ^[Nn]$ ]] && INSTALL_PACKAGES=false || INSTALL_PACKAGES=true
-
-            read -p "Install dotfiles? [Y/n] " -n 1 -r
-            echo ""
-            [[ $REPLY =~ ^[Nn]$ ]] && INSTALL_DOTFILES=false || INSTALL_DOTFILES=true
-
-            read -p "Run post-install tasks? [Y/n] " -n 1 -r
-            echo ""
-            [[ $REPLY =~ ^[Nn]$ ]] && INSTALL_POST=false || INSTALL_POST=true
-            ;;
-        *)
-            log_error "Invalid choice"
-            exit 1
-            ;;
-    esac
-
-    echo ""
+    if [[ $REPLY =~ ^[Nn]$ ]]; then
+        log_info "Installation cancelled"
+        exit 0
+    fi
     read -p "Create backup of existing dotfiles? [Y/n] " -n 1 -r
     echo ""
     [[ $REPLY =~ ^[Nn]$ ]] && SKIP_BACKUP=true || SKIP_BACKUP=false
@@ -303,9 +263,6 @@ rollback_dotfiles() {
 
 main() {
     # Default options
-    INSTALL_PACKAGES=false
-    INSTALL_DOTFILES=false
-    INSTALL_POST=false
     SKIP_BACKUP=false
     INTERACTIVE=true
 
@@ -315,23 +272,6 @@ main() {
             -h|--help)
                 show_help
                 exit 0
-                ;;
-            -f|--full)
-                INSTALL_PACKAGES=true
-                INSTALL_DOTFILES=true
-                INSTALL_POST=true
-                INTERACTIVE=false
-                shift
-                ;;
-            -d|--dotfiles-only)
-                INSTALL_DOTFILES=true
-                INTERACTIVE=false
-                shift
-                ;;
-            -p|--packages-only)
-                INSTALL_PACKAGES=true
-                INTERACTIVE=false
-                shift
                 ;;
             -s|--skip-backup)
                 SKIP_BACKUP=true
@@ -368,24 +308,12 @@ main() {
     check_dependencies
 
     # Backup
-    if [[ "$SKIP_BACKUP" == false ]] && [[ "$INSTALL_DOTFILES" == true ]]; then
+    if [[ "$SKIP_BACKUP" == false ]]; then
         run_backup
     fi
 
-    # Install packages
-    if [[ "$INSTALL_PACKAGES" == true ]]; then
-        run_packages
-    fi
-
     # Stow dotfiles
-    if [[ "$INSTALL_DOTFILES" == true ]]; then
-        run_stow
-    fi
-
-    # Post-install
-    if [[ "$INSTALL_POST" == true ]]; then
-        run_post_install
-    fi
+    run_stow
 
     # Done
     log_header "Installation complete!"
@@ -393,10 +321,11 @@ main() {
     log_success "Your dotfiles have been installed successfully!"
     echo ""
     log_info "Next steps:"
+    echo "  • Install packages for configs you stowed: ${BLUE}dotfiles packages nvim zsh${NC}"
+    echo "  • Run post-install tasks (ASDF, etc): ${BLUE}dotfiles post-install${NC}"
     echo "  • Log out and back in for shell changes to take effect"
-    echo "  • Open Neovim and run :Lazy sync (or :PackerSync) to install plugins"
+    echo "  • Open Neovim and run :Lazy sync to install plugins"
     echo "  • Open Tmux and press prefix + I to install plugins"
-    echo "  • Restart your window manager/compositor if you installed WM configs"
     echo ""
 
     log_info "Enjoy your new setup! 🚀"

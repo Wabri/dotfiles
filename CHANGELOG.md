@@ -3,6 +3,17 @@
 ## [Unreleased] - 2026-04-14
 
 ### Added
+- 💡 **Package suggestions on stow**: When stowing a package, suggest installing dependencies
+  - Shows message: "Package 'X' has dependencies. Install them with: dotfiles packages X"
+  - Allows selective installation (e.g., niri OR sway, not both)
+  - Reduces system bloat by not auto-installing all packages
+
+### Removed
+- ❌ **Removed `--full` installation option**: Too invasive, installed all packages for all configs
+- ❌ **Removed `--packages-only` option**: Package installation is now always opt-in via `dotfiles packages`
+- ❌ **Simplified interactive installation**: Now only asks for confirmation, no complex menus
+
+### Added (Previously)
 - ✨ Comprehensive documentation in `install/README.md`
 - 📋 Issue tracker and fixes documentation in `install/ISSUES_AND_FIXES.md`
 - 📝 This changelog
@@ -185,6 +196,30 @@ git log @{upstream}..HEAD --oneline
 git push
 ```
 
+#### Implementation: Package suggestions on stow
+**Location**: `install/stow.sh:stow_package()`
+
+After successfully stowing a package, check for packages.txt and suggest installation:
+
+```bash
+if stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -v "$package" 2>&1 | grep -q "LINK"; then
+    log_success "Stowed: $package"
+    
+    # Check if package has dependencies
+    if [[ -f "$DOTFILES_DIR/$package/packages.txt" ]]; then
+        echo ""
+        log_info "Package '$package' has dependencies"
+        echo "  Install them with: dotfiles packages $package"
+        echo ""
+    fi
+fi
+```
+
+**Workflow change**:
+- Old: `./install.sh --full` → installs ALL packages for ALL configs
+- New: `dotfiles install` → stow configs only, suggests packages
+- New: `dotfiles packages nvim zsh` → install only needed packages
+
 ### Testing
 - ✅ Syntax validation passed for all scripts
 - ✅ Verified `install` directory no longer appears in stow package list
@@ -196,6 +231,9 @@ git push
 - ✅ Commit command prompts for message when not provided
 - ✅ Push command successfully pushes to remote
 - ✅ Push command requires clean working tree
+- ✅ Package suggestion appears when stowing packages with dependencies
+- ✅ Interactive install simplified (no complex menus)
+- ✅ --full option removed, install.sh only stows configs
 
 ---
 
