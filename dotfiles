@@ -71,6 +71,8 @@ COMMANDS:
 
     status                      Show dotfiles repository status
     diff                        Show differences between local and remote
+    commit [message]            Stage all changes and commit (prompts if no message)
+    push                        Push local commits to remote repository
     update                      Pull latest changes and restow all
 
     help                        Show this help message
@@ -82,6 +84,8 @@ EXAMPLES:
     dotfiles preview sway               # Preview sway changes
     dotfiles packages nvim zsh tmux     # Install packages for nvim, zsh, tmux
     dotfiles rollback ~/.dotfiles_backup_*  # Restore from backup
+    dotfiles commit "Add new feature"   # Stage all changes and commit
+    dotfiles push                       # Push local commits to remote
     dotfiles update                     # Update dotfiles
 
 For more information on a specific command:
@@ -228,6 +232,105 @@ cmd_status() {
     fi
 }
 
+cmd_commit() {
+    echo -e "${CYAN}${BOLD}Committing Dotfiles${NC}"
+    echo ""
+
+    if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+        log_error "Not a git repository"
+        exit 1
+    fi
+
+    cd "$DOTFILES_DIR"
+
+    # Check if there are any changes
+    if git diff-index --quiet HEAD -- 2>/dev/null && [[ -z "$(git ls-files --others --exclude-standard)" ]]; then
+        log_info "No changes to commit"
+        exit 0
+    fi
+
+    # Show what will be committed
+    log_info "Changes to be committed:"
+    echo ""
+    git status --short
+    echo ""
+
+    # Get commit message
+    local message=""
+    if [[ -n "$1" ]]; then
+        # Message provided as argument
+        message="$1"
+    else
+        # Prompt for message
+        read -p "Commit message: " message
+        if [[ -z "$message" ]]; then
+            log_error "Commit message cannot be empty"
+            exit 1
+        fi
+    fi
+
+    # Stage all changes
+    log_info "Staging all changes..."
+    git add -A
+
+    # Create commit
+    log_info "Creating commit..."
+    if git commit -m "$message"; then
+        log_success "Successfully committed changes"
+        git log -1 --oneline
+    else
+        log_error "Failed to commit"
+        exit 1
+    fi
+}
+
+cmd_push() {
+    echo -e "${CYAN}${BOLD}Pushing Dotfiles${NC}"
+    echo ""
+
+    if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+        log_error "Not a git repository"
+        exit 1
+    fi
+
+    cd "$DOTFILES_DIR"
+
+    # Check for uncommitted changes
+    if ! git diff-index --quiet HEAD -- 2>/dev/null; then
+        log_error "You have uncommitted changes"
+        echo ""
+        git status --short
+        echo ""
+        log_info "Please commit your changes first: dotfiles commit"
+        exit 1
+    fi
+
+    # Fetch to check remote state
+    git fetch --quiet 2>/dev/null || true
+
+    # Check if there's anything to push
+    local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null || echo "0")
+
+    if [[ "$ahead" -eq 0 ]]; then
+        log_info "Nothing to push - already up to date with remote"
+        exit 0
+    fi
+
+    # Show what will be pushed
+    log_info "Commits to push ($ahead):"
+    git log @{upstream}..HEAD --oneline
+    echo ""
+
+    # Push to remote
+    log_info "Pushing to remote..."
+    if git push; then
+        log_success "Successfully pushed $ahead commit(s)"
+    else
+        log_error "Failed to push"
+        exit 1
+    fi
+}
+
 cmd_update() {
     echo -e "${CYAN}${BOLD}Updating Dotfiles${NC}"
     echo ""
@@ -339,6 +442,12 @@ main() {
             ;;
         diff)
             cmd_diff
+            ;;
+        commit)
+            cmd_commit "$@"
+            ;;
+        push)
+            cmd_push
             ;;
         update|up)
             cmd_update
