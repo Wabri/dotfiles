@@ -23,8 +23,8 @@ dotfiles stow nvim zsh
 # Install packages for the configs you stowed
 dotfiles packages nvim zsh
 
-# Run post-installation tasks (ASDF, etc)
-dotfiles post-install
+# Run setup tasks (zsh, asdf, etc)
+dotfiles setup
 ```
 
 **Using the CLI:**
@@ -33,6 +33,7 @@ dotfiles help                    # Show all commands
 dotfiles stow nvim zsh           # Stow specific configs
 dotfiles preview sway            # Preview changes before applying (shows file diffs)
 dotfiles packages nvim zsh       # Install packages for specific tools
+dotfiles setup                   # Run setup tasks (zsh, asdf, etc)
 dotfiles status                  # Check repository status
 dotfiles diff                    # Show differences between local and remote
 dotfiles commit "message"        # Stage all changes and commit

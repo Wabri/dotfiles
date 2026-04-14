@@ -65,7 +65,7 @@ COMMANDS:
 
     packages <packages...>      Install system packages for specific tools
     backup                      Backup existing dotfiles
-    post-install                Run post-installation tasks
+    setup                       Run setup tasks (zsh, nvim, tmux, asdf)
     rollback <backup-dir>       Restore from backup
 
     status                      Show dotfiles repository status
@@ -81,7 +81,7 @@ EXAMPLES:
     dotfiles stow nvim zsh              # Stow nvim and zsh configs
     dotfiles preview sway               # Preview sway changes
     dotfiles packages nvim zsh          # Install packages for nvim and zsh
-    dotfiles post-install               # Run post-installation tasks
+    dotfiles setup                      # Run setup tasks (zsh, asdf, etc)
     dotfiles commit "Add new feature"   # Stage all changes and commit
     dotfiles push                       # Push local commits to remote
     dotfiles update                     # Update dotfiles
@@ -129,8 +129,8 @@ cmd_backup() {
     exec "$DOTFILES_DIR/install/backup.sh" "$@"
 }
 
-cmd_post_install() {
-    exec "$DOTFILES_DIR/install/post-install.sh" "$@"
+cmd_setup() {
+    exec "$DOTFILES_DIR/install/setup.sh" "$@"
 }
 
 cmd_rollback() {
@@ -422,8 +422,8 @@ main() {
         backup)
             cmd_backup "$@"
             ;;
-        post-install|post)
-            cmd_post_install "$@"
+        setup)
+            cmd_setup "$@"
             ;;
         rollback)
             cmd_rollback "$@"

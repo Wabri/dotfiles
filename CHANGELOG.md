@@ -2,6 +2,12 @@
 
 ## [Unreleased] - 2026-04-14
 
+### Changed
+- 🔄 **Renamed `post-install` to `setup`**: More accurate naming for one-time setup tasks
+  - Command: `dotfiles setup` (was `dotfiles post-install`)
+  - Script: `install/setup.sh` (was `install/post-install.sh`)
+  - Clearer purpose: runs setup for zsh, nvim, tmux, asdf
+
 ### Added
 - 💡 **Package suggestions on stow**: When stowing a package, suggest installing dependencies
   - Shows message: "Package 'X' has dependencies. Install them with: dotfiles packages X"

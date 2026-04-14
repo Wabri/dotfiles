@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Post-installation tasks
+# Setup tasks for dotfiles (zsh, nvim, tmux, asdf)
 
 set -e
 
@@ -161,7 +161,7 @@ setup_asdf() {
 
 main() {
     echo ""
-    log_info "Running post-installation tasks..."
+    log_info "Running setup tasks..."
     echo ""
 
     set_zsh_as_default
@@ -182,7 +182,7 @@ main() {
     setup_asdf
     echo ""
 
-    log_success "Post-installation tasks completed!"
+    log_success "Setup tasks completed!"
     echo ""
     log_warning "Note: You may need to log out and back in for all changes to take effect"
 }
