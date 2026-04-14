@@ -17,11 +17,11 @@ cd ~/dotfiles
 # Install the CLI (adds 'dotfiles' command to PATH)
 ./install-cli.sh
 
-# Install dotfiles (stow configs)
-dotfiles install
+# Stow specific configs
+dotfiles stow nvim zsh
 
-# Install packages for specific tools only
-dotfiles packages nvim zsh tmux
+# Install packages for the configs you stowed
+dotfiles packages nvim zsh
 
 # Run post-installation tasks (ASDF, etc)
 dotfiles post-install

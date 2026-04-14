@@ -57,14 +57,13 @@ Usage: dotfiles <command> [options]
 Unified CLI for managing Wabri's dotfiles.
 
 COMMANDS:
-    install [options]           Run installation (see dotfiles install --help)
     stow <packages...>          Stow (symlink) dotfile packages
     unstow <packages...>        Unstow (remove symlinks) packages
     restow <packages...>        Restow (recreate symlinks) packages
     preview <packages...>       Preview what would be stowed (dry run)
     list                        List available dotfile packages
 
-    packages [packages...]      Install system packages
+    packages <packages...>      Install system packages for specific tools
     backup                      Backup existing dotfiles
     post-install                Run post-installation tasks
     rollback <backup-dir>       Restore from backup
@@ -79,11 +78,10 @@ COMMANDS:
     version                     Show version information
 
 EXAMPLES:
-    dotfiles install --full             # Full installation
     dotfiles stow nvim zsh              # Stow nvim and zsh configs
     dotfiles preview sway               # Preview sway changes
-    dotfiles packages nvim zsh tmux     # Install packages for nvim, zsh, tmux
-    dotfiles rollback ~/.dotfiles_backup_*  # Restore from backup
+    dotfiles packages nvim zsh          # Install packages for nvim and zsh
+    dotfiles post-install               # Run post-installation tasks
     dotfiles commit "Add new feature"   # Stage all changes and commit
     dotfiles push                       # Push local commits to remote
     dotfiles update                     # Update dotfiles
@@ -101,10 +99,6 @@ Location: $DOTFILES_DIR
 Git branch: $(git -C "$DOTFILES_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
 Git commit: $(git -C "$DOTFILES_DIR" rev-parse --short HEAD 2>/dev/null || echo "unknown")
 EOF
-}
-
-cmd_install() {
-    exec "$DOTFILES_DIR/install.sh" "$@"
 }
 
 cmd_stow() {
@@ -407,9 +401,6 @@ main() {
     shift
 
     case "$command" in
-        install)
-            cmd_install "$@"
-            ;;
         stow)
             cmd_stow "$@"
             ;;

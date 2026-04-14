@@ -9,6 +9,7 @@
   - Reduces system bloat by not auto-installing all packages
 
 ### Removed
+- ❌ **Removed `dotfiles install` command**: Redundant with `dotfiles stow`, simplified workflow
 - ❌ **Removed `--full` installation option**: Too invasive, installed all packages for all configs
 - ❌ **Removed `--packages-only` option**: Package installation is now always opt-in via `dotfiles packages`
 - ❌ **Simplified interactive installation**: Now only asks for confirmation, no complex menus
