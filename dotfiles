@@ -64,9 +64,7 @@ COMMANDS:
     list                        List available dotfile packages
 
     packages <packages...>      Install system packages for specific tools
-    backup                      Backup existing dotfiles
     setup                       Run setup tasks (zsh, nvim, tmux, asdf)
-    rollback <backup-dir>       Restore from backup
 
     status                      Show dotfiles repository status
     diff                        Show differences between local and remote
@@ -125,22 +123,8 @@ cmd_packages() {
     exec "$DOTFILES_DIR/install/packages.sh" "$@"
 }
 
-cmd_backup() {
-    exec "$DOTFILES_DIR/install/backup.sh" "$@"
-}
-
 cmd_setup() {
     exec "$DOTFILES_DIR/install/setup.sh" "$@"
-}
-
-cmd_rollback() {
-    if [[ -z "$1" ]]; then
-        log_error "Rollback requires a backup directory"
-        log_info "Available backups:"
-        ls -dt ~/.dotfiles_backup_* 2>/dev/null | head -5 || log_info "  No backups found"
-        exit 1
-    fi
-    exec "$DOTFILES_DIR/install.sh" --rollback "$1"
 }
 
 cmd_diff() {
@@ -419,14 +403,8 @@ main() {
         packages|pkg)
             cmd_packages "$@"
             ;;
-        backup)
-            cmd_backup "$@"
-            ;;
         setup)
             cmd_setup "$@"
-            ;;
-        rollback)
-            cmd_rollback "$@"
             ;;
         status|st)
             cmd_status

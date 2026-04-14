@@ -6,7 +6,7 @@ This repository contains my personal dotfiles and configuration files for variou
 
 ## Installation
 
-This repository includes an intelligent installation system with automatic backups and cross-distribution support.
+This repository includes an intelligent installation system with cross-distribution support.
 
 **Quick start:**
 ```bash
@@ -72,7 +72,7 @@ dotfiles stow mytool
 **Architecture:**
 - **Why Bash?** Universal on Linux, no runtime dependencies, easy to read/modify
 - **Why GNU Stow?** Simple symlink management, handles directories automatically, battle-tested
-- **Module structure:** CLI → install.sh → specialized scripts (backup.sh, packages.sh, stow.sh, setup.sh)
+- **Module structure:** CLI → install.sh → specialized scripts (packages.sh, stow.sh, setup.sh)
 
 **Code style:**
 - Use `set -e` for fail-fast behavior
@@ -82,7 +82,7 @@ dotfiles stow mytool
 
 **Known limitations:**
 - Fully tested on openSUSE Tumbleweed; supported on Debian/Ubuntu, Fedora, Arch
-- Existing files prevent stowing (use `dotfiles backup` first)
+- Existing files prevent stowing (remove them manually or use `dotfiles unstow` first)
 - Some packages may not exist in all distro repositories
 
 ## Requirements
