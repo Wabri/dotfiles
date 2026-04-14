@@ -59,7 +59,6 @@ Unified CLI for managing Wabri's dotfiles.
 COMMANDS:
     stow <packages...>          Stow (symlink) dotfile packages
     unstow <packages...>        Unstow (remove symlinks) packages
-    restow <packages...>        Restow (recreate symlinks) packages
     preview <packages...>       Preview what would be stowed (dry run)
     list                        List available dotfile packages
 
@@ -70,7 +69,7 @@ COMMANDS:
     diff                        Show differences between local and remote
     commit [message]            Stage all changes and commit (prompts if no message)
     push                        Push local commits to remote repository
-    update                      Pull latest changes and restow all
+    update                      Pull latest changes and refresh symlinks
 
     help                        Show this help message
     version                     Show version information
@@ -105,10 +104,6 @@ cmd_stow() {
 
 cmd_unstow() {
     exec "$DOTFILES_DIR/install/stow.sh" --unstow "$@"
-}
-
-cmd_restow() {
-    exec "$DOTFILES_DIR/install/stow.sh" --restow "$@"
 }
 
 cmd_preview() {
@@ -355,12 +350,12 @@ cmd_update() {
         echo ""
     fi
 
-    # Restow all packages
-    log_info "Restowing all packages..."
-    if "$DOTFILES_DIR/install/stow.sh" --restow; then
-        log_success "All packages restowed"
+    # Refresh symlinks (unstow then stow to remove obsolete symlinks)
+    log_info "Refreshing symlinks..."
+    if "$DOTFILES_DIR/install/stow.sh" --unstow && "$DOTFILES_DIR/install/stow.sh"; then
+        log_success "Symlinks refreshed"
     else
-        log_error "Failed to restow packages"
+        log_error "Failed to refresh symlinks"
         exit 1
     fi
 
@@ -390,9 +385,6 @@ main() {
             ;;
         unstow)
             cmd_unstow "$@"
-            ;;
-        restow)
-            cmd_restow "$@"
             ;;
         preview)
             cmd_preview "$@"

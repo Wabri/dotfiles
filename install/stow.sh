@@ -90,20 +90,6 @@ unstow_package() {
     fi
 }
 
-restow_package() {
-    local package="$1"
-
-    log_info "Restowing: $package"
-
-    if stow -d "$DOTFILES_DIR" -t "$TARGET_DIR" -R -v "$package" 2>&1; then
-        log_success "Restowed: $package"
-        return 0
-    else
-        log_error "Failed to restow: $package"
-        return 1
-    fi
-}
-
 preview_package() {
     local package="$1"
 
@@ -205,7 +191,6 @@ Stow dotfiles to home directory using GNU Stow.
 OPTIONS:
     -h, --help      Show this help message
     -u, --unstow    Unstow (remove symlinks) instead of stow
-    -r, --restow    Restow (remove and recreate symlinks)
     -l, --list      List available packages
     -n, --preview   Preview changes without applying (dry run)
 
@@ -213,7 +198,6 @@ EXAMPLES:
     $(basename "$0")              # Stow all packages
     $(basename "$0") nvim zsh     # Stow only nvim and zsh
     $(basename "$0") -u sway      # Unstow sway
-    $(basename "$0") -r nvim      # Restow nvim
     $(basename "$0") -n nvim      # Preview nvim changes (dry run)
 
 EOF
@@ -241,10 +225,6 @@ main() {
                 ;;
             -u|--unstow)
                 action="unstow"
-                shift
-                ;;
-            -r|--restow)
-                action="restow"
                 shift
                 ;;
             -l|--list)
@@ -287,9 +267,6 @@ main() {
                 ;;
             unstow)
                 unstow_package "$package" || ((failed++))
-                ;;
-            restow)
-                restow_package "$package" || ((failed++))
                 ;;
             preview)
                 preview_package "$package"
