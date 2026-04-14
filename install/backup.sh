@@ -12,6 +12,7 @@ DOTFILES_TO_BACKUP=(
     ".gitconfig"
     ".config/nvim"
     ".config/sway"
+    ".config/niri"
     ".config/i3"
     ".config/kitty"
     ".config/alacritty"

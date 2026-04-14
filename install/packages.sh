@@ -127,7 +127,11 @@ main() {
     # Ask for confirmation
     echo ""
     log_warning "The following packages will be installed:"
-    printf '%s\n' "${packages[@]}" | column
+    if command -v column &> /dev/null; then
+        printf '%s\n' "${packages[@]}" | column
+    else
+        printf '  - %s\n' "${packages[@]}"
+    fi
     echo ""
 
     read -p "Do you want to continue? [y/N] " -n 1 -r

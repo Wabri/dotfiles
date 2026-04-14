@@ -41,10 +41,11 @@ check_stow() {
 get_stow_packages() {
     local packages=()
 
-    # Get all directories that contain dotfiles (exclude hidden dirs and scripts)
+    # Get all directories that contain dotfiles (exclude hidden dirs, scripts, and install)
     for dir in "$DOTFILES_DIR"/*; do
-        if [[ -d "$dir" ]] && [[ ! "$(basename "$dir")" =~ ^\. ]] && [[ "$(basename "$dir")" != "scripts" ]]; then
-            packages+=("$(basename "$dir")")
+        local dirname="$(basename "$dir")"
+        if [[ -d "$dir" ]] && [[ ! "$dirname" =~ ^\. ]] && [[ "$dirname" != "scripts" ]] && [[ "$dirname" != "install" ]]; then
+            packages+=("$dirname")
         fi
     done
 
