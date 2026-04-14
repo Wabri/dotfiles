@@ -41,14 +41,51 @@ dotfiles push                    # Push local commits to remote
 dotfiles update                  # Pull latest changes and restow
 ```
 
-## Documentation
+## Contributing
 
-- **[install/README.md](install/README.md)** - Detailed installation guide
-- **[CHANGELOG.md](CHANGELOG.md)** - Release history and changes
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
-- **[DEVELOPMENT.md](DEVELOPMENT.md)** - Development notes and ideas
+**Adding a new tool configuration:**
+```bash
+# 1. Create directory structure
+mkdir -p mytool/.config/mytool
 
-### Requirements
+# 2. Add your config files
+cp ~/.config/mytool/* mytool/.config/mytool/
+
+# 3. Add packages (optional)
+echo "mytool" > mytool/packages.txt
+
+# 4. Exclude packages.txt from stowing
+echo "packages.txt" > mytool/.stow-local-ignore
+
+# 5. Test it
+dotfiles preview mytool
+dotfiles stow mytool
+```
+
+**Making changes:**
+- Use `dotfiles preview` before stowing
+- Test on a clean system if possible
+- Keep commit messages clear and descriptive
+
+## Development
+
+**Architecture:**
+- **Why Bash?** Universal on Linux, no runtime dependencies, easy to read/modify
+- **Why GNU Stow?** Simple symlink management, handles directories automatically, battle-tested
+- **Module structure:** CLI → install.sh → specialized scripts (backup.sh, packages.sh, stow.sh, setup.sh)
+
+**Code style:**
+- Use `set -e` for fail-fast behavior
+- Consistent logging: `log_info`, `log_success`, `log_warning`, `log_error`
+- Quote variables: `"$variable"` not `$variable`
+- Use `[[ ]]` for conditions, not `[ ]`
+
+**Known limitations:**
+- Fully tested on openSUSE Tumbleweed; supported on Debian/Ubuntu, Fedora, Arch
+- Existing files prevent stowing (use `dotfiles backup` first)
+- Some packages may not exist in all distro repositories
+
+## Requirements
 - `git` and `stow` (required)
 - Supported distributions: openSUSE, Debian/Ubuntu, Fedora, Arch Linux
 
