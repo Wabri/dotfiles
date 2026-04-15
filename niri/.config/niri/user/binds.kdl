@@ -1,6 +1,6 @@
 binds {
     // === System & Overview ===
-    Mod+O repeat=false { toggle-overview; }
+    Mod+W repeat=false { toggle-overview; }
     Mod+Tab repeat=false { toggle-overview; }
     Mod+Shift+Slash { show-hotkey-overlay; }
 
@@ -134,8 +134,8 @@ binds {
     Mod+Shift+Q repeat=false { close-window; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+T { toggle-window-floating; }
-    Mod+Shift+T { switch-focus-between-floating-and-tiling; }
+    Mod+O { switch-focus-between-floating-and-tiling; }
+    Mod+Shift+O { toggle-window-floating; }
     Mod+Ctrl+W hotkey-overlay-title="Create window rule" {
         spawn "dms" "ipc" "call" "window-rules" "toggle";
     }
