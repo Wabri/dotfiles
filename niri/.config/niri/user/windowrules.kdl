@@ -8,9 +8,19 @@ window-rule {
 window-rule {
     match app-id="^org.gnome.Calculator$"
     match app-id="org.pulseaudio.pavucontrol$"
+    match app-id="io.github.focustimerhq.FocusTimer"
     open-floating true
     open-focused true
     default-floating-position x=0 y=0 relative-to="bottom"
+    default-column-width { proportion 0.33; }
+    default-window-height { fixed 500; }
+}
+
+window-rule {
+    match app-id="io.github.focustimerhq.FocusTimer"
+    open-floating true
+    open-focused true
+    default-floating-position x=0 y=0 relative-to="bottom-right"
     default-column-width { proportion 0.33; }
     default-window-height { fixed 500; }
 }

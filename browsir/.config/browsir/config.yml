@@ -58,12 +58,11 @@ shortcuts:
   # Suse
   suse-verse: https://sites.google.com/suse.com/suseverse
   suse-benefits: https://sites.google.com/suse.com/rewards/benefits/emea/italy
-  suse-okta: https://suse.okta.com/
-  suse-id: https://id.suse.com/if/user/#
+  suse-id: https://id.suse.com/
   suse-confluence: https://confluence.suse.com/
   suse-intranet: https://sites.google.com/suse.com/suseverse/home
   suse-tools-squads: https://confluence.suse.com/spaces/qasle/pages/1080262927/Squads
-  suse-tools-assigned: https://progress.opensuse.org/issues?assigned_to_id=47527&set_filter=1&sort=priority%3Adesc%2Cupdated_on%3Adesc
+  suse-tools-ticket-assigned: https://progress.opensuse.org/issues?assigned_to_id=47527&set_filter=1&sort=priority%3Adesc%2Cupdated_on%3Adesc
   suse-tools-task: https://progress.opensuse.org/my/page
   suse-tools-wiki: https://progress.opensuse.org/projects/qa/wiki/Tools
   suse-tools-office: https://play.workadventu.re/@/suse/suse-office/space-station-office

@@ -39,11 +39,16 @@ binds {
     }
 
     Mod+Shift+N hotkey-overlay-title="Notepad" { 
-        spawn "dms" "ipc" "call" "notepad" "toggle"; 
+        //spawn "dms" "ipc" "call" "notepad" "toggle"; 
+        spawn "flatpak" "run" "com.logseq.Logseq";
     }
 
     Mod+E hotkey-overlay-title="File manager" {
         spawn "nautilus";
+    }
+
+    Mod+T hotkey-overlay-title="Pomodoro manager" {
+        spawn "flatpak" "run" "io.github.focustimerhq.FocusTimer";
     }
 
     // === Scripts Menu ===
@@ -61,6 +66,10 @@ binds {
 
     Mod+Shift+B hotkey-overlay-title="Bluethoot Keyboard-Focused Menu" {
         spawn "sh" "-c" "~/.config/niri/scripts/bluethoot-menu/bluethoot-menu.sh";
+    }
+
+    Mod+S hotkey-overlay-title="Sessions Menu" {
+        spawn "sh" "-c" "~/.config/niri/scripts/sessions/sessions-menu.sh";
     }
 
     // === Security ===
@@ -246,5 +255,5 @@ binds {
 
     // === System Controls ===
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
 }
