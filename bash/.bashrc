@@ -11,3 +11,6 @@
 # ridden in every subshell.
 
 test -s ~/.aliases && . ~/.aliases || true
+. ~/.openqa_ipmi_aliases
+
+. "$HOME/.local/share/../bin/env"

@@ -32,3 +32,5 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
 
 export PATH=$PATH:$HOME/.spicetify
+
+. "$HOME/.local/share/../bin/env"

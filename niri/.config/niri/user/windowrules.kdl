@@ -1,4 +1,8 @@
 window-rule {
+    default-column-width { proportion 0.66667; }
+}
+
+window-rule {
     match app-id="com.danklinux.dms$"
     match app-id="org.quickshell"
     open-floating true
@@ -9,6 +13,7 @@ window-rule {
     match app-id="^org.gnome.Calculator$"
     match app-id="org.pulseaudio.pavucontrol$"
     match app-id="io.github.focustimerhq.FocusTimer"
+    open-on-workspace "Notes"
     open-floating true
     open-focused true
     default-floating-position x=0 y=0 relative-to="bottom"
@@ -44,19 +49,20 @@ window-rule {
 
 window-rule {
     match app-id="Logseq$"
+    open-maximized true
     open-on-workspace "Notes"
 }
 
 window-rule {
     match app-id="^com.mitchellh.ghostty$" title="^tmux-ide$"
     open-on-workspace "Tmux Ide"
-    default-column-width { proportion 0.66667; }
-    open-focused false
+    open-maximized true
 }
 
 window-rule {
     match app-id="Slack$"
     match app-id="telegram.desktop$"
+    match app-id="com.rtosta.zapzap$"
     open-on-workspace "Chats"
 }
 
@@ -70,6 +76,7 @@ window-rule {
     match app-id="spotify"
     match app-id="qbz"
     open-on-workspace "Music"
+    open-maximized true
 }
 
 window-rule {

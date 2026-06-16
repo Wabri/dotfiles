@@ -51,6 +51,10 @@ binds {
         spawn "flatpak" "run" "io.github.focustimerhq.FocusTimer";
     }
 
+    Mod+A hotkey-overlay-title="Music Application" {
+        spawn "flatpak" "run" "com.blitzfc.qbz";
+    }
+
     // === Scripts Menu ===
     Mod+B hotkey-overlay-title="Browsir Keyboard-Focused Menu" {
         spawn "sh" "-c" "~/.config/niri/scripts/browsir-menu/browsir-menu.sh";

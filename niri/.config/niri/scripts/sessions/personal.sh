@@ -22,7 +22,9 @@ ghostty --title="distrobox-bazzite" -e zsh -c "distrobox enter bazzite-arch" &
 wait_a_bit
 
 Telegram &
-browsir personal whatsapp &
+wait_a_bit
+
+flatpak run com.rtosta.zapzap &
 wait_a_bit
 
 notify "✅ Personal Session Ready" "All personal applications launched" --icon=emblem-default --expire-time=3000

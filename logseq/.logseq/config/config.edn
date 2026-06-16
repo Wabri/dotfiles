@@ -9,4 +9,5 @@
 ;;   {:shortcuts {:ui/toggle-theme "t z"
 ;;                :ui/toggle-brackets "t b"}}
 
-{}
+{:shortcuts {:plugin.logseq-journals-calendar/$shortcut$mod_shift_left []
+ :plugin.logseq-journals-calendar/$shortcut$mod_shift_right []}}
