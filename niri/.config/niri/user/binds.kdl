@@ -190,7 +190,7 @@ binds {
     Mod+Shift+K         { move-column-to-workspace-up; }
 
     // === Workspace Management ===
-    Ctrl+Shift+R hotkey-overlay-title="Rename Workspace" {
+    Mod+Shift+R hotkey-overlay-title="Rename Workspace" {
         spawn "dms" "ipc" "call" "workspace-rename" "open";
     }
 

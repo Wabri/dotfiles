@@ -78,7 +78,7 @@ function M.setup_servers()
   mason_lspconfig.setup({
     ensure_installed = {
       "gopls", "bashls", "pyright", "html", "cssls",
-      "tsserver", "lua_ls", "perlnavigator",
+      "tsserver", "lua_ls", "perlnavigator", "rust_analyzer",
     },
     automatic_installation = true,
   })
@@ -106,6 +106,18 @@ function M.setup_servers()
           enableWarnings = true,
           perlcriticEnabled = false,
           includePaths = {},
+        },
+      },
+    },
+    rust_analyzer = {
+      settings = {
+        ["rust-analyzer"] = {
+          cargo = {
+            allFeatures = true,
+          },
+          checkOnSave = {
+            command = "clippy",
+          },
         },
       },
     },

@@ -15,6 +15,7 @@
   "pinnedToolbarItems": [
     "logseq-journals-calendar:goto-today",
     "logseq-journals-calendar:open-calendar",
-    "logseq-agenda:Agenda3"
+    "logseq-agenda:Agenda3",
+    "logseq-awesome-styler:AwesomeStyler"
   ]
 }

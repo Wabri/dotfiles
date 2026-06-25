@@ -5,4 +5,7 @@
  :logseq-mark-map {:version "v0.4.6", :repo "vipzhicheng/logseq-plugin-mark-map", :effect false, :theme false}
  :logseq-copy-code-plugin {:version "v.1.2.0", :repo "vyleung/logseq-copy-code-plugin", :effect true, :theme false}
  :logseq-awesome-ui {:version "v2.4.0", :repo "yoyurec/logseq-awesome-ui", :effect true, :theme false}
- :logseq-awesome-styler {:version "v3.7.1", :repo "yoyurec/logseq-awesome-styler", :effect true, :theme false}}
+ :logseq-awesome-styler {:version "v3.7.1", :repo "yoyurec/logseq-awesome-styler", :effect true, :theme false}
+ :logseq-automatic-linker {:version "1.7.0", :repo "sawhney17/logseq-automatic-linker", :effect false, :theme false}
+ :logseq-banners-plugin {:version "v3.4.11", :repo "yoyurec/logseq-banners-plugin", :effect true, :theme false}
+ :logseq-plugin-show-weekday-and-week-number {:version "v1.72.1", :repo "YU000jp/logseq-plugin-show-weekday-and-week-number", :effect true, :theme false}}
