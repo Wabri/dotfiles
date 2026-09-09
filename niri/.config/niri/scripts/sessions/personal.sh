@@ -16,9 +16,10 @@ wait_a_bit() {
 
 browsir personal pmail &
 browsir personal pcal &
+browsir personal personal-rmk2 &
 wait_a_bit
 
-ghostty --title="distrobox-bazzite" -e zsh -c "distrobox enter bazzite-arch" &
+ghostty --title="distrobox-chachyos-steam" -e zsh -c "distrobox enter cachyos-steam -- steam" &
 wait_a_bit
 
 Telegram &

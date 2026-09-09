@@ -14,16 +14,13 @@ wait_a_bit() {
     sleep 0.5
 }
 
-flatpak run io.github.focustimerhq.FocusTimer &
-wait_a_bit
-
 browsir work gcal &
 browsir work gmail &
 browsir work suse-tools-backlog-status &
 wait_a_bit
 
-flatpak run com.logseq.Logseq &
-wait_a_bit
+# flatpak run com.logseq.Logseq &
+# wait_a_bit
 
 ghostty --title=tmux-ide -e zsh -c 'tmux new -As local' &
 wait_a_bit

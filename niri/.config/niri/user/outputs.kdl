@@ -1,12 +1,12 @@
-output "eDP-1" {
-    mode "1920x1200@120.030"
-
-    scale 1
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
-}
+// output "eDP-1" {
+//     mode "1920x1200@120.030"
+// 
+//     scale 1
+// 
+//     // Transform allows to rotate the output counter-clockwise, valid values are:
+//     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+//     transform "normal"
+// }
 
 output "DP-1" {
     mode "3840x2160@120.030"
