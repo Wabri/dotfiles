@@ -9,9 +9,9 @@ palette = 1=#c96a4c
 palette = 2=#4daf4c
 palette = 3=#dacb52
 palette = 4=#35a639
-palette = 5=#005103
+palette = 5=#1b5e20
 palette = 6=#4caf50
-palette = 7=#abb7ab
+palette = 7=#abb7ac
 palette = 8=#3a443b
 palette = 9=#eca088
 palette = 10=#80d27e
@@ -19,4 +19,4 @@ palette = 11=#fff39a
 palette = 12=#63c067
 palette = 13=#89e38d
 palette = 14=#b6f4b9
-palette = 15=#f6fdf6
+palette = 15=#f6fdf7

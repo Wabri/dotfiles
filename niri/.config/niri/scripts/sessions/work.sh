@@ -31,7 +31,4 @@ wait_a_bit
 flatpak run com.slack.Slack &
 wait_a_bit
 
-flatpak run com.blitzfc.qbz &
-wait_a_bit
-
 notify "✅ Work Session Ready" "All work applications launched" --icon=emblem-default --expire-time=3000

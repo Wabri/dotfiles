@@ -1,0 +1,14 @@
+[Unit]
+Description=Konveyor widget collectors
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/wabri/.local/share/konveyor/widgets/service/konveyor-widgets
+Restart=always
+RestartSec=3
+Nice=19
+
+
+[Install]
+WantedBy=default.target
