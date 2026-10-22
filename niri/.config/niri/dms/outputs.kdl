@@ -2,7 +2,7 @@
 
 output "DP-2" {
     mode "3840x2160@60.000"
-    scale 1.5
+    scale 1.25
     position x=0 y=0
     variable-refresh-rate on-demand=true
 }
